@@ -1,0 +1,1 @@
+gradlew migrateMappings --mappings "1.18.1+build.22"

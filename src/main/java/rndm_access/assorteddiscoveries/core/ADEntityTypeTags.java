@@ -13,6 +13,8 @@ import rndm_access.assorteddiscoveries.AssortedDiscoveries;
 public class ADEntityTypeTags {
     public static final Tag<EntityType<?>> SNAPDRAGON_TELEPORT_EXCEPTIONS;
     public static final Tag<EntityType<?>> ANIMALS_THAT_GIVE_BLOOD;
+    public static final Tag<EntityType<?>> BLUEBERRY_BUSH_SLOWS;
+    public static final Tag<EntityType<?>> WITCHS_CRADLE_SLOWS_AND_DAMAGES;
 
     /**
      * @param name The name of the tag.
@@ -25,5 +27,7 @@ public class ADEntityTypeTags {
     static {
         SNAPDRAGON_TELEPORT_EXCEPTIONS = bind("snapdragon_teleport_exceptions");
         ANIMALS_THAT_GIVE_BLOOD = bind("animals_that_give_blood");
+        BLUEBERRY_BUSH_SLOWS = bind("blueberry_bush_slows");
+        WITCHS_CRADLE_SLOWS_AND_DAMAGES = bind("witchs_cradle_slows_and_damages");
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "XXX",
+    "###"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:book"
+    },
+    "#": {
+      "tag": "assorteddiscoveries:planks"
+    }
+  },
+  "result": {
+    "item": "minecraft:bookshelf"
+  }
+}

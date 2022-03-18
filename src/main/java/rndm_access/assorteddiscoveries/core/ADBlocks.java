@@ -74,13 +74,11 @@ public class ADBlocks {
         register("chicken_plush", CHICKEN_PLUSH);
         register("cow_plush", COW_PLUSH);
         register("creeper_plush", CREEPER_PLUSH);
+
+        AssortedDiscoveries.LOGGER.info("Registered blocks for " + AssortedDiscoveries.MOD_ID);
     }
 
     /*
-
-
-
-
     public static final Block ENDERMAN_PLUSH = BLOCKS.register("enderman_plush", () -> {
         return new ADEndermanPlushBlock(
                 Properties.of(Material.WOOL, MaterialColor.COLOR_BLACK).strength(0.2F).sound(SoundType.WOOL));

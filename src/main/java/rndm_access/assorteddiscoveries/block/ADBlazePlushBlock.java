@@ -2,23 +2,11 @@ package rndm_access.assorteddiscoveries.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
 import rndm_access.assorteddiscoveries.util.ADBoxUtil;
 
-public class ADBlazePlushBlock extends ADPlushBlock {
+public class ADBlazePlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_HEAD;
     protected static final VoxelShape NORTH_RIGHT_EYE;
     protected static final VoxelShape NORTH_LEFT_EYE;

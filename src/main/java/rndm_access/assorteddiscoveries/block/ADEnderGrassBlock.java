@@ -22,13 +22,6 @@ public class ADEnderGrassBlock extends PlantBlock {
         return ADBlockTags.ENDER_GRASS_PLANTABLE_ON.contains(floor.getBlock());
     }
 
-    /*
-    @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return isValidBlock(world, pos);
-    }
-    */
-
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         double x = (double) pos.getX() + random.nextFloat();
@@ -37,17 +30,6 @@ public class ADEnderGrassBlock extends PlantBlock {
 
         world.addParticle(ParticleTypes.PORTAL, x, y, z, 0.0D, 0.0D, 0.0D);
     }
-
-    /**
-     * A helper method used for checking that the plant placement is valid.
-     */
-    /*
-    private boolean isValidBlock(BlockView world, BlockPos pos) {
-        Block block = world.getBlockState(pos.below()).getBlock();
-
-        return ADBlockTags.ENDER_GRASS_PLANTABLE_ON.contains(block);
-    }
-    */
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

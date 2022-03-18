@@ -62,7 +62,7 @@ public class ADBambooFenceBlock extends FenceBlock {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{UP});
+        builder.add(UP);
         super.appendProperties(builder);
     }
 

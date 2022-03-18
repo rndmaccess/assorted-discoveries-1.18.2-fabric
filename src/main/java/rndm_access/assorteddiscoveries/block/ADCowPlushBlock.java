@@ -10,7 +10,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import rndm_access.assorteddiscoveries.util.ADBoxUtil;
 
-public class ADCowPlushBlock extends ADPlushBlock {
+public class ADCowPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_TORSO_SHAPE;
     protected static final VoxelShape NORTH_HEAD_SHAPE;
     protected static final VoxelShape NORTH_SNOUT_SHAPE;
@@ -36,8 +36,23 @@ public class ADCowPlushBlock extends ADPlushBlock {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return getOutlineDirectionalShape(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
+    protected VoxelShape northShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape southShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape westShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape eastShape() {
+        return EAST_SHAPE;
     }
 
     static {

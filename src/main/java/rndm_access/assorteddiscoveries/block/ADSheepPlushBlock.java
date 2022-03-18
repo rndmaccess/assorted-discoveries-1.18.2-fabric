@@ -9,7 +9,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
 
-public class ADSheepPlushBlock extends ADPlushBlock {
+public class ADSheepPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_TORSO = Block.box(4.0D, 4.0D, 4.5D, 12.0D, 9.0D, 14.0D);
     protected static final VoxelShape NORTH_HEAD = Block.box(4.5D, 5.0D, 2.0D, 11.5D, 12.0D, 8.0D);
     protected static final VoxelShape NORTH_FRONT_RIGHT_LEG_TUFF = Block.box(4.0D, 2.0D, 4.5D, 7.0D, 4.0D, 7.5D);

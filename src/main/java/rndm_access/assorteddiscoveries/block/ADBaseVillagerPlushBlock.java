@@ -2,15 +2,11 @@ package rndm_access.assorteddiscoveries.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
 import rndm_access.assorteddiscoveries.util.ADBoxUtil;
 
-public class ADBaseVillagerPlushBlock extends ADPlushBlock {
+public class ADBaseVillagerPlushBlock extends ADAbstractPlushBlock {
     // Zombie Villager Shapes
     public static final VoxelShape NORTH_ZOMBIE_VILLAGER_LEFT_ARM;
     public static final VoxelShape NORTH_ZOMBIE_VILLAGER_RIGHT_ARM;

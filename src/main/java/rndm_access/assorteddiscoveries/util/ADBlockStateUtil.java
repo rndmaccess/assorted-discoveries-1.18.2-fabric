@@ -1,12 +1,9 @@
 package rndm_access.assorteddiscoveries.util;
 
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.material.FluidState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.SlabType;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 
 /**
  * A utility class that holds helper methods for block states.
@@ -21,11 +18,13 @@ public final class ADBlockStateUtil {
      * @param state The slab block.
      * @return True if the slab is the bottom half.
      */
+    /*
     public static boolean isBottomSlab(BlockState state) {
-        EnumProperty<SlabType> slabType = BlockStateProperties.SLAB_TYPE;
+        EnumProperty<SlabType> slabType = Properties.SLAB_TYPE;
 
-        return state.hasProperty(slabType) && state.getValue(slabType).equals(SlabType.BOTTOM);
+        return state.get(slabType).equals(SlabType.BOTTOM);
     }
+    */
 
     /**
      * @param fluidState The fluidState to check.

@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "BBB",
+    "CIC",
+    "B B"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:orange_wool"
+    },
+    "C": {
+      "item": "minecraft:gray_wool"
+    },
+    "I": {
+      "item": "assorteddiscoveries:charred_flesh"
+    }
+  },
+  "result": {
+    "item": "assorteddiscoveries:charred_remnant_plush"
+  }
+}

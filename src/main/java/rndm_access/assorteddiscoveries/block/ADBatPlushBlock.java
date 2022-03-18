@@ -5,7 +5,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import rndm_access.assorteddiscoveries.util.ADBoxUtil;
 
-public class ADBatPlushBlock extends ADPlushBlock {
+public class ADBatPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_BODY;
     protected static final VoxelShape NORTH_HEAD;
     protected static final VoxelShape NORTH_LEFT_EAR;

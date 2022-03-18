@@ -2,45 +2,39 @@ package rndm_access.assorteddiscoveries.block;
 
 import java.util.Random;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.KelpBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import rndm_access.assorteddiscoveries.common.core.ADBlocks;
+import net.minecraft.block.*;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import rndm_access.assorteddiscoveries.core.ADBlocks;
 
 public class ADBloodKelpBlock extends KelpBlock {
 
-    public ADBloodKelpBlock(Properties properties) {
-        super(properties);
+    public ADBloodKelpBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    protected Block getBodyBlock() {
-        return ADBlocks.BLOOD_KELP_PLANT.get();
+    protected Block getPlant() {
+        return ADBlocks.BLOOD_KELP_PLANT;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random) {
-        BlockPos blockpos = pos.relative(this.growthDirection);
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        BlockPos blockpos = pos.offset(this.growthDirection);
 
-        if (state.getValue(AGE) < 25 && ForgeHooks.onCropsGrowPre(level, blockpos, level.getBlockState(blockpos),
-                random.nextDouble() < 0.14D)) {
-
-            ADBloodKelpPlantBlock body = (ADBloodKelpPlantBlock) this.getBodyBlock();
-            if (this.canGrowInto(level.getBlockState(blockpos))) {
-                body.growSpores(level, pos, random);
-                level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state, level.random));
-                ForgeHooks.onCropsGrowPost(level, blockpos, level.getBlockState(blockpos));
+        if (state.get(AGE) < 25) {
+            ADBloodKelpPlantBlock plant = (ADBloodKelpPlantBlock) this.getPlant();
+            if (this.chooseStemState(world.getBlockState(blockPos))) {
+                plant.growSpores(world, pos, random);
+                world.setBlockState(blockpos, this.age(state, world.random));
             }
         }
     }
 
     @Override
-    public void performBonemeal(ServerLevel level, Random random, BlockPos pos, BlockState state) {
-        ADBloodKelpPlantBlock body = (ADBloodKelpPlantBlock) this.getBodyBlock();
-        super.performBonemeal(level, random, pos, state);
-        body.growSpores(level, pos, random);
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        ADBloodKelpPlantBlock plant = (ADBloodKelpPlantBlock) this.getPlant();
+        super.grow(world, random, pos, state);
+        plant.growSpores(world, pos, random);
     }
 }

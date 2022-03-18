@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
 import rndm_access.assorteddiscoveries.util.ADBoxUtil;
 
-public class ADBeePlushBlock extends ADPlushBlock {
+public class ADBeePlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_BODY;
     protected static final VoxelShape NORTH_STINGER;
     protected static final VoxelShape NORTH_LEFT_WING;

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "assorteddiscoveries:polished_bauxite"
+    }
+  },
+  "result": {
+    "item": "assorteddiscoveries:polished_bauxite_wall",
+    "count": 6
+  }
+}

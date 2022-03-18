@@ -23,7 +23,7 @@ import rndm_access.assorteddiscoveries.common.util.ADBlockStateUtil;
  * @author Ryan
  *
  */
-public class ADTallPlushBlock extends ADPlushBlock {
+public class ADTallPlushBlock extends ADAbstractPlushBlock {
     public static final IntegerProperty PLUSH_STACK_SIZE = ADBlockStateProperties.PLUSH_STACK_SIZE_1_3;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 

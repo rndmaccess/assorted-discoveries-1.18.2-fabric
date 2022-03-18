@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import rndm_access.assorteddiscoveries.common.block.state.ADBlockStateProperties;
 import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
 
-public class ADPufferfishPlushBlock extends ADPlushBlock {
+public class ADPufferfishPlushBlock extends ADAbstractPlushBlock {
     public static final IntegerProperty PUFFED = ADBlockStateProperties.PUFFED_2;
 
     // Pufferfish 0 Bounding Boxes

@@ -1,5 +1,7 @@
 package rndm_access.assorteddiscoveries.block;
 
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.CakeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,8 +18,8 @@ public class ADFoodBlock extends CakeBlock {
     private int foodLevel;
     private float foodSaturation;
 
-    public ADFoodBlock(int foodLevel, float foodSaturation, BlockBehaviour.Properties properties) {
-        super(properties);
+    public ADFoodBlock(int foodLevel, float foodSaturation, AbstractBlock.Settings settings) {
+        super(settings);
         this.foodLevel = foodLevel;
         this.foodSaturation = foodSaturation;
     }
@@ -26,7 +28,7 @@ public class ADFoodBlock extends CakeBlock {
      * Called when the player right-clicks a block.
      */
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
+    public InteractionResult onUse(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
             BlockHitResult BlockRayTrace) {
         if (level.isClientSide()) {
             ItemStack itemstack = player.getItemInHand(hand);

@@ -1,0 +1,9 @@
+{
+  "parent": "assorteddiscoveries:block/template_one_colored_cat_plush",
+  "textures": {
+    "body_color": "block/light_gray_wool",
+    "eye_color": "block/black_wool",
+    "eye_white_color_one": "block/yellow_wool",
+    "eye_white_color_two": "block/yellow_wool"
+  }
+}

@@ -14,12 +14,15 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "rndm_access.assorteddiscoveries.AssortedDiscoveries"
+      "rndm_access.assorteddiscoveries.common.AssortedDiscoveries"
+    ],
+    "client": [
+      "rndm_access.assorteddiscoveries.client.AssortedDiscoveriesClient"
     ]
   },
   "mixins": [

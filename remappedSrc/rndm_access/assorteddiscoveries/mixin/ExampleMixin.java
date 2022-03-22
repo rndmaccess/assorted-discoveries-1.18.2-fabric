@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.mixin;
+package rndm_access.assorteddiscoveries.common.mixin;
 
 import net.fabricmc.example.ExampleMod;
 import net.minecraft.client.gui.screen.TitleScreen;

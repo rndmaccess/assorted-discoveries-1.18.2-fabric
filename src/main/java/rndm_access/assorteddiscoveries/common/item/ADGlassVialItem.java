@@ -1,39 +1,37 @@
 package rndm_access.assorteddiscoveries.common.item;
 
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypeTags;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 
 public class ADGlassVialItem extends Item {
-    public ADGlassVialItem(Properties properties) {
-        super(properties);
+    public ADGlassVialItem(Item.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target,
-            InteractionHand hand) {
-        if (stack.getItem().equals(ADItems.GLASS_VIAL.get())) {
-            if (target instanceof Animal && target.getHealth() > 0.0
-                    && ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD.contains(target.getType())) {
-                Mob animalTarget = (Mob) target;
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+        if (stack.getItem().equals(ADItems.GLASS_VIAL)) {
+            if (entity instanceof AnimalEntity && entity.getHealth() > 0.0 && ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD.contains(entity.getType())) {
+                AnimalEntity animalTarget = (AnimalEntity)(entity);
 
-                if (animalTarget.hurt(DamageSource.GENERIC, 1)) {
-                    playerIn.addItem(new ItemStack(ADItems.BLOOD_VIAL.get()));
-                    animalTarget.playSound(SoundEvents.BOTTLE_FILL, 1.0F, 1.0F);
-                    stack.shrink(1);
-                    return InteractionResult.CONSUME;
+                if (animalTarget.damage(DamageSource.GENERIC, 1)) {
+                    user.giveItemStack(new ItemStack(ADItems.BLOOD_VIAL));
+                    animalTarget.playSound(SoundEvents.ITEM_BOTTLE_FILL, 1.0F, 1.0F);
+                    stack.decrement(1);
+                    return ActionResult.CONSUME;
                 }
             }
         }
-        return InteractionResult.PASS;
+        return ActionResult.PASS;
     }
 }

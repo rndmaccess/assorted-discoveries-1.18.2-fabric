@@ -1,32 +1,32 @@
 package rndm_access.assorteddiscoveries.common.item;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.StewItem;
+import net.minecraft.world.World;
 
 import java.util.function.Supplier;
 
 public class ADFoodContainerItem extends Item {
-    private Supplier<Item> returnItem;
+    private Item returnItem;
 
-    public ADFoodContainerItem(Properties properties) {
-        super(properties);
-        this.returnItem = () -> Items.BOWL;
+    public ADFoodContainerItem(Item.Settings settings) {
+        super(settings);
+        this.returnItem = Items.BOWL;
     }
 
-    public ADFoodContainerItem(Properties properties, Supplier<Item> returnItem) {
-        super(properties);
+    public ADFoodContainerItem(Item.Settings settings, Item returnItem) {
+        super(settings);
         this.returnItem = returnItem;
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stackIn, Level level, LivingEntity livingEntityIn) {
-        super.finishUsingItem(stackIn, level, livingEntityIn);
-        boolean flag = livingEntityIn instanceof Player && ((Player) livingEntityIn).isCreative();
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        boolean flag = user instanceof PlayerEntity && ((PlayerEntity)user).isCreative();
 
-        return flag ? stackIn : new ItemStack(this.returnItem.get());
+        return flag ? stack : new ItemStack(this.returnItem);
     }
 }

@@ -1,42 +1,42 @@
 package rndm_access.assorteddiscoveries.common.item;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
 
 public class ADDrinkItem extends Item {
     private Item returnItem;
 
-    public ADDrinkItem(Properties properties) {
-        super(properties);
+    public ADDrinkItem(Item.Settings settings) {
+        super(settings);
         this.returnItem = Items.GLASS_BOTTLE;
     }
 
-    public ADDrinkItem(Properties properties, Item returnItemIn) {
-        super(properties);
+    public ADDrinkItem(Item.Settings settings, Item returnItemIn) {
+        super(settings);
         this.returnItem = returnItemIn;
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stackIn, Level level, LivingEntity livingEntityIn) {
-        if (livingEntityIn instanceof Player) {
-            Player playerEntity = (Player) livingEntityIn;
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        if (user instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) user;
             boolean flag = playerEntity.isCreative();
 
             if (!flag) {
-                playerEntity.addItem(new ItemStack(this.returnItem, 1));
-                return super.finishUsingItem(stackIn, level, livingEntityIn);
+                playerEntity.giveItemStack(new ItemStack(this.returnItem, 1));
+                return super.finishUsing(stack, world, user);
             }
         }
-        return stackIn;
+        return stack;
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.DRINK;
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.DRINK;
     }
 }

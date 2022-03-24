@@ -32,7 +32,6 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-
         double x = (double) pos.getX() + random.nextFloat();
         double y = (double) pos.getY() + random.nextFloat();
         double z = (double) pos.getZ() + random.nextFloat();
@@ -44,9 +43,8 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-
         if (state.get(LIT)) {
-            player.setStackInHand(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER));
+            player.giveItemStack(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER));
             world.setBlockState(pos, state.with(LIT, false));
             return ActionResult.success(world.isClient);
         }

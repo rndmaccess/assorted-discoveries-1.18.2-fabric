@@ -3,11 +3,8 @@ package rndm_access.assorteddiscoveries.common.core;
 import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.block.Block;
 import net.minecraft.tag.Tag;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.ForgeTagHandler;
-import net.minecraftforge.registries.ForgeRegistries;
+import rndm_access.assorteddiscoveries.Reference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADBlockTags {
@@ -27,7 +24,7 @@ public class ADBlockTags {
      * @return The tag from the location or an empty tag if none exists.
      */
     private static Tag<Block> bind(String name) {
-        return TagFactory.BLOCK.create(new Identifier(AssortedDiscoveries.MOD_ID, name));
+        return TagFactory.BLOCK.create(new Identifier(Reference.MOD_ID, name));
     }
 
     static {

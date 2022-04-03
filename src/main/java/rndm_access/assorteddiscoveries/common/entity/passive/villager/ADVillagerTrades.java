@@ -1,6 +1,11 @@
 package rndm_access.assorteddiscoveries.common.entity.passive.villager;
 
 import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerTypeHelper;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.village.VillagerType;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

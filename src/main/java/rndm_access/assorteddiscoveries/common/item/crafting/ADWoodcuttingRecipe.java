@@ -9,7 +9,7 @@ import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 import rndm_access.assorteddiscoveries.common.core.ADRecipeSerializers;
 import rndm_access.assorteddiscoveries.common.core.ADRecipeTypes;
 
-public class ADWoodcuttingRecipe extends ADSingleItemRecipe {
+public class ADWoodcuttingRecipe extends ADCuttingRecipe {
 
     public ADWoodcuttingRecipe(ResourceLocation id, String group, Ingredient ingredient, ItemStack result) {
         super(ADRecipeTypes.WOODCUTTING, ADRecipeSerializers.WOODCUTTING, id, group, ingredient, result);

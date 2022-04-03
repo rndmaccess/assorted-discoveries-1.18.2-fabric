@@ -1,15 +1,12 @@
-package rndm_access.assorteddiscoveries.common.worldgen.placements;
+package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.world.gen.decorator.PlacementModifier;
 import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
-public class ADVegetationPlacements {
+public class ADVegetationPlacedFeatures {
     public static final PlacedFeature PATCH_BLUEBERRY_COMMON = ADFeatureUtils.register("patch_blueberry_common",
             ADVegetationFeatures.PATCH_BLUEBERRY_BUSH.placed(getCommonBushPlacement()));
     public static final PlacedFeature PATCH_BLUEBERRY_RARE = ADFeatureUtils.register("patch_blueberry_rare",

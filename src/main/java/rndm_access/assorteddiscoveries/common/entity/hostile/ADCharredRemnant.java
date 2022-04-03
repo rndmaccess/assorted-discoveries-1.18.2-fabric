@@ -1,34 +1,28 @@
 package rndm_access.assorteddiscoveries.common.entity.hostile;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.monster.Strider;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.level.pathfinder.PathFinder;
-import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
-import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.pathing.*;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypes;
 
 import javax.annotation.Nullable;
@@ -36,22 +30,22 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoField;
 import java.util.Random;
 
-public class ADCharredRemnant extends Zombie {
-    public ADCharredRemnant(EntityType<? extends Zombie> zombie, Level level) {
-        super(ADEntityTypes.CHARRED_REMNANT.get(), level);
+public class ADCharredRemnant extends ZombieEntity {
+    public ADCharredRemnant(World world) {
+        super(ADEntityTypes.CHARRED_REMNANT, world);
     }
 
-    public static boolean checkCharredRemnantSpawnRules(EntityType<ADCharredRemnant> entity, ServerLevelAccessor world,
-            MobSpawnType spawnType, BlockPos pos, Random random) {
-        MutableBlockPos mutableBlockpos = pos.mutable();
+    public static boolean canSpawn(EntityType<ADCharredRemnant> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        BlockPos.Mutable mutablePos = pos.mutableCopy();
 
         do {
-            mutableBlockpos.move(Direction.UP);
-        } while (world.getFluidState(mutableBlockpos).is(FluidTags.LAVA));
+            mutablePos.move(Direction.UP);
+        } while (world.getFluidState(mutablePos).isIn(FluidTags.LAVA));
 
-        return world.getBlockState(mutableBlockpos).isAir();
+        return world.getBlockState(mutablePos).isAir();
     }
 
+    /*
     @Override
     public float getWalkTargetValue(BlockPos pos, LevelReader levelReader) {
         // This lets the charred remnant to spawn at any light level on lava.
@@ -61,7 +55,9 @@ public class ADCharredRemnant extends Zombie {
             return levelReader.getMaxLightLevel();
         }
     }
+    */
 
+    /*
     @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficulty,
@@ -113,67 +109,66 @@ public class ADCharredRemnant extends Zombie {
         this.handleAttributes(f);
         return livingData;
     }
+    */
 
+    /*
     private void spawnJockey(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficulty) {
-        Strider strider = EntityType.STRIDER.create(this.level);
-        strider.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+        StriderEntity strider = EntityType.STRIDER.create(this.world);
+        strider.setPos(this.getX(), this.getY(), this.getZ());
         strider.finalizeSpawn(serverLevelAccessor, difficulty, MobSpawnType.JOCKEY, null, null);
         strider.setBaby(true);
         this.startRiding(strider);
         strider.positionRider(this);
         serverLevelAccessor.addFreshEntity(strider);
     }
+     */
 
     @Override
-    public boolean doHurtTarget(Entity entity) {
-        boolean flag = super.doHurtTarget(entity);
-        if (flag && this.getMainHandItem().isEmpty() && entity instanceof LivingEntity) {
-            float f = this.level.getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
-            ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 140 * (int) f));
+    public boolean tryAttack(Entity target) {
+        boolean bl = super.tryAttack(target);
+
+        if (bl && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
+            float f = this.world.getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
+            ((LivingEntity)target).addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 140 * (int)f), this);
         }
-        return flag;
+        return bl;
     }
 
     @Override
-    protected boolean isSunSensitive() {
-        return false;
-    }
+    protected boolean burnsInDaylight() { return false; }
 
     @Override
-    public boolean canStandOnFluid(Fluid fluid) {
-        return fluid.is(FluidTags.LAVA);
+    public boolean canWalkOnFluid(Fluid fluid) {
+        return fluid.isIn(FluidTags.LAVA);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.HUSK_AMBIENT;
+        return SoundEvents.ENTITY_HUSK_AMBIENT;
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.HUSK_HURT;
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_HUSK_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.HUSK_DEATH;
+        return SoundEvents.ENTITY_HUSK_DEATH;
     }
 
     @Override
     protected SoundEvent getStepSound() {
-        return SoundEvents.HUSK_STEP;
+        return SoundEvents.ENTITY_HUSK_STEP;
     }
 
     @Override
-    protected boolean convertsInWater() {
-        return true;
-    }
+    protected boolean canConvertInWater() { return true; }
 
-    @Override
-    protected void doUnderWaterConversion() {
-        this.convertToZombieType(EntityType.HUSK);
+    protected void convertInWater() {
+        this.convertTo(EntityType.HUSK);
         if (!this.isSilent()) {
-            this.level.levelEvent(null, 1041, this.blockPosition(), 0);
+            this.world.syncWorldEvent((PlayerEntity)null, 1041, this.getBlockPos(), 0);
         }
     }
 
@@ -185,38 +180,38 @@ public class ADCharredRemnant extends Zombie {
     @Override
     public void tick() {
         super.tick();
-        this.floatCharredRemant();
+        this.updateFloating();
     }
 
-    private void floatCharredRemant() {
+    private void updateFloating() {
         if (this.isInLava()) {
-            CollisionContext iselectioncontext = CollisionContext.of(this);
-            if (iselectioncontext.isAbove(LiquidBlock.STABLE_SHAPE, this.blockPosition(), true)
-                    && !this.level.getFluidState(this.blockPosition().above()).is(FluidTags.LAVA)) {
+            ShapeContext shapeContext = ShapeContext.of(this);
+            if (shapeContext.isAbove(FluidBlock.COLLISION_SHAPE, this.getBlockPos(), true)
+                    && !this.world.getFluidState(this.getBlockPos().up()).isIn(FluidTags.LAVA)) {
                 this.onGround = true;
             } else {
-                this.setDeltaMovement(this.getDeltaMovement().scale(0.5D).add(0.0D, 0.05D, 0.0D));
+                this.setVelocity(this.getVelocity().multiply(0.5D).add(0.0D, 0.05D, 0.0D));
             }
         }
     }
 
     @Override
-    public boolean checkSpawnObstruction(LevelReader world) {
-        BlockPos spawnAtPos = new BlockPos(this.getX(), this.getY(), this.getZ());
-        BlockPos spawnAbovePos = spawnAtPos.above();
-        BlockPos spawnOnPos = spawnAtPos.below();
+    public boolean canSpawn(WorldView world) {
+        BlockPos spawnPos = new BlockPos(this.getX(), this.getY(), this.getZ());
+        BlockPos spawnAbovePos = spawnPos.up();
+        BlockPos spawnOnPos = spawnPos.down();
 
-        return world.isUnobstructed(this) && isEmptyAndIsAir(world, spawnAtPos) && isEmptyAndIsAir(world, spawnAbovePos)
-                && world.getFluidState(spawnOnPos).is(FluidTags.LAVA);
+        return world.doesNotIntersectEntities(this) && isEmptyAir(world, spawnPos)
+                && isEmptyAir(world, spawnAbovePos) && world.getFluidState(spawnOnPos).isIn(FluidTags.LAVA);
     }
 
-    private boolean isEmptyAndIsAir(LevelReader reader, BlockPos pos) {
-        return reader.getFluidState(pos).isEmpty() && reader.getBlockState(pos).isAir();
+    private boolean isEmptyAir(WorldView world, BlockPos pos) {
+        return world.getFluidState(pos).isEmpty() && world.getBlockState(pos).isAir();
     }
 
     @Override
-    protected PathNavigation createNavigation(Level level) {
-        return new LavaPathNavigator(this, level);
+    protected EntityNavigation createNavigation(World world) {
+        return new Navigation(this, world);
     }
 
     /**
@@ -224,31 +219,31 @@ public class ADCharredRemnant extends Zombie {
      *
      * @author Ryan
      */
-    static class LavaPathNavigator extends GroundPathNavigation {
-        LavaPathNavigator(ADCharredRemnant entity, Level level) {
-            super(entity, level);
+    static class Navigation extends MobNavigation {
+        Navigation(ADCharredRemnant entity, World world) {
+            super(entity, world);
         }
 
         @Override
-        protected PathFinder createPathFinder(int p_179679_1_) {
-            this.nodeEvaluator = new WalkNodeEvaluator();
-            return new PathFinder(this.nodeEvaluator, p_179679_1_);
+        protected PathNodeNavigator createPathNodeNavigator(int range) {
+            this.nodeMaker = new LandPathNodeMaker();
+            return new PathNodeNavigator(this.nodeMaker, range);
         }
 
         @Override
-        protected boolean hasValidPathType(BlockPathTypes type) {
-            if (type == BlockPathTypes.WATER) {
+        protected boolean canWalkOnPath(PathNodeType pathType) {
+            if (pathType == PathNodeType.WATER) {
                 return false;
-            } else if (type != BlockPathTypes.WALKABLE) {
+            } else if (pathType != PathNodeType.WALKABLE) {
                 return true;
             } else {
-                return super.hasValidPathType(type);
+                return super.canWalkOnPath(pathType);
             }
         }
 
         @Override
-        public boolean isStableDestination(BlockPos pos) {
-            return this.level.getBlockState(pos).is(Blocks.LAVA) || super.isStableDestination(pos);
+        public boolean isValidPosition(BlockPos pos) {
+            return this.world.getBlockState(pos).isOf(Blocks.LAVA) || super.isValidPosition(pos);
         }
     }
 }

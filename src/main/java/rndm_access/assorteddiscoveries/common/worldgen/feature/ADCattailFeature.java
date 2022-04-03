@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.common.levelgen.feature;
+package rndm_access.assorteddiscoveries.common.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;

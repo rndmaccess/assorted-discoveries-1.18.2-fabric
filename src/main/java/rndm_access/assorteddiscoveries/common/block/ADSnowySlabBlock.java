@@ -1,34 +1,32 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.SlabType;
-import rndm_access.assorteddiscoveries.common.util.ADBlockStateUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.enums.SlabType;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class ADSnowySlabBlock extends SlabBlock {
-    public ADSnowySlabBlock(Properties properties) {
-        super(properties);
+    public ADSnowySlabBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor levelAccessor,
-            BlockPos pos, BlockPos pos2) {
-
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (direction.equals(Direction.DOWN)) {
-            makeSnowy(levelAccessor, pos, state);
+            makeSnowy(world, pos, state);
         }
-
-        return super.updateShape(state, direction, state2, levelAccessor, pos, pos2);
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState state2, boolean p_220082_5_) {
-        makeSnowy(level, pos, state);
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        makeSnowy(world, pos, state);
     }
 
     /**
@@ -37,17 +35,20 @@ public class ADSnowySlabBlock extends SlabBlock {
      * an upper type.
      *
      * @param world
-     * @param pos   The location of the this snowy block.
+     * @param pos   The location of the snowy block.
      * @param state The snowy slab as a block state.
      */
-    private static void makeSnowy(LevelAccessor levelAccessor, BlockPos pos, BlockState state) {
-        BlockPos belowPos = pos.below();
-        BlockState belowState = levelAccessor.getBlockState(belowPos);
-        SlabType slabType = state.getValue(TYPE);
+    private static void makeSnowy(WorldAccess world, BlockPos pos, BlockState state) {
+        BlockPos belowPos = pos.down();
+        BlockState belowState = world.getBlockState(belowPos);
+        SlabType slabType = state.get(TYPE);
 
-        if (slabType != SlabType.TOP && belowState.hasProperty(BlockStateProperties.SNOWY) && state.hasProperty(TYPE)
-                && !ADBlockStateUtil.isBottomSlab(belowState)) {
-            levelAccessor.setBlock(belowPos, belowState.setValue(BlockStateProperties.SNOWY, true), 3);
+        if (slabType != SlabType.TOP &&
+                belowState.contains(Properties.SNOWY) &&
+                state.contains(TYPE) &&
+                belowState.contains(Properties.SLAB_TYPE) &&
+                !belowState.get(Properties.SLAB_TYPE).equals(SlabType.BOTTOM)) {
+            world.setBlockState(belowPos, belowState.with(Properties.SNOWY, true), 3);
         }
     }
 }

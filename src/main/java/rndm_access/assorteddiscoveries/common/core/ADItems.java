@@ -8,33 +8,39 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.item.*;
 
 public class ADItems {
-    public static final Item BOK_CHOY;
-    public static final Item BOK_CHOY_SEEDS;
-    public static final Item GARLIC;
-    public static final Item GREEN_ONION;
-    public static final Item BLUEBERRIES;
-    public static final Item SWEET_BERRY_JUICE;
-    public static final Item BLUEBERRY_JUICE;
-    public static final Item NOODLES;
-    public static final Item NOODLE_SOUP;
-    public static final Item PUDDING;
-    public static final Item BERRY_PUDDING;
-    public static final Item SMOKY_QUARTZ;
-    public static final Item CARAMEL_APPLE;
-    public static final Item CARAMEL;
-    public static final Item SPRUCE_CONE;
-    public static final Item FORESTS_BOUNTY;
-    public static final Item WITCHS_CRADLE_BRANCH;
-    public static final Item WITCHS_CRADLE_SOUP;
-    public static final Item GLASS_VIAL;
-    public static final Item BLOOD_VIAL;
-    public static final Item MIXED_SEED_PACKET;
-    public static final Item CATTAIL;
-    public static final Item CHARRED_REMNANT_SPAWN_EGG;
-    public static final Item CHARRED_FLESH;
-    public static final Item DRIED_BAMBOO;
-    public static final Item FRIED_EGG;
-    public static final Item BLOOD_KELP_SEED_CLUSTER;
+    public static final Item BOK_CHOY = new Item(makeSettings(ADFoodComponents.BOK_CHOY));
+    public static final Item BOK_CHOY_SEEDS = new AliasedBlockItem(ADBlocks.BOK_CHOY, makeSettings());
+    public static final Item GARLIC = new AliasedBlockItem(ADBlocks.GARLIC, makeSettings(ADFoodComponents.GARLIC));
+    public static final Item GREEN_ONION = new AliasedBlockItem(
+            ADBlocks.GREEN_ONIONS, makeSettings(ADFoodComponents.GREEN_ONION));
+    public static final Item BLUEBERRIES = new AliasedBlockItem(
+            ADBlocks.BLUEBERRY_BUSH, makeSettings(ADFoodComponents.BLUEBERRIES));
+    public static final Item SWEET_BERRY_JUICE = new ADDrinkItem(makeSettings(ADFoodComponents.SWEET_BERRY_JUICE, 16));
+    public static final Item BLUEBERRY_JUICE = new ADDrinkItem(makeSettings(ADFoodComponents.BLUEBERRY_JUICE, 16));
+    public static final Item NOODLES = item();
+    public static final Item NOODLE_SOUP = new ADFoodContainerItem(makeSettings(ADFoodComponents.NOODLE_SOUP, 1));
+    public static final Item PUDDING = new ADFoodContainerItem(makeSettings(ADFoodComponents.PUDDING, 1));
+    public static final Item BERRY_PUDDING = new ADFoodContainerItem(makeSettings(ADFoodComponents.BERRY_PUDDING, 1));
+    public static final Item SMOKY_QUARTZ = item();
+    public static final Item CARAMEL_APPLE = new ADFoodContainerItem(
+            makeSettings(ADFoodComponents.CARAMEL_APPLE, 1), Items.STICK);
+    public static final Item CARAMEL = item();
+    public static final Item SPRUCE_CONE = new Item(makeSettings(ADFoodComponents.SPRUCE_CONE));
+    public static final Item FORESTS_BOUNTY = new ADFoodContainerItem(makeSettings(ADFoodComponents.FORESTS_BOUNTY, 1));
+    public static final Item WITCHS_CRADLE_BRANCH = new AliasedBlockItem(
+            ADBlocks.WITCHS_CRADLE, makeSettings(ADFoodComponents.WITCHS_CRADLE_BRANCH));
+    public static final Item WITCHS_CRADLE_SOUP = new ADFoodContainerItem(makeSettings(ADFoodComponents.WITCHS_CRADLE_SOUP, 1));
+    public static final Item GLASS_VIAL = new ADGlassVialItem(makeSettings());
+    public static final Item BLOOD_VIAL = new ADDrinkItem(
+            makeSettings(ADFoodComponents.BLOOD_VILE, 1), ADItems.GLASS_VIAL);
+    public static final Item MIXED_SEED_PACKET = new ADMixedSeedPacketItem(makeSettings());
+    public static final Item CATTAIL = new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings());
+    public static final Item CHARRED_REMNANT_SPAWN_EGG = new SpawnEggItem(
+            ADEntityTypes.CHARRED_REMNANT, 0x944619, 0xdec33c, makeSettings());
+    public static final Item CHARRED_FLESH = item();
+    public static final Item DRIED_BAMBOO = item();
+    public static final Item FRIED_EGG = new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16));
+    public static final Item BLOOD_KELP_SEED_CLUSTER = new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings());
 
     private static Item item() {
         return new Item(makeSettings());
@@ -46,7 +52,7 @@ public class ADItems {
      *
      * @return The Settings for this item.
      */
-    public static Item.Settings makeSettings() {
+    private static Item.Settings makeSettings() {
         return new Item.Settings().group(AssortedDiscoveries.MOD_GROUP);
     }
 
@@ -73,45 +79,39 @@ public class ADItems {
         return new Item.Settings().group(AssortedDiscoveries.MOD_GROUP).food(food).maxCount(maxCount);
     }
 
-    private static Item registerItem(String id, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id), item);
+    private static void registerItem(String id, Item item) {
+        Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id), item);
     }
 
-    static {
-        BOK_CHOY = registerItem("bok_choy", new Item(makeSettings(ADFoodComponents.BOK_CHOY)));
-        BOK_CHOY_SEEDS = registerItem("bok_choy_seeds",
-                new AliasedBlockItem(ADBlocks.BOK_CHOY, makeSettings()));
-        GARLIC = registerItem("garlic",
-                new AliasedBlockItem(ADBlocks.GARLIC, makeSettings(ADFoodComponents.GARLIC)));
-        GREEN_ONION = registerItem("green_onion",
-                new AliasedBlockItem(ADBlocks.GREEN_ONIONS, makeSettings(ADFoodComponents.GREEN_ONION)));
-        BLUEBERRIES = registerItem("blueberries",
-                new AliasedBlockItem(ADBlocks.BLUEBERRY_BUSH, makeSettings(ADFoodComponents.BLUEBERRIES)));
-        SWEET_BERRY_JUICE = registerItem("sweet_berry_juice",
-                new ADDrinkItem(makeSettings(ADFoodComponents.SWEET_BERRY_JUICE, 16)));
-        BLUEBERRY_JUICE = registerItem("blueberry_juice",
-                new ADDrinkItem(makeSettings(ADFoodComponents.BLUEBERRY_JUICE, 16)));
-        NOODLES = registerItem("noodles", item());
-        NOODLE_SOUP = registerItem("noodle_soup", new ADFoodContainerItem(makeSettings(ADFoodComponents.NOODLE_SOUP, 1)));
-        PUDDING = registerItem("pudding", new ADFoodContainerItem(makeSettings(ADFoodComponents.PUDDING, 1)));
-        BERRY_PUDDING = registerItem("berry_pudding", new ADFoodContainerItem(makeSettings(ADFoodComponents.BERRY_PUDDING, 1)));
-        SMOKY_QUARTZ = registerItem("smoky_quartz", item());
-        CARAMEL_APPLE = registerItem("caramel_apple", new ADFoodContainerItem(makeSettings(ADFoodComponents.CARAMEL_APPLE, 1), Items.STICK));
-        CARAMEL = registerItem("caramel", item());
-        SPRUCE_CONE = registerItem("spruce_cone", new Item(makeSettings(ADFoodComponents.SPRUCE_CONE)));
-        FORESTS_BOUNTY = registerItem("forests_bounty", new ADFoodContainerItem(makeSettings(ADFoodComponents.FORESTS_BOUNTY, 1)));
-        WITCHS_CRADLE_BRANCH = registerItem("witchs_cradle_branch", new AliasedBlockItem(ADBlocks.WITCHS_CRADLE, makeSettings(ADFoodComponents.WITCHS_CRADLE_BRANCH)));
-        WITCHS_CRADLE_SOUP = registerItem("witchs_cradle_soup", new ADFoodContainerItem(makeSettings(ADFoodComponents.WITCHS_CRADLE_SOUP, 1)));
-        GLASS_VIAL = registerItem("glass_vial", new ADGlassVialItem(makeSettings()));
-        BLOOD_VIAL = registerItem("blood_vial", new ADDrinkItem(makeSettings(ADFoodComponents.BLOOD_VILE, 1), ADItems.GLASS_VIAL));
-        MIXED_SEED_PACKET = registerItem("mixed_seed_packet", new ADMixedSeedPacketItem(makeSettings()));
-        CATTAIL = registerItem("cattail", new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings()));
-        CHARRED_REMNANT_SPAWN_EGG = registerItem("charred_remnant_spawn_egg",
-                new SpawnEggItem(ADEntityTypes.CHARRED_REMNANT, 0x944619, 0xdec33c, makeSettings()));
-        CHARRED_FLESH = registerItem("charred_flesh", item());
-        DRIED_BAMBOO = registerItem("dried_bamboo", item());
-        FRIED_EGG = registerItem("fried_egg", new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16)));
-        BLOOD_KELP_SEED_CLUSTER = registerItem("blood_kelp_seed_cluster",
-                new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings()));
+    public static void registerItems() {
+        registerItem("bok_choy", BOK_CHOY);
+        registerItem("bok_choy_seeds", BOK_CHOY_SEEDS);
+        registerItem("garlic", GARLIC);
+        registerItem("green_onion", GREEN_ONION);
+        registerItem("blueberries", BLUEBERRIES);
+        registerItem("sweet_berry_juice", SWEET_BERRY_JUICE);
+        registerItem("blueberry_juice", BLUEBERRY_JUICE);
+        registerItem("noodles", NOODLES);
+        registerItem("noodle_soup", NOODLE_SOUP);
+        registerItem("pudding", PUDDING);
+        registerItem("berry_pudding", BERRY_PUDDING);
+        registerItem("smoky_quartz", SMOKY_QUARTZ);
+        registerItem("caramel_apple", CARAMEL_APPLE);
+        registerItem("caramel", CARAMEL);
+        registerItem("spruce_cone", SPRUCE_CONE);
+        registerItem("forests_bounty", FORESTS_BOUNTY);
+        registerItem("witchs_cradle_branch", WITCHS_CRADLE_BRANCH);
+        registerItem("witchs_cradle_soup", WITCHS_CRADLE_SOUP);
+        registerItem("glass_vial", GLASS_VIAL);
+        registerItem("blood_vial", BLOOD_VIAL);
+        registerItem("mixed_seed_packet", MIXED_SEED_PACKET);
+        registerItem("cattail", CATTAIL);
+        registerItem("charred_remnant_spawn_egg", CHARRED_REMNANT_SPAWN_EGG);
+        registerItem("charred_flesh", CHARRED_FLESH);
+        registerItem("dried_bamboo", DRIED_BAMBOO);
+        registerItem("fried_egg", FRIED_EGG);
+        registerItem("blood_kelp_seed_cluster", BLOOD_KELP_SEED_CLUSTER);
+
+        AssortedDiscoveries.LOGGER.info("Registered Items");
     }
 }

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -40,8 +41,6 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     private Runnable slotUpdateListener = () -> {
     };
 
-
-
     public final Container inputInventory = new SimpleContainer(1) {
         @Override
         public void setChanged() {
@@ -58,7 +57,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     }
 
     public ADWoodcutterScreenHandler(int windowIdIn, Inventory inventoryIn, final ContainerLevelAccess accessIn) {
-        super(ADMenuTypes.WOODCUTTER.get(), windowIdIn);
+        super(ADMenuTypes.WOODCUTTER, windowIdIn);
         this.access = accessIn;
         this.level = inventoryIn.player.level;
         this.inputSlot = this.addSlot(new Slot(this.inputInventory, 0, 20, 33));

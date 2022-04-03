@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.common.worldgen.features;
+package rndm_access.assorteddiscoveries.common.worldgen.configured_feature;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;

@@ -2,14 +2,8 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADGhastPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_SHAPE;
@@ -21,10 +15,30 @@ public class ADGhastPlushBlock extends ADAbstractPlushBlock {
         super(settings);
     }
 
+    @Override
+    protected VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getSouthOutlineShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getWestOutlineShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getEastOutlineShape() {
+        return EAST_SHAPE;
+    }
+
     static {
         NORTH_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
-        SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

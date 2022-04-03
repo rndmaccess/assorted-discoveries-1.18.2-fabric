@@ -1,27 +1,47 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADSavannaVillagerPlushBlock extends ADBaseVillagerPlushBlock {
-    protected static final VoxelShape NORTH_HEADBAND = Block.box(3.0D, 12.0D, 4.5D, 13.0D, 13.0D, 13.0D);
-    protected static final VoxelShape NORTH_SHAPE = Shapes.or(ADBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HEADBAND);
-    protected static final VoxelShape SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+    protected static final VoxelShape NORTH_HEADBAND;
+    protected static final VoxelShape NORTH_SHAPE;
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    protected static final VoxelShape EAST_SHAPE;
 
-    public ADSavannaVillagerPlushBlock(Properties properties) {
-        super(properties);
+    public ADSavannaVillagerPlushBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return getDirectionalShapes(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
+    public VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getSouthOutlineShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getWestOutlineShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getEastOutlineShape() {
+        return EAST_SHAPE;
+    }
+
+    static {
+        NORTH_HEADBAND = Block.createCuboidShape(3.0D, 12.0D, 4.5D, 13.0D, 13.0D, 13.0D);
+        NORTH_SHAPE = VoxelShapes.union(ADBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HEADBAND);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

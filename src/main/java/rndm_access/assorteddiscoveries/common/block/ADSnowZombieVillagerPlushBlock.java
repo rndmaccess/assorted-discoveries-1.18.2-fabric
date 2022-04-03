@@ -1,26 +1,46 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADSnowZombieVillagerPlushBlock extends ADSnowVillagerPlushBlock {
-    protected static final VoxelShape NORTH_BODY = Shapes.or(NORTH_HEAD, NORTH_TORSO, NORTH_ZOMBIE_VILLAGER_ARMS);
-    protected static final VoxelShape NORTH_SHAPE = Shapes.or(NORTH_FEET, NORTH_FACE, NORTH_BODY, NORTH_HAT);
-    protected static final VoxelShape SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+    protected static final VoxelShape NORTH_BODY;
+    protected static final VoxelShape NORTH_SHAPE;
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    protected static final VoxelShape EAST_SHAPE;
 
-    public ADSnowZombieVillagerPlushBlock(Properties properties) {
-        super(properties);
+    public ADSnowZombieVillagerPlushBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return getDirectionalShapes(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
+    public VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getSouthOutlineShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getWestOutlineShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getEastOutlineShape() {
+        return EAST_SHAPE;
+    }
+
+    static {
+        NORTH_BODY = VoxelShapes.union(NORTH_HEAD, NORTH_TORSO, NORTH_ZOMBIE_VILLAGER_ARMS);
+        NORTH_SHAPE = VoxelShapes.union(NORTH_FEET, NORTH_FACE, NORTH_BODY, NORTH_HAT);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

@@ -1,22 +1,6 @@
 package rndm_access.assorteddiscoveries.client.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.model.DrownedModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.render.entity.DrownedEntityRenderer;
-import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import rndm_access.assorteddiscoveries.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.Reference;
-import rndm_access.assorteddiscoveries.client.renderer.entity.layers.ADCharredRemnantOuterLayer;
 import rndm_access.assorteddiscoveries.common.entity.hostile.ADCharredRemnant;
 
 public class ADCharredRemnantRenderer extends AbstractZombieRenderer<ADCharredRemnant, DrownedModel<ADCharredRemnant>> {

@@ -1,10 +1,10 @@
-package rndm_access.assorteddiscoveries.common.worldgen.placements;
+package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
-import rndm_access.assorteddiscoveries.common.worldgen.features.ADTreeConfiguredFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
 
 import java.util.List;
 

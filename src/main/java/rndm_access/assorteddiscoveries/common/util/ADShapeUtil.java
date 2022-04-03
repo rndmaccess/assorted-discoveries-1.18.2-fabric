@@ -9,18 +9,13 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-/**
- * A utility class that rotates bounding boxes.
- *
- * @author Ryan
- */
-public final class ADBoxUtil {
+public final class ADShapeUtil {
     private static final double CENTER = 0.5;
     private static final double NINETY_DEGREES = Math.toRadians(90);
     private static final double ONE_HUNDRED_EIGHTY_DEGREES = Math.toRadians(180);
     private static final double TWO_HUNDRED_SEVENTY_DEGREES = Math.toRadians(270);
 
-    private ADBoxUtil() {
+    private ADShapeUtil() {
     }
 
     /**

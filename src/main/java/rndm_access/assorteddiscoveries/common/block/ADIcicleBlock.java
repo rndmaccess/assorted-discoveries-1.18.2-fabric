@@ -1,70 +1,68 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
 public class ADIcicleBlock extends FallingBlock {
-    private static final VoxelShape ICICLE_SHAPE = Block.box(4.0, 1.0, 4.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape ICICLE_SHAPE;
 
-    public ADIcicleBlock(Properties properties) {
-        super(properties);
+    public ADIcicleBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return ICICLE_SHAPE;
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        // This prevents the icicle from falling instantly when its placed.
-        if (!canStay(level, pos)) {
-            super.onPlace(state, level, pos, oldState, isMoving);
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if(!canStay(world, pos)) {
+            super.onPlaced(world, pos, state, placer, itemStack);
         }
     }
 
+    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
+    public BlockState getPlacementState(ItemPlacementContext context) {
+        World world = context.getWorld();
+        BlockPos pos = context.getBlockPos();
 
         // Used to keep the player from placing icicle's without supporting blocks.
-        return canStay(level, pos) ? this.defaultBlockState() : null;
+        return canStay(world, pos) ? this.getDefaultState() : null;
     }
 
-    private boolean canStay(LevelReader levelReader, BlockPos pos) {
+    private boolean canStay(WorldAccess world, BlockPos pos) {
         Direction direction = Direction.DOWN;
-        BlockPos blockpos = pos.relative(direction.getOpposite());
-        BlockState blockstate = levelReader.getBlockState(blockpos);
-        return blockstate.isFaceSturdy(levelReader, blockpos, direction);
+        BlockPos blockpos = pos.offset(direction.getOpposite());
+        BlockState blockstate = world.getBlockState(blockpos);
+        return blockstate.isSideSolidFullSquare(world, blockpos, direction);
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState,
-            LevelAccessor levelAccessor, BlockPos currentPos, BlockPos facingPos) {
-        if (canStay(levelAccessor, currentPos)) {
-            return stateIn;
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        if (canStay(world, pos)) {
+            return state;
         } else {
             // The icicle can't fall but isn't supported so harvest it.
-            if (levelAccessor.getBlockState(currentPos.below()) != Blocks.AIR.defaultBlockState()) {
-                return Blocks.AIR.defaultBlockState();
+            if (world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState()) {
+                return Blocks.AIR.getDefaultState();
             } else {
-                return super.updateShape(stateIn, facing, facingState, levelAccessor, currentPos, facingPos);
+                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
             }
         }
     }
@@ -73,21 +71,25 @@ public class ADIcicleBlock extends FallingBlock {
      * Called when a falling block hits the ground.
      */
     @Override
-    public void onLand(Level level, BlockPos pos, BlockState fallingState, BlockState hitState,
-            FallingBlockEntity fallingBlock) {
-        Player player = level.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 1.1, false);
-        float blocksFallen = fallingBlock.time / 3.0F;
-        float fallMult = blocksFallen / 10.0F; // When the block has fallen more than 10 blocks the damage grows.
+    public void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos,
+                          FallingBlockEntity fallingBlockEntity) {
+        PlayerEntity player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 1.1, false);
+        float blocksFallen = fallingBlockEntity.timeFalling / 3.0F;
+        float fallMultiplier = blocksFallen / 10.0F; // When the block has fallen more than 10 blocks the damage grows.
 
         // Damages the player when underneath the icicle.
         if (player != null) {
-            player.hurt(DamageSource.GENERIC, blocksFallen * fallMult);
+            player.damage(DamageSource.GENERIC, blocksFallen * fallMultiplier);
         }
-        level.destroyBlock(pos, false);
+        world.removeBlock(pos, false);
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        entity.hurt(DamageSource.GENERIC, 0.5F);
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        entity.damage(DamageSource.GENERIC, 0.5F);
+    }
+
+    static {
+        ICICLE_SHAPE = Block.createCuboidShape(4.0, 1.0, 4.0, 12.0, 16.0, 12.0);
     }
 }

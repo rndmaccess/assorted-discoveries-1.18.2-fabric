@@ -1,22 +1,9 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
+import net.minecraft.block.AbstractBlock;
 
 public class ADOverworldPlanterBoxBlock extends ADPlanterBoxBlock {
-    public ADOverworldPlanterBoxBlock(Properties properties) {
-        super(properties);
-    }
-
-    @Override
-    public boolean canSustainPlant(BlockState state, BlockGetter blockGetter, BlockPos pos, Direction facing,
-            IPlantable plantable) {
-        PlantType type = plantable.getPlantType(blockGetter, pos);
-
-        return type.equals(PlantType.CROP);
+    public ADOverworldPlanterBoxBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 }

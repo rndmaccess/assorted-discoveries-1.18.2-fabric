@@ -1,34 +1,19 @@
 package rndm_access.assorteddiscoveries.common.item.crafting;
 
 import com.google.gson.JsonObject;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.recipe.CuttingRecipe;
-import net.minecraft.recipe.StonecuttingRecipe;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleItemRecipe;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
- * This class helps assorted discoveries create single item recipes easier.
+ * This class that helps assorted discoveries create cutting recipes easier.
  *
  * @author rndm_access
  */
-public class ADSingleItemRecipe extends CuttingRecipe {
+public class ADCuttingRecipe extends CuttingRecipe {
     private final RecipeType<?> type;
     private final RecipeSerializer<?> serializer;
 
-    StonecuttingRecipe
-
-    public ADSingleItemRecipe(RecipeType<?> type, RecipeSerializer<?> serializer, ResourceLocation id, String group,
-            Ingredient ingredient, ItemStack result) {
+    public ADCuttingRecipe(RecipeType<?> type, RecipeSerializer<?> serializer, ResourceLocation id, String group,
+                           Ingredient ingredient, ItemStack result) {
         super(type, serializer, id, group, ingredient, result);
 
         this.type = type;

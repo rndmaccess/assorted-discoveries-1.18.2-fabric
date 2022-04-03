@@ -4,6 +4,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.util.registry.Registry;
 
 public class ADFoodComponents {
     public static final FoodComponent FRIED_EGG;

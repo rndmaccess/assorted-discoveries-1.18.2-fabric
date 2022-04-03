@@ -3,6 +3,7 @@ package rndm_access.assorteddiscoveries.client.entity.layers;
 import net.minecraft.client.render.entity.model.DrownedEntityModel;
 import net.minecraft.util.Identifier;
 import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.common.entity.hostile.ADCharredRemnant;
 
 public class ADCharredRemnantOuterLayer<T extends ADCharredRemnant> extends RenderLayer<T, DrownedEntityModel<T>> {
     private static final Identifier TEXTURE = new Identifier(Reference.MOD_ID, "textures/entity/zombie/charred_remnant_outer_layer.png");

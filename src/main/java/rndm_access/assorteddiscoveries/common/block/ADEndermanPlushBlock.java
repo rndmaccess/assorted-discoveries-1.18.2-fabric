@@ -2,16 +2,9 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADEndermanPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_HEAD_SHAPE;
@@ -40,22 +33,22 @@ public class ADEndermanPlushBlock extends ADAbstractPlushBlock {
     }
 
     @Override
-    protected VoxelShape northShape() {
+    protected VoxelShape getNorthOutlineShape() {
         return NORTH_SHAPE;
     }
 
     @Override
-    protected VoxelShape southShape() {
+    protected VoxelShape getSouthOutlineShape() {
         return SOUTH_SHAPE;
     }
 
     @Override
-    protected VoxelShape westShape() {
+    protected VoxelShape getWestOutlineShape() {
         return WEST_SHAPE;
     }
 
     @Override
-    protected VoxelShape eastShape() {
+    protected VoxelShape getEastOutlineShape() {
         return EAST_SHAPE;
     }
     
@@ -79,8 +72,8 @@ public class ADEndermanPlushBlock extends ADAbstractPlushBlock {
                 NORTH_MIDDLE_ARM_SHAPE, NORTH_LEFT_ARM1_SHAPE, NORTH_LEFT_ARM2_SHAPE);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY_SHAPE, NORTH_EYES_SHAPE, NORTH_LEGS_SHAPE,
                 NORTH_ARMS_SHAPE, NORTH_GRASS_BLOCK_SHAPE);
-        SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

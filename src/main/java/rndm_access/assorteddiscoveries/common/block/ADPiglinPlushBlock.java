@@ -1,29 +1,51 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADPiglinPlushBlock extends ADZombifiedPiglinPlushBlock {
-    protected static final VoxelShape NORTH_LEFT_ARM = Block.box(12.0D, 3.0D, 7.5D, 14.5D, 8.0D, 10.5D);
-    protected static final VoxelShape NORTH_RIGHT_ARM = Block.box(1.5D, 3.0D, 7.5D, 4.0D, 8.0D, 10.5D);
-    protected static final VoxelShape NORTH_ARMS = Shapes.or(NORTH_LEFT_ARM, NORTH_RIGHT_ARM);
-    protected static final VoxelShape NORTH_SHAPE = Shapes.or(ADZombifiedPiglinPlushBlock.NORTH_BODY_SHAPE, NORTH_ARMS);
-    protected static final VoxelShape SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+    protected static final VoxelShape NORTH_LEFT_ARM;
+    protected static final VoxelShape NORTH_RIGHT_ARM;
+    protected static final VoxelShape NORTH_ARMS;
+    protected static final VoxelShape NORTH_SHAPE;
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    protected static final VoxelShape EAST_SHAPE;
 
-    public ADPiglinPlushBlock(Properties properties) {
-        super(properties);
+    public ADPiglinPlushBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return getDirectionalShapes(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
+    protected VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getSouthOutlineShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getWestOutlineShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getEastOutlineShape() {
+        return EAST_SHAPE;
+    }
+
+    static {
+        NORTH_LEFT_ARM = Block.createCuboidShape(12.0D, 3.0D, 7.5D, 14.5D, 8.0D, 10.5D);
+        NORTH_RIGHT_ARM = Block.createCuboidShape(1.5D, 3.0D, 7.5D, 4.0D, 8.0D, 10.5D);
+        NORTH_ARMS = VoxelShapes.union(NORTH_LEFT_ARM, NORTH_RIGHT_ARM);
+        NORTH_SHAPE = VoxelShapes.union(ADZombifiedPiglinPlushBlock.NORTH_BODY_SHAPE, NORTH_ARMS);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

@@ -5,7 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
-import rndm_access.assorteddiscoveries.common.item.crafting.ADSingleItemRecipe;
+import rndm_access.assorteddiscoveries.common.item.crafting.ADCuttingRecipe;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADWoodcuttingRecipe;
 
 public class ADRecipeSerializers {
@@ -14,6 +14,6 @@ public class ADRecipeSerializers {
 
     public static final RegistryObject<RecipeSerializer<ADWoodcuttingRecipe>> WOODCUTTING = RECIPE_SERIALIZERS
             .register("woodcutting", () -> {
-                return new ADSingleItemRecipe.Serializer<>(ADWoodcuttingRecipe::new);
+                return new ADCuttingRecipe.Serializer<>(ADWoodcuttingRecipe::new);
             });
 }

@@ -1,39 +1,34 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import java.util.function.Supplier;
+import net.minecraft.block.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.BeetrootBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+public class ADOnionBlock extends BeetrootsBlock {
+    private static final VoxelShape[] ONION_SHAPE_BY_AGE;
+    private Item seedItem;
 
-public class ADOnionBlock extends BeetrootBlock {
-
-    private static final VoxelShape[] ONION_SHAPE_BY_AGE = new VoxelShape[] {
-            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
-            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D), Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D) };
-    private Supplier<Item> seedItem;
-
-    public ADOnionBlock(Properties properties, Supplier<Item> seedItem) {
-        super(properties);
+    public ADOnionBlock(AbstractBlock.Settings settings, Item seedItem) {
+        super(settings);
         this.seedItem = seedItem;
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blcokGetter, BlockPos pos, CollisionContext context) {
-        return ONION_SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return ONION_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
     }
 
-    /**
-     * Returns the item when using pick block.
-     */
     @Override
-    protected ItemLike getBaseSeedId() {
-        return seedItem.get();
+    protected ItemConvertible getSeedsItem() { return seedItem; }
+
+    static {
+        ONION_SHAPE_BY_AGE = new VoxelShape[] {
+                Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
+                Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
+                Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D),
+                Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D) };
     }
 }

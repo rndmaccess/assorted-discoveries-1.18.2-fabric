@@ -3,7 +3,7 @@ package rndm_access.assorteddiscoveries.common.block;
 import net.minecraft.block.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
 public class ADBatPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_BODY;
@@ -31,22 +31,22 @@ public class ADBatPlushBlock extends ADAbstractPlushBlock {
     }
 
     @Override
-    protected VoxelShape northShape() {
+    protected VoxelShape getNorthOutlineShape() {
         return NORTH_SHAPE;
     }
 
     @Override
-    protected VoxelShape southShape() {
+    protected VoxelShape getSouthOutlineShape() {
         return SOUTH_SHAPE;
     }
 
     @Override
-    protected VoxelShape westShape() {
+    protected VoxelShape getWestOutlineShape() {
         return WEST_SHAPE;
     }
 
     @Override
-    protected VoxelShape eastShape() {
+    protected VoxelShape getEastOutlineShape() {
         return EAST_SHAPE;
     }
 
@@ -68,8 +68,8 @@ public class ADBatPlushBlock extends ADAbstractPlushBlock {
         NORTH_EYES = VoxelShapes.union(NORTH_RIGHT_EYE, NORTH_LEFT_EYE);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY, NORTH_HEAD, NORTH_MOUTH, NORTH_EARS,
                 NORTH_LEGS, NORTH_WINGS, NORTH_EYES);
-        SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

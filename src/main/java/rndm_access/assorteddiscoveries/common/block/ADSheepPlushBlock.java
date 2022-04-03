@@ -1,45 +1,78 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
-public class ADSheepPlushBlock extends ADAbstractPlushBlock {
-    protected static final VoxelShape NORTH_TORSO = Block.box(4.0D, 4.0D, 4.5D, 12.0D, 9.0D, 14.0D);
-    protected static final VoxelShape NORTH_HEAD = Block.box(4.5D, 5.0D, 2.0D, 11.5D, 12.0D, 8.0D);
-    protected static final VoxelShape NORTH_FRONT_RIGHT_LEG_TUFF = Block.box(4.0D, 2.0D, 4.5D, 7.0D, 4.0D, 7.5D);
-    protected static final VoxelShape NORTH_FRONT_RIGHT_LEG = Block.box(4.5D, 0.0D, 5.0D, 6.5D, 2.0D, 7.0D);
-    protected static final VoxelShape NORTH_BACK_LEFT_LEG_TUFF = Block.box(9.0D, 2.0D, 11.0D, 12.0D, 4.0D, 14.0D);
-    protected static final VoxelShape NORTH_BACK_LEFT_LEG = Block.box(9.5D, 0.0D, 11.5D, 11.5D, 2.0D, 13.5D);
-    protected static final VoxelShape NORTH_FRONT_LEFT_LEG_TUFF = Block.box(9.0D, 2.0D, 4.5D, 12.0D, 4.0D, 7.5D);
-    protected static final VoxelShape NORTH_FRONT_LEFT_LEG = Block.box(9.5D, 0.0D, 5.0D, 11.5D, 2.0D, 7.0D);
-    protected static final VoxelShape NORTH_BACK_RIGHT_LEG_TUFF = Block.box(4.0D, 2.0D, 11.0D, 7.0D, 4.0D, 14.0D);
-    protected static final VoxelShape NORTH_BACK_RIGHT_LEG = Block.box(4.5D, 0.0D, 11.5D, 6.5D, 2.0D, 13.5D);
-    protected static final VoxelShape NORTH_LEFT_EYE = Block.box(8.5D, 8.0D, 1.5D, 10.5D, 9.0D, 2.0D);
-    protected static final VoxelShape NORTH_RIGHT_EYE = Block.box(5.5D, 8.0D, 1.5D, 7.5D, 9.0D, 2.0D);
-    protected static final VoxelShape NORTH_MOUTH = Block.box(7.5D, 6.0D, 1.5D, 8.5D, 7.0D, 2.0D);
-    protected static final VoxelShape NORTH_LEG_TUFFS = Shapes.or(NORTH_FRONT_RIGHT_LEG_TUFF, NORTH_BACK_LEFT_LEG_TUFF,
-            NORTH_FRONT_LEFT_LEG_TUFF, NORTH_BACK_RIGHT_LEG_TUFF);
-    protected static final VoxelShape NORTH_LEGS = Shapes.or(NORTH_FRONT_RIGHT_LEG, NORTH_BACK_LEFT_LEG,
-            NORTH_FRONT_LEFT_LEG, NORTH_BACK_RIGHT_LEG);
-    protected static final VoxelShape NORTH_EYES = Shapes.or(NORTH_LEFT_EYE, NORTH_RIGHT_EYE);
-    protected static final VoxelShape NORTH_SHAPE = Shapes.or(NORTH_TORSO, NORTH_HEAD, NORTH_MOUTH, NORTH_LEG_TUFFS,
-            NORTH_LEGS, NORTH_EYES);
-    protected static final VoxelShape SOUTH_SHAPE = ADBoxUtil.rotate180Y(NORTH_SHAPE);
-    protected static final VoxelShape WEST_SHAPE = ADBoxUtil.rotate270Y(NORTH_SHAPE);
-    protected static final VoxelShape EAST_SHAPE = ADBoxUtil.rotate90Y(NORTH_SHAPE);
+public class ADSheepPlushBlock extends ADPlushBlock {
+    protected static final VoxelShape NORTH_TORSO;
+    protected static final VoxelShape NORTH_HEAD;
+    protected static final VoxelShape NORTH_FRONT_RIGHT_LEG_TUFF;
+    protected static final VoxelShape NORTH_FRONT_RIGHT_LEG;
+    protected static final VoxelShape NORTH_BACK_LEFT_LEG_TUFF;
+    protected static final VoxelShape NORTH_BACK_LEFT_LEG;
+    protected static final VoxelShape NORTH_FRONT_LEFT_LEG_TUFF;
+    protected static final VoxelShape NORTH_FRONT_LEFT_LEG;
+    protected static final VoxelShape NORTH_BACK_RIGHT_LEG_TUFF;
+    protected static final VoxelShape NORTH_BACK_RIGHT_LEG;
+    protected static final VoxelShape NORTH_LEFT_EYE;
+    protected static final VoxelShape NORTH_RIGHT_EYE;
+    protected static final VoxelShape NORTH_MOUTH;
+    protected static final VoxelShape NORTH_LEG_TUFFS;
+    protected static final VoxelShape NORTH_LEGS;
+    protected static final VoxelShape NORTH_EYES;
+    protected static final VoxelShape NORTH_SHAPE;
+    protected static final VoxelShape SOUTH_SHAPE;
+    protected static final VoxelShape WEST_SHAPE;
+    protected static final VoxelShape EAST_SHAPE;
 
-    public ADSheepPlushBlock(Properties properties) {
-        super(properties);
+    public ADSheepPlushBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return getDirectionalShapes(state, NORTH_SHAPE, SOUTH_SHAPE, WEST_SHAPE, EAST_SHAPE);
+    protected VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getSouthOutlineShape() {
+        return SOUTH_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getWestOutlineShape() {
+        return WEST_SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getEastOutlineShape() {
+        return EAST_SHAPE;
+    }
+
+    static {
+        NORTH_TORSO = Block.createCuboidShape(4.0D, 4.0D, 4.5D, 12.0D, 9.0D, 14.0D);
+        NORTH_HEAD = Block.createCuboidShape(4.5D, 5.0D, 2.0D, 11.5D, 12.0D, 8.0D);
+        NORTH_FRONT_RIGHT_LEG_TUFF = Block.createCuboidShape(4.0D, 2.0D, 4.5D, 7.0D, 4.0D, 7.5D);
+        NORTH_FRONT_RIGHT_LEG = Block.createCuboidShape(4.5D, 0.0D, 5.0D, 6.5D, 2.0D, 7.0D);
+        NORTH_BACK_LEFT_LEG_TUFF = Block.createCuboidShape(9.0D, 2.0D, 11.0D, 12.0D, 4.0D, 14.0D);
+        NORTH_BACK_LEFT_LEG = Block.createCuboidShape(9.5D, 0.0D, 11.5D, 11.5D, 2.0D, 13.5D);
+        NORTH_FRONT_LEFT_LEG_TUFF = Block.createCuboidShape(9.0D, 2.0D, 4.5D, 12.0D, 4.0D, 7.5D);
+        NORTH_FRONT_LEFT_LEG = Block.createCuboidShape(9.5D, 0.0D, 5.0D, 11.5D, 2.0D, 7.0D);
+        NORTH_BACK_RIGHT_LEG_TUFF = Block.createCuboidShape(4.0D, 2.0D, 11.0D, 7.0D, 4.0D, 14.0D);
+        NORTH_BACK_RIGHT_LEG = Block.createCuboidShape(4.5D, 0.0D, 11.5D, 6.5D, 2.0D, 13.5D);
+        NORTH_LEFT_EYE = Block.createCuboidShape(8.5D, 8.0D, 1.5D, 10.5D, 9.0D, 2.0D);
+        NORTH_RIGHT_EYE = Block.createCuboidShape(5.5D, 8.0D, 1.5D, 7.5D, 9.0D, 2.0D);
+        NORTH_MOUTH = Block.createCuboidShape(7.5D, 6.0D, 1.5D, 8.5D, 7.0D, 2.0D);
+        NORTH_LEG_TUFFS = VoxelShapes.union(NORTH_FRONT_RIGHT_LEG_TUFF, NORTH_BACK_LEFT_LEG_TUFF,
+                NORTH_FRONT_LEFT_LEG_TUFF, NORTH_BACK_RIGHT_LEG_TUFF);
+        NORTH_LEGS = VoxelShapes.union(NORTH_FRONT_RIGHT_LEG, NORTH_BACK_LEFT_LEG, NORTH_FRONT_LEFT_LEG, NORTH_BACK_RIGHT_LEG);
+        NORTH_EYES = VoxelShapes.union(NORTH_LEFT_EYE, NORTH_RIGHT_EYE);
+        NORTH_SHAPE = VoxelShapes.union(NORTH_TORSO, NORTH_HEAD, NORTH_MOUTH, NORTH_LEG_TUFFS, NORTH_LEGS, NORTH_EYES);
+        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
     }
 }

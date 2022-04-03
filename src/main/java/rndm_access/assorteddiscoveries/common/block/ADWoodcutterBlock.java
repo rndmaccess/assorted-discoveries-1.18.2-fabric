@@ -2,45 +2,58 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.StonecutterBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.screen.StonecutterScreenHandler;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.StonecutterBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import rndm_access.assorteddiscoveries.Reference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block.screen.ADWoodcutterScreenHandler;
 
 public class ADWoodcutterBlock extends StonecutterBlock {
-    private static final TranslatableComponent CONTAINER_TITLE = new TranslatableComponent(
-            "container." + AssortedDiscoveries.MOD_ID + ".woodcutter");
+    private static final Text TITLE = new TranslatableText(
+            "container." + Reference.MOD_ID + ".woodcutter");
 
-    public ADWoodcutterBlock(Properties properties) {
-        super(properties);
+    public ADWoodcutterBlock(AbstractBlock.Settings settings) {
+        super(settings);
+    }
+
+    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        return new SimpleNamedScreenHandlerFactory((syncId, playerInventory, player) -> {
+            return new ADWoodcutterScreenHandler(syncId, playerInventory, ScreenHandlerContext.create(world, pos));
+        }, TITLE);
     }
 
     @Override
-    @Nullable
-    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider((windowId, playerInventory, p_220283_4_) -> {
-            return new ADWoodcutterScreenHandler(windowId, playerInventory, ContainerLevelAccess.create(level, pos));
-        }, CONTAINER_TITLE);
-    }
-
-    @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
-            BlockHitResult result) {
-        if (level.isClientSide) {
-            return InteractionResult.SUCCESS;
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) {
+            return ActionResult.SUCCESS;
         } else {
-            player.openMenu(state.getMenuProvider(level, pos));
-            return InteractionResult.CONSUME;
+            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+            return ActionResult.CONSUME;
         }
     }
 }

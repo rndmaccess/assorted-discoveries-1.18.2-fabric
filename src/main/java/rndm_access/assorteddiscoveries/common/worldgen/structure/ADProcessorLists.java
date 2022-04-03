@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.common.levelgen.structure;
+package rndm_access.assorteddiscoveries.common.worldgen.structure;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.BuiltinRegistries;

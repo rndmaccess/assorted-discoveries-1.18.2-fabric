@@ -35,7 +35,7 @@ public class ADBloodKelpSporeParticle extends SpriteBillboardParticle {
         if (this.maxAge-- <= 0) {
             this.markDead();
         } else {
-            this.yd += 0.002D;
+            this.velocityY += 0.002D;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
             this.velocityX *= 0.85F;
             this.velocityY *= 0.85F;
@@ -46,12 +46,7 @@ public class ADBloodKelpSporeParticle extends SpriteBillboardParticle {
         }
     }
 
-    public static class Factory implements ParticleFactory<DefaultParticleType> {
-        protected final SpriteProvider sprite;
-
-        public Factory(SpriteProvider sprite) {
-            this.sprite = sprite;
-        }
+    public record Factory(SpriteProvider sprite) implements ParticleFactory<DefaultParticleType> {
 
         @Override
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld,

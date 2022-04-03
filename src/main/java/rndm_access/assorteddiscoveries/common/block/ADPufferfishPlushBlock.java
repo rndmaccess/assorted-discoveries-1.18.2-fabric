@@ -1,167 +1,177 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.block.state.ADBlockStateProperties;
-import rndm_access.assorteddiscoveries.common.util.ADBoxUtil;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
+import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
 
-public class ADPufferfishPlushBlock extends ADAbstractPlushBlock {
-    public static final IntegerProperty PUFFED = ADBlockStateProperties.PUFFED_2;
+public class ADPufferfishPlushBlock extends ADPlushBlock {
+    public static final IntProperty PUFFED;
 
-    // Pufferfish 0 Bounding Boxes
-    protected static final VoxelShape PUFFERFISH_0_NORTH_BODY_SHAPE = Block.box(5.0D, 0.0D, 3.0D, 11.0D, 4.0D, 11.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_MOUTH_SHAPE = Block.box(7.0D, 2.0D, 2.5D, 9.0D, 3.0D, 3.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_FIN_SHAPE = Block.box(4.0D, 1.0D, 3.0D, 5.0D, 2.0D,
-            8.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_FIN_SHAPE = Block.box(11.0D, 1.0D, 3.0D, 12.0D, 2.0D,
-            8.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 4.0D, 3.0D, 6.5D, 5.5D,
-            4.5D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_LEFT_EYE_SHAPE = Block.box(9.5D, 4.0D, 3.0D, 11.0D, 5.5D,
-            4.5D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_MIDDLE_SHAPE = Block.box(6.0D, 1.0D, 11.0D, 10.0D, 2.0D,
-            13.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_RIGHT_SHAPE = Block.box(6.0D, 1.0D, 13.0D, 7.0D, 2.0D,
-            14.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_LEFT_SHAPE = Block.box(9.0D, 1.0D, 13.0D, 10.0D, 2.0D,
-            14.0D);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_FINS_SHAPE = Shapes.or(PUFFERFISH_0_NORTH_RIGHT_FIN_SHAPE,
-            PUFFERFISH_0_NORTH_LEFT_FIN_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_EYES_SHAPE = Shapes.or(PUFFERFISH_0_NORTH_RIGHT_EYE_SHAPE,
-            PUFFERFISH_0_NORTH_LEFT_EYE_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_TAIL_SHAPE = Shapes.or(PUFFERFISH_0_NORTH_TAIL_MIDDLE_SHAPE,
-            PUFFERFISH_0_NORTH_TAIL_RIGHT_SHAPE, PUFFERFISH_0_NORTH_TAIL_LEFT_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_NORTH_SHAPE = Shapes.or(PUFFERFISH_0_NORTH_BODY_SHAPE,
-            PUFFERFISH_0_NORTH_MOUTH_SHAPE, PUFFERFISH_0_NORTH_FINS_SHAPE, PUFFERFISH_0_NORTH_EYES_SHAPE,
-            PUFFERFISH_0_NORTH_TAIL_SHAPE);
+    protected static final VoxelShape SMALL_NORTH_BODY_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_MOUTH_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_RIGHT_FIN_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_LEFT_FIN_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_RIGHT_EYE_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_LEFT_EYE_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_TAIL_MIDDLE_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_TAIL_RIGHT_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_TAIL_LEFT_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_FINS_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_EYES_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_TAIL_SHAPE;
+    protected static final VoxelShape SMALL_NORTH_SHAPE;
+    protected static final VoxelShape SMALL_SOUTH_SHAPE;
+    protected static final VoxelShape SMALL_WEST_SHAPE;
+    protected static final VoxelShape SMALL_EAST_SHAPE;
 
-    protected static final VoxelShape PUFFERFISH_0_SOUTH_SHAPE = ADBoxUtil.rotate180Y(PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_WEST_SHAPE = ADBoxUtil.rotate270Y(PUFFERFISH_0_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_0_EAST_SHAPE = ADBoxUtil.rotate90Y(PUFFERFISH_0_NORTH_SHAPE);
+    protected static final VoxelShape MEDIUM_NORTH_BODY_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_RIGHT_FIN_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_LEFT_FIN_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_MOUTH_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_RIGHT_EYE_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_LEFT_EYE_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_FINS_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_EYES_SHAPE;
+    protected static final VoxelShape MEDIUM_NORTH_SHAPE;
+    protected static final VoxelShape MEDIUM_SOUTH_SHAPE;
+    protected static final VoxelShape MEDIUM_WEST_SHAPE;
+    protected static final VoxelShape MEDIUM_EAST_SHAPE;
 
-    // Pufferfish 1 Bounding Boxes
-    protected static final VoxelShape PUFFERFISH_1_NORTH_BODY_SHAPE = Block.box(4.0D, 0.0D, 3.0D, 12.0D, 8.0D, 11.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_FIN_SHAPE = Block.box(2.0D, 5.0D, 4.0D, 4.0D, 6.0D,
-            9.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_FIN_SHAPE = Block.box(12.0D, 5.0D, 4.0D, 14.0D, 6.0D,
-            9.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_MOUTH_SHAPE = Block.box(7.5D, 2.0D, 2.5D, 8.5D, 3.0D, 3.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_RIGHT_EYE_SHAPE = Block.box(5.0D, 4.0D, 2.5D, 6.5D, 5.5D,
-            3.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_LEFT_EYE_SHAPE = Block.box(9.5D, 4.0D, 2.5D, 11.0D, 5.5D,
-            3.0D);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_FINS_SHAPE = Shapes.or(PUFFERFISH_1_NORTH_RIGHT_FIN_SHAPE,
-            PUFFERFISH_1_NORTH_LEFT_FIN_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_EYES_SHAPE = Shapes.or(PUFFERFISH_1_NORTH_RIGHT_EYE_SHAPE,
-            PUFFERFISH_1_NORTH_LEFT_EYE_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_NORTH_SHAPE = Shapes.or(PUFFERFISH_1_NORTH_BODY_SHAPE,
-            PUFFERFISH_1_NORTH_MOUTH_SHAPE, PUFFERFISH_1_NORTH_FINS_SHAPE, PUFFERFISH_1_NORTH_EYES_SHAPE);
+    protected static final VoxelShape LARGE_NORTH_BODY_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_RIGHT_FIN_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_LEFT_FIN_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_MOUTH_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_RIGHT_EYE_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_LEFT_EYE_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_FINS_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_EYES_SHAPE;
+    protected static final VoxelShape LARGE_NORTH_SHAPE;
+    protected static final VoxelShape LARGE_SOUTH_SHAPE;
+    protected static final VoxelShape LARGE_WEST_SHAPE;
+    protected static final VoxelShape LARGE_EAST_SHAPE;
 
-    protected static final VoxelShape PUFFERFISH_1_SOUTH_SHAPE = ADBoxUtil.rotate180Y(PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_WEST_SHAPE = ADBoxUtil.rotate270Y(PUFFERFISH_1_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_1_EAST_SHAPE = ADBoxUtil.rotate90Y(PUFFERFISH_1_NORTH_SHAPE);
-
-    // Pufferfish 2 Bounding Boxes
-    protected static final VoxelShape PUFFERFISH_2_NORTH_BODY_SHAPE = Block.box(3.0D, 0.0D, 2.0D, 13.0D, 9.0D, 12.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE = Block.box(1.0D, 6.0D, 4.0D, 3.0D, 7.0D,
-            9.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE = Block.box(13.0D, 6.0D, 4.0D, 15.0D, 7.0D,
-            9.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_MOUTH_SHAPE = Block.box(6.5D, 3.0D, 1.5D, 9.5D, 4.0D, 2.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE = Block.box(4.0D, 5.0D, 1.5D, 7.0D, 6.5D,
-            2.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE = Block.box(9.0D, 5.0D, 1.5D, 12.0D, 6.5D,
-            2.0D);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_FINS_SHAPE = Shapes.or(PUFFERFISH_2_NORTH_RIGHT_FIN_SHAPE,
-            PUFFERFISH_2_NORTH_LEFT_FIN_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_EYES_SHAPE = Shapes.or(PUFFERFISH_2_NORTH_RIGHT_EYE_SHAPE,
-            PUFFERFISH_2_NORTH_LEFT_EYE_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_NORTH_SHAPE = Shapes.or(PUFFERFISH_2_NORTH_BODY_SHAPE,
-            PUFFERFISH_2_NORTH_MOUTH_SHAPE, PUFFERFISH_2_NORTH_FINS_SHAPE, PUFFERFISH_2_NORTH_EYES_SHAPE);
-
-    protected static final VoxelShape PUFFERFISH_2_SOUTH_SHAPE = ADBoxUtil.rotate180Y(PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_WEST_SHAPE = ADBoxUtil.rotate270Y(PUFFERFISH_2_NORTH_SHAPE);
-    protected static final VoxelShape PUFFERFISH_2_EAST_SHAPE = ADBoxUtil.rotate90Y(PUFFERFISH_2_NORTH_SHAPE);
-
-    public ADPufferfishPlushBlock(Properties properties) {
-        super(properties);
+    public ADPufferfishPlushBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
-    /**
-     * Called when the player right-clicks a block.
-     */
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand,
-            BlockHitResult rayTrace) {
-        int puffed_property = state.getValue(PUFFED);
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        int puffed_level = state.get(PUFFED);
 
-        if (puffed_property < 2) {
-            level.playSound(null, pos, SoundEvents.PUFFER_FISH_BLOW_UP, SoundSource.BLOCKS, 1.0F,
-                    0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(PUFFED, Integer.valueOf(puffed_property + 1)), 3);
+        if (puffed_level < 2) {
+            world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
+                    0.8F + world.random.nextFloat() * 0.4F);
+            world.setBlockState(pos, state.with(PUFFED, puffed_level + 1), 3);
         } else {
-            level.playSound(null, pos, SoundEvents.PUFFER_FISH_BLOW_OUT, SoundSource.BLOCKS, 1.0F,
-                    0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(PUFFED, 0), 3);
+            world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
+                    0.8F + world.random.nextFloat() * 0.4F);
+            world.setBlockState(pos, state.with(PUFFED, 0), 3);
         }
-        return InteractionResult.SUCCESS;
+        return ActionResult.SUCCESS;
     }
 
-    /**
-     * Creates the bounding box for this block.
-     */
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        switch (state.getValue(FACING)) {
-        case NORTH:
-            return getPuffedShapes(state, PUFFERFISH_0_NORTH_SHAPE, PUFFERFISH_1_NORTH_SHAPE, PUFFERFISH_2_NORTH_SHAPE);
-        case SOUTH:
-            return getPuffedShapes(state, PUFFERFISH_0_SOUTH_SHAPE, PUFFERFISH_1_SOUTH_SHAPE, PUFFERFISH_2_SOUTH_SHAPE);
-        case WEST:
-            return getPuffedShapes(state, PUFFERFISH_0_WEST_SHAPE, PUFFERFISH_1_WEST_SHAPE, PUFFERFISH_2_WEST_SHAPE);
-        default:
-            return getPuffedShapes(state, PUFFERFISH_0_EAST_SHAPE, PUFFERFISH_1_EAST_SHAPE, PUFFERFISH_2_EAST_SHAPE);
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        switch (state.get(FACING)) {
+            case NORTH:
+                return getPuffedShapes(state, SMALL_NORTH_SHAPE, MEDIUM_NORTH_SHAPE, LARGE_NORTH_SHAPE);
+            case SOUTH:
+                return getPuffedShapes(state, SMALL_SOUTH_SHAPE, MEDIUM_SOUTH_SHAPE, LARGE_SOUTH_SHAPE);
+            case WEST:
+                return getPuffedShapes(state, SMALL_WEST_SHAPE, MEDIUM_WEST_SHAPE, LARGE_WEST_SHAPE);
+            default:
+                return getPuffedShapes(state, SMALL_EAST_SHAPE, MEDIUM_EAST_SHAPE, LARGE_EAST_SHAPE);
         }
     }
 
     /**
      * @param state      The current state that this block is in.
-     * @param puffShape0 When the puff level is 0.
-     * @param puffShape1 When the puff level is 1.
-     * @param puffShape2 When the puff level is 2.
+     * @param smallShape When the puff level is 0.
+     * @param mediumShape When the puff level is 1.
+     * @param largeShape When the puff level is 2.
      * @return The appropriate shape for the current state.
      */
-    private static VoxelShape getPuffedShapes(BlockState state, VoxelShape puffShape0, VoxelShape puffShape1,
-            VoxelShape puffShape2) {
-        switch (state.getValue(PUFFED)) {
+    private static VoxelShape getPuffedShapes(BlockState state, VoxelShape smallShape, VoxelShape mediumShape, VoxelShape largeShape) {
+        switch (state.get(PUFFED)) {
         case 0:
-            return puffShape0;
+            return smallShape;
         case 1:
-            return puffShape1;
+            return mediumShape;
         default:
-            return puffShape2;
+            return largeShape;
         }
     }
 
-    /**
-     * Creates a list of properties that this block can have.
-     */
     @Override
-    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED, PUFFED);
+    }
+
+    static {
+        PUFFED = ADProperties.PUFFED;
+        SMALL_NORTH_BODY_SHAPE = Block.createCuboidShape(5.0D, 0.0D, 3.0D, 11.0D, 4.0D, 11.0D);
+        SMALL_NORTH_MOUTH_SHAPE = Block.createCuboidShape(7.0D, 2.0D, 2.5D, 9.0D, 3.0D, 3.0D);
+        SMALL_NORTH_RIGHT_FIN_SHAPE = Block.createCuboidShape(4.0D, 1.0D, 3.0D, 5.0D, 2.0D, 8.0D);
+        SMALL_NORTH_LEFT_FIN_SHAPE = Block.createCuboidShape(11.0D, 1.0D, 3.0D, 12.0D, 2.0D, 8.0D);
+        SMALL_NORTH_RIGHT_EYE_SHAPE = Block.createCuboidShape(5.0D, 4.0D, 3.0D, 6.5D, 5.5D, 4.5D);
+        SMALL_NORTH_LEFT_EYE_SHAPE = Block.createCuboidShape(9.5D, 4.0D, 3.0D, 11.0D, 5.5D, 4.5D);
+        SMALL_NORTH_TAIL_MIDDLE_SHAPE = Block.createCuboidShape(6.0D, 1.0D, 11.0D, 10.0D, 2.0D, 13.0D);
+        SMALL_NORTH_TAIL_RIGHT_SHAPE = Block.createCuboidShape(6.0D, 1.0D, 13.0D, 7.0D, 2.0D, 14.0D);
+        SMALL_NORTH_TAIL_LEFT_SHAPE = Block.createCuboidShape(9.0D, 1.0D, 13.0D, 10.0D, 2.0D, 14.0D);
+        SMALL_NORTH_FINS_SHAPE = VoxelShapes.union(SMALL_NORTH_RIGHT_FIN_SHAPE, SMALL_NORTH_LEFT_FIN_SHAPE);
+        SMALL_NORTH_EYES_SHAPE = VoxelShapes.union(SMALL_NORTH_RIGHT_EYE_SHAPE, SMALL_NORTH_LEFT_EYE_SHAPE);
+        SMALL_NORTH_TAIL_SHAPE = VoxelShapes.union(SMALL_NORTH_TAIL_MIDDLE_SHAPE, SMALL_NORTH_TAIL_RIGHT_SHAPE,
+                SMALL_NORTH_TAIL_LEFT_SHAPE);
+        SMALL_NORTH_SHAPE = VoxelShapes.union(SMALL_NORTH_BODY_SHAPE,
+                SMALL_NORTH_MOUTH_SHAPE, SMALL_NORTH_FINS_SHAPE, SMALL_NORTH_EYES_SHAPE,
+                SMALL_NORTH_TAIL_SHAPE);
+        SMALL_SOUTH_SHAPE = ADShapeUtil.rotate180Y(SMALL_NORTH_SHAPE);
+        SMALL_WEST_SHAPE = ADShapeUtil.rotate270Y(SMALL_NORTH_SHAPE);
+        SMALL_EAST_SHAPE = ADShapeUtil.rotate90Y(SMALL_NORTH_SHAPE);
+
+        MEDIUM_NORTH_BODY_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 3.0D, 12.0D, 8.0D, 11.0D);
+        MEDIUM_NORTH_RIGHT_FIN_SHAPE = Block.createCuboidShape(2.0D, 5.0D, 4.0D, 4.0D, 6.0D, 9.0D);
+        MEDIUM_NORTH_LEFT_FIN_SHAPE = Block.createCuboidShape(12.0D, 5.0D, 4.0D, 14.0D, 6.0D, 9.0D);
+        MEDIUM_NORTH_MOUTH_SHAPE = Block.createCuboidShape(7.5D, 2.0D, 2.5D, 8.5D, 3.0D, 3.0D);
+        MEDIUM_NORTH_RIGHT_EYE_SHAPE = Block.createCuboidShape(5.0D, 4.0D, 2.5D, 6.5D, 5.5D, 3.0D);
+        MEDIUM_NORTH_LEFT_EYE_SHAPE = Block.createCuboidShape(9.5D, 4.0D, 2.5D, 11.0D, 5.5D, 3.0D);
+        MEDIUM_NORTH_FINS_SHAPE = VoxelShapes.union(MEDIUM_NORTH_RIGHT_FIN_SHAPE, MEDIUM_NORTH_LEFT_FIN_SHAPE);
+        MEDIUM_NORTH_EYES_SHAPE = VoxelShapes.union(MEDIUM_NORTH_RIGHT_EYE_SHAPE, MEDIUM_NORTH_LEFT_EYE_SHAPE);
+        MEDIUM_NORTH_SHAPE = VoxelShapes.union(MEDIUM_NORTH_BODY_SHAPE, MEDIUM_NORTH_MOUTH_SHAPE,
+                MEDIUM_NORTH_FINS_SHAPE, MEDIUM_NORTH_EYES_SHAPE);
+        MEDIUM_SOUTH_SHAPE = ADShapeUtil.rotate180Y(MEDIUM_NORTH_SHAPE);
+        MEDIUM_WEST_SHAPE = ADShapeUtil.rotate270Y(MEDIUM_NORTH_SHAPE);
+        MEDIUM_EAST_SHAPE = ADShapeUtil.rotate90Y(MEDIUM_NORTH_SHAPE);
+
+        LARGE_NORTH_BODY_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 2.0D, 13.0D, 9.0D, 12.0D);
+        LARGE_NORTH_RIGHT_FIN_SHAPE = Block.createCuboidShape(1.0D, 6.0D, 4.0D, 3.0D, 7.0D, 9.0D);
+        LARGE_NORTH_LEFT_FIN_SHAPE = Block.createCuboidShape(13.0D, 6.0D, 4.0D, 15.0D, 7.0D, 9.0D);
+        LARGE_NORTH_MOUTH_SHAPE = Block.createCuboidShape(6.5D, 3.0D, 1.5D, 9.5D, 4.0D, 2.0D);
+        LARGE_NORTH_RIGHT_EYE_SHAPE = Block.createCuboidShape(4.0D, 5.0D, 1.5D, 7.0D, 6.5D, 2.0D);
+        LARGE_NORTH_LEFT_EYE_SHAPE = Block.createCuboidShape(9.0D, 5.0D, 1.5D, 12.0D, 6.5D, 2.0D);
+        LARGE_NORTH_FINS_SHAPE = VoxelShapes.union(LARGE_NORTH_RIGHT_FIN_SHAPE, LARGE_NORTH_LEFT_FIN_SHAPE);
+        LARGE_NORTH_EYES_SHAPE = VoxelShapes.union(LARGE_NORTH_RIGHT_EYE_SHAPE, LARGE_NORTH_LEFT_EYE_SHAPE);
+        LARGE_NORTH_SHAPE = VoxelShapes.union(LARGE_NORTH_BODY_SHAPE, LARGE_NORTH_MOUTH_SHAPE,
+                LARGE_NORTH_FINS_SHAPE, LARGE_NORTH_EYES_SHAPE);
+        LARGE_SOUTH_SHAPE = ADShapeUtil.rotate180Y(LARGE_NORTH_SHAPE);
+        LARGE_WEST_SHAPE = ADShapeUtil.rotate270Y(LARGE_NORTH_SHAPE);
+        LARGE_EAST_SHAPE = ADShapeUtil.rotate90Y(LARGE_NORTH_SHAPE);
     }
 }

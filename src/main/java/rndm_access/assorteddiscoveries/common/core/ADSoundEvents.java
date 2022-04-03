@@ -1,27 +1,26 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import rndm_access.assorteddiscoveries.Reference;
 
 public class ADSoundEvents {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,
-            AssortedDiscoveries.MOD_ID);
-
-    public static final RegistryObject<SoundEvent> BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
-    public static final RegistryObject<SoundEvent> UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
+    public static final SoundEvent BLOCK_MUSHROOM_BOUNCE;
+    public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT;
 
     /**
      * @param name The name for the sound event.
      * @return new sound event.
      */
-    private static RegistryObject<SoundEvent> register(String name) {
-        ResourceLocation modLocation = AssortedDiscoveries.makeModLocation(name);
-        SoundEvent sound = new SoundEvent(modLocation);
+    private static SoundEvent registerSound(String id) {
+        Identifier name = new Identifier(Reference.MOD_ID, id);
 
-        return SOUNDS.register(name, () -> sound);
+        return Registry.register(Registry.SOUND_EVENT, name, new SoundEvent(name));
+    }
+
+    static {
+        BLOCK_MUSHROOM_BOUNCE = registerSound("block.mushroom_bounce");
+        UI_WOODCUTTER_TAKE_RESULT = registerSound("ui.woodcutter.take_result");
     }
 }

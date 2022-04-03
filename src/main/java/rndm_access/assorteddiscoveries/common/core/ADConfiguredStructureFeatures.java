@@ -1,11 +1,11 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
-import rndm_access.assorteddiscoveries.common.levelgen.structure.ADStructurePoolStarts;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.common.worldgen.structure.ADStructurePoolStarts;
 
 public class ADConfiguredStructureFeatures {
     public static final ConfiguredStructureFeature<?, ?> TAIGA_CABIN = register("taiga_cabin", ADStructureFeatures.CABIN
@@ -29,10 +29,9 @@ public class ADConfiguredStructureFeatures {
             ADStructureFeatures.NETHER_CABIN.get()
                     .configured(new JigsawConfiguration(() -> ADStructurePoolStarts.WARPED_FOREST_CABIN_START, 7)));
 
-    private static ConfiguredStructureFeature<?, ?> register(String name,
-            ConfiguredStructureFeature<?, ?> configuredStructureFeature) {
+    private static ConfiguredStructureFeature<?, ?> register(String id, ConfiguredStructureFeature<?, ?> configuredStructure) {
         Registry<ConfiguredStructureFeature<?, ?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
 
-        return Registry.register(registry, AssortedDiscoveries.makeModLocation(name), configuredStructureFeature);
+        return Registry.register(registry, new Identifier(Reference.MOD_ID, id), configuredStructure);
     }
 }

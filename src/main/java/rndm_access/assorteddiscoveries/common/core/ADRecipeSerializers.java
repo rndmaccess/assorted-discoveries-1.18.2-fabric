@@ -1,19 +1,23 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADCuttingRecipe;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADWoodcuttingRecipe;
 
 public class ADRecipeSerializers {
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister
-            .create(ForgeRegistries.RECIPE_SERIALIZERS, AssortedDiscoveries.MOD_ID);
+    public static final RecipeSerializer<ADWoodcuttingRecipe> WOODCUTTING = new ADCuttingRecipe.Serializer<>(ADWoodcuttingRecipe::new);
 
-    public static final RegistryObject<RecipeSerializer<ADWoodcuttingRecipe>> WOODCUTTING = RECIPE_SERIALIZERS
-            .register("woodcutting", () -> {
-                return new ADCuttingRecipe.Serializer<>(ADWoodcuttingRecipe::new);
-            });
+    public static void registerSerializers() {
+        registerSerializer("woodcutting", WOODCUTTING);
+    }
+
+    /**
+     * Called during mod initialization to register every recipe serializer.
+     */
+    private static void registerSerializer(String id, RecipeSerializer serializer) {
+        Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(ADReference.MOD_ID, id), serializer);
+    }
 }

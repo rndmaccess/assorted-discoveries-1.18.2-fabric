@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADSwampVillagerPlushBlock extends ADBaseVillagerPlushBlock {
     protected static final VoxelShape NORTH_HAT_TOP;
@@ -54,8 +54,8 @@ public class ADSwampVillagerPlushBlock extends ADBaseVillagerPlushBlock {
                 NORTH_RIGHT_BACK_HAT_DETAIL, NORTH_LEFT_FRONT_HAT_DETAIL, NORTH_MIDDLE_FRONT_HAT_DETAIL0,
                 NORTH_MIDDLE_FRONT_HAT_DETAIL1);
         NORTH_SHAPE = VoxelShapes.union(ADBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HAT);
-        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

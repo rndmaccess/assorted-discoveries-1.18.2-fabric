@@ -1,109 +1,100 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
-import rndm_access.assorteddiscoveries.common.block.state.ADBlockStateProperties;
+import net.minecraft.block.*;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
+import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
 
 public class ADRopeLadderBlock extends LadderBlock {
-    public static final IntegerProperty LENGTH = ADBlockStateProperties.LENGTH;
-    public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final IntProperty LENGTH = ADProperties.LENGTH;
+    public static final BooleanProperty DOWN = Properties.DOWN;
 
     public ADRopeLadderBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH)
-                .setValue(WATERLOGGED, false).setValue(LENGTH, 0).setValue(DOWN, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH)
+                .with(WATERLOGGED, false).with(LENGTH, 0).with(DOWN, false));
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockPos abovePos = pos.above();
-        BlockPos belowPos = pos.below();
-        BlockState aboveState = level.getBlockState(abovePos);
-        BlockState belowState = level.getBlockState(belowPos);
-        boolean isInWater = level.getFluidState(pos).is(Fluids.WATER);
-        BlockState placedState = this.defaultBlockState();
+    public BlockState getPlacementState(ItemPlacementContext context) {
+        World world = context.getWorld();
+        BlockPos pos = context.getBlockPos();
+        BlockState aboveState = world.getBlockState(pos.up());
+        BlockState belowState = world.getBlockState(pos.down());
+        boolean isInWater = world.getFluidState(pos).isOf(Fluids.WATER);
+        BlockState placedState = this.getDefaultState().with(WATERLOGGED, isInWater);
 
         // Place hanging ladders when they're supporting blocks up to 16.
-        if (aboveState.is(this)) {
-            Direction facing = aboveState.getValue(FACING);
-            int length = aboveState.getValue(LENGTH);
+        if (aboveState.isOf(this)) {
+            Direction facing = aboveState.get(FACING);
+            int length = aboveState.get(LENGTH);
 
             if (length < 16) {
-                BlockPos behindPos = pos.relative(facing.getOpposite());
-                BlockState behindState = level.getBlockState(behindPos);
+                BlockPos behindPos = pos.offset(facing.getOpposite());
+                BlockState behindState = world.getBlockState(behindPos);
 
-                if (!behindState.isFaceSturdy(level, behindPos, facing)) {
-                    return placedState.setValue(WATERLOGGED, isInWater).setValue(LENGTH, length + 1)
-                            .setValue(FACING, facing).setValue(DOWN, belowState.is(this));
+                if (!behindState.isSideSolidFullSquare(world, behindPos, facing)) {
+                    return placedState.with(LENGTH, length + 1)
+                            .with(FACING, facing).with(DOWN, belowState.isOf(this));
                 }
-                return placedState.setValue(WATERLOGGED, isInWater).setValue(FACING, facing).setValue(DOWN,
-                        belowState.is(this));
+                return placedState.with(FACING, facing).with(DOWN, belowState.isOf(this));
             }
             return null;
         }
 
         // Place ladder on block facing the correct way.
-        for (Direction direction : context.getNearestLookingDirections()) {
+        for (Direction direction : context.getPlacementDirections()) {
             if (direction.getAxis().isHorizontal()) {
-                return placedState.setValue(WATERLOGGED, isInWater).setValue(FACING, direction.getOpposite());
+                return placedState.with(FACING, direction.getOpposite());
             }
         }
         return null;
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState state2, LevelAccessor levelAccessor,
-            BlockPos pos, BlockPos pos2) {
-        Direction facing = state.getValue(FACING);
-        BlockPos posAbove = pos.above();
-        BlockPos posBelow = pos.below();
-        BlockPos posBehind = pos.relative(facing.getOpposite());
-        BlockState stateAbove = levelAccessor.getBlockState(posAbove);
-        BlockState stateBelow = levelAccessor.getBlockState(posBelow);
-        BlockState stateBehind = levelAccessor.getBlockState(posBehind);
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        Direction facing = state.get(FACING);
+        BlockPos posBehind = pos.offset(facing.getOpposite());
+        BlockState stateAbove = world.getBlockState(pos.up());
+        BlockState stateBelow = world.getBlockState(pos.down());
+        BlockState stateBehind = world.getBlockState(posBehind);
 
-        if (canSurvive(state, levelAccessor, pos)) {
+        if (canPlaceAt(state, world, pos)) {
 
-            // Set the ladders length to 0 when a block is placed behind it.
-            if (stateBehind.isFaceSturdy(levelAccessor, posBehind, facing)) {
-                return state.setValue(LENGTH, 0).setValue(DOWN, stateBelow.is(this));
+            // Set the ladder's length to 0 when a block is placed behind it.
+            if (stateBehind.isSideSolidFullSquare(world, posBehind, facing)) {
+                return state.with(LENGTH, 0).with(DOWN, stateBelow.isOf(this));
             }
 
-            // Update each ladders length to keep the ladders length consistent.
-            if (stateAbove.is(this)) {
-                return state.setValue(LENGTH, stateAbove.getValue(LENGTH) + 1).setValue(DOWN, stateBelow.is(this));
+            // Update each ladders length to keep the ladder's length consistent.
+            if (stateAbove.isOf(this)) {
+                return state.with(LENGTH, stateAbove.get(LENGTH) + 1).with(DOWN, stateBelow.isOf(this));
             }
         }
-        return Blocks.AIR.defaultBlockState();
+        return Blocks.AIR.getDefaultState();
     }
 
     @Override
-    public boolean canSurvive(BlockState state, LevelReader levelReader, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-        BlockPos behindPos = pos.relative(facing.getOpposite());
-        BlockState aboveState = levelReader.getBlockState(pos.above());
-        BlockState behindState = levelReader.getBlockState(behindPos);
-        boolean hasSupport = behindState.isFaceSturdy(levelReader, behindPos, facing);
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        Direction facing = state.get(FACING);
+        BlockPos behindPos = pos.offset(facing.getOpposite());
+        BlockState aboveState = world.getBlockState(pos.up());
+        BlockState behindState = world.getBlockState(behindPos);
+        boolean hasSupport = behindState.isSideSolidFullSquare(world, behindPos, facing);
 
-        if (aboveState.is(this)) {
-            int length = aboveState.getValue(LENGTH) + 1;
+        if (aboveState.isOf(this)) {
+            int length = aboveState.get(LENGTH) + 1;
 
             return length <= 16;
         }
@@ -111,7 +102,7 @@ public class ADRopeLadderBlock extends LadderBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LENGTH, DOWN, FACING, WATERLOGGED);
     }
 }

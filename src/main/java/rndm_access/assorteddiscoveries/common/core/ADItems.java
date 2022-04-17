@@ -3,7 +3,7 @@ package rndm_access.assorteddiscoveries.common.core;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.item.*;
 
@@ -80,9 +80,12 @@ public class ADItems {
     }
 
     private static void registerItem(String id, Item item) {
-        Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id), item);
+        Registry.register(Registry.ITEM, new Identifier(ADReference.MOD_ID, id), item);
     }
 
+    /**
+     * Called during mod initialization to register every item.
+     */
     public static void registerItems() {
         registerItem("bok_choy", BOK_CHOY);
         registerItem("bok_choy_seeds", BOK_CHOY_SEEDS);

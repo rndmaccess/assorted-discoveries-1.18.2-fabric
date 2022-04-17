@@ -10,7 +10,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block.*;
 import rndm_access.assorteddiscoveries.common.item.ADRopeLadderBlockItem;
@@ -530,7 +530,7 @@ public class ADBlocks {
     }
 
     private static void registerBlockItem(String id, Block block) {
-        Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id),
+        Registry.register(Registry.ITEM, new Identifier(ADReference.MOD_ID, id),
                 new BlockItem(block, itemBlockSettings()));
     }
 
@@ -543,12 +543,12 @@ public class ADBlocks {
     }
 
     private static void registerRopeLadderItem(String id, Block block) {
-        Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id),
+        Registry.register(Registry.ITEM, new Identifier(ADReference.MOD_ID, id),
                 new ADRopeLadderBlockItem(block, itemBlockSettings()));
     }
 
     private static void registerBlock(String id, Block block) {
-        Registry.register(Registry.BLOCK, new Identifier(Reference.MOD_ID, id), block);
+        Registry.register(Registry.BLOCK, new Identifier(ADReference.MOD_ID, id), block);
     }
 
     /**
@@ -561,7 +561,7 @@ public class ADBlocks {
     }
 
     private static void registerTorchItem(String id, Block wallTorch, Block standingTorch) {
-        Registry.register(Registry.ITEM, new Identifier(Reference.MOD_ID, id),
+        Registry.register(Registry.ITEM, new Identifier(ADReference.MOD_ID, id),
                 new WallStandingBlockItem(standingTorch, wallTorch, itemBlockSettings()));
     }
 
@@ -577,7 +577,7 @@ public class ADBlocks {
     }
 
     /**
-     * Registers the blocks during mod initialization.
+     * Called during mod initialization to register every block.
      */
     public static void registerBlocks() {
         registerBlockAndItem("bat_plush", BAT_PLUSH);

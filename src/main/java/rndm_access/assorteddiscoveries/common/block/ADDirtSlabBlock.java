@@ -25,7 +25,7 @@ public class ADDirtSlabBlock extends ADSoilSlabBlock {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.getLightLevel(pos.up()) >= 9) {
-            BlockState blockstate = ADBlocks.GRASS_SLAB.defaultBlockState();
+            BlockState blockstate = ADBlocks.GRASS_SLAB.getDefaultState();
 
             for (int i = 0; i < 4; ++i) {
                 BlockPos atPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);

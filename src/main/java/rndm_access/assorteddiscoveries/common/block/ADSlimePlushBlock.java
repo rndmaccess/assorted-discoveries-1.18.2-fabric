@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADSlimePlushBlock extends ADMagmaCubePlushBlock {
     // One Slime Bounding Boxes
@@ -95,21 +95,21 @@ public class ADSlimePlushBlock extends ADMagmaCubePlushBlock {
     static {
         BOTTOM_NORTH_MOUTH_SHAPE = Block.createCuboidShape(6.0D, 2.0D, 2.5D, 7.0D, 3.0D, 3.0D);
         BOTTOM_NORTH_SHAPE = VoxelShapes.union(ADMagmaCubePlushBlock.BOTTOM_NORTH_SHAPE, BOTTOM_NORTH_MOUTH_SHAPE);
-        BOTTOM_SOUTH_SHAPE = ADShapeUtil.rotate180Y(BOTTOM_NORTH_SHAPE);
-        BOTTOM_WEST_SHAPE = ADShapeUtil.rotate270Y(BOTTOM_NORTH_SHAPE);
-        BOTTOM_EAST_SHAPE = ADShapeUtil.rotate90Y(BOTTOM_NORTH_SHAPE);
+        BOTTOM_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(BOTTOM_NORTH_SHAPE);
+        BOTTOM_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(BOTTOM_NORTH_SHAPE);
+        BOTTOM_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(BOTTOM_NORTH_SHAPE);
 
         MIDDLE_NORTH_MOUTH_EYE_SHAPE = Block.createCuboidShape(6.5D, 10.5D, 3.5D, 7.5D, 11.5D, 4.0D);
         MIDDLE_NORTH_SHAPE = VoxelShapes.union(ADMagmaCubePlushBlock.MIDDLE_NORTH_SHAPE,
                 MIDDLE_NORTH_MOUTH_EYE_SHAPE, BOTTOM_NORTH_SHAPE);
-        MIDDLE_SOUTH_SHAPE = ADShapeUtil.rotate180Y(MIDDLE_NORTH_SHAPE);
-        MIDDLE_WEST_SHAPE = ADShapeUtil.rotate270Y(MIDDLE_NORTH_SHAPE);
-        MIDDLE_EAST_SHAPE = ADShapeUtil.rotate90Y(MIDDLE_NORTH_SHAPE);
+        MIDDLE_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(MIDDLE_NORTH_SHAPE);
+        MIDDLE_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(MIDDLE_NORTH_SHAPE);
+        MIDDLE_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(MIDDLE_NORTH_SHAPE);
 
         TOP_NORTH_MOUTH_EYE_SHAPE = Block.createCuboidShape(7.0D, 1.0D, 5.5D, 7.5D, 1.5D, 6.0D);
         TOP_NORTH_SHAPE = VoxelShapes.union(ADMagmaCubePlushBlock.TOP_NORTH_SHAPE, TOP_NORTH_MOUTH_EYE_SHAPE);
-        TOP_SOUTH_SHAPE = ADShapeUtil.rotate180Y(TOP_NORTH_SHAPE);
-        TOP_WEST_SHAPE = ADShapeUtil.rotate270Y(TOP_NORTH_SHAPE);
-        TOP_EAST_SHAPE = ADShapeUtil.rotate90Y(TOP_NORTH_SHAPE);
+        TOP_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(TOP_NORTH_SHAPE);
+        TOP_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(TOP_NORTH_SHAPE);
+        TOP_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(TOP_NORTH_SHAPE);
     }
 }

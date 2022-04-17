@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADWolfPlushBlock extends ADAbstractPlushBlock {
     protected static final VoxelShape NORTH_SNOUT_SHAPE;
@@ -68,8 +68,8 @@ public class ADWolfPlushBlock extends ADAbstractPlushBlock {
         NORTH_EAR_SHAPES = VoxelShapes.union(NORTH_LEFT_EAR_SHAPE, NORTH_RIGHT_EAR_SHAPE);
         NORTH_LEG_SHAPES = VoxelShapes.union(NORTH_BACK_LEFT_LEG_SHAPE, NORTH_FRONT_LEFT_LEG_SHAPE, NORTH_BACK_RIGHT_LEG_SHAPE, NORTH_FRONT_RIGHT_LEG_SHAPE);
         NORTH_SHAPE = VoxelShapes.union(NORTH_SNOUT_SHAPE, NORTH_HEAD_SHAPE, NORTH_BODY_SHAPE, NORTH_TAIL_SHAPE, NORTH_EYE_SHAPES, NORTH_EAR_SHAPES, NORTH_LEG_SHAPES);
-        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

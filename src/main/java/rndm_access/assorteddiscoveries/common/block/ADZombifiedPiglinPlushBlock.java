@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADZombifiedPiglinPlushBlock extends ADZombiePlushBlock {
     protected static final VoxelShape NORTH_SNOUT;
@@ -48,8 +48,8 @@ public class ADZombifiedPiglinPlushBlock extends ADZombiePlushBlock {
         NORTH_EARS = VoxelShapes.union(NORTH_RIGHT_EAR, NORTH_LEFT_EAR);
         NORTH_BODY_SHAPE = VoxelShapes.union(NORTH_SNOUT, NORTH_EARS, NORTH_HEAD, NORTH_TORSO, NORTH_LEGS, NORTH_EYES);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY_SHAPE, NORTH_ARMS);
-        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

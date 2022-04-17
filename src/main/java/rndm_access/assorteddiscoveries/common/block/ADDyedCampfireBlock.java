@@ -5,20 +5,17 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.common.block.entity.ADDyedCampfireBlockEntity;
 import rndm_access.assorteddiscoveries.common.core.ADBlockEntityTypes;
 
@@ -31,20 +28,19 @@ public class ADDyedCampfireBlock extends CampfireBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState stateIn, Level levelIn, BlockPos pos, Random rand) {
-        if (stateIn.getValue(LIT)) {
-            if (rand.nextInt(10) == 0) {
-                levelIn.playLocalSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                        SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + rand.nextFloat(),
-                        rand.nextFloat() * 0.7F + 0.6F, false);
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (state.get(LIT)) {
+            if (random.nextInt(10) == 0) {
+                world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+                        SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + random.nextFloat(),
+                        random.nextFloat() * 0.7F + 0.6F, false);
             }
 
             // Spawn the spark particle randomly.
-            if (rand.nextInt(5) == 0) {
-                for (int i = 0; i < rand.nextInt(1) + 1; ++i) {
-                    levelIn.addParticle(sparkParticle, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
-                            rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
+            if (random.nextInt(5) == 0) {
+                for (int i = 0; i < random.nextInt(1) + 1; ++i) {
+                    world.addParticle(sparkParticle, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+                            random.nextFloat() / 2.0F, 5.0E-5D, random.nextFloat() / 2.0F);
                 }
             }
         }
@@ -52,24 +48,18 @@ public class ADDyedCampfireBlock extends CampfireBlock {
 
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_152755_, BlockState state,
-            BlockEntityType<T> blockEntity) {
-        if (p_152755_.isClientSide) {
-            return state.getValue(LIT)
-                    ? createTickerHelper(blockEntity, ADBlockEntityTypes.DYED_CAMPFIRE.get(),
-                            ADDyedCampfireBlockEntity::particleTick)
-                    : null;
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        if (world.isClient()) {
+            return state.get(LIT)
+                    ? checkType(type, ADBlockEntityTypes.DYED_CAMPFIRE, ADDyedCampfireBlockEntity::clientTick) : null;
         } else {
-            return state.getValue(LIT)
-                    ? createTickerHelper(blockEntity, ADBlockEntityTypes.DYED_CAMPFIRE.get(),
-                            ADDyedCampfireBlockEntity::cookTick)
-                    : createTickerHelper(blockEntity, ADBlockEntityTypes.DYED_CAMPFIRE.get(),
-                            ADDyedCampfireBlockEntity::cooldownTick);
+            return state.get(LIT) ? checkType(type, ADBlockEntityTypes.DYED_CAMPFIRE, ADDyedCampfireBlockEntity::litServerTick)
+                    : checkType(type, ADBlockEntityTypes.DYED_CAMPFIRE, ADDyedCampfireBlockEntity::unlitServerTick);
         }
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new ADDyedCampfireBlockEntity(pos, state);
     }
 }

@@ -1,6 +1,7 @@
 package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
@@ -9,7 +10,7 @@ import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTree
 import java.util.List;
 
 public class ADTreePlacedFeatures {
-    public static final PlacedFeature HUGE_PURPLE_MUSHROOM_VEGETATION;
+    public static final RegistryKey<PlacedFeature> HUGE_PURPLE_MUSHROOM_VEGETATION;
 
     private static List<PlacementModifier> getPurpleMushroomPlacement(int chance, PlacementModifier modifier) {
         ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();

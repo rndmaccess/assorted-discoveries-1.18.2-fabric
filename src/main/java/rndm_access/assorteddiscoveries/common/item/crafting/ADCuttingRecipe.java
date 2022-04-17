@@ -1,81 +1,86 @@
 package rndm_access.assorteddiscoveries.common.item.crafting;
 
 import com.google.gson.JsonObject;
-import net.minecraft.recipe.CuttingRecipe;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.recipe.*;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
+
+import java.util.Objects;
 
 /**
- * This class that helps assorted discoveries create cutting recipes easier.
+ * This class provides a public constructor for cutting recipe serializers which is required for making
+ * custom serializers.
  *
  * @author rndm_access
  */
-public class ADCuttingRecipe extends CuttingRecipe {
-    private final RecipeType<?> type;
-    private final RecipeSerializer<?> serializer;
-
-    public ADCuttingRecipe(RecipeType<?> type, RecipeSerializer<?> serializer, ResourceLocation id, String group,
-                           Ingredient ingredient, ItemStack result) {
-        super(type, serializer, id, group, ingredient, result);
-
-        this.type = type;
-        this.serializer = serializer;
+public abstract class ADCuttingRecipe extends CuttingRecipe {
+    public ADCuttingRecipe(RecipeType<?> type, RecipeSerializer<?> serializer, Identifier id, String group, Ingredient input, ItemStack output) {
+        super(type, serializer, id, group, input, output);
     }
 
     @Override
-    public RecipeType<?> getType() {
-        return type;
+    public boolean matches(Inventory inventory, World world) {
+        return this.input.test(inventory.getStack(0));
     }
 
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return serializer;
-    }
+    public record Serializer<T extends ADCuttingRecipe>(
+            ADCuttingRecipe.Serializer.RecipeFactory<T> recipeFactory) implements RecipeSerializer<T> {
 
-    @Override
-    public boolean matches(Container inv, Level worldIn) {
-        return this.ingredient.test(inv.getItem(0));
-    }
-
-    public static class Serializer<T extends SingleItemRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>>
-            implements RecipeSerializer<T> {
-        final SingleItemMaker<T> factory;
-
-        public Serializer(SingleItemMaker<T> factory) {
-            this.factory = factory;
-        }
-
-        @Override
-        public T fromJson(ResourceLocation location, JsonObject obj) {
-            String s = GsonHelper.getAsString(obj, "group", "");
+        public T read(Identifier identifier, JsonObject jsonObject) {
+            String string = JsonHelper.getString(jsonObject, "group", "");
             Ingredient ingredient;
-            if (GsonHelper.isArrayNode(obj, "ingredient")) {
-                ingredient = Ingredient.fromJson(GsonHelper.getAsJsonArray(obj, "ingredient"));
+            if (JsonHelper.hasArray(jsonObject, "ingredient")) {
+                ingredient = Ingredient.fromJson(JsonHelper.getArray(jsonObject, "ingredient"));
             } else {
-                ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(obj, "ingredient"));
+                ingredient = Ingredient.fromJson(JsonHelper.getObject(jsonObject, "ingredient"));
             }
 
-            String s1 = GsonHelper.getAsString(obj, "result");
-            int i = GsonHelper.getAsInt(obj, "count");
-            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s1)), i);
-            return this.factory.create(location, s, ingredient, itemstack);
+            String string2 = JsonHelper.getString(jsonObject, "result");
+            int i = JsonHelper.getInt(jsonObject, "count");
+            ItemStack itemStack = new ItemStack((ItemConvertible) Registry.ITEM.get(new Identifier(string2)), i);
+            return this.recipeFactory.create(identifier, string, ingredient, itemStack);
+        }
+
+        public T read(Identifier identifier, PacketByteBuf packetByteBuf) {
+            String string = packetByteBuf.readString();
+            Ingredient ingredient = Ingredient.fromPacket(packetByteBuf);
+            ItemStack itemStack = packetByteBuf.readItemStack();
+            return this.recipeFactory.create(identifier, string, ingredient, itemStack);
+        }
+
+        public void write(PacketByteBuf packetByteBuf, T cuttingRecipe) {
+            packetByteBuf.writeString(cuttingRecipe.group);
+            cuttingRecipe.input.write(packetByteBuf);
+            packetByteBuf.writeItemStack(cuttingRecipe.output);
         }
 
         @Override
-        public T fromNetwork(ResourceLocation location, FriendlyByteBuf buffer) {
-            String s = buffer.readUtf();
-            Ingredient ingredient = Ingredient.fromNetwork(buffer);
-            ItemStack itemstack = buffer.readItem();
-            return this.factory.create(location, s, ingredient, itemstack);
+        public boolean equals(Object obj) {
+            if (obj == this) return true;
+            if (obj == null || obj.getClass() != this.getClass()) return false;
+            var that = (Serializer) obj;
+            return Objects.equals(this.recipeFactory, that.recipeFactory);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, T recipe) {
-            buffer.writeUtf(recipe.getGroup());
-            recipe.getIngredients().get(0).toNetwork(buffer);
-            buffer.writeItem(recipe.getResultItem());
+        public int hashCode() {
+            return Objects.hash(recipeFactory);
         }
 
-        public interface SingleItemMaker<T extends SingleItemRecipe> {
-            T create(ResourceLocation location, String name, Ingredient ingredient, ItemStack stack);
+        @Override
+        public String toString() {
+            return "Serializer[" +
+                    "recipeFactory=" + recipeFactory + ']';
+        }
+
+        public interface RecipeFactory<T extends CuttingRecipe> {
+            T create(Identifier id, String group, Ingredient input, ItemStack output);
         }
     }
 }

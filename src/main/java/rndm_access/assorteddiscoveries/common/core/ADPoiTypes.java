@@ -1,24 +1,18 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.minecraft.world.poi.PointOfInterestType;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADPoiTypes {
-    public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES,
-            AssortedDiscoveries.MOD_ID);
+    public static final PointOfInterestType LUMBERJACK;
 
-    public static final RegistryObject<PoiType> LUMBERJACK = register("lumberjack", ADBlocks.WOODCUTTER, 1, 1);
+    public static void registerPointOfInterestTypes() {
+        AssortedDiscoveries.LOGGER.info("Registered point of interest types.");
+    }
 
-    private static RegistryObject<PoiType> register(String name, RegistryObject<Block> blockObject, int maxTickets,
-            int validRange) {
-        String location = AssortedDiscoveries.makeModLocation(name).toString();
-
-        return POI_TYPES.register(name, () -> {
-            return new PoiType(location, PoiType.getBlockStates(blockObject.get()), maxTickets, validRange);
-        });
+    static {
+        LUMBERJACK = PointOfInterestHelper.register(ADReference.makeId("lumberjack"), 1, 1, ADBlocks.WOODCUTTER);
     }
 }

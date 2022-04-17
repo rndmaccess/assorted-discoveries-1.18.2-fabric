@@ -1,22 +1,45 @@
 package rndm_access.assorteddiscoveries.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaEmberParticle;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.ADReference;
+import rndm_access.assorteddiscoveries.client.entity.ADCharredRemnantRenderer;
 import rndm_access.assorteddiscoveries.client.particle.ADBloodKelpSporeParticle;
+import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
+import rndm_access.assorteddiscoveries.common.core.ADBlocks;
+import rndm_access.assorteddiscoveries.common.core.ADEntityTypes;
 import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
+import rndm_access.assorteddiscoveries.common.core.ADScreenHandlerTypes;
 
+@Environment(EnvType.CLIENT)
 public class AssortedDiscoveriesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        registerEntityRenderers();
         registerParticleSprites();
         registerParticleFactories();
+        registerRenderLayers();
+        registerScreens();
+    }
+
+    private void registerEntityRenderers() {
+        EntityRendererRegistry.register(ADEntityTypes.CHARRED_REMNANT, ADCharredRemnantRenderer::new);
+    }
+
+    private void registerScreens() {
+        ScreenRegistry.register(ADScreenHandlerTypes.WOODCUTTER, ADWoodcutterScreen::new);
     }
 
     private void registerParticleSprites() {
@@ -57,7 +80,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
 
     private void registerParticleSprite(String id) {
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier(Reference.MOD_ID, "particle/" + id));
+            registry.register(new Identifier(ADReference.MOD_ID, "particle/" + id));
         }));
     }
 
@@ -97,5 +120,37 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         factoryRegistry.register(ADParticleTypes.RED_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLACK_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADBloodKelpSporeParticle.Factory::new);
+    }
+
+    private void registerRenderLayers() {
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(),
+                ADBlocks.RED_GLASS, ADBlocks.RED_GLASS_PANE, ADBlocks.OAK_ROPE_LADDER, ADBlocks.SPRUCE_ROPE_LADDER,
+                ADBlocks.BIRCH_ROPE_LADDER, ADBlocks.JUNGLE_ROPE_LADDER, ADBlocks.ACACIA_ROPE_LADDER,
+                ADBlocks.DARK_OAK_ROPE_LADDER, ADBlocks.WARPED_ROPE_LADDER, ADBlocks.CRIMSON_ROPE_LADDER,
+                ADBlocks.IRON_LADDER, ADBlocks.PURPLE_MUSHROOM, ADBlocks.WOODCUTTER, ADBlocks.WHITE_CAMPFIRE,
+                ADBlocks.ORANGE_CAMPFIRE, ADBlocks.MAGENTA_CAMPFIRE, ADBlocks.LIGHT_BLUE_CAMPFIRE,
+                ADBlocks.YELLOW_CAMPFIRE, ADBlocks.LIME_CAMPFIRE, ADBlocks.PINK_CAMPFIRE, ADBlocks.LIGHT_GRAY_CAMPFIRE,
+                ADBlocks.GRAY_CAMPFIRE, ADBlocks.CYAN_CAMPFIRE, ADBlocks.PURPLE_CAMPFIRE, ADBlocks.BLUE_CAMPFIRE,
+                ADBlocks.BROWN_CAMPFIRE, ADBlocks.GREEN_CAMPFIRE, ADBlocks.RED_CAMPFIRE, ADBlocks.BLACK_CAMPFIRE,
+                ADBlocks.WHITE_LANTERN, ADBlocks.ORANGE_LANTERN, ADBlocks.MAGENTA_LANTERN, ADBlocks.LIGHT_BLUE_LANTERN,
+                ADBlocks.YELLOW_LANTERN, ADBlocks.LIME_LANTERN, ADBlocks.PINK_LANTERN, ADBlocks.LIGHT_GRAY_LANTERN,
+                ADBlocks.GRAY_LANTERN, ADBlocks.CYAN_LANTERN, ADBlocks.PURPLE_LANTERN, ADBlocks.BLUE_LANTERN,
+                ADBlocks.BROWN_LANTERN, ADBlocks.GREEN_LANTERN, ADBlocks.RED_LANTERN, ADBlocks.BLACK_LANTERN,
+                ADBlocks.WHITE_TORCH, ADBlocks.ORANGE_TORCH, ADBlocks.MAGENTA_TORCH, ADBlocks.LIGHT_BLUE_TORCH,
+                ADBlocks.YELLOW_TORCH, ADBlocks.LIME_TORCH, ADBlocks.PINK_TORCH, ADBlocks.LIGHT_GRAY_TORCH,
+                ADBlocks.GRAY_TORCH, ADBlocks.CYAN_TORCH, ADBlocks.PURPLE_TORCH, ADBlocks.BLUE_TORCH,
+                ADBlocks.BROWN_TORCH, ADBlocks.GREEN_TORCH, ADBlocks.RED_TORCH, ADBlocks.BLACK_TORCH,
+                ADBlocks.WHITE_WALL_TORCH, ADBlocks.ORANGE_WALL_TORCH, ADBlocks.MAGENTA_WALL_TORCH,
+                ADBlocks.LIGHT_BLUE_WALL_TORCH, ADBlocks.YELLOW_WALL_TORCH, ADBlocks.LIME_WALL_TORCH,
+                ADBlocks.PINK_WALL_TORCH, ADBlocks.LIGHT_GRAY_WALL_TORCH, ADBlocks.GRAY_WALL_TORCH,
+                ADBlocks.CYAN_WALL_TORCH, ADBlocks.PURPLE_WALL_TORCH, ADBlocks.BLUE_WALL_TORCH,
+                ADBlocks.BROWN_WALL_TORCH, ADBlocks.GREEN_WALL_TORCH, ADBlocks.RED_WALL_TORCH,
+                ADBlocks.BLACK_WALL_TORCH, ADBlocks.BOK_CHOY, ADBlocks.GARLIC, ADBlocks.GREEN_ONIONS,
+                ADBlocks.BLUEBERRY_BUSH, ADBlocks.WITCHS_CRADLE, ADBlocks.SNAPDRAGON, ADBlocks.POTTED_SNAPDRAGON,
+                ADBlocks.ENDER_GRASS, ADBlocks.ICICLE, ADBlocks.CATTAIL, ADBlocks.POTTED_PURPLE_MUSHROOM,
+                ADBlocks.BLOOD_KELP, ADBlocks.BLOOD_KELP_PLANT);
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
+                ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
     }
 }

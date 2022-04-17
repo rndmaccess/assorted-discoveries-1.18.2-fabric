@@ -24,7 +24,7 @@ public class ADBloodKelpBlock extends KelpBlock {
 
         if (state.get(AGE) < 25) {
             ADBloodKelpPlantBlock plant = (ADBloodKelpPlantBlock) this.getPlant();
-            if (this.chooseStemState(world.getBlockState(blockPos))) {
+            if (this.chooseStemState(world.getBlockState(blockpos))) {
                 plant.growSpores(world, pos, random);
                 world.setBlockState(blockpos, this.age(state, world.random));
             }

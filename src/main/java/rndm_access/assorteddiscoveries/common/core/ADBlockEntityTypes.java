@@ -5,7 +5,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import rndm_access.assorteddiscoveries.Reference;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block.entity.ADDyedCampfireBlockEntity;
 
@@ -18,11 +18,13 @@ public class ADBlockEntityTypes {
             ADBlocks.PURPLE_CAMPFIRE, ADBlocks.BLUE_CAMPFIRE, ADBlocks.BROWN_CAMPFIRE,
             ADBlocks.GREEN_CAMPFIRE, ADBlocks.RED_CAMPFIRE, ADBlocks.BLACK_CAMPFIRE).build();
 
-    private static <T extends BlockEntity> void registerBlockEntityType(String id, BlockEntityType<T> type) {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Reference.MOD_ID, id), type);
+    private static <T extends BlockEntity> void registerBlockEntityType(String path, BlockEntityType<T> type) {
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, ADReference.makeId(path), type);
     }
 
-
+    /**
+     * Called during mod initialization to register every block entity type.
+     */
     public static void registerBlockEntityTypes() {
         registerBlockEntityType("dyed_campfire", DYED_CAMPFIRE);
 

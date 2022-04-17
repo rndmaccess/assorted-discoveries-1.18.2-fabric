@@ -2,16 +2,10 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
-public class ADHoglinPlushBlock extends ADPlushBlock {
+public class ADHoglinPlushBlock extends ADAbstractPlushBlock {
 
     public static final VoxelShape NORTH_SHAPE;
     protected static final VoxelShape SOUTH_SHAPE;
@@ -44,8 +38,8 @@ public class ADHoglinPlushBlock extends ADPlushBlock {
 
     static {
         NORTH_SHAPE = Block.createCuboidShape(2.0, 0.0, 0.0, 14.0, 12.0, 16.0);
-        SOUTH_SHAPE = ADShapeUtil.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADShapeUtil.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADShapeUtil.rotate90Y(NORTH_SHAPE);
+        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
+        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
+        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

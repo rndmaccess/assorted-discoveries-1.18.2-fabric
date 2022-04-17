@@ -3,7 +3,6 @@ package rndm_access.assorteddiscoveries.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.ingame.StonecutterScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
@@ -26,7 +25,7 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
 
     public ADWoodcutterScreen(ADWoodcutterScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        handler.registerUpdateListener(this::onInventoryChange);
+        handler.setContentsChangedListener(this::onInventoryChange);
         --this.titleY;
     }
 
@@ -61,9 +60,9 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
             int i = this.x + 52;
             int j = this.y + 14;
             int k = this.scrollOffset + 12;
-            List<ADWoodcuttingRecipe> list = this.handler.getRecipes();
+            List<ADWoodcuttingRecipe> list = this.handler.getAvailableRecipes();
 
-            for (int l = this.scrollOffset; l < k && l < this.handler.getNumRecipes(); ++l) {
+            for (int l = this.scrollOffset; l < k && l < this.handler.getAvailableRecipeCount(); ++l) {
                 int i1 = l - this.scrollOffset;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
@@ -75,13 +74,13 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
     }
 
     private void renderRecipeBackground(MatrixStack matrices, int mouseX, int mouseY, int x, int y, int scrollOffset) {
-        for (int i = this.scrollOffset; i < scrollOffset && i < this.handler.getNumRecipes(); ++i) {
+        for (int i = this.scrollOffset; i < scrollOffset && i < this.handler.getAvailableRecipeCount(); ++i) {
             int j = i - this.scrollOffset;
             int k = x + j % 4 * 16;
             int l = j / 4;
             int i1 = y + l * 18 + 2;
             int j1 = this.backgroundHeight;
-            if (i == this.handler.getSelectedRecipeIndex()) {
+            if (i == this.handler.getSelectedRecipe()) {
                 j1 += 18;
             } else if (mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18) {
                 j1 += 36;
@@ -91,9 +90,9 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
     }
 
     private void renderRecipeIcons(int x, int y, int scrollOffset) {
-        List<ADWoodcuttingRecipe> list = this.handler.getRecipes();
+        List<ADWoodcuttingRecipe> list = this.handler.getAvailableRecipes();
 
-        for (int i = this.scrollOffset; i < scrollOffset && i < this.handler.getNumRecipes(); ++i) {
+        for (int i = this.scrollOffset; i < scrollOffset && i < this.handler.getAvailableRecipeCount(); ++i) {
             int j = i - this.scrollOffset;
             int k = x + j % 4 * 16;
             int l = j / 4;
@@ -157,15 +156,15 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
     }
 
     private boolean shouldScroll() {
-        return this.canCraft && this.handler.getNumRecipes() > 12;
+        return this.canCraft && this.handler.getAvailableRecipeCount() > 12;
     }
 
     protected int getMaxScroll() {
-        return (this.handler.getNumRecipes() + 4 - 1) / 4 - 3;
+        return (this.handler.getAvailableRecipeCount() + 4 - 1) / 4 - 3;
     }
 
     private void onInventoryChange() {
-        this.canCraft = this.handler.hasInputItem();
+        this.canCraft = this.handler.canCraft();
         if (!this.canCraft) {
             this.scrollAmount = 0.0F;
             this.scrollOffset = 0;

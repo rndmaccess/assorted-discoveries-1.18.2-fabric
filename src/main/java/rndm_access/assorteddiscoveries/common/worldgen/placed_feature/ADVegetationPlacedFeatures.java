@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.PlacedFeature;
 import java.util.List;
 
 public class ADVegetationPlacedFeatures {
+    /*
     public static final PlacedFeature PATCH_BLUEBERRY_COMMON = ADFeatureUtils.register("patch_blueberry_common",
             ADVegetationFeatures.PATCH_BLUEBERRY_BUSH.placed(getCommonBushPlacement()));
     public static final PlacedFeature PATCH_BLUEBERRY_RARE = ADFeatureUtils.register("patch_blueberry_rare",
@@ -37,4 +38,5 @@ public class ADVegetationPlacedFeatures {
         builder.add(BiomeFilter.biome());
         return builder.build();
     }
+     */
 }

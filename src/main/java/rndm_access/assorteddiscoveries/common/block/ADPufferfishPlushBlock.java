@@ -9,7 +9,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,7 +18,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADPufferfishPlushBlock extends ADPlushBlock {
     public static final IntProperty PUFFED;
@@ -142,9 +141,9 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
         SMALL_NORTH_SHAPE = VoxelShapes.union(SMALL_NORTH_BODY_SHAPE,
                 SMALL_NORTH_MOUTH_SHAPE, SMALL_NORTH_FINS_SHAPE, SMALL_NORTH_EYES_SHAPE,
                 SMALL_NORTH_TAIL_SHAPE);
-        SMALL_SOUTH_SHAPE = ADShapeUtil.rotate180Y(SMALL_NORTH_SHAPE);
-        SMALL_WEST_SHAPE = ADShapeUtil.rotate270Y(SMALL_NORTH_SHAPE);
-        SMALL_EAST_SHAPE = ADShapeUtil.rotate90Y(SMALL_NORTH_SHAPE);
+        SMALL_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(SMALL_NORTH_SHAPE);
+        SMALL_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(SMALL_NORTH_SHAPE);
+        SMALL_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(SMALL_NORTH_SHAPE);
 
         MEDIUM_NORTH_BODY_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 3.0D, 12.0D, 8.0D, 11.0D);
         MEDIUM_NORTH_RIGHT_FIN_SHAPE = Block.createCuboidShape(2.0D, 5.0D, 4.0D, 4.0D, 6.0D, 9.0D);
@@ -156,9 +155,9 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
         MEDIUM_NORTH_EYES_SHAPE = VoxelShapes.union(MEDIUM_NORTH_RIGHT_EYE_SHAPE, MEDIUM_NORTH_LEFT_EYE_SHAPE);
         MEDIUM_NORTH_SHAPE = VoxelShapes.union(MEDIUM_NORTH_BODY_SHAPE, MEDIUM_NORTH_MOUTH_SHAPE,
                 MEDIUM_NORTH_FINS_SHAPE, MEDIUM_NORTH_EYES_SHAPE);
-        MEDIUM_SOUTH_SHAPE = ADShapeUtil.rotate180Y(MEDIUM_NORTH_SHAPE);
-        MEDIUM_WEST_SHAPE = ADShapeUtil.rotate270Y(MEDIUM_NORTH_SHAPE);
-        MEDIUM_EAST_SHAPE = ADShapeUtil.rotate90Y(MEDIUM_NORTH_SHAPE);
+        MEDIUM_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(MEDIUM_NORTH_SHAPE);
+        MEDIUM_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(MEDIUM_NORTH_SHAPE);
+        MEDIUM_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(MEDIUM_NORTH_SHAPE);
 
         LARGE_NORTH_BODY_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 2.0D, 13.0D, 9.0D, 12.0D);
         LARGE_NORTH_RIGHT_FIN_SHAPE = Block.createCuboidShape(1.0D, 6.0D, 4.0D, 3.0D, 7.0D, 9.0D);
@@ -170,8 +169,8 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
         LARGE_NORTH_EYES_SHAPE = VoxelShapes.union(LARGE_NORTH_RIGHT_EYE_SHAPE, LARGE_NORTH_LEFT_EYE_SHAPE);
         LARGE_NORTH_SHAPE = VoxelShapes.union(LARGE_NORTH_BODY_SHAPE, LARGE_NORTH_MOUTH_SHAPE,
                 LARGE_NORTH_FINS_SHAPE, LARGE_NORTH_EYES_SHAPE);
-        LARGE_SOUTH_SHAPE = ADShapeUtil.rotate180Y(LARGE_NORTH_SHAPE);
-        LARGE_WEST_SHAPE = ADShapeUtil.rotate270Y(LARGE_NORTH_SHAPE);
-        LARGE_EAST_SHAPE = ADShapeUtil.rotate90Y(LARGE_NORTH_SHAPE);
+        LARGE_SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(LARGE_NORTH_SHAPE);
+        LARGE_WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(LARGE_NORTH_SHAPE);
+        LARGE_EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(LARGE_NORTH_SHAPE);
     }
 }

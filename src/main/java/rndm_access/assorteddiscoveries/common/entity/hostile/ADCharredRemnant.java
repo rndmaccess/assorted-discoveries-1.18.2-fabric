@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.pathing.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -31,8 +32,8 @@ import java.time.temporal.ChronoField;
 import java.util.Random;
 
 public class ADCharredRemnant extends ZombieEntity {
-    public ADCharredRemnant(World world) {
-        super(ADEntityTypes.CHARRED_REMNANT, world);
+    public ADCharredRemnant(EntityType<? extends ADCharredRemnant> entityType, World world) {
+        super(entityType, world);
     }
 
     public static boolean canSpawn(EntityType<ADCharredRemnant> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {

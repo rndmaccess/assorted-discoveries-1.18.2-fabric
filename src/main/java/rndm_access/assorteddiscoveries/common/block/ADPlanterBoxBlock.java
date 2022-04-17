@@ -14,7 +14,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import rndm_access.assorteddiscoveries.common.util.ADShapeUtil;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 public class ADPlanterBoxBlock extends Block {
     public static final BooleanProperty NORTH;
@@ -216,33 +216,33 @@ public class ADPlanterBoxBlock extends Block {
         EAST = Properties.EAST;
 
         INSIDE_SINGLE_SHAPE = Block.createCuboidShape(3.0, 15.0, 3.0, 13.0, 16.0, 13.0);
-        SINGLE_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_SINGLE_SHAPE);
+        SINGLE_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_SINGLE_SHAPE);
 
         INSIDE_MIDDLE_SHAPE = Block.createCuboidShape(0.0, 15.0, 0.0, 16.0, 16.0, 16.0);
-        MIDDLE_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_MIDDLE_SHAPE);
+        MIDDLE_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_MIDDLE_SHAPE);
 
         INSIDE_NORTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 13.0);
-        NORTH_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SHAPE);
-        SOUTH_BOX_SHAPE = ADShapeUtil.rotate180Y(NORTH_BOX_SHAPE);
-        WEST_BOX_SHAPE = ADShapeUtil.rotate270Y(NORTH_BOX_SHAPE);
-        EAST_BOX_SHAPE = ADShapeUtil.rotate90Y(NORTH_BOX_SHAPE);
+        NORTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SHAPE);
+        SOUTH_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_BOX_SHAPE);
+        WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_BOX_SHAPE);
+        EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_BOX_SHAPE);
 
         INSIDE_NORTH_SOUTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 16.0);
-        NORTH_SOUTH_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SOUTH_SHAPE);
-        EAST_WEST_BOX_SHAPE = ADShapeUtil.rotate90Y(NORTH_SOUTH_BOX_SHAPE);
+        NORTH_SOUTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SOUTH_SHAPE);
+        EAST_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SOUTH_BOX_SHAPE);
 
         INSIDE_NORTH_EAST_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-        NORTH_EAST_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_EAST_SHAPE);
+        NORTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_EAST_SHAPE);
 
-        SOUTH_WEST_BOX_SHAPE = ADShapeUtil.rotate180Y(NORTH_EAST_BOX_SHAPE);
-        NORTH_WEST_BOX_SHAPE = ADShapeUtil.rotate270Y(NORTH_EAST_BOX_SHAPE);
-        SOUTH_EAST_BOX_SHAPE = ADShapeUtil.rotate90Y(NORTH_EAST_BOX_SHAPE);
+        SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_EAST_BOX_SHAPE);
+        NORTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_EAST_BOX_SHAPE);
+        SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_EAST_BOX_SHAPE);
 
         INSIDE_NORTH_WEST_EAST_SHAPE = Block.createCuboidShape(0.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-        NORTH_WEST_EAST_BOX_SHAPE = ADShapeUtil.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_WEST_EAST_SHAPE);
+        NORTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_WEST_EAST_SHAPE);
 
-        SOUTH_WEST_EAST_BOX_SHAPE = ADShapeUtil.rotate180Y(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_WEST_BOX_SHAPE = ADShapeUtil.rotate270Y(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_EAST_BOX_SHAPE = ADShapeUtil.rotate90Y(NORTH_WEST_EAST_BOX_SHAPE);
+        SOUTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_WEST_EAST_BOX_SHAPE);
+        NORTH_SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_WEST_EAST_BOX_SHAPE);
+        NORTH_SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_WEST_EAST_BOX_SHAPE);
     }
 }

@@ -1,21 +1,25 @@
 package rndm_access.assorteddiscoveries.common.worldgen.configured_feature;
 
+import net.minecraft.block.Block;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 
 import java.util.List;
 
 public class ADVegetationConfiguredFeatures {
+    /*
     public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = ADFeatureUtils.register("patch_blueberry_bush",
             Feature.RANDOM_PATCH.configured(FeatureUtils.simplePatchConfiguration(
-                    Feature.SIMPLE_BLOCK.configured(makeBushConfig(ADBlocks.BLUEBERRY_BUSH.get())),
+                    Feature.SIMPLE_BLOCK.configure(makeBushConfig(ADBlocks.BLUEBERRY_BUSH)),
                     List.of(Blocks.GRASS_BLOCK))));
     public static final ConfiguredFeature<?, ?> PATCH_WITCHS_CRADLE = ADFeatureUtils.register("patch_witchs_cradle",
             Feature.RANDOM_PATCH.configured(FeatureUtils.simplePatchConfiguration(
-                    Feature.SIMPLE_BLOCK.configured(makeBushConfig(ADBlocks.WITCHS_CRADLE.get())),
+                    Feature.SIMPLE_BLOCK.configure(makeBushConfig(ADBlocks.WITCHS_CRADLE)),
                     List.of(Blocks.GRASS_BLOCK))));
     public static final ConfiguredFeature<RandomPatchConfiguration, ?> SNAPDRAGON_AND_GRASS_DEFAULT = FeatureUtils
             .register("snapdragon_and_grass_default",
-                    Feature.FLOWER.configured(grassPatch(new WeightedStateProvider(SimpleWeightedRandomList
+                    Feature.FLOWER.configure(grassPatch(new WeightedStateProvider(SimpleWeightedRandomList
                             .<BlockState>builder().add(ADBlocks.ENDER_GRASS.get().defaultBlockState(), 2)
                             .add(ADBlocks.SNAPDRAGON.get().defaultBlockState(), 1)), 64)));
 
@@ -28,4 +32,5 @@ public class ADVegetationConfiguredFeatures {
         return FeatureUtils.simpleRandomPatchConfiguration(tries,
                 Feature.SIMPLE_BLOCK.configured(new SimpleBlockConfiguration(stateProvider)).onlyWhenEmpty());
     }
+     */
 }

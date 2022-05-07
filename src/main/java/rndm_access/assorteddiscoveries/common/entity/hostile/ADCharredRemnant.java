@@ -13,8 +13,10 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -139,8 +141,8 @@ public class ADCharredRemnant extends ZombieEntity {
     protected boolean burnsInDaylight() { return false; }
 
     @Override
-    public boolean canWalkOnFluid(Fluid fluid) {
-        return fluid.isIn(FluidTags.LAVA);
+    public boolean canWalkOnFluid(FluidState fluidState) {
+        return fluidState.isIn(FluidTags.LAVA);
     }
 
     @Override

@@ -32,8 +32,12 @@ public class ADPlushBlock extends HorizontalFacingBlock implements Waterloggable
         FluidState fluidstate = world.getFluidState(pos);
         boolean flag = fluidstate.isIn(FluidTags.WATER) && fluidstate.getLevel() == 8;
 
-        return this.getDefaultState().with(FACING, context.getPlayerLookDirection().getOpposite())
-                .with(WATERLOGGED, flag);
+        for (Direction direction : context.getPlacementDirections()) {
+            if (direction.getAxis().isHorizontal()) {
+                return this.getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, flag);
+            }
+        }
+        return null;
     }
 
     @Override

@@ -412,16 +412,5 @@
   
   "itemGroup.assorteddiscoveries.mod_group": "Assorted Discoveries Mod",
   
-  "config.assorteddiscoveries.spruceConePercent": "Spruce Cone Percent",
-  "config.assorteddiscoveries.netherSmokyQuartzOreVeinSize": "Nether Smoky Quartz Ore Vein Size",
-  "config.assorteddiscoveries.blackstoneRubyOreVeinSize": "Blackstone Ruby Ore Vein Size",
-  "config.assorteddiscoveries.enableSmartHarvest": "Enable Smart Harvest",
-  "config.assorteddiscoveries.charredRemnantWeight": "Charred Remnant Weight",
-  "config.assorteddiscoveries.charredRemnantMinCount": "Charred Remnant Min Count",
-  "config.assorteddiscoveries.charredRemnantMaxCount": "Charred Remnant Max Count",
-  "config.assorteddiscoveries.saveTheBunnies": "Save The Bunnies",
-  
-  "gui.jei.assorteddiscoveries.category.woodcutter": "Woodcutter",
-  
-  "entity.minecraft.villager.assorteddiscoveries.lumberjack": "Lumberjack"
+  "entity.minecraft.villager.lumberjack": "Lumberjack"
 }

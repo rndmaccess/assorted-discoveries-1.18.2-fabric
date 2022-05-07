@@ -7,6 +7,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 
 public class ADOreConfiguredFeatures {
+    /*
     public static final ConfiguredFeature<?, ?> ORE_SMOKY_QUARTZ;
 
     static {
@@ -14,4 +15,5 @@ public class ADOreConfiguredFeatures {
                 Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.NETHERRACK,
                         ADBlocks.NETHER_SMOKY_QUARTZ_ORE.getDefaultState(), 14)));
     }
+     */
 }

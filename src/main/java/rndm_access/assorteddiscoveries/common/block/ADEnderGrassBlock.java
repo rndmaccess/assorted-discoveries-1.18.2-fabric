@@ -19,7 +19,7 @@ public class ADEnderGrassBlock extends PlantBlock {
 
     @Override
     public boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return ADBlockTags.ENDER_GRASS_PLANTABLE_ON.contains(floor.getBlock());
+        return floor.isIn(ADBlockTags.ENDER_GRASS_PLANTABLE_ON);
     }
 
     @Override

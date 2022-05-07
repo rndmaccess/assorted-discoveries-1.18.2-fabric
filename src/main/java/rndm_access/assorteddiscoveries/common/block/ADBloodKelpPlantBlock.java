@@ -32,9 +32,11 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        double x = (double) pos.getX() + random.nextFloat();
-        double y = (double) pos.getY() + random.nextFloat();
-        double z = (double) pos.getZ() + random.nextFloat();
+        double x = pos.getX() + random.nextDouble();
+        double y = pos.getY() + random.nextDouble();
+        double z = pos.getZ() + random.nextDouble();
+
+        System.out.println(x);
 
         if (state.get(LIT)) {
             world.addParticle(ADParticleTypes.BLOOD_KELP_SPORE, x, y, z, 0.0D, 0.0D, 0.0D);

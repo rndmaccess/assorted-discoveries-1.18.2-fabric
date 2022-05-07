@@ -1,24 +1,22 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.tag.Tag;
-import net.minecraft.util.Identifier;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
-import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADEntityTypeTags {
-    public static final Tag<EntityType<?>> SNAPDRAGON_TELEPORT_EXCEPTIONS;
-    public static final Tag<EntityType<?>> ANIMALS_THAT_GIVE_BLOOD;
-    public static final Tag<EntityType<?>> BLUEBERRY_BUSH_SLOWS;
-    public static final Tag<EntityType<?>> WITCHS_CRADLE_SLOWS_AND_DAMAGES;
+    public static final TagKey<EntityType<?>> SNAPDRAGON_TELEPORT_EXCEPTIONS;
+    public static final TagKey<EntityType<?>> ANIMALS_THAT_GIVE_BLOOD;
+    public static final TagKey<EntityType<?>> BLUEBERRY_BUSH_SLOWS;
+    public static final TagKey<EntityType<?>> WITCHS_CRADLE_SLOWS_AND_DAMAGES;
 
     /**
      * @param path The name of the tag.
      * @return The tag from the location or an empty tag if none exists.
      */
-    private static Tag<EntityType<?>> bind(String path) {
-        return TagFactory.ENTITY_TYPE.create(ADReference.makeId(path));
+    private static TagKey<EntityType<?>> bind(String path) {
+        return TagKey.of(Registry.ENTITY_TYPE_KEY, ADReference.makeId(path));
     }
 
     static {

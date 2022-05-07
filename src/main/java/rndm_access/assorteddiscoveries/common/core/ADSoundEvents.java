@@ -17,12 +17,12 @@ public class ADSoundEvents {
      * @param name The name for the sound event.
      * @return new sound event.
      */
-    private static SoundEvent registerSound(String name) {
+    private static SoundEvent register(String name) {
         return Registry.register(Registry.SOUND_EVENT, ADReference.makeId(name), new SoundEvent(ADReference.makeId(name)));
     }
 
     static {
-        BLOCK_MUSHROOM_BOUNCE = registerSound("block.mushroom_bounce");
-        UI_WOODCUTTER_TAKE_RESULT = registerSound("ui.woodcutter.take_result");
+        BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
+        UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
     }
 }

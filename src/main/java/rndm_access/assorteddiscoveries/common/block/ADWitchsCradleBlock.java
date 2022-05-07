@@ -13,6 +13,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypeTags;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
+import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
+
+import java.util.Random;
 
 public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
     private static final VoxelShape SMALL_SHAPE;
@@ -40,6 +43,15 @@ public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
                 }
             }
         }
+    }
+
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        double x = pos.getX() + random.nextDouble();
+        double y = pos.getY() + random.nextDouble();
+        double z = pos.getZ() + random.nextDouble();
+
+        world.addParticle(ADParticleTypes.WITCHS_CRADLE_SPORE, x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     @Override

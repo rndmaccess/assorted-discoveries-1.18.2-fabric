@@ -76,12 +76,6 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
         return true;
     }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(STACK_SIZE, HALF);
-        super.appendProperties(builder);
-    }
-
     // Get the bottom outline shapes.
     public abstract VoxelShape getBottomNorthOutlineShape();
     public abstract VoxelShape getBottomSouthOutlineShape();
@@ -131,6 +125,11 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
         default:
             return state.get(HALF).equals(DoubleBlockHalf.UPPER) ? stackSizeShapeTop : stackSizeShapeMiddle;
         }
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(STACK_SIZE, HALF, WATERLOGGED, FACING);
     }
 
     static {

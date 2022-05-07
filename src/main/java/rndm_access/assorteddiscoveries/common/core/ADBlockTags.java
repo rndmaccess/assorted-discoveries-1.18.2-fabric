@@ -1,29 +1,31 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.block.Block;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADBlockTags {
-    public static final Tag<Block> END_BONE_MEALABLE_BLOCKS;
-    public static final Tag<Block> END_BONE_MEALABLE_PLANTS;
-    public static final Tag<Block> OVERWORLD_PLANTER_BOXES;
-    public static final Tag<Block> NETHER_PLANTER_BOXES;
-    public static final Tag<Block> OVERWORLD_BOXABLE;
-    public static final Tag<Block> NETHER_BOXABLE;
-    public static final Tag<Block> CATTAIL_PLANTABLE_ON;
-    public static final Tag<Block> SNAPDRAGON_PLANTABLE_ON;
-    public static final Tag<Block> ENDER_GRASS_PLANTABLE_ON;
-    public static final Tag<Block> BAMBOO_FENCES;
+    public static final TagKey<Block> END_BONE_MEALABLE_BLOCKS;
+    public static final TagKey<Block> END_BONE_MEALABLE_PLANTS;
+    public static final TagKey<Block> OVERWORLD_PLANTER_BOXES;
+    public static final TagKey<Block> NETHER_PLANTER_BOXES;
+    public static final TagKey<Block> OVERWORLD_BOXABLE;
+    public static final TagKey<Block> NETHER_BOXABLE;
+    public static final TagKey<Block> CATTAIL_PLANTABLE_ON;
+    public static final TagKey<Block> SNAPDRAGON_PLANTABLE_ON;
+    public static final TagKey<Block> ENDER_GRASS_PLANTABLE_ON;
+    public static final TagKey<Block> BAMBOO_FENCES;
 
     /**
-     * @param name The name of the tag.
+     * @param path The name of the tag.
      * @return The tag from the location or an empty tag if none exists.
      */
-    private static Tag<Block> bind(String name) {
-        return TagFactory.BLOCK.create(new Identifier(ADReference.MOD_ID, name));
+    private static TagKey<Block> bind(String path) {
+        return TagKey.of(Registry.BLOCK_KEY, ADReference.makeId(path));
     }
 
     static {

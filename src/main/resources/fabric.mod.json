@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "icon.png",
+  "icon": "assets/assorteddiscoveries/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -25,9 +25,7 @@
       "rndm_access.assorteddiscoveries.client.AssortedDiscoveriesClient"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
+  "mixins": [],
 
   "depends": {
     "fabricloader": ">=0.12.12",

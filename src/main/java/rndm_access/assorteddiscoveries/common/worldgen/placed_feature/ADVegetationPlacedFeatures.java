@@ -1,7 +1,6 @@
 package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.world.gen.decorator.PlacementModifier;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.List;

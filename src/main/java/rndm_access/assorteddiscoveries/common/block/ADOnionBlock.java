@@ -7,11 +7,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
+import java.util.function.Supplier;
+
 public class ADOnionBlock extends BeetrootsBlock {
     private static final VoxelShape[] ONION_SHAPE_BY_AGE;
-    private Item seedItem;
+    private Supplier<Item> seedItem;
 
-    public ADOnionBlock(AbstractBlock.Settings settings, Item seedItem) {
+    public ADOnionBlock(AbstractBlock.Settings settings, Supplier<Item> seedItem) {
         super(settings);
         this.seedItem = seedItem;
     }
@@ -22,7 +24,7 @@ public class ADOnionBlock extends BeetrootsBlock {
     }
 
     @Override
-    protected ItemConvertible getSeedsItem() { return seedItem; }
+    protected ItemConvertible getSeedsItem() { return seedItem.get(); }
 
     static {
         ONION_SHAPE_BY_AGE = new VoxelShape[] {

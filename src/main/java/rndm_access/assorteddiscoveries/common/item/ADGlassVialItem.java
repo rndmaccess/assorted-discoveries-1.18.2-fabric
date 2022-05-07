@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypeTags;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 
@@ -21,7 +23,8 @@ public class ADGlassVialItem extends Item {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (stack.getItem().equals(ADItems.GLASS_VIAL)) {
-            if (entity instanceof AnimalEntity && entity.getHealth() > 0.0 && ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD.contains(entity.getType())) {
+
+            if (entity instanceof AnimalEntity && entity.getHealth() > 0.0 && entity.getType().isIn(ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD)) {
                 AnimalEntity animalTarget = (AnimalEntity)(entity);
 
                 if (animalTarget.damage(DamageSource.GENERIC, 1)) {

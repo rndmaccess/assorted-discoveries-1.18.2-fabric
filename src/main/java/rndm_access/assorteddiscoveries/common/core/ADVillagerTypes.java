@@ -13,7 +13,7 @@ public class ADVillagerTypes {
     public static final VillagerType CRIMSON;
     public static final VillagerType WARPED;
 
-    private static VillagerType registerVillagerType(String path, RegistryKey<Biome> biome) {
+    private static VillagerType register(String path, RegistryKey<Biome> biome) {
         VillagerType type = VillagerTypeHelper.register(ADReference.makeId(path));
 
         VillagerTypeHelper.addVillagerTypeToBiome(biome, type);
@@ -25,8 +25,8 @@ public class ADVillagerTypes {
     }
 
     static {
-        CRIMSON = registerVillagerType("crimson", BiomeKeys.CRIMSON_FOREST);
-        WARPED = registerVillagerType("warped", BiomeKeys.WARPED_FOREST);
+        CRIMSON = register("crimson", BiomeKeys.CRIMSON_FOREST);
+        WARPED = register("warped", BiomeKeys.WARPED_FOREST);
     }
 }
 

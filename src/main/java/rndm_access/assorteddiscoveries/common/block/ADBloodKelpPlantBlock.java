@@ -36,8 +36,6 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
         double y = pos.getY() + random.nextDouble();
         double z = pos.getZ() + random.nextDouble();
 
-        System.out.println(x);
-
         if (state.get(LIT)) {
             world.addParticle(ADParticleTypes.BLOOD_KELP_SPORE, x, y, z, 0.0D, 0.0D, 0.0D);
         }

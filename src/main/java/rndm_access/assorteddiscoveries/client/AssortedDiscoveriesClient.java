@@ -9,18 +9,15 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaEmberParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.util.Identifier;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.client.entity.ADCharredRemnantRenderer;
-import rndm_access.assorteddiscoveries.client.particle.ADBloodKelpSporeParticle;
-import rndm_access.assorteddiscoveries.client.particle.ADWitchsCradleSporeParticle;
+import rndm_access.assorteddiscoveries.client.particle.ADSporeParticle;
 import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
 import rndm_access.assorteddiscoveries.common.core.*;
 
@@ -29,17 +26,24 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
-            return tintIndex == 1 ? BiomeColors.getGrassColor(view, pos) : -1;
-            }, ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> GrassColors.getColor(0.5D, 1.0D),
-                ADItems.ENDERMAN_PLUSH, ADItems.GRASS_SLAB);
-
+        registerBlockColorProviders();
+        registerItemColorProviders();
         registerEntityRenderers();
         registerParticleSprites();
         registerParticleFactories();
         registerRenderLayers();
         registerScreens();
+    }
+
+    private void registerBlockColorProviders() {
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
+            return tintIndex == 1 ? BiomeColors.getGrassColor(view, pos) : -1;
+        }, ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
+    }
+
+    private void registerItemColorProviders() {
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> GrassColors.getColor(0.5D, 1.0D),
+                ADItems.ENDERMAN_PLUSH, ADItems.GRASS_SLAB);
     }
 
     private void registerEntityRenderers() {
@@ -128,8 +132,8 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         factoryRegistry.register(ADParticleTypes.GREEN_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.RED_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLACK_FLAME, FlameParticle.Factory::new);
-        factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADBloodKelpSporeParticle.Factory::new);
-        factoryRegistry.register(ADParticleTypes.WITCHS_CRADLE_SPORE, ADWitchsCradleSporeParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADSporeParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.WITCHS_CRADLE_SPORE, ADSporeParticle.Factory::new);
     }
 
     private void registerRenderLayers() {

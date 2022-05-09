@@ -38,7 +38,7 @@ public class ADPersianCatPlushBlock extends ADCatPlushBlock {
     }
 
     static {
-        NORTH_NOSE = Block.createCuboidShape(7.5D, 5.0D, 0.5D, 8.5D, 6.0D, 1.0D);
+        NORTH_NOSE = Block.createCuboidShape(7.5D, 4.5D, 0.5D, 8.5D, 5.5D, 1.0D);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY, NORTH_NOSE);
         SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
         WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);

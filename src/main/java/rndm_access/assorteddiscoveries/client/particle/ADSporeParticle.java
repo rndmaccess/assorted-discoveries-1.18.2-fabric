@@ -3,12 +3,10 @@ package rndm_access.assorteddiscoveries.client.particle;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
 
-public class ADBloodKelpSporeParticle extends SpriteBillboardParticle {
+public class ADSporeParticle extends SpriteBillboardParticle {
 
-    protected ADBloodKelpSporeParticle(ClientWorld clientWorld, double x, double y, double z, double xd, double yd, double zd) {
+    protected ADSporeParticle(ClientWorld clientWorld, double x, double y, double z, double xd, double yd, double zd) {
         super(clientWorld, x, y, z);
         this.setBoundingBoxSpacing(0.01F, 0.01F);
         this.velocityX = xd * 0.2F + (Math.random() * 2.0D - 1.0D) * 0.02F;
@@ -40,9 +38,6 @@ public class ADBloodKelpSporeParticle extends SpriteBillboardParticle {
             this.velocityX *= 0.85F;
             this.velocityY *= 0.85F;
             this.velocityZ *= 0.85F;
-            if (!this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-                this.markDead();
-            }
         }
     }
 
@@ -51,9 +46,9 @@ public class ADBloodKelpSporeParticle extends SpriteBillboardParticle {
         @Override
         public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld,
                                        double x, double y, double z, double xd, double yd, double zd) {
-            ADBloodKelpSporeParticle bloodKelpSporeParticle = new ADBloodKelpSporeParticle(clientWorld, x, y, z, xd, yd, zd);
-            bloodKelpSporeParticle.setSprite(this.sprite);
-            return bloodKelpSporeParticle;
+            ADSporeParticle particle = new ADSporeParticle(clientWorld, x, y, z, xd, yd, zd);
+            particle.setSprite(this.sprite);
+            return particle;
         }
     }
 }

@@ -6,12 +6,17 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.*;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
 
 import java.util.List;
 
 public class ADTreePlacedFeatures {
     public static final RegistryEntry<PlacedFeature> HUGE_PURPLE_MUSHROOM_VEGETATION;
+
+    public static void registerTreePlacedFeatures() {
+        AssortedDiscoveries.LOGGER.info("Registered tree placed features");
+    }
 
     private static List<PlacementModifier> getPurpleMushroomPlacement(int chance, PlacementModifier modifier) {
         ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();

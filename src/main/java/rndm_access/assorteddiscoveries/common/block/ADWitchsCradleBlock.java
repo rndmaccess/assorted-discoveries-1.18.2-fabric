@@ -3,7 +3,10 @@ package rndm_access.assorteddiscoveries.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.ai.pathing.PathNodeMaker;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +22,9 @@ import java.util.Random;
 
 public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
     private static final VoxelShape SMALL_SHAPE;
+    private static final VoxelShape MEDIUM_SHAPE;
+    private static final VoxelShape LARGE_SHAPE;
+    private static final VoxelShape GIANT_SHAPE;
 
     public ADWitchsCradleBlock(Settings settings) {
         super(settings);
@@ -31,10 +37,10 @@ public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity.getType().isIn(ADEntityTypeTags.WITCHS_CRADLE_SLOWS_AND_DAMAGES)) { // Slime, Bee
+        if (!entity.getType().isIn(ADEntityTypeTags.WITCHS_CRADLE_IMMUNE_ENTITY_TYPES)) {
             entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
 
-            if (!world.isClient && state.get(AGE) > 0 && (entity.lastRenderX != entity.getX() || entity.lastRenderZ != entity.getZ())) {
+            if (!world.isClient() && state.get(AGE) > 0 && (entity.lastRenderX != entity.getX() || entity.lastRenderZ != entity.getZ())) {
                 double d = Math.abs(entity.getX() - entity.lastRenderX);
                 double e = Math.abs(entity.getZ() - entity.lastRenderZ);
 
@@ -56,14 +62,18 @@ public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(AGE).equals(0)) {
-            return SMALL_SHAPE;
-        } else {
-            return super.getOutlineShape(state, world, pos, context);
-        }
+        return switch (state.get(AGE)) {
+            case 0 -> SMALL_SHAPE;
+            case 1 -> MEDIUM_SHAPE;
+            case 2 -> LARGE_SHAPE;
+            default -> GIANT_SHAPE;
+        };
     }
 
     static {
-        SMALL_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 9.0D, 14.0D);
+        SMALL_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 9.0D, 13.0D);
+        MEDIUM_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 11.0D, 14.0D);
+        LARGE_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 11.0D, 15.0D);
+        GIANT_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
     }
 }

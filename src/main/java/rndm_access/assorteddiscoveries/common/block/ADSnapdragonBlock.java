@@ -47,7 +47,7 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
         EntityType<?> type = entity.getType();
 
-        if (entity instanceof LivingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_EXCEPTIONS))) {
+        if (entity instanceof LivingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES))) {
             LivingEntity livingEntity = (LivingEntity) entity;
 
             if (!world.isClient() && !livingEntity.isSneaking() && ((LivingEntity) entity).getVelocity().y == 0.0D) {

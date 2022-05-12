@@ -877,7 +877,7 @@ public class ADBlocks {
         BLACK_TORCH = register("black_torch",
                 torchBlock(ADParticleTypes.BLACK_FLAME));
         WITCHS_CRADLE = register("witchs_cradle",
-                new ADWitchsCradleBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH)));
+                new ADWitchsCradleBlock(AbstractBlock.Settings.copy(Blocks.SWEET_BERRY_BUSH).luminance((state) -> 10)));
         FRESH_BAMBOO_FENCE = register("fresh_bamboo_fence",
                 bambooFenceBlock(MapColor.DARK_GREEN));
         FRESH_BAMBOO_FENCE_GATE = register("fresh_bamboo_fence_gate",

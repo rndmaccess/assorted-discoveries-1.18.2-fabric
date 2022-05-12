@@ -6,23 +6,23 @@ import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 
 public class ADEntityTypeTags {
-    public static final TagKey<EntityType<?>> SNAPDRAGON_TELEPORT_EXCEPTIONS;
+    public static final TagKey<EntityType<?>> SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES;
     public static final TagKey<EntityType<?>> ANIMALS_THAT_GIVE_BLOOD;
     public static final TagKey<EntityType<?>> BLUEBERRY_BUSH_SLOWS;
-    public static final TagKey<EntityType<?>> WITCHS_CRADLE_SLOWS_AND_DAMAGES;
+    public static final TagKey<EntityType<?>> WITCHS_CRADLE_IMMUNE_ENTITY_TYPES;
 
     /**
      * @param path The name of the tag.
      * @return The tag from the location or an empty tag if none exists.
      */
-    private static TagKey<EntityType<?>> bind(String path) {
+    private static TagKey<EntityType<?>> of(String path) {
         return TagKey.of(Registry.ENTITY_TYPE_KEY, ADReference.makeId(path));
     }
 
     static {
-        SNAPDRAGON_TELEPORT_EXCEPTIONS = bind("snapdragon_teleport_exceptions");
-        ANIMALS_THAT_GIVE_BLOOD = bind("animals_that_give_blood");
-        BLUEBERRY_BUSH_SLOWS = bind("blueberry_bush_slows");
-        WITCHS_CRADLE_SLOWS_AND_DAMAGES = bind("witchs_cradle_slows_and_damages");
+        SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES = of("snapdragon_teleport_immune_entity_types");
+        ANIMALS_THAT_GIVE_BLOOD = of("animals_that_give_blood");
+        BLUEBERRY_BUSH_SLOWS = of("blueberry_bush_slows");
+        WITCHS_CRADLE_IMMUNE_ENTITY_TYPES = of("witchs_cradle_immune_entity_types");
     }
 }

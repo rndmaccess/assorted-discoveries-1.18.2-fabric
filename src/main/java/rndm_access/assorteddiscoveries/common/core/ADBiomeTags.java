@@ -6,25 +6,23 @@ import net.minecraft.world.biome.Biome;
 import rndm_access.assorteddiscoveries.ADReference;
 
 public class ADBiomeTags {
-    public static final TagKey<Biome> CABIN_BIRCH_FOREST_HAS_STRUCTURE;
-    public static final TagKey<Biome> CABIN_DARK_FOREST_HAS_STRUCTURE;
-    public static final TagKey<Biome> CABIN_FOREST_HAS_STRUCTURE;
-    public static final TagKey<Biome> CABIN_ICY_TAIGA_HAS_STRUCTURE;
-    public static final TagKey<Biome> CABIN_TAIGA_HAS_STRUCTURE;
-    public static final TagKey<Biome> NETHER_CABIN_CRIMSON_HAS_STRUCTURE;
-    public static final TagKey<Biome> NETHER_CABIN_WARPED_HAS_STRUCTURE;
+    public static final TagKey<Biome> CATTAIL_PATCH;
+    public static final TagKey<Biome> HUGE_PURPLE_MUSHROOM;
+    public static final TagKey<Biome> ORE_SMOKY_QUARTZ;
+    public static final TagKey<Biome> BLUEBERRY_BUSH_PATCH;
+    public static final TagKey<Biome> WITCHS_CRADLE_PATCH;
+    public static final TagKey<Biome> SNAPDRAGON_AND_ENDER_GRASS;
 
     private static TagKey<Biome> of(String path) {
         return TagKey.of(Registry.BIOME_KEY, ADReference.makeId(path));
     }
 
     static {
-        CABIN_BIRCH_FOREST_HAS_STRUCTURE = of("has_structure/cabin_birch_forest");
-        CABIN_DARK_FOREST_HAS_STRUCTURE = of("has_structure/cabin_dark_forest");
-        CABIN_FOREST_HAS_STRUCTURE = of("has_structure/cabin_forest");
-        CABIN_ICY_TAIGA_HAS_STRUCTURE = of("has_structure/cabin_icy_taiga");
-        CABIN_TAIGA_HAS_STRUCTURE = of("has_structure/cabin_taiga");
-        NETHER_CABIN_CRIMSON_HAS_STRUCTURE = of("has_structure/nether_cabin_crimson");
-        NETHER_CABIN_WARPED_HAS_STRUCTURE = of("has_structure/nether_cabin_warped");
+        CATTAIL_PATCH = of("has_feature/cattail_patch");
+        HUGE_PURPLE_MUSHROOM = of("has_feature/huge_purple_mushroom");
+        ORE_SMOKY_QUARTZ = of("has_feature/ore_smoky_quartz");
+        BLUEBERRY_BUSH_PATCH = of("has_feature/blueberry_bush_patch");
+        WITCHS_CRADLE_PATCH = of("has_feature/witchs_cradle_patch");
+        SNAPDRAGON_AND_ENDER_GRASS = of("has_feature/snapdragon_and_ender_grass");
     }
 }

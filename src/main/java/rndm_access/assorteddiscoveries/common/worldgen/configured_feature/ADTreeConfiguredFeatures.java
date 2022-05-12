@@ -7,10 +7,15 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeMushroomFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 
 public class ADTreeConfiguredFeatures {
     public static final RegistryEntry<ConfiguredFeature<?, ?>> HUGE_PURPLE_MUSHROOM;
+
+    public static void registerTreeConfiguredFeatures() {
+        AssortedDiscoveries.LOGGER.info("Registered tree configured features");
+    }
 
     static {
         HUGE_PURPLE_MUSHROOM = ADConfiguredFeatures.register("huge_purple_mushroom",

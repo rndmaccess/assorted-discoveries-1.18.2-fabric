@@ -47,12 +47,4 @@ public class ADCattailBlock extends TallFlowerBlock {
         return state.get(HALF) == DoubleBlockHalf.LOWER ? Fluids.WATER.getStill(false)
                 : Fluids.EMPTY.getDefaultState();
     }
-
-    public boolean canFillWithFluid(BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-        return false;
-    }
-
-    public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-        return false;
-    }
 }

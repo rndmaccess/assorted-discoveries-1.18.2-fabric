@@ -4,17 +4,37 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.advancement.criterion.EntityHurtPlayerCriterion;
+import net.minecraft.block.CactusBlock;
+import net.minecraft.client.particle.DamageParticle;
+import net.minecraft.entity.DamageUtil;
+import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.DamageModifierStatusEffect;
+import net.minecraft.entity.mob.HoglinBrain;
+import net.minecraft.entity.mob.HoglinEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.condition.DamageSourcePropertiesLootCondition;
+import net.minecraft.predicate.entity.DamageSourcePredicate;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.PlacedFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.core.*;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADOceanConfiguredFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADOreConfiguredFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADVegetationConfiguredFeatures;
 import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADOceanPlacedFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADOrePlacedFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADTreePlacedFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADVegetationPlacedFeatures;
 
 public class AssortedDiscoveries implements ModInitializer {
 	public static final ItemGroup MOD_GROUP = FabricItemGroupBuilder.build(ADReference.makeId("mod_group"), () -> new ItemStack(ADItems.CATTAIL));
@@ -42,14 +62,47 @@ public class AssortedDiscoveries implements ModInitializer {
 
 		// World Generation Registries
 		ADFeature.registerFeatures();
-		ADOceanPlacedFeatures.registerOceanPlacedFeatures();
 		ADStructureFeatures.registerStructureFeatures();
-		//addFeaturesToBiomes();
+		ADOceanConfiguredFeatures.registerOceanConfiguredFeatures();
+		ADOreConfiguredFeatures.registerOreConfiguredFeatures();
+		ADTreeConfiguredFeatures.registerTreeConfiguredFeatures();
+		ADVegetationConfiguredFeatures.registerVegetationConfiguredFeatures();
+		ADOceanPlacedFeatures.registerOceanPlacedFeatures();
+		ADOrePlacedFeatures.registerOrePlacedFeatures();
+		ADTreePlacedFeatures.registerTreePlacedFeatures();
+		ADVegetationPlacedFeatures.registerVegetationPlacedFeatures();
+		addFeaturesToBiomes();
 	}
 
 	private static void addFeaturesToBiomes() {
-		RegistryKey cattailSwamp = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, ADReference.makeId("cattail_swamp"));
+		RegistryKey<PlacedFeature> cattailPatch = placedFeatureRegistryKey("cattail_patch");
+		RegistryKey<PlacedFeature> oreSmokyQuartz = placedFeatureRegistryKey("ore_smoky_quartz");
+		RegistryKey<PlacedFeature> hugePurpleMushroom = placedFeatureRegistryKey("huge_purple_mushroom_vegetation");
+		RegistryKey<PlacedFeature> patchBlueberryCommon = placedFeatureRegistryKey("patch_blueberry_common");
+		RegistryKey<PlacedFeature> patchBlueberryRare = placedFeatureRegistryKey("patch_blueberry_rare");
+		RegistryKey<PlacedFeature> patchWitchsCradleCommon = placedFeatureRegistryKey("patch_witchs_cradle_common");
+		RegistryKey<PlacedFeature> patchWitchsCradleRare = placedFeatureRegistryKey("patch_witchs_cradle_rare");
+		RegistryKey<PlacedFeature> snapdragonAndEnderGrass = placedFeatureRegistryKey("snapdragon_and_ender_grass");
 
-		BiomeModifications.addFeature(BiomeSelectors.categories(Biome.Category.SWAMP), GenerationStep.Feature.TOP_LAYER_MODIFICATION, cattailSwamp);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.CATTAIL_PATCH),
+				GenerationStep.Feature.VEGETAL_DECORATION, cattailPatch);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.ORE_SMOKY_QUARTZ),
+				GenerationStep.Feature.UNDERGROUND_ORES, oreSmokyQuartz);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.HUGE_PURPLE_MUSHROOM),
+				GenerationStep.Feature.VEGETAL_DECORATION, hugePurpleMushroom);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLUEBERRY_BUSH_PATCH),
+				GenerationStep.Feature.VEGETAL_DECORATION, patchBlueberryCommon);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLUEBERRY_BUSH_PATCH),
+				GenerationStep.Feature.VEGETAL_DECORATION, patchBlueberryRare);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.WITCHS_CRADLE_PATCH),
+				GenerationStep.Feature.VEGETAL_DECORATION, patchWitchsCradleCommon);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.WITCHS_CRADLE_PATCH),
+				GenerationStep.Feature.VEGETAL_DECORATION, patchWitchsCradleRare);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.SNAPDRAGON_AND_ENDER_GRASS),
+				GenerationStep.Feature.VEGETAL_DECORATION, snapdragonAndEnderGrass);
+	}
+
+	private static RegistryKey<PlacedFeature> placedFeatureRegistryKey(String path) {
+		return RegistryKey.of(Registry.PLACED_FEATURE_KEY, ADReference.makeId(path));
 	}
 }

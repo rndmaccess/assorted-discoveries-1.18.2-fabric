@@ -1,9 +1,12 @@
 package rndm_access.assorteddiscoveries.common.core;
 
+import com.sun.jdi.event.StepEvent;
+import com.sun.jdi.request.StepRequest;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.PathNodeNavigator;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
 import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
@@ -44,12 +47,8 @@ public class ADParticleTypes {
     public static final DefaultParticleType BLOOD_KELP_SPORE;
     public static final DefaultParticleType WITCHS_CRADLE_SPORE;
 
-    /**
-     * @param name The name of this particles
-     * @return The particle added.
-     */
-    private static DefaultParticleType register(String name) {
-        return Registry.register(Registry.PARTICLE_TYPE, ADReference.makeId(name), FabricParticleTypes.simple());
+    private static DefaultParticleType register(String path) {
+        return Registry.register(Registry.PARTICLE_TYPE, ADReference.makeId(path), FabricParticleTypes.simple());
     }
 
     /**

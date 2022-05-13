@@ -10,9 +10,11 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
 
@@ -61,19 +63,20 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
         BlockState topState = context.getWorld().getBlockState(topPos);
         int size = state.get(STACK_SIZE);
 
-        if (context.getStack().isOf(this.asItem())) {
-            return size < 2 || size < 3 && topState.getMaterial().isReplaceable() ? true : false;
-        }
-        return false;
+        // Let the player continue to stack plushes as long as the conditions are met.
+        return context.getStack().isOf(this.asItem()) && size < 3 && topState.getMaterial().isReplaceable();
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        // If the stack is not full break the other half.
-        if(state.get(STACK_SIZE).equals(3)) {
-            return world.getBlockState(pos.down()).isOf(this) || world.getBlockState(pos.up()).isOf(this);
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        if(state.get(STACK_SIZE) == 3) {
+            // If the stack is not full break the other half.
+            if(world.getBlockState(pos.down()).isOf(this) || world.getBlockState(pos.up()).isOf(this)) {
+                return state;
+            }
+            return Blocks.AIR.getDefaultState();
         }
-        return true;
+        return state;
     }
 
     // Get the bottom outline shapes.
@@ -96,16 +99,16 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING)) {
-            case NORTH:
-                return getStackShape(state, getBottomNorthOutlineShape(), getMiddleNorthOutlineShape(), getTopNorthOutlineShape());
-            case SOUTH:
-                return getStackShape(state, getBottomSouthOutlineShape(), getMiddleSouthOutlineShape(), getTopSouthOutlineShape());
-            case WEST:
-                return getStackShape(state, getBottomWestOutlineShape(), getMiddleWestOutlineShape(), getTopWestOutlineShape());
-            default:
-                return getStackShape(state, getBottomEastOutlineShape(), getMiddleEastOutlineShape(), getTopEastOutlineShape());
-        }
+        return switch (state.get(FACING)) {
+            case NORTH -> getStackShape(state, getBottomNorthOutlineShape(),
+                    getMiddleNorthOutlineShape(), getTopNorthOutlineShape());
+            case SOUTH -> getStackShape(state, getBottomSouthOutlineShape(),
+                    getMiddleSouthOutlineShape(), getTopSouthOutlineShape());
+            case WEST -> getStackShape(state, getBottomWestOutlineShape(),
+                    getMiddleWestOutlineShape(), getTopWestOutlineShape());
+            default -> getStackShape(state, getBottomEastOutlineShape(),
+                    getMiddleEastOutlineShape(), getTopEastOutlineShape());
+        };
     }
 
     /**
@@ -117,14 +120,11 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
      */
     protected static VoxelShape getStackShape(BlockState state, VoxelShape stackSizeShapeBottom,
                                               VoxelShape stackSizeShapeMiddle, VoxelShape stackSizeShapeTop) {
-        switch (state.get(STACK_SIZE)) {
-        case 1:
-            return stackSizeShapeBottom;
-        case 2:
-            return stackSizeShapeMiddle;
-        default:
-            return state.get(HALF).equals(DoubleBlockHalf.UPPER) ? stackSizeShapeTop : stackSizeShapeMiddle;
-        }
+        return switch (state.get(STACK_SIZE)) {
+            case 1 -> stackSizeShapeBottom;
+            case 2 -> stackSizeShapeMiddle;
+            default -> (state.get(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop : stackSizeShapeMiddle);
+        };
     }
 
     @Override

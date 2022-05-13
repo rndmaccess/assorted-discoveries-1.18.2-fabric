@@ -2,7 +2,7 @@
 	"__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio",
 	"parent": "minecraft:block/block",
 	"textures": {
-		"particle": "block/black_wool",
+		"particle": "block/yellow_wool",
 		"body": "block/yellow_wool",
 		"eyes": "block/black_wool",
 		"nose": "block/pink_wool"

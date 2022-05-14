@@ -32,12 +32,23 @@
                 }
               ],
               "count": 3
-            },
+            }
+          ],
+          "conditions": [
             {
-              "function": "minecraft:explosion_decay"
+              "condition": "minecraft:block_state_property",
+              "block": "assorteddiscoveries:magma_cube_plush",
+              "properties": {
+                "half": "lower"
+              }
             }
           ],
           "name": "assorteddiscoveries:magma_cube_plush"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

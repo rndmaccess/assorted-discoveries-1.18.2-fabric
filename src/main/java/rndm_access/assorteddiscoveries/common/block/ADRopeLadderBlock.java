@@ -12,7 +12,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import org.jetbrains.annotations.Nullable;
 import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
 
 public class ADRopeLadderBlock extends LadderBlock {
@@ -93,6 +92,7 @@ public class ADRopeLadderBlock extends LadderBlock {
         BlockState behindState = world.getBlockState(behindPos);
         boolean hasSupport = behindState.isSideSolidFullSquare(world, behindPos, facing);
 
+        // When the last ladder supported is less than or equal to 16 allow new ladders to be placed.
         if (aboveState.isOf(this)) {
             int length = aboveState.get(LENGTH) + 1;
 

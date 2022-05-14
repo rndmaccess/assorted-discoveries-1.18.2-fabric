@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "assorteddiscoveries:polished_bauxite"
-  },
-  "result": "assorteddiscoveries:polished_bauxite_wall",
-  "count": 1
-}

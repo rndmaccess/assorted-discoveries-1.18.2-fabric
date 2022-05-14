@@ -2,18 +2,13 @@ package rndm_access.assorteddiscoveries.common.core;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block.*;
-import rndm_access.assorteddiscoveries.common.item.ADRopeLadderBlockItem;
 import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
 
 import java.util.function.ToIntFunction;
@@ -254,10 +249,6 @@ public class ADBlocks {
     public static final Block BAUXITE_SLAB;
     public static final Block BAUXITE_STAIRS;
     public static final Block BAUXITE_WALL;
-    public static final Block POLISHED_BAUXITE;
-    public static final Block POLISHED_BAUXITE_SLAB;
-    public static final Block POLISHED_BAUXITE_STAIRS;
-    public static final Block POLISHED_BAUXITE_WALL;
     public static final Block BAUXITE_BRICKS;
     public static final Block BAUXITE_BRICK_STAIRS;
     public static final Block BAUXITE_BRICK_SLAB;
@@ -335,23 +326,19 @@ public class ADBlocks {
     public static final Block QUARTZ_TILE_STAIRS;
     public static final Block QUARTZ_TILE_SLAB;
     public static final Block QUARTZ_TILE_WALL;
-    public static final Block POLISHED_CALCITE;
-    public static final Block POLISHED_CALCITE_STAIRS;
-    public static final Block POLISHED_CALCITE_SLAB;
-    public static final Block POLISHED_CALCITE_WALL;
     public static final Block CALCITE_BRICKS;
     public static final Block CALCITE_BRICK_STAIRS;
     public static final Block CALCITE_BRICK_SLAB;
     public static final Block CALCITE_BRICK_WALL;
+    public static final Block MOSSY_CALCITE_BRICKS;
+    public static final Block MOSSY_CALCITE_BRICK_STAIRS;
+    public static final Block MOSSY_CALCITE_BRICK_SLAB;
+    public static final Block MOSSY_CALCITE_BRICK_WALL;
     public static final Block CRACKED_CALCITE_BRICKS;
     public static final Block CRACKED_CALCITE_BRICK_STAIRS;
     public static final Block CRACKED_CALCITE_BRICK_SLAB;
     public static final Block CRACKED_CALCITE_BRICK_WALL;
     public static final Block CHISELED_CALCITE_BRICKS;
-    public static final Block POLISHED_TUFF;
-    public static final Block POLISHED_TUFF_STAIRS;
-    public static final Block POLISHED_TUFF_SLAB;
-    public static final Block POLISHED_TUFF_WALL;
     public static final Block TUFF_BRICKS;
     public static final Block TUFF_BRICK_STAIRS;
     public static final Block TUFF_BRICK_SLAB;
@@ -365,10 +352,6 @@ public class ADBlocks {
     public static final Block CRACKED_TUFF_BRICK_SLAB;
     public static final Block CRACKED_TUFF_BRICK_WALL;
     public static final Block CHISELED_TUFF_BRICKS;
-    public static final Block POLISHED_DRIPSTONE_BLOCK;
-    public static final Block POLISHED_DRIPSTONE_STAIRS;
-    public static final Block POLISHED_DRIPSTONE_SLAB;
-    public static final Block POLISHED_DRIPSTONE_WALL;
     public static final Block DRIPSTONE_BRICKS;
     public static final Block DRIPSTONE_BRICK_STAIRS;
     public static final Block DRIPSTONE_BRICK_SLAB;
@@ -894,14 +877,6 @@ public class ADBlocks {
                 new ADStairsBlock(BAUXITE.getDefaultState(), AbstractBlock.Settings.copy(BAUXITE)));
         BAUXITE_WALL = register("bauxite_wall",
                 new WallBlock(AbstractBlock.Settings.copy(BAUXITE)));
-        POLISHED_BAUXITE = register("polished_bauxite",
-                new Block(AbstractBlock.Settings.copy(BAUXITE)));
-        POLISHED_BAUXITE_SLAB = register("polished_bauxite_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(BAUXITE)));
-        POLISHED_BAUXITE_STAIRS = register("polished_bauxite_stairs",
-                new ADStairsBlock(BAUXITE.getDefaultState(), AbstractBlock.Settings.copy(BAUXITE)));
-        POLISHED_BAUXITE_WALL = register("polished_bauxite_wall",
-                new WallBlock(AbstractBlock.Settings.copy(BAUXITE)));
         BAUXITE_BRICKS = register("bauxite_bricks",
                 new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.SPRUCE_BROWN).strength(0.4F)));
         BAUXITE_BRICK_STAIRS = register("bauxite_brick_stairs",
@@ -1063,14 +1038,6 @@ public class ADBlocks {
                 new SlabBlock(AbstractBlock.Settings.copy(QUARTZ_TILES)));
         QUARTZ_TILE_WALL = register("quartz_tile_wall",
                 new WallBlock(AbstractBlock.Settings.copy(QUARTZ_TILES)));
-        POLISHED_CALCITE = register("polished_calcite",
-                new Block(AbstractBlock.Settings.copy(Blocks.CALCITE)));
-        POLISHED_CALCITE_STAIRS = register("polished_calcite_stairs",
-                new ADStairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)));
-        POLISHED_CALCITE_SLAB = register("polished_calcite_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
-        POLISHED_CALCITE_WALL = register("polished_calcite_wall",
-                new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
         CALCITE_BRICKS = register("calcite_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.CALCITE)));
         CALCITE_BRICK_STAIRS = register("calcite_brick_stairs",
@@ -1078,6 +1045,14 @@ public class ADBlocks {
         CALCITE_BRICK_SLAB = register("calcite_brick_slab",
                 new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
         CALCITE_BRICK_WALL = register("calcite_brick_wall",
+                new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
+        MOSSY_CALCITE_BRICKS = register("mossy_calcite_bricks",
+                new Block(AbstractBlock.Settings.copy(Blocks.CALCITE)));
+        MOSSY_CALCITE_BRICK_STAIRS = register("mossy_calcite_brick_stairs",
+                new ADStairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)));
+        MOSSY_CALCITE_BRICK_SLAB = register("mossy_calcite_brick_slab",
+                new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
+        MOSSY_CALCITE_BRICK_WALL = register("mossy_calcite_brick_wall",
                 new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)));
         CRACKED_CALCITE_BRICKS = register("cracked_calcite_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.CALCITE)));
@@ -1089,14 +1064,6 @@ public class ADBlocks {
                 new WallBlock(AbstractBlock.Settings.copy(CRACKED_CALCITE_BRICKS)));
         CHISELED_CALCITE_BRICKS = register("chiseled_calcite_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.CALCITE)));
-        POLISHED_TUFF = register("polished_tuff",
-                new Block(AbstractBlock.Settings.copy(Blocks.TUFF)));
-        POLISHED_TUFF_STAIRS = register("polished_tuff_stairs",
-                new ADStairsBlock(Blocks.TUFF.getDefaultState(), AbstractBlock.Settings.copy(Blocks.TUFF)));
-        POLISHED_TUFF_SLAB = register("polished_tuff_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF)));
-        POLISHED_TUFF_WALL = register("polished_tuff_wall",
-                new WallBlock(AbstractBlock.Settings.copy(Blocks.TUFF)));
         TUFF_BRICKS = register("tuff_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.TUFF)));
         TUFF_BRICK_STAIRS = register("tuff_brick_stairs",
@@ -1123,14 +1090,6 @@ public class ADBlocks {
                 new WallBlock(AbstractBlock.Settings.copy(Blocks.TUFF)));
         CHISELED_TUFF_BRICKS = register("chiseled_tuff_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.TUFF)));
-        POLISHED_DRIPSTONE_BLOCK = register("polished_dripstone_block",
-                new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
-        POLISHED_DRIPSTONE_STAIRS = register("polished_dripstone_stairs",
-                new ADStairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
-        POLISHED_DRIPSTONE_SLAB = register("polished_dripstone_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
-        POLISHED_DRIPSTONE_WALL = register("polished_dripstone_wall",
-                new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
         DRIPSTONE_BRICKS = register("dripstone_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
         DRIPSTONE_BRICK_STAIRS = register("dripstone_brick_stairs",

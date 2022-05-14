@@ -31,7 +31,8 @@ public class ADRopeLadderBlock extends LadderBlock {
         BlockState aboveState = world.getBlockState(pos.up());
         BlockState belowState = world.getBlockState(pos.down());
         boolean isInWater = world.getFluidState(pos).isOf(Fluids.WATER);
-        BlockState placedState = this.getDefaultState().with(WATERLOGGED, isInWater);
+        BlockState placedState = this.getDefaultState().with(WATERLOGGED, isInWater)
+                .with(DOWN, belowState.isOf(this));
 
         // Place hanging ladders when they're supporting blocks up to 16.
         if (aboveState.isOf(this)) {
@@ -43,10 +44,9 @@ public class ADRopeLadderBlock extends LadderBlock {
                 BlockState behindState = world.getBlockState(behindPos);
 
                 if (!behindState.isSideSolidFullSquare(world, behindPos, facing)) {
-                    return placedState.with(LENGTH, length + 1)
-                            .with(FACING, facing).with(DOWN, belowState.isOf(this));
+                    return placedState.with(LENGTH, length + 1).with(FACING, facing);
                 }
-                return placedState.with(FACING, facing).with(DOWN, belowState.isOf(this));
+                return placedState.with(FACING, facing);
             }
             return null;
         }

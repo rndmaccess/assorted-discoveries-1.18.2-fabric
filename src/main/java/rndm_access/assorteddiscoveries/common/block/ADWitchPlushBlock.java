@@ -49,7 +49,7 @@ public class ADWitchPlushBlock extends ADBaseVillagerPlushBlock {
         NORTH_HAT_TOP = Block.createCuboidShape(6.0D, 15.0D, 7.5D, 10.0D, 17.5D, 10.0D);
         NORTH_HAT_POINT = Block.createCuboidShape(6.5D, 17.5D, 8.5D, 9.0D, 19.5D, 9.5D);
         NORTH_WART = Block.createCuboidShape(7.0D, 5.0D, 2.5D, 8.0D, 6.0D, 3.5D);
-        NORTH_FACE = VoxelShapes.union(NORTH_EYEBROW, NORTH_LEFT_EYE, NORTH_RIGHT_EYE, NORTH_NOSE, NORTH_WART);
+        NORTH_FACE = VoxelShapes.union(NORTH_LEFT_EYE, NORTH_RIGHT_EYE, NORTH_NOSE, NORTH_WART);
         NORTH_HAT = VoxelShapes.union(NORTH_HAT_RIM, NORTH_HAT_MIDDLE, NORTH_HAT_TOP, NORTH_HAT_POINT);
         NORTH_SHAPE = VoxelShapes.union(NORTH_FEET, NORTH_FACE, NORTH_BODY, NORTH_HAT);
         SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);

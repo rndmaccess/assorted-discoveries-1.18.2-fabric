@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
@@ -17,6 +18,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.client.entity.ADCharredRemnantRenderer;
+import rndm_access.assorteddiscoveries.client.entity.ADDyedCampfireBlockEntityRenderer;
 import rndm_access.assorteddiscoveries.client.particle.ADSporeParticle;
 import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
 import rndm_access.assorteddiscoveries.common.core.*;
@@ -33,12 +35,17 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         registerParticleFactories();
         registerRenderLayers();
         registerScreens();
+        registerBlockEntityRenderers();
+    }
+
+    private void registerBlockEntityRenderers() {
+        BlockEntityRendererRegistry.register(ADBlockEntityTypes.DYED_CAMPFIRE, ADDyedCampfireBlockEntityRenderer::new);
     }
 
     private void registerBlockColorProviders() {
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
-            return tintIndex == 1 ? BiomeColors.getGrassColor(view, pos) : -1;
-        }, ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> ((tintIndex == 1) && (view != null))
+                ? BiomeColors.getGrassColor(view, pos)
+                : -1, ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
     }
 
     private void registerItemColorProviders() {
@@ -92,9 +99,8 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
     }
 
     private static void registerParticleSprite(String id) {
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(ADReference.makeId("particle/" + id));
-        }));
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((
+                (atlasTexture, registry) -> registry.register(ADReference.makeId("particle/" + id))));
     }
 
     private void registerParticleFactories() {

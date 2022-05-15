@@ -1,7 +1,7 @@
 {
   "parent": "assorteddiscoveries:block/template_two_colored_villager_plush",
   "textures": {
-    "body_color": "block/white_wool",
-    "arm_color": "block/brown_wool"
+    "shirt": "block/white_wool",
+    "arms": "block/brown_wool"
   }
 }

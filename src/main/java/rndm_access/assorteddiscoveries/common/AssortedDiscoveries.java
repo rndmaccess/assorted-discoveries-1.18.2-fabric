@@ -62,14 +62,14 @@ public class AssortedDiscoveries implements ModInitializer {
 	}
 
 	private static void addFeaturesToBiomes() {
-		RegistryKey<PlacedFeature> cattailPatch = placedFeatureRegistryKey("cattail_patch");
-		RegistryKey<PlacedFeature> oreSmokyQuartz = placedFeatureRegistryKey("ore_smoky_quartz");
-		RegistryKey<PlacedFeature> hugePurpleMushroom = placedFeatureRegistryKey("huge_purple_mushroom_vegetation");
-		RegistryKey<PlacedFeature> patchBlueberryCommon = placedFeatureRegistryKey("patch_blueberry_common");
-		RegistryKey<PlacedFeature> patchBlueberryRare = placedFeatureRegistryKey("patch_blueberry_rare");
-		RegistryKey<PlacedFeature> patchWitchsCradleCommon = placedFeatureRegistryKey("patch_witchs_cradle_common");
-		RegistryKey<PlacedFeature> patchWitchsCradleRare = placedFeatureRegistryKey("patch_witchs_cradle_rare");
-		RegistryKey<PlacedFeature> snapdragonAndEnderGrass = placedFeatureRegistryKey("snapdragon_and_ender_grass");
+		RegistryKey<PlacedFeature> cattailPatch = of("cattail_patch");
+		RegistryKey<PlacedFeature> oreSmokyQuartz = of("ore_smoky_quartz");
+		RegistryKey<PlacedFeature> hugePurpleMushroom = of("huge_purple_mushroom_vegetation");
+		RegistryKey<PlacedFeature> patchBlueberryCommon = of("patch_blueberry_common");
+		RegistryKey<PlacedFeature> patchBlueberryRare = of("patch_blueberry_rare");
+		RegistryKey<PlacedFeature> patchWitchsCradleCommon = of("patch_witchs_cradle_common");
+		RegistryKey<PlacedFeature> patchWitchsCradleRare = of("patch_witchs_cradle_rare");
+		RegistryKey<PlacedFeature> snapdragonAndEnderGrass = of("snapdragon_and_ender_grass");
 
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.CATTAIL_PATCH),
 				GenerationStep.Feature.VEGETAL_DECORATION, cattailPatch);
@@ -89,7 +89,7 @@ public class AssortedDiscoveries implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION, snapdragonAndEnderGrass);
 	}
 
-	private static RegistryKey<PlacedFeature> placedFeatureRegistryKey(String path) {
+	private static RegistryKey<PlacedFeature> of(String path) {
 		return RegistryKey.of(Registry.PLACED_FEATURE_KEY, ADReference.makeId(path));
 	}
 }

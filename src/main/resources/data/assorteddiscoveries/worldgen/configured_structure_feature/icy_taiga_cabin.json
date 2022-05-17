@@ -1,7 +1,7 @@
 {
   "type": "assorteddiscoveries:cabin",
   "config": {
-    "start_pool": "assorteddiscoveries:cabin/icy_taiga/start",
+    "start_pool": "assorteddiscoveries:cabin/taigas/icy_taiga/start",
     "size": 7
   },
   "biomes": "#assorteddiscoveries:has_structure/cabin_icy_taiga",

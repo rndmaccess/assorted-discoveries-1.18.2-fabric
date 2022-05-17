@@ -1,13 +1,13 @@
 {
-  "name": "assorteddiscoveries:cabin/taiga/villagers",
+  "name": "assorteddiscoveries:cabin/taigas/taiga/start",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 10,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "minecraft:village/taiga/villagers/unemployed",
-        "processors": "minecraft:empty",
+        "location": "assorteddiscoveries:cabin/taigas/taiga/taiga_cabin",
+        "processors": "minecraft:mossify_70_percent",
         "projection": "rigid"
       }
     }

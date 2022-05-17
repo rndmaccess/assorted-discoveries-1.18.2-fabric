@@ -1,12 +1,12 @@
 {
-  "name": "assorteddiscoveries:cabin/taiga/start",
+  "name": "assorteddiscoveries:cabin/taigas/icy_taiga/start",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 10,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "assorteddiscoveries:cabin/taiga/taiga_cabin",
+        "location": "assorteddiscoveries:cabin/taigas/icy_taiga/icy_taiga_cabin",
         "processors": "minecraft:mossify_70_percent",
         "projection": "rigid"
       }

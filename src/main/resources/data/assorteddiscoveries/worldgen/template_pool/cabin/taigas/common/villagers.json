@@ -1,12 +1,12 @@
 {
-  "name": "assorteddiscoveries:cabin/plains/villagers",
+  "name": "assorteddiscoveries:cabin/taigas/common/villagers",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 10,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "minecraft:village/plains/villagers/unemployed",
+        "location": "minecraft:village/taiga/villagers/unemployed",
         "processors": "minecraft:empty",
         "projection": "rigid"
       }

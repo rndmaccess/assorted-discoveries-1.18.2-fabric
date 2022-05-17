@@ -82,7 +82,6 @@
   "block.assorteddiscoveries.witch_plush": "Witch Plush",
   "block.assorteddiscoveries.wolf_plush": "Wolf Plush",
   "block.assorteddiscoveries.zombie_plush": "Zombie Plush",
-  "block.assorteddiscoveries.charred_remnant_plush": "Charred Remnant Plush",
   "block.assorteddiscoveries.piglin_plush": "Piglin Plush",
   "block.assorteddiscoveries.zombified_piglin_plush": "Zombified Piglin Plush",
   "block.assorteddiscoveries.pufferfish_plush": "Pufferfish Plush",
@@ -383,13 +382,9 @@
   "item.assorteddiscoveries.blood_vial": "Blood Vial",
   "item.assorteddiscoveries.mixed_seed_packet": "Mixed Seed Packet",
   "item.assorteddiscoveries.cattail": "Cattail",
-  "item.assorteddiscoveries.charred_remnant_spawn_egg": "Charred Remnant Spawn Egg",
-  "item.assorteddiscoveries.charred_flesh": "Charred Flesh",
   "item.assorteddiscoveries.dried_bamboo": "Dried Bamboo",
   "item.assorteddiscoveries.fried_egg": "Fried Egg",
   "item.assorteddiscoveries.blood_kelp_seed_cluster": "Blood Kelp Seed Cluster",
-  
-  "entity.assorteddiscoveries.charred_remnant": "Charred Remnant",
   
   "advancements.assorteddiscoveries.story.root.title": "Assorted Journeys",
   "advancements.assorteddiscoveries.story.root.description": "A mod designed to enhance vanilla gameplay",

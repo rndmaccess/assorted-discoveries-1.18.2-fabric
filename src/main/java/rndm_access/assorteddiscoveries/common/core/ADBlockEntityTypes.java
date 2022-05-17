@@ -3,12 +3,10 @@ package rndm_access.assorteddiscoveries.common.core;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.CampfireBlockEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
-import rndm_access.assorteddiscoveries.common.block.entity.ADDyedCampfireBlockEntity;
+import rndm_access.assorteddiscoveries.common.block_entity.ADDyedCampfireBlockEntity;
 
 public class ADBlockEntityTypes {
     public static final BlockEntityType<ADDyedCampfireBlockEntity> DYED_CAMPFIRE;

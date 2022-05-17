@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.client.entity;
+package rndm_access.assorteddiscoveries.client.block_entity;
 
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.client.MinecraftClient;
@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
-import rndm_access.assorteddiscoveries.common.block.entity.ADDyedCampfireBlockEntity;
+import rndm_access.assorteddiscoveries.common.block_entity.ADDyedCampfireBlockEntity;
 
 public class ADDyedCampfireBlockEntityRenderer implements BlockEntityRenderer<ADDyedCampfireBlockEntity> {
     public ADDyedCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context context) {

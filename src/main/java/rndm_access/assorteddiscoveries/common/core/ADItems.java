@@ -89,7 +89,6 @@ public class ADItems {
     public static final Item WITCH_PLUSH;
     public static final Item WOLF_PLUSH;
     public static final Item ZOMBIE_PLUSH;
-    public static final Item CHARRED_REMNANT_PLUSH;
     public static final Item PIGLIN_PLUSH;
     public static final Item ZOMBIFIED_PIGLIN_PLUSH;
     public static final Item PUFFERFISH_PLUSH;
@@ -372,8 +371,6 @@ public class ADItems {
     public static final Item BLOOD_VIAL;
     public static final Item MIXED_SEED_PACKET;
     public static final Item CATTAIL;
-    public static final Item CHARRED_REMNANT_SPAWN_EGG;
-    public static final Item CHARRED_FLESH;
     public static final Item DRIED_BAMBOO;
     public static final Item FRIED_EGG;
     public static final Item BLOOD_KELP_SEED_CLUSTER;
@@ -502,7 +499,6 @@ public class ADItems {
         WITCH_PLUSH = registerBlockItem(ADBlocks.WITCH_PLUSH);
         WOLF_PLUSH = registerBlockItem(ADBlocks.WOLF_PLUSH);
         ZOMBIE_PLUSH = registerBlockItem(ADBlocks.ZOMBIE_PLUSH);
-        CHARRED_REMNANT_PLUSH = registerBlockItem(ADBlocks.CHARRED_REMNANT_PLUSH);
         PIGLIN_PLUSH = registerBlockItem(ADBlocks.PIGLIN_PLUSH);
         ZOMBIFIED_PIGLIN_PLUSH = registerBlockItem(ADBlocks.ZOMBIFIED_PIGLIN_PLUSH);
         PUFFERFISH_PLUSH = registerBlockItem(ADBlocks.PUFFERFISH_PLUSH);
@@ -820,9 +816,6 @@ public class ADItems {
                 new ADMixedSeedPacketItem(makeSettings()));
         CATTAIL = registerItem("cattail",
                 new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings()));
-        CHARRED_REMNANT_SPAWN_EGG = registerItem("charred_remnant_spawn_egg",
-                new SpawnEggItem(ADEntityTypes.CHARRED_REMNANT, 0x944619, 0xdec33c, makeSettings()));
-        CHARRED_FLESH = registerItem("charred_flesh", item());
         DRIED_BAMBOO = registerItem("dried_bamboo", item());
         FRIED_EGG = registerItem("fried_egg",
                 new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16)));

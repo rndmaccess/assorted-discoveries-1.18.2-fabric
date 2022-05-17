@@ -94,7 +94,6 @@ public class ADBlocks {
     public static final Block WITCH_PLUSH;
     public static final Block WOLF_PLUSH;
     public static final Block ZOMBIE_PLUSH;
-    public static final Block CHARRED_REMNANT_PLUSH;
     public static final Block PIGLIN_PLUSH;
     public static final Block ZOMBIFIED_PIGLIN_PLUSH;
     public static final Block PUFFERFISH_PLUSH;
@@ -590,8 +589,6 @@ public class ADBlocks {
                 new ADWolfPlushBlock(AbstractBlock.Settings.copy(CHICKEN_PLUSH)));
         ZOMBIE_PLUSH = register("zombie_plush",
                 new ADZombiePlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH)));
-        CHARRED_REMNANT_PLUSH = register("charred_remnant_plush",
-                new ADZombiePlushBlock(AbstractBlock.Settings.copy(RED_CAT_PLUSH)));
         PIGLIN_PLUSH = register("piglin_plush",
                 new ADPiglinPlushBlock(AbstractBlock.Settings.copy(PIG_PLUSH)));
         ZOMBIFIED_PIGLIN_PLUSH = register("zombified_piglin_plush",

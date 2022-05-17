@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.color.world.BiomeColors;
@@ -17,8 +16,7 @@ import net.minecraft.client.particle.LavaEmberParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
 import rndm_access.assorteddiscoveries.ADReference;
-import rndm_access.assorteddiscoveries.client.entity.ADCharredRemnantRenderer;
-import rndm_access.assorteddiscoveries.client.entity.ADDyedCampfireBlockEntityRenderer;
+import rndm_access.assorteddiscoveries.client.block_entity.ADDyedCampfireBlockEntityRenderer;
 import rndm_access.assorteddiscoveries.client.particle.ADSporeParticle;
 import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
 import rndm_access.assorteddiscoveries.common.core.*;
@@ -30,7 +28,6 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
     public void onInitializeClient() {
         registerBlockColorProviders();
         registerItemColorProviders();
-        registerEntityRenderers();
         registerParticleSprites();
         registerParticleFactories();
         registerRenderLayers();
@@ -51,10 +48,6 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
     private void registerItemColorProviders() {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> GrassColors.getColor(0.5D, 1.0D),
                 ADItems.ENDERMAN_PLUSH, ADItems.GRASS_SLAB);
-    }
-
-    private void registerEntityRenderers() {
-        EntityRendererRegistry.register(ADEntityTypes.CHARRED_REMNANT, ADCharredRemnantRenderer::new);
     }
 
     private void registerScreens() {

@@ -41,7 +41,6 @@ public class AssortedDiscoveries implements ModInitializer {
 		ADSoundEvents.registerSoundEvents();
 
 		// Entity Registries
-		ADEntityTypes.registerEntities();
 		ADVillagerTypes.registerVillagerTypes();
 		ADPoiTypes.registerPointOfInterestTypes();
 		ADVillagerProfessions.registerVillagerProfessions();

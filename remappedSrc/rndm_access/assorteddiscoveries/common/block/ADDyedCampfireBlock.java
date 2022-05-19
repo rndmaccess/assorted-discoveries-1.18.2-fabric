@@ -11,16 +11,15 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.particle.ParticleEffect;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import rndm_access.assorteddiscoveries.common.block.entity.ADDyedCampfireBlockEntity;
+import rndm_access.assorteddiscoveries.common.block_entity.ADDyedCampfireBlockEntity;
 import rndm_access.assorteddiscoveries.common.core.ADBlockEntityTypes;
 
 public class ADDyedCampfireBlock extends CampfireBlock {
-    private ParticleEffect sparkParticle;
+    private final ParticleEffect sparkParticle;
 
     public ADDyedCampfireBlock(AbstractBlock.Settings settings, ParticleEffect sparkParticle) {
         super(false, 1, settings);

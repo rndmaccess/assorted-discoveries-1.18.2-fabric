@@ -1,5 +1,6 @@
 package rndm_access.assorteddiscoveries.common.core;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -8,113 +9,817 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.item.*;
 
 public class ADItems {
-    public static final Item BOK_CHOY = new Item(makeSettings(ADFoodComponents.BOK_CHOY));
-    public static final Item BOK_CHOY_SEEDS = new AliasedBlockItem(ADBlocks.BOK_CHOY, makeSettings());
-    public static final Item GARLIC = new AliasedBlockItem(ADBlocks.GARLIC, makeSettings(ADFoodComponents.GARLIC));
-    public static final Item GREEN_ONION = new AliasedBlockItem(
-            ADBlocks.GREEN_ONIONS, makeSettings(ADFoodComponents.GREEN_ONION));
-    public static final Item BLUEBERRIES = new AliasedBlockItem(
-            ADBlocks.BLUEBERRY_BUSH, makeSettings(ADFoodComponents.BLUEBERRIES));
-    public static final Item SWEET_BERRY_JUICE = new ADDrinkItem(makeSettings(ADFoodComponents.SWEET_BERRY_JUICE, 16));
-    public static final Item BLUEBERRY_JUICE = new ADDrinkItem(makeSettings(ADFoodComponents.BLUEBERRY_JUICE, 16));
-    public static final Item NOODLES = item();
-    public static final Item NOODLE_SOUP = new ADFoodContainerItem(makeSettings(ADFoodComponents.NOODLE_SOUP, 1));
-    public static final Item PUDDING = new ADFoodContainerItem(makeSettings(ADFoodComponents.PUDDING, 1));
-    public static final Item BERRY_PUDDING = new ADFoodContainerItem(makeSettings(ADFoodComponents.BERRY_PUDDING, 1));
-    public static final Item SMOKY_QUARTZ = item();
-    public static final Item CARAMEL_APPLE = new ADFoodContainerItem(
-            makeSettings(ADFoodComponents.CARAMEL_APPLE, 1), Items.STICK);
-    public static final Item CARAMEL = item();
-    public static final Item SPRUCE_CONE = new Item(makeSettings(ADFoodComponents.SPRUCE_CONE));
-    public static final Item FORESTS_BOUNTY = new ADFoodContainerItem(makeSettings(ADFoodComponents.FORESTS_BOUNTY, 1));
-    public static final Item WITCHS_CRADLE_BRANCH = new AliasedBlockItem(
-            ADBlocks.WITCHS_CRADLE, makeSettings(ADFoodComponents.WITCHS_CRADLE_BRANCH));
-    public static final Item WITCHS_CRADLE_SOUP = new ADFoodContainerItem(makeSettings(ADFoodComponents.WITCHS_CRADLE_SOUP, 1));
-    public static final Item GLASS_VIAL = new ADGlassVialItem(makeSettings());
-    public static final Item BLOOD_VIAL = new ADDrinkItem(
-            makeSettings(ADFoodComponents.BLOOD_VILE, 1), ADItems.GLASS_VIAL);
-    public static final Item MIXED_SEED_PACKET = new ADMixedSeedPacketItem(makeSettings());
-    public static final Item CATTAIL = new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings());
-    public static final Item CHARRED_REMNANT_SPAWN_EGG = new SpawnEggItem(
-            ADEntityTypes.CHARRED_REMNANT, 0x944619, 0xdec33c, makeSettings());
-    public static final Item CHARRED_FLESH = item();
-    public static final Item DRIED_BAMBOO = item();
-    public static final Item FRIED_EGG = new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16));
-    public static final Item BLOOD_KELP_SEED_CLUSTER = new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings());
+    public static final Item BAT_PLUSH;
+    public static final Item BLAZE_PLUSH;
+    public static final Item CAVE_SPIDER_PLUSH;
+    public static final Item CHICKEN_PLUSH;
+    public static final Item COW_PLUSH;
+    public static final Item CREEPER_PLUSH;
+    public static final Item ENDERMAN_PLUSH;
+    public static final Item GHAST_PLUSH;
+    public static final Item GUARDIAN_PLUSH;
+    public static final Item WHITE_HORSE_PLUSH;
+    public static final Item GRAY_HORSE_PLUSH;
+    public static final Item LIGHT_GRAY_HORSE_PLUSH;
+    public static final Item BROWN_HORSE_PLUSH;
+    public static final Item BLACK_HORSE_PLUSH;
+    public static final Item MAGMA_CUBE_PLUSH;
+    public static final Item RED_MOOSHROOM_PLUSH;
+    public static final Item BROWN_MOOSHROOM_PLUSH;
+    public static final Item OCELOT_PLUSH;
+    public static final Item TABBY_CAT_PLUSH;
+    public static final Item TUXEDO_CAT_PLUSH;
+    public static final Item RED_CAT_PLUSH;
+    public static final Item SIAMESE_CAT_PLUSH;
+    public static final Item BRITISH_SHORTHAIR_CAT_PLUSH;
+    public static final Item CALICO_CAT_PLUSH;
+    public static final Item PERSIAN_CAT_PLUSH;
+    public static final Item RAGDOLL_CAT_PLUSH;
+    public static final Item WHITE_CAT_PLUSH;
+    public static final Item JELLIE_CAT_PLUSH;
+    public static final Item BLACK_CAT_PLUSH;
+    public static final Item PIG_PLUSH;
+    public static final Item BROWN_RABBIT_PLUSH;
+    public static final Item WHITE_RABBIT_PLUSH;
+    public static final Item BLACK_RABBIT_PLUSH;
+    public static final Item WHITE_SPLOTCHED_RABBIT_PLUSH;
+    public static final Item GOLD_RABBIT_PLUSH;
+    public static final Item TOAST_RABBIT_PLUSH;
+    public static final Item SALT_RABBIT_PLUSH;
+    public static final Item WHITE_SHEEP_PLUSH;
+    public static final Item ORANGE_SHEEP_PLUSH;
+    public static final Item MAGENTA_SHEEP_PLUSH;
+    public static final Item LIGHT_BLUE_SHEEP_PLUSH;
+    public static final Item YELLOW_SHEEP_PLUSH;
+    public static final Item LIME_SHEEP_PLUSH;
+    public static final Item PINK_SHEEP_PLUSH;
+    public static final Item GRAY_SHEEP_PLUSH;
+    public static final Item LIGHT_GRAY_SHEEP_PLUSH;
+    public static final Item CYAN_SHEEP_PLUSH;
+    public static final Item PURPLE_SHEEP_PLUSH;
+    public static final Item BLUE_SHEEP_PLUSH;
+    public static final Item BROWN_SHEEP_PLUSH;
+    public static final Item GREEN_SHEEP_PLUSH;
+    public static final Item RED_SHEEP_PLUSH;
+    public static final Item BLACK_SHEEP_PLUSH;
+    public static final Item SKELETON_PLUSH;
+    public static final Item SLIME_PLUSH;
+    public static final Item SPIDER_PLUSH;
+    public static final Item SQUID_PLUSH;
+    public static final Item BEE_PLUSH;
+    public static final Item PLAINS_VILLAGER_PLUSH;
+    public static final Item DESERT_VILLAGER_PLUSH;
+    public static final Item JUNGLE_VILLAGER_PLUSH;
+    public static final Item SAVANNA_VILLAGER_PLUSH;
+    public static final Item SNOW_VILLAGER_PLUSH;
+    public static final Item SWAMP_VILLAGER_PLUSH;
+    public static final Item TAIGA_VILLAGER_PLUSH;
+    public static final Item CRIMSON_VILLAGER_PLUSH;
+    public static final Item WARPED_VILLAGER_PLUSH;
+    public static final Item WANDERING_TRADER_PLUSH;
+    public static final Item PLAINS_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item DESERT_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item JUNGLE_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item SAVANNA_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item SNOW_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item SWAMP_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item TAIGA_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item CRIMSON_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item WARPED_ZOMBIE_VILLAGER_PLUSH;
+    public static final Item WITCH_PLUSH;
+    public static final Item WOLF_PLUSH;
+    public static final Item ZOMBIE_PLUSH;
+    public static final Item PIGLIN_PLUSH;
+    public static final Item ZOMBIFIED_PIGLIN_PLUSH;
+    public static final Item PUFFERFISH_PLUSH;
+    public static final Item WITHER_PLUSH;
+    public static final Item STRIDER_PLUSH;
+    public static final Item SHIVERING_STRIDER_PLUSH;
+    public static final Item PHANTOM_PLUSH;
+    public static final Item HOGLIN_PLUSH;
+    public static final Item ZOGLIN_PLUSH;
+    public static final Item POLAR_BEAR_PLUSH;
+    public static final Item NETHER_SMOKY_QUARTZ_ORE;
+    public static final Item SMOKY_QUARTZ_BLOCK;
+    public static final Item CHISELED_SMOKY_QUARTZ_BLOCK;
+    public static final Item SMOKY_QUARTZ_BRICKS;
+    public static final Item SMOKY_QUARTZ_BRICK_STAIRS;
+    public static final Item SMOKY_QUARTZ_BRICK_SLAB;
+    public static final Item SMOKY_QUARTZ_BRICK_WALL;
+    public static final Item SMOKY_QUARTZ_PILLAR;
+    public static final Item SMOKY_QUARTZ_STAIRS;
+    public static final Item SMOKY_QUARTZ_SLAB;
+    public static final Item SMOKY_QUARTZ_WALL;
+    public static final Item SMOOTH_SMOKY_QUARTZ;
+    public static final Item SMOOTH_SMOKY_QUARTZ_STAIRS;
+    public static final Item SMOOTH_SMOKY_QUARTZ_SLAB;
+    public static final Item SMOOTH_SMOKY_QUARTZ_WALL;
+    public static final Item CRACKED_STONE_BRICK_STAIRS;
+    public static final Item CRACKED_STONE_BRICK_SLAB;
+    public static final Item CRACKED_STONE_BRICK_WALL;
+    public static final Item QUARTZ_WALL;
+    public static final Item SMOOTH_QUARTZ_WALL;
+    public static final Item STONE_WALL;
+    public static final Item RED_GLASS;
+    public static final Item RED_GLASS_PANE;
+    public static final Item OAK_PLANTER_BOX;
+    public static final Item SPRUCE_PLANTER_BOX;
+    public static final Item BIRCH_PLANTER_BOX;
+    public static final Item JUNGLE_PLANTER_BOX;
+    public static final Item ACACIA_PLANTER_BOX;
+    public static final Item DARK_OAK_PLANTER_BOX;
+    public static final Item CRIMSON_PLANTER_BOX;
+    public static final Item WARPED_PLANTER_BOX;
+    public static final Item OAK_WALL;
+    public static final Item SPRUCE_WALL;
+    public static final Item BIRCH_WALL;
+    public static final Item JUNGLE_WALL;
+    public static final Item ACACIA_WALL;
+    public static final Item DARK_OAK_WALL;
+    public static final Item CRIMSON_WALL;
+    public static final Item WARPED_WALL;
+    public static final Item STRIPPED_OAK_WALL;
+    public static final Item STRIPPED_SPRUCE_WALL;
+    public static final Item STRIPPED_BIRCH_WALL;
+    public static final Item STRIPPED_JUNGLE_WALL;
+    public static final Item STRIPPED_ACACIA_WALL;
+    public static final Item STRIPPED_DARK_OAK_WALL;
+    public static final Item STRIPPED_CRIMSON_WALL;
+    public static final Item STRIPPED_WARPED_WALL;
+    public static final Item OAK_ROPE_LADDER;
+    public static final Item SPRUCE_ROPE_LADDER;
+    public static final Item BIRCH_ROPE_LADDER;
+    public static final Item JUNGLE_ROPE_LADDER;
+    public static final Item ACACIA_ROPE_LADDER;
+    public static final Item DARK_OAK_ROPE_LADDER;
+    public static final Item CRIMSON_ROPE_LADDER;
+    public static final Item WARPED_ROPE_LADDER;
+    public static final Item IRON_LADDER;
+    public static final Item DIRT_SLAB;
+    public static final Item GRASS_SLAB;
+    public static final Item DIRT_PATH_SLAB;
+    public static final Item COARSE_DIRT_SLAB;
+    public static final Item SNOW_BRICKS;
+    public static final Item SNOW_BRICK_STAIRS;
+    public static final Item SNOW_BRICK_SLAB;
+    public static final Item SNOW_BRICK_WALL;
+    public static final Item PURPLE_MUSHROOM;
+    public static final Item PURPLE_MUSHROOM_BLOCK;
+    public static final Item WOODCUTTER;
+    public static final Item WHITE_CAMPFIRE;
+    public static final Item ORANGE_CAMPFIRE;
+    public static final Item MAGENTA_CAMPFIRE;
+    public static final Item LIGHT_BLUE_CAMPFIRE;
+    public static final Item YELLOW_CAMPFIRE;
+    public static final Item LIME_CAMPFIRE;
+    public static final Item PINK_CAMPFIRE;
+    public static final Item GRAY_CAMPFIRE;
+    public static final Item LIGHT_GRAY_CAMPFIRE;
+    public static final Item CYAN_CAMPFIRE;
+    public static final Item PURPLE_CAMPFIRE;
+    public static final Item BLUE_CAMPFIRE;
+    public static final Item BROWN_CAMPFIRE;
+    public static final Item GREEN_CAMPFIRE;
+    public static final Item RED_CAMPFIRE;
+    public static final Item BLACK_CAMPFIRE;
+    public static final Item WHITE_LANTERN;
+    public static final Item ORANGE_LANTERN;
+    public static final Item MAGENTA_LANTERN;
+    public static final Item LIGHT_BLUE_LANTERN;
+    public static final Item YELLOW_LANTERN;
+    public static final Item LIME_LANTERN;
+    public static final Item PINK_LANTERN;
+    public static final Item GRAY_LANTERN;
+    public static final Item LIGHT_GRAY_LANTERN;
+    public static final Item CYAN_LANTERN;
+    public static final Item PURPLE_LANTERN;
+    public static final Item BLUE_LANTERN;
+    public static final Item BROWN_LANTERN;
+    public static final Item GREEN_LANTERN;
+    public static final Item RED_LANTERN;
+    public static final Item BLACK_LANTERN;
+    public static final Item WHITE_TORCH;
+    public static final Item ORANGE_TORCH;
+    public static final Item MAGENTA_TORCH;
+    public static final Item LIGHT_BLUE_TORCH;
+    public static final Item YELLOW_TORCH;
+    public static final Item LIME_TORCH;
+    public static final Item PINK_TORCH;
+    public static final Item GRAY_TORCH;
+    public static final Item LIGHT_GRAY_TORCH;
+    public static final Item CYAN_TORCH;
+    public static final Item PURPLE_TORCH;
+    public static final Item BLUE_TORCH;
+    public static final Item BROWN_TORCH;
+    public static final Item GREEN_TORCH;
+    public static final Item RED_TORCH;
+    public static final Item BLACK_TORCH;
+    public static final Item FRESH_BAMBOO_FENCE;
+    public static final Item FRESH_BAMBOO_FENCE_GATE;
+    public static final Item DRIED_BAMBOO_FENCE;
+    public static final Item DRIED_BAMBOO_FENCE_GATE;
+    public static final Item BAUXITE;
+    public static final Item BAUXITE_SLAB;
+    public static final Item BAUXITE_STAIRS;
+    public static final Item BAUXITE_WALL;
+    public static final Item BAUXITE_BRICKS;
+    public static final Item BAUXITE_BRICK_STAIRS;
+    public static final Item BAUXITE_BRICK_SLAB;
+    public static final Item BAUXITE_BRICK_WALL;
+    public static final Item SNOW_SLAB;
+    public static final Item SNOW_STAIRS;
+    public static final Item SNOW_WALL;
+    public static final Item TWISTED_NETHER_BRICKS;
+    public static final Item TWISTED_NETHER_BRICK_STAIRS;
+    public static final Item TWISTED_NETHER_BRICK_SLAB;
+    public static final Item TWISTED_NETHER_BRICK_WALL;
+    public static final Item TWISTED_NETHERRACK;
+    public static final Item TWISTED_NETHERRACK_STAIRS;
+    public static final Item TWISTED_NETHERRACK_SLAB;
+    public static final Item TWISTED_NETHERRACK_WALL;
+    public static final Item WEEPING_NETHER_BRICKS;
+    public static final Item WEEPING_NETHER_BRICK_STAIRS;
+    public static final Item WEEPING_NETHER_BRICK_SLAB;
+    public static final Item WEEPING_NETHER_BRICK_WALL;
+    public static final Item WEEPING_NETHERRACK;
+    public static final Item WEEPING_NETHERRACK_STAIRS;
+    public static final Item WEEPING_NETHERRACK_SLAB;
+    public static final Item WEEPING_NETHERRACK_WALL;
+    public static final Item SNAPDRAGON;
+    public static final Item ENDER_GRASS;
+    public static final Item ICICLE;
+    public static final Item CHOCOLATE_CAKE;
+    public static final Item RED_VELVET_CAKE;
+    public static final Item STONE_TILES;
+    public static final Item STONE_TILE_SLAB;
+    public static final Item STONE_TILE_STAIRS;
+    public static final Item STONE_TILE_WALL;
+    public static final Item MOSSY_STONE_TILES;
+    public static final Item MOSSY_STONE_TILE_SLAB;
+    public static final Item MOSSY_STONE_TILE_STAIRS;
+    public static final Item MOSSY_STONE_TILE_WALL;
+    public static final Item CRACKED_STONE_TILES;
+    public static final Item CRACKED_STONE_TILE_SLAB;
+    public static final Item CRACKED_STONE_TILE_STAIRS;
+    public static final Item CRACKED_STONE_TILE_WALL;
+    public static final Item SWEET_BERRY_PIE;
+    public static final Item BLUEBERRY_PIE;
+    public static final Item BLACKSTONE_TILES;
+    public static final Item BLACKSTONE_TILE_STAIRS;
+    public static final Item BLACKSTONE_TILE_SLAB;
+    public static final Item BLACKSTONE_TILE_WALL;
+    public static final Item TWISTED_BLACKSTONE_TILES;
+    public static final Item TWISTED_BLACKSTONE_TILE_STAIRS;
+    public static final Item TWISTED_BLACKSTONE_TILE_SLAB;
+    public static final Item TWISTED_BLACKSTONE_TILE_WALL;
+    public static final Item WEEPING_BLACKSTONE_TILES;
+    public static final Item WEEPING_BLACKSTONE_TILE_STAIRS;
+    public static final Item WEEPING_BLACKSTONE_TILE_SLAB;
+    public static final Item WEEPING_BLACKSTONE_TILE_WALL;
+    public static final Item TWISTED_POLISHED_BLACKSTONE_BRICKS;
+    public static final Item TWISTED_POLISHED_BLACKSTONE_BRICK_STAIRS;
+    public static final Item TWISTED_POLISHED_BLACKSTONE_BRICK_SLAB;
+    public static final Item TWISTED_POLISHED_BLACKSTONE_BRICK_WALL;
+    public static final Item WEEPING_POLISHED_BLACKSTONE_BRICKS;
+    public static final Item WEEPING_POLISHED_BLACKSTONE_BRICK_STAIRS;
+    public static final Item WEEPING_POLISHED_BLACKSTONE_BRICK_SLAB;
+    public static final Item WEEPING_POLISHED_BLACKSTONE_BRICK_WALL;
+    public static final Item TWISTED_BLACKSTONE;
+    public static final Item TWISTED_BLACKSTONE_STAIRS;
+    public static final Item TWISTED_BLACKSTONE_SLAB;
+    public static final Item TWISTED_BLACKSTONE_WALL;
+    public static final Item WEEPING_BLACKSTONE;
+    public static final Item WEEPING_BLACKSTONE_STAIRS;
+    public static final Item WEEPING_BLACKSTONE_SLAB;
+    public static final Item WEEPING_BLACKSTONE_WALL;
+    public static final Item QUARTZ_TILES;
+    public static final Item QUARTZ_TILE_STAIRS;
+    public static final Item QUARTZ_TILE_SLAB;
+    public static final Item QUARTZ_TILE_WALL;
+    public static final Item CALCITE_BRICKS;
+    public static final Item CALCITE_BRICK_STAIRS;
+    public static final Item CALCITE_BRICK_SLAB;
+    public static final Item CALCITE_BRICK_WALL;
+    public static final Item MOSSY_CALCITE_BRICKS;
+    public static final Item MOSSY_CALCITE_BRICK_STAIRS;
+    public static final Item MOSSY_CALCITE_BRICK_SLAB;
+    public static final Item MOSSY_CALCITE_BRICK_WALL;
+    public static final Item CRACKED_CALCITE_BRICKS;
+    public static final Item CRACKED_CALCITE_BRICK_STAIRS;
+    public static final Item CRACKED_CALCITE_BRICK_SLAB;
+    public static final Item CRACKED_CALCITE_BRICK_WALL;
+    public static final Item CHISELED_CALCITE_BRICKS;
+    public static final Item TUFF_BRICKS;
+    public static final Item TUFF_BRICK_STAIRS;
+    public static final Item TUFF_BRICK_SLAB;
+    public static final Item TUFF_BRICK_WALL;
+    public static final Item MOSSY_TUFF_BRICKS;
+    public static final Item MOSSY_TUFF_BRICK_STAIRS;
+    public static final Item MOSSY_TUFF_BRICK_SLAB;
+    public static final Item MOSSY_TUFF_BRICK_WALL;
+    public static final Item CRACKED_TUFF_BRICKS;
+    public static final Item CRACKED_TUFF_BRICK_STAIRS;
+    public static final Item CRACKED_TUFF_BRICK_SLAB;
+    public static final Item CRACKED_TUFF_BRICK_WALL;
+    public static final Item CHISELED_TUFF_BRICKS;
+    public static final Item DRIPSTONE_BRICKS;
+    public static final Item DRIPSTONE_BRICK_STAIRS;
+    public static final Item DRIPSTONE_BRICK_SLAB;
+    public static final Item DRIPSTONE_BRICK_WALL;
+    public static final Item MOSSY_DRIPSTONE_BRICKS;
+    public static final Item MOSSY_DRIPSTONE_BRICK_STAIRS;
+    public static final Item MOSSY_DRIPSTONE_BRICK_SLAB;
+    public static final Item MOSSY_DRIPSTONE_BRICK_WALL;
+    public static final Item CRACKED_DRIPSTONE_BRICKS;
+    public static final Item CRACKED_DRIPSTONE_BRICK_STAIRS;
+    public static final Item CRACKED_DRIPSTONE_BRICK_SLAB;
+    public static final Item CRACKED_DRIPSTONE_BRICK_WALL;
+    public static final Item CHISELED_DRIPSTONE_BRICKS;
+    public static final Item SPECTRAL_ONYX;
+    public static final Item SPECTRAL_ONYX_STAIRS;
+    public static final Item SPECTRAL_ONYX_SLAB;
+    public static final Item SPECTRAL_ONYX_WALL;
+    public static final Item COBBLED_SPECTRAL_ONYX;
+    public static final Item COBBLED_SPECTRAL_ONYX_STAIRS;
+    public static final Item COBBLED_SPECTRAL_ONYX_SLAB;
+    public static final Item COBBLED_SPECTRAL_ONYX_WALL;
+    public static final Item SPECTRAL_ONYX_BRICKS;
+    public static final Item SPECTRAL_ONYX_BRICK_STAIRS;
+    public static final Item SPECTRAL_ONYX_BRICK_SLAB;
+    public static final Item SPECTRAL_ONYX_BRICK_WALL;
+    public static final Item CRIMSON_BOOKSHELF;
+    public static final Item WARPED_BOOKSHELF;
+    public static final Item BOK_CHOY;
+    public static final Item BOK_CHOY_SEEDS;
+    public static final Item GARLIC;
+    public static final Item GREEN_ONION;
+    public static final Item BLUEBERRIES;
+    public static final Item SWEET_BERRY_JUICE;
+    public static final Item BLUEBERRY_JUICE;
+    public static final Item NOODLES;
+    public static final Item NOODLE_SOUP;
+    public static final Item PUDDING;
+    public static final Item BERRY_PUDDING;
+    public static final Item SMOKY_QUARTZ;
+    public static final Item CARAMEL_APPLE;
+    public static final Item CARAMEL;
+    public static final Item SPRUCE_CONE;
+    public static final Item FORESTS_BOUNTY;
+    public static final Item WITCHS_CRADLE_BRANCH;
+    public static final Item WITCHS_CRADLE_SOUP;
+    public static final Item GLASS_VIAL;
+    public static final Item BLOOD_VIAL;
+    public static final Item MIXED_SEED_PACKET;
+    public static final Item CATTAIL;
+    public static final Item DRIED_BAMBOO;
+    public static final Item FRIED_EGG;
+    public static final Item BLOOD_KELP_SEED_CLUSTER;
 
     private static Item item() {
         return new Item(makeSettings());
     }
 
-    /**
-     * A helper method that makes Settings for an item that is added to the vanilla
-     * expansions tab.
-     *
-     * @return The Settings for this item.
-     */
     private static Item.Settings makeSettings() {
         return new Item.Settings().group(AssortedDiscoveries.MOD_GROUP);
     }
 
-    /**
-     * A helper method that makes Settings for a food item that is added to the
-     * vanilla expansions tab.
-     *
-     * @param food The stats of this food item.
-     * @return The Settings for this item.
-     */
     private static Item.Settings makeSettings(FoodComponent food) {
         return new Item.Settings().group(AssortedDiscoveries.MOD_GROUP).food(food);
     }
 
-    /**
-     * A helper method that makes Settings for a food item with a custom max stack
-     * size and is added to the vanilla expansions tab.
-     *
-     * @param food     The stats for this food item.
-     * @param maxCount The max stack size for this item.
-     * @return The Settings for this item.
-     */
     private static Item.Settings makeSettings(FoodComponent food, int maxCount) {
-        return new Item.Settings().group(AssortedDiscoveries.MOD_GROUP).food(food).maxCount(maxCount);
+        return new Item.Settings().food(food).maxCount(maxCount).group(AssortedDiscoveries.MOD_GROUP);
     }
 
-    private static void registerItem(String id, Item item) {
-        Registry.register(Registry.ITEM, new Identifier(ADReference.MOD_ID, id), item);
+    private static Item registerItem(String path, Item item) {
+        return register(ADReference.makeId(path), item);
+    }
+
+    private static Item registerBlockItem(Block block) {
+        return register(Registry.BLOCK.getId(block), new BlockItem(block, makeSettings()));
+    }
+
+    private static Item registerWallStandingBlockItem(String path, Block standingBlock, Block wallBlock) {
+        return registerItem(path, new WallStandingBlockItem(standingBlock, wallBlock, makeSettings()));
+    }
+
+    private static Item registerRopeLadderItem(Block block) {
+        return register(Registry.BLOCK.getId(block), new ADRopeLadderBlockItem(block, makeSettings()));
+    }
+
+    private static Item register(Identifier path, Item item) {
+        return Registry.register(Registry.ITEM, path, item);
     }
 
     /**
      * Called during mod initialization to register every item.
      */
     public static void registerItems() {
-        registerItem("bok_choy", BOK_CHOY);
-        registerItem("bok_choy_seeds", BOK_CHOY_SEEDS);
-        registerItem("garlic", GARLIC);
-        registerItem("green_onion", GREEN_ONION);
-        registerItem("blueberries", BLUEBERRIES);
-        registerItem("sweet_berry_juice", SWEET_BERRY_JUICE);
-        registerItem("blueberry_juice", BLUEBERRY_JUICE);
-        registerItem("noodles", NOODLES);
-        registerItem("noodle_soup", NOODLE_SOUP);
-        registerItem("pudding", PUDDING);
-        registerItem("berry_pudding", BERRY_PUDDING);
-        registerItem("smoky_quartz", SMOKY_QUARTZ);
-        registerItem("caramel_apple", CARAMEL_APPLE);
-        registerItem("caramel", CARAMEL);
-        registerItem("spruce_cone", SPRUCE_CONE);
-        registerItem("forests_bounty", FORESTS_BOUNTY);
-        registerItem("witchs_cradle_branch", WITCHS_CRADLE_BRANCH);
-        registerItem("witchs_cradle_soup", WITCHS_CRADLE_SOUP);
-        registerItem("glass_vial", GLASS_VIAL);
-        registerItem("blood_vial", BLOOD_VIAL);
-        registerItem("mixed_seed_packet", MIXED_SEED_PACKET);
-        registerItem("cattail", CATTAIL);
-        registerItem("charred_remnant_spawn_egg", CHARRED_REMNANT_SPAWN_EGG);
-        registerItem("charred_flesh", CHARRED_FLESH);
-        registerItem("dried_bamboo", DRIED_BAMBOO);
-        registerItem("fried_egg", FRIED_EGG);
-        registerItem("blood_kelp_seed_cluster", BLOOD_KELP_SEED_CLUSTER);
-
         AssortedDiscoveries.LOGGER.info("Registered Items");
+    }
+
+    static {
+        BAT_PLUSH = registerBlockItem(ADBlocks.BAT_PLUSH);
+        BLAZE_PLUSH = registerBlockItem(ADBlocks.BLAZE_PLUSH);
+        CAVE_SPIDER_PLUSH = registerBlockItem(ADBlocks.CAVE_SPIDER_PLUSH);
+        CHICKEN_PLUSH = registerBlockItem(ADBlocks.CHICKEN_PLUSH);
+        COW_PLUSH = registerBlockItem(ADBlocks.COW_PLUSH);
+        CREEPER_PLUSH = registerBlockItem(ADBlocks.CREEPER_PLUSH);
+        ENDERMAN_PLUSH = registerBlockItem(ADBlocks.ENDERMAN_PLUSH);
+        GHAST_PLUSH = registerBlockItem(ADBlocks.GHAST_PLUSH);
+        GUARDIAN_PLUSH = registerBlockItem(ADBlocks.GUARDIAN_PLUSH);
+        WHITE_HORSE_PLUSH = registerBlockItem(ADBlocks.WHITE_HORSE_PLUSH);
+        GRAY_HORSE_PLUSH = registerBlockItem(ADBlocks.GRAY_HORSE_PLUSH);
+        LIGHT_GRAY_HORSE_PLUSH = registerBlockItem(ADBlocks.LIGHT_GRAY_HORSE_PLUSH);
+        BROWN_HORSE_PLUSH = registerBlockItem(ADBlocks.BROWN_HORSE_PLUSH);
+        BLACK_HORSE_PLUSH = registerBlockItem(ADBlocks.BLACK_HORSE_PLUSH);
+        MAGMA_CUBE_PLUSH = registerBlockItem(ADBlocks.MAGMA_CUBE_PLUSH);
+        RED_MOOSHROOM_PLUSH = registerBlockItem(ADBlocks.RED_MOOSHROOM_PLUSH);
+        BROWN_MOOSHROOM_PLUSH = registerBlockItem(ADBlocks.BROWN_MOOSHROOM_PLUSH);
+        OCELOT_PLUSH = registerBlockItem(ADBlocks.OCELOT_PLUSH);
+        TABBY_CAT_PLUSH = registerBlockItem(ADBlocks.TABBY_CAT_PLUSH);
+        TUXEDO_CAT_PLUSH = registerBlockItem(ADBlocks.TUXEDO_CAT_PLUSH);
+        RED_CAT_PLUSH = registerBlockItem(ADBlocks.RED_CAT_PLUSH);
+        SIAMESE_CAT_PLUSH = registerBlockItem(ADBlocks.SIAMESE_CAT_PLUSH);
+        BRITISH_SHORTHAIR_CAT_PLUSH = registerBlockItem(ADBlocks.BRITISH_SHORTHAIR_CAT_PLUSH);
+        CALICO_CAT_PLUSH = registerBlockItem(ADBlocks.CALICO_CAT_PLUSH);
+        PERSIAN_CAT_PLUSH = registerBlockItem(ADBlocks.PERSIAN_CAT_PLUSH);
+        RAGDOLL_CAT_PLUSH = registerBlockItem(ADBlocks.RAGDOLL_CAT_PLUSH);
+        WHITE_CAT_PLUSH = registerBlockItem(ADBlocks.WHITE_CAT_PLUSH);
+        JELLIE_CAT_PLUSH = registerBlockItem(ADBlocks.JELLIE_CAT_PLUSH);
+        BLACK_CAT_PLUSH = registerBlockItem(ADBlocks.BLACK_CAT_PLUSH);
+        PIG_PLUSH = registerBlockItem(ADBlocks.PIG_PLUSH);
+        BROWN_RABBIT_PLUSH = registerBlockItem(ADBlocks.BROWN_RABBIT_PLUSH);
+        WHITE_RABBIT_PLUSH = registerBlockItem(ADBlocks.WHITE_RABBIT_PLUSH);
+        BLACK_RABBIT_PLUSH = registerBlockItem(ADBlocks.BLACK_RABBIT_PLUSH);
+        WHITE_SPLOTCHED_RABBIT_PLUSH = registerBlockItem(ADBlocks.WHITE_SPLOTCHED_RABBIT_PLUSH);
+        GOLD_RABBIT_PLUSH = registerBlockItem(ADBlocks.GOLD_RABBIT_PLUSH);
+        TOAST_RABBIT_PLUSH = registerBlockItem(ADBlocks.TOAST_RABBIT_PLUSH);
+        SALT_RABBIT_PLUSH = registerBlockItem(ADBlocks.SALT_RABBIT_PLUSH);
+        WHITE_SHEEP_PLUSH = registerBlockItem(ADBlocks.WHITE_SHEEP_PLUSH);
+        ORANGE_SHEEP_PLUSH = registerBlockItem(ADBlocks.ORANGE_SHEEP_PLUSH);
+        MAGENTA_SHEEP_PLUSH = registerBlockItem(ADBlocks.MAGENTA_SHEEP_PLUSH);
+        LIGHT_BLUE_SHEEP_PLUSH = registerBlockItem(ADBlocks.LIGHT_BLUE_SHEEP_PLUSH);
+        YELLOW_SHEEP_PLUSH = registerBlockItem(ADBlocks.YELLOW_SHEEP_PLUSH);
+        LIME_SHEEP_PLUSH = registerBlockItem(ADBlocks.LIME_SHEEP_PLUSH);
+        PINK_SHEEP_PLUSH = registerBlockItem(ADBlocks.PINK_SHEEP_PLUSH);
+        GRAY_SHEEP_PLUSH = registerBlockItem(ADBlocks.GRAY_SHEEP_PLUSH);
+        LIGHT_GRAY_SHEEP_PLUSH = registerBlockItem(ADBlocks.LIGHT_GRAY_SHEEP_PLUSH);
+        CYAN_SHEEP_PLUSH = registerBlockItem(ADBlocks.CYAN_SHEEP_PLUSH);
+        PURPLE_SHEEP_PLUSH = registerBlockItem(ADBlocks.PURPLE_SHEEP_PLUSH);
+        BLUE_SHEEP_PLUSH = registerBlockItem(ADBlocks.BLUE_SHEEP_PLUSH);
+        BROWN_SHEEP_PLUSH = registerBlockItem(ADBlocks.BROWN_SHEEP_PLUSH);
+        GREEN_SHEEP_PLUSH = registerBlockItem(ADBlocks.GREEN_SHEEP_PLUSH);
+        RED_SHEEP_PLUSH = registerBlockItem(ADBlocks.RED_SHEEP_PLUSH);
+        BLACK_SHEEP_PLUSH = registerBlockItem(ADBlocks.BLACK_SHEEP_PLUSH);
+        SKELETON_PLUSH = registerBlockItem(ADBlocks.SKELETON_PLUSH);
+        SLIME_PLUSH = registerBlockItem(ADBlocks.SLIME_PLUSH);
+        SPIDER_PLUSH = registerBlockItem(ADBlocks.SPIDER_PLUSH);
+        SQUID_PLUSH = registerBlockItem(ADBlocks.SQUID_PLUSH);
+        BEE_PLUSH = registerBlockItem(ADBlocks.BEE_PLUSH);
+        PLAINS_VILLAGER_PLUSH = registerBlockItem(ADBlocks.PLAINS_VILLAGER_PLUSH);
+        DESERT_VILLAGER_PLUSH = registerBlockItem(ADBlocks.DESERT_VILLAGER_PLUSH);
+        JUNGLE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.JUNGLE_VILLAGER_PLUSH);
+        SAVANNA_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SAVANNA_VILLAGER_PLUSH);
+        SNOW_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SNOW_VILLAGER_PLUSH);
+        SWAMP_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SWAMP_VILLAGER_PLUSH);
+        TAIGA_VILLAGER_PLUSH = registerBlockItem(ADBlocks.TAIGA_VILLAGER_PLUSH);
+        CRIMSON_VILLAGER_PLUSH = registerBlockItem(ADBlocks.CRIMSON_VILLAGER_PLUSH);
+        WARPED_VILLAGER_PLUSH = registerBlockItem(ADBlocks.WARPED_VILLAGER_PLUSH);
+        WANDERING_TRADER_PLUSH = registerBlockItem(ADBlocks.WANDERING_TRADER_PLUSH);
+        PLAINS_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.PLAINS_ZOMBIE_VILLAGER_PLUSH);
+        DESERT_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.DESERT_ZOMBIE_VILLAGER_PLUSH);
+        JUNGLE_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.JUNGLE_ZOMBIE_VILLAGER_PLUSH);
+        SAVANNA_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SAVANNA_ZOMBIE_VILLAGER_PLUSH);
+        SNOW_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SNOW_ZOMBIE_VILLAGER_PLUSH);
+        SWAMP_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.SWAMP_ZOMBIE_VILLAGER_PLUSH);
+        TAIGA_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.TAIGA_ZOMBIE_VILLAGER_PLUSH);
+        CRIMSON_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.CRIMSON_ZOMBIE_VILLAGER_PLUSH);
+        WARPED_ZOMBIE_VILLAGER_PLUSH = registerBlockItem(ADBlocks.WARPED_ZOMBIE_VILLAGER_PLUSH);
+        WITCH_PLUSH = registerBlockItem(ADBlocks.WITCH_PLUSH);
+        WOLF_PLUSH = registerBlockItem(ADBlocks.WOLF_PLUSH);
+        ZOMBIE_PLUSH = registerBlockItem(ADBlocks.ZOMBIE_PLUSH);
+        PIGLIN_PLUSH = registerBlockItem(ADBlocks.PIGLIN_PLUSH);
+        ZOMBIFIED_PIGLIN_PLUSH = registerBlockItem(ADBlocks.ZOMBIFIED_PIGLIN_PLUSH);
+        PUFFERFISH_PLUSH = registerBlockItem(ADBlocks.PUFFERFISH_PLUSH);
+        WITHER_PLUSH = registerBlockItem(ADBlocks.WITHER_PLUSH);
+        STRIDER_PLUSH = registerBlockItem(ADBlocks.STRIDER_PLUSH);
+        SHIVERING_STRIDER_PLUSH = registerBlockItem(ADBlocks.SHIVERING_STRIDER_PLUSH);
+        PHANTOM_PLUSH = registerBlockItem(ADBlocks.PHANTOM_PLUSH);
+        HOGLIN_PLUSH = registerBlockItem(ADBlocks.HOGLIN_PLUSH);
+        ZOGLIN_PLUSH = registerBlockItem(ADBlocks.ZOGLIN_PLUSH);
+        POLAR_BEAR_PLUSH = registerBlockItem(ADBlocks.POLAR_BEAR_PLUSH);
+        NETHER_SMOKY_QUARTZ_ORE = registerBlockItem(ADBlocks.NETHER_SMOKY_QUARTZ_ORE);
+        SMOKY_QUARTZ_BLOCK = registerBlockItem(ADBlocks.SMOKY_QUARTZ_BLOCK);
+        CHISELED_SMOKY_QUARTZ_BLOCK = registerBlockItem(ADBlocks.CHISELED_SMOKY_QUARTZ_BLOCK);
+        SMOKY_QUARTZ_BRICKS = registerBlockItem(ADBlocks.SMOKY_QUARTZ_BRICKS);
+        SMOKY_QUARTZ_BRICK_STAIRS = registerBlockItem(ADBlocks.SMOKY_QUARTZ_BRICK_STAIRS);
+        SMOKY_QUARTZ_BRICK_SLAB = registerBlockItem(ADBlocks.SMOKY_QUARTZ_BRICK_SLAB);
+        SMOKY_QUARTZ_BRICK_WALL = registerBlockItem(ADBlocks.SMOKY_QUARTZ_BRICK_WALL);
+        SMOKY_QUARTZ_PILLAR = registerBlockItem(ADBlocks.SMOKY_QUARTZ_PILLAR);
+        SMOKY_QUARTZ_STAIRS = registerBlockItem(ADBlocks.SMOKY_QUARTZ_STAIRS);
+        SMOKY_QUARTZ_SLAB = registerBlockItem(ADBlocks.SMOKY_QUARTZ_SLAB);
+        SMOKY_QUARTZ_WALL = registerBlockItem(ADBlocks.SMOKY_QUARTZ_WALL);
+        SMOOTH_SMOKY_QUARTZ = registerBlockItem(ADBlocks.SMOOTH_SMOKY_QUARTZ);
+        SMOOTH_SMOKY_QUARTZ_STAIRS = registerBlockItem(ADBlocks.SMOOTH_SMOKY_QUARTZ_STAIRS);
+        SMOOTH_SMOKY_QUARTZ_SLAB = registerBlockItem(ADBlocks.SMOOTH_SMOKY_QUARTZ_SLAB);
+        SMOOTH_SMOKY_QUARTZ_WALL = registerBlockItem(ADBlocks.SMOOTH_SMOKY_QUARTZ_WALL);
+        CRACKED_STONE_BRICK_STAIRS = registerBlockItem(ADBlocks.CRACKED_STONE_BRICK_STAIRS);
+        CRACKED_STONE_BRICK_SLAB = registerBlockItem(ADBlocks.CRACKED_STONE_BRICK_SLAB);
+        CRACKED_STONE_BRICK_WALL = registerBlockItem(ADBlocks.CRACKED_STONE_BRICK_WALL);
+        QUARTZ_WALL = registerBlockItem(ADBlocks.QUARTZ_WALL);
+        SMOOTH_QUARTZ_WALL = registerBlockItem(ADBlocks.SMOOTH_QUARTZ_WALL);
+        STONE_WALL = registerBlockItem(ADBlocks.STONE_WALL);
+        RED_GLASS = registerBlockItem(ADBlocks.RED_GLASS);
+        RED_GLASS_PANE = registerBlockItem(ADBlocks.RED_GLASS_PANE);
+        OAK_PLANTER_BOX = registerBlockItem(ADBlocks.OAK_PLANTER_BOX);
+        SPRUCE_PLANTER_BOX = registerBlockItem(ADBlocks.SPRUCE_PLANTER_BOX);
+        BIRCH_PLANTER_BOX = registerBlockItem(ADBlocks.BIRCH_PLANTER_BOX);
+        JUNGLE_PLANTER_BOX = registerBlockItem(ADBlocks.JUNGLE_PLANTER_BOX);
+        ACACIA_PLANTER_BOX = registerBlockItem(ADBlocks.ACACIA_PLANTER_BOX);
+        DARK_OAK_PLANTER_BOX = registerBlockItem(ADBlocks.DARK_OAK_PLANTER_BOX);
+        CRIMSON_PLANTER_BOX = registerBlockItem(ADBlocks.CRIMSON_PLANTER_BOX);
+        WARPED_PLANTER_BOX = registerBlockItem(ADBlocks.WARPED_PLANTER_BOX);
+        OAK_WALL = registerBlockItem(ADBlocks.OAK_WALL);
+        SPRUCE_WALL = registerBlockItem(ADBlocks.SPRUCE_WALL);
+        BIRCH_WALL = registerBlockItem(ADBlocks.BIRCH_WALL);
+        JUNGLE_WALL = registerBlockItem(ADBlocks.JUNGLE_WALL);
+        ACACIA_WALL = registerBlockItem(ADBlocks.ACACIA_WALL);
+        DARK_OAK_WALL = registerBlockItem(ADBlocks.DARK_OAK_WALL);
+        CRIMSON_WALL = registerBlockItem(ADBlocks.CRIMSON_WALL);
+        WARPED_WALL = registerBlockItem(ADBlocks.WARPED_WALL);
+        STRIPPED_OAK_WALL = registerBlockItem(ADBlocks.STRIPPED_OAK_WALL);
+        STRIPPED_SPRUCE_WALL = registerBlockItem(ADBlocks.STRIPPED_SPRUCE_WALL);
+        STRIPPED_BIRCH_WALL = registerBlockItem(ADBlocks.STRIPPED_BIRCH_WALL);
+        STRIPPED_JUNGLE_WALL = registerBlockItem(ADBlocks.STRIPPED_JUNGLE_WALL);
+        STRIPPED_ACACIA_WALL = registerBlockItem(ADBlocks.STRIPPED_ACACIA_WALL);
+        STRIPPED_DARK_OAK_WALL = registerBlockItem(ADBlocks.STRIPPED_DARK_OAK_WALL);
+        STRIPPED_CRIMSON_WALL = registerBlockItem(ADBlocks.STRIPPED_CRIMSON_WALL);
+        STRIPPED_WARPED_WALL = registerBlockItem(ADBlocks.STRIPPED_WARPED_WALL);
+        OAK_ROPE_LADDER = registerRopeLadderItem(ADBlocks.OAK_ROPE_LADDER);
+        SPRUCE_ROPE_LADDER = registerRopeLadderItem(ADBlocks.SPRUCE_ROPE_LADDER);
+        BIRCH_ROPE_LADDER = registerRopeLadderItem(ADBlocks.BIRCH_ROPE_LADDER);
+        JUNGLE_ROPE_LADDER = registerRopeLadderItem(ADBlocks.JUNGLE_ROPE_LADDER);
+        ACACIA_ROPE_LADDER = registerRopeLadderItem(ADBlocks.ACACIA_ROPE_LADDER);
+        DARK_OAK_ROPE_LADDER = registerRopeLadderItem(ADBlocks.DARK_OAK_ROPE_LADDER);
+        CRIMSON_ROPE_LADDER = registerRopeLadderItem(ADBlocks.CRIMSON_ROPE_LADDER);
+        WARPED_ROPE_LADDER = registerRopeLadderItem(ADBlocks.WARPED_ROPE_LADDER);
+        IRON_LADDER = registerBlockItem(ADBlocks.IRON_LADDER);
+        DIRT_SLAB = registerBlockItem(ADBlocks.DIRT_SLAB);
+        GRASS_SLAB = registerBlockItem(ADBlocks.GRASS_SLAB);
+        DIRT_PATH_SLAB = registerBlockItem(ADBlocks.DIRT_PATH_SLAB);
+        COARSE_DIRT_SLAB = registerBlockItem(ADBlocks.COARSE_DIRT_SLAB);
+        SNOW_BRICKS = registerBlockItem(ADBlocks.SNOW_BRICKS);
+        SNOW_BRICK_STAIRS = registerBlockItem(ADBlocks.SNOW_BRICK_STAIRS);
+        SNOW_BRICK_SLAB = registerBlockItem(ADBlocks.SNOW_BRICK_SLAB);
+        SNOW_BRICK_WALL = registerBlockItem(ADBlocks.SNOW_BRICK_WALL);
+        PURPLE_MUSHROOM = registerBlockItem(ADBlocks.PURPLE_MUSHROOM);
+        PURPLE_MUSHROOM_BLOCK = registerBlockItem(ADBlocks.PURPLE_MUSHROOM_BLOCK);
+        WOODCUTTER = registerBlockItem(ADBlocks.WOODCUTTER);
+        WHITE_CAMPFIRE = registerBlockItem(ADBlocks.WHITE_CAMPFIRE);
+        ORANGE_CAMPFIRE = registerBlockItem(ADBlocks.ORANGE_CAMPFIRE);
+        MAGENTA_CAMPFIRE = registerBlockItem(ADBlocks.MAGENTA_CAMPFIRE);
+        LIGHT_BLUE_CAMPFIRE = registerBlockItem(ADBlocks.LIGHT_BLUE_CAMPFIRE);
+        YELLOW_CAMPFIRE = registerBlockItem(ADBlocks.YELLOW_CAMPFIRE);
+        LIME_CAMPFIRE = registerBlockItem(ADBlocks.LIME_CAMPFIRE);
+        PINK_CAMPFIRE = registerBlockItem(ADBlocks.PINK_CAMPFIRE);
+        GRAY_CAMPFIRE = registerBlockItem(ADBlocks.GRAY_CAMPFIRE);
+        LIGHT_GRAY_CAMPFIRE = registerBlockItem(ADBlocks.LIGHT_GRAY_CAMPFIRE);
+        CYAN_CAMPFIRE = registerBlockItem(ADBlocks.CYAN_CAMPFIRE);
+        PURPLE_CAMPFIRE = registerBlockItem(ADBlocks.PURPLE_CAMPFIRE);
+        BLUE_CAMPFIRE = registerBlockItem(ADBlocks.BLUE_CAMPFIRE);
+        BROWN_CAMPFIRE = registerBlockItem(ADBlocks.BROWN_CAMPFIRE);
+        GREEN_CAMPFIRE = registerBlockItem(ADBlocks.GREEN_CAMPFIRE);
+        RED_CAMPFIRE = registerBlockItem(ADBlocks.RED_CAMPFIRE);
+        BLACK_CAMPFIRE = registerBlockItem(ADBlocks.BLACK_CAMPFIRE);
+        WHITE_LANTERN = registerBlockItem(ADBlocks.WHITE_LANTERN);
+        ORANGE_LANTERN = registerBlockItem(ADBlocks.ORANGE_LANTERN);
+        MAGENTA_LANTERN = registerBlockItem(ADBlocks.MAGENTA_LANTERN);
+        LIGHT_BLUE_LANTERN = registerBlockItem(ADBlocks.LIGHT_BLUE_LANTERN);
+        YELLOW_LANTERN = registerBlockItem(ADBlocks.YELLOW_LANTERN);
+        LIME_LANTERN = registerBlockItem(ADBlocks.LIME_LANTERN);
+        PINK_LANTERN = registerBlockItem(ADBlocks.PINK_LANTERN);
+        GRAY_LANTERN = registerBlockItem(ADBlocks.GRAY_LANTERN);
+        LIGHT_GRAY_LANTERN = registerBlockItem(ADBlocks.LIGHT_GRAY_LANTERN);
+        CYAN_LANTERN = registerBlockItem(ADBlocks.CYAN_LANTERN);
+        PURPLE_LANTERN = registerBlockItem(ADBlocks.PURPLE_LANTERN);
+        BLUE_LANTERN = registerBlockItem(ADBlocks.BLUE_LANTERN);
+        BROWN_LANTERN = registerBlockItem(ADBlocks.BROWN_LANTERN);
+        GREEN_LANTERN = registerBlockItem(ADBlocks.GREEN_LANTERN);
+        RED_LANTERN = registerBlockItem(ADBlocks.RED_LANTERN);
+        BLACK_LANTERN = registerBlockItem(ADBlocks.BLACK_LANTERN);
+        WHITE_TORCH = registerWallStandingBlockItem("white_torch",
+                ADBlocks.WHITE_TORCH, ADBlocks.WHITE_WALL_TORCH);
+        ORANGE_TORCH = registerWallStandingBlockItem("orange_torch",
+                ADBlocks.ORANGE_TORCH, ADBlocks.ORANGE_WALL_TORCH);
+        MAGENTA_TORCH = registerWallStandingBlockItem("magenta_torch",
+                ADBlocks.MAGENTA_TORCH, ADBlocks.MAGENTA_WALL_TORCH);
+        LIGHT_BLUE_TORCH = registerWallStandingBlockItem("light_blue_torch",
+                ADBlocks.LIGHT_BLUE_TORCH, ADBlocks.LIGHT_BLUE_WALL_TORCH);
+        YELLOW_TORCH = registerWallStandingBlockItem("yellow_torch",
+                ADBlocks.YELLOW_TORCH, ADBlocks.YELLOW_WALL_TORCH);
+        LIME_TORCH = registerWallStandingBlockItem("lime_torch",
+                ADBlocks.LIME_TORCH, ADBlocks.LIME_WALL_TORCH);
+        PINK_TORCH = registerWallStandingBlockItem("pink_torch",
+                ADBlocks.PINK_TORCH, ADBlocks.PINK_WALL_TORCH);
+        GRAY_TORCH = registerWallStandingBlockItem("gray_torch",
+                ADBlocks.GRAY_TORCH, ADBlocks.GRAY_WALL_TORCH);
+        LIGHT_GRAY_TORCH = registerWallStandingBlockItem("light_gray_torch",
+                ADBlocks.LIGHT_GRAY_TORCH, ADBlocks.LIGHT_GRAY_WALL_TORCH);
+        CYAN_TORCH = registerWallStandingBlockItem("cyan_torch",
+                ADBlocks.CYAN_TORCH, ADBlocks.CYAN_WALL_TORCH);
+        PURPLE_TORCH = registerWallStandingBlockItem("purple_torch",
+                ADBlocks.PURPLE_TORCH, ADBlocks.PURPLE_WALL_TORCH);
+        BLUE_TORCH = registerWallStandingBlockItem("blue_torch",
+                ADBlocks.BLUE_TORCH, ADBlocks.BLUE_WALL_TORCH);
+        BROWN_TORCH = registerWallStandingBlockItem("brown_torch",
+                ADBlocks.BROWN_TORCH, ADBlocks.BROWN_WALL_TORCH);
+        GREEN_TORCH = registerWallStandingBlockItem("green_torch",
+                ADBlocks.GREEN_TORCH, ADBlocks.GREEN_WALL_TORCH);
+        RED_TORCH = registerWallStandingBlockItem("red_torch",
+                ADBlocks.RED_TORCH, ADBlocks.RED_WALL_TORCH);
+        BLACK_TORCH = registerWallStandingBlockItem("black_torch",
+                ADBlocks.BLACK_TORCH, ADBlocks.BLACK_WALL_TORCH);
+        FRESH_BAMBOO_FENCE = registerBlockItem(ADBlocks.FRESH_BAMBOO_FENCE);
+        FRESH_BAMBOO_FENCE_GATE = registerBlockItem(ADBlocks.FRESH_BAMBOO_FENCE_GATE);
+        DRIED_BAMBOO_FENCE = registerBlockItem(ADBlocks.DRIED_BAMBOO_FENCE);
+        DRIED_BAMBOO_FENCE_GATE = registerBlockItem(ADBlocks.DRIED_BAMBOO_FENCE_GATE);
+        BAUXITE = registerBlockItem(ADBlocks.BAUXITE);
+        BAUXITE_SLAB = registerBlockItem(ADBlocks.BAUXITE_SLAB);
+        BAUXITE_STAIRS = registerBlockItem(ADBlocks.BAUXITE_STAIRS);
+        BAUXITE_WALL = registerBlockItem(ADBlocks.BAUXITE_WALL);
+        BAUXITE_BRICKS = registerBlockItem(ADBlocks.BAUXITE_BRICKS);
+        BAUXITE_BRICK_STAIRS = registerBlockItem(ADBlocks.BAUXITE_BRICK_STAIRS);
+        BAUXITE_BRICK_SLAB = registerBlockItem(ADBlocks.BAUXITE_BRICK_SLAB);
+        BAUXITE_BRICK_WALL = registerBlockItem(ADBlocks.BAUXITE_BRICK_WALL);
+        SNOW_SLAB = registerBlockItem(ADBlocks.SNOW_SLAB);
+        SNOW_STAIRS = registerBlockItem(ADBlocks.SNOW_STAIRS);
+        SNOW_WALL = registerBlockItem(ADBlocks.SNOW_WALL);
+        TWISTED_NETHER_BRICKS = registerBlockItem(ADBlocks.TWISTED_NETHER_BRICKS);
+        TWISTED_NETHER_BRICK_STAIRS = registerBlockItem(ADBlocks.TWISTED_NETHER_BRICK_STAIRS);
+        TWISTED_NETHER_BRICK_SLAB = registerBlockItem(ADBlocks.TWISTED_NETHER_BRICK_SLAB);
+        TWISTED_NETHER_BRICK_WALL = registerBlockItem(ADBlocks.TWISTED_NETHER_BRICK_WALL);
+        TWISTED_NETHERRACK = registerBlockItem(ADBlocks.TWISTED_NETHERRACK);
+        TWISTED_NETHERRACK_STAIRS = registerBlockItem(ADBlocks.TWISTED_NETHERRACK_STAIRS);
+        TWISTED_NETHERRACK_SLAB = registerBlockItem(ADBlocks.TWISTED_NETHERRACK_SLAB);
+        TWISTED_NETHERRACK_WALL = registerBlockItem(ADBlocks.TWISTED_NETHERRACK_WALL);
+        WEEPING_NETHER_BRICKS = registerBlockItem(ADBlocks.WEEPING_NETHER_BRICKS);
+        WEEPING_NETHER_BRICK_STAIRS = registerBlockItem(ADBlocks.WEEPING_NETHER_BRICK_STAIRS);
+        WEEPING_NETHER_BRICK_SLAB = registerBlockItem(ADBlocks.WEEPING_NETHER_BRICK_SLAB);
+        WEEPING_NETHER_BRICK_WALL = registerBlockItem(ADBlocks.WEEPING_NETHER_BRICK_WALL);
+        WEEPING_NETHERRACK = registerBlockItem(ADBlocks.WEEPING_NETHERRACK);
+        WEEPING_NETHERRACK_STAIRS = registerBlockItem(ADBlocks.WEEPING_NETHERRACK_STAIRS);
+        WEEPING_NETHERRACK_SLAB = registerBlockItem(ADBlocks.WEEPING_NETHERRACK_SLAB);
+        WEEPING_NETHERRACK_WALL = registerBlockItem(ADBlocks.WEEPING_NETHERRACK_WALL);
+        SNAPDRAGON = registerBlockItem(ADBlocks.SNAPDRAGON);
+        ENDER_GRASS = registerBlockItem(ADBlocks.ENDER_GRASS);
+        ICICLE = registerBlockItem(ADBlocks.ICICLE);
+        CHOCOLATE_CAKE = registerBlockItem(ADBlocks.CHOCOLATE_CAKE);
+        RED_VELVET_CAKE = registerBlockItem(ADBlocks.RED_VELVET_CAKE);
+        STONE_TILES = registerBlockItem(ADBlocks.STONE_TILES);
+        STONE_TILE_SLAB = registerBlockItem(ADBlocks.STONE_TILE_SLAB);
+        STONE_TILE_STAIRS = registerBlockItem(ADBlocks.STONE_TILE_STAIRS);
+        STONE_TILE_WALL = registerBlockItem(ADBlocks.STONE_TILE_WALL);
+        MOSSY_STONE_TILES = registerBlockItem(ADBlocks.MOSSY_STONE_TILES);
+        MOSSY_STONE_TILE_SLAB = registerBlockItem(ADBlocks.MOSSY_STONE_TILE_SLAB);
+        MOSSY_STONE_TILE_STAIRS = registerBlockItem(ADBlocks.MOSSY_STONE_TILE_STAIRS);
+        MOSSY_STONE_TILE_WALL = registerBlockItem(ADBlocks.MOSSY_STONE_TILE_WALL);
+        CRACKED_STONE_TILES = registerBlockItem(ADBlocks.CRACKED_STONE_TILES);
+        CRACKED_STONE_TILE_SLAB = registerBlockItem(ADBlocks.CRACKED_STONE_TILE_SLAB);
+        CRACKED_STONE_TILE_STAIRS = registerBlockItem(ADBlocks.CRACKED_STONE_TILE_STAIRS);
+        CRACKED_STONE_TILE_WALL = registerBlockItem(ADBlocks.CRACKED_STONE_TILE_WALL);
+        SWEET_BERRY_PIE = registerBlockItem(ADBlocks.SWEET_BERRY_PIE);
+        BLUEBERRY_PIE = registerBlockItem(ADBlocks.BLUEBERRY_PIE);
+        BLACKSTONE_TILES = registerBlockItem(ADBlocks.BLACKSTONE_TILES);
+        BLACKSTONE_TILE_STAIRS = registerBlockItem(ADBlocks.BLACKSTONE_TILE_STAIRS);
+        BLACKSTONE_TILE_SLAB = registerBlockItem(ADBlocks.BLACKSTONE_TILE_SLAB);
+        BLACKSTONE_TILE_WALL = registerBlockItem(ADBlocks.BLACKSTONE_TILE_WALL);
+        TWISTED_BLACKSTONE_TILES = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_TILES);
+        TWISTED_BLACKSTONE_TILE_STAIRS = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_TILE_STAIRS);
+        TWISTED_BLACKSTONE_TILE_SLAB = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_TILE_SLAB);
+        TWISTED_BLACKSTONE_TILE_WALL = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_TILE_WALL);
+        WEEPING_BLACKSTONE_TILES = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_TILES);
+        WEEPING_BLACKSTONE_TILE_STAIRS = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_TILE_STAIRS);
+        WEEPING_BLACKSTONE_TILE_SLAB = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_TILE_SLAB);
+        WEEPING_BLACKSTONE_TILE_WALL = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_TILE_WALL);
+        TWISTED_POLISHED_BLACKSTONE_BRICKS = registerBlockItem(ADBlocks.TWISTED_POLISHED_BLACKSTONE_BRICKS);
+        TWISTED_POLISHED_BLACKSTONE_BRICK_STAIRS = registerBlockItem(ADBlocks.TWISTED_POLISHED_BLACKSTONE_BRICK_STAIRS);
+        TWISTED_POLISHED_BLACKSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.TWISTED_POLISHED_BLACKSTONE_BRICK_SLAB);
+        TWISTED_POLISHED_BLACKSTONE_BRICK_WALL = registerBlockItem(ADBlocks.TWISTED_POLISHED_BLACKSTONE_BRICK_WALL);
+        WEEPING_POLISHED_BLACKSTONE_BRICKS = registerBlockItem(ADBlocks.WEEPING_POLISHED_BLACKSTONE_BRICKS);
+        WEEPING_POLISHED_BLACKSTONE_BRICK_STAIRS = registerBlockItem(ADBlocks.WEEPING_POLISHED_BLACKSTONE_BRICK_STAIRS);
+        WEEPING_POLISHED_BLACKSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.WEEPING_POLISHED_BLACKSTONE_BRICK_SLAB);
+        WEEPING_POLISHED_BLACKSTONE_BRICK_WALL = registerBlockItem(ADBlocks.WEEPING_POLISHED_BLACKSTONE_BRICK_WALL);
+        TWISTED_BLACKSTONE = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE);
+        TWISTED_BLACKSTONE_STAIRS = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_STAIRS);
+        TWISTED_BLACKSTONE_SLAB = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_SLAB);
+        TWISTED_BLACKSTONE_WALL = registerBlockItem(ADBlocks.TWISTED_BLACKSTONE_WALL);
+        WEEPING_BLACKSTONE = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE);
+        WEEPING_BLACKSTONE_STAIRS = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_STAIRS);
+        WEEPING_BLACKSTONE_SLAB = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_SLAB);
+        WEEPING_BLACKSTONE_WALL = registerBlockItem(ADBlocks.WEEPING_BLACKSTONE_WALL);
+        QUARTZ_TILES = registerBlockItem(ADBlocks.QUARTZ_TILES);
+        QUARTZ_TILE_STAIRS = registerBlockItem(ADBlocks.QUARTZ_TILE_STAIRS);
+        QUARTZ_TILE_SLAB = registerBlockItem(ADBlocks.QUARTZ_TILE_SLAB);
+        QUARTZ_TILE_WALL = registerBlockItem(ADBlocks.QUARTZ_TILE_WALL);
+        CALCITE_BRICKS = registerBlockItem(ADBlocks.CALCITE_BRICKS);
+        CALCITE_BRICK_STAIRS = registerBlockItem(ADBlocks.CALCITE_BRICK_STAIRS);
+        CALCITE_BRICK_SLAB = registerBlockItem(ADBlocks.CALCITE_BRICK_SLAB);
+        CALCITE_BRICK_WALL = registerBlockItem(ADBlocks.CALCITE_BRICK_WALL);
+        MOSSY_CALCITE_BRICKS = registerBlockItem(ADBlocks.MOSSY_CALCITE_BRICKS);
+        MOSSY_CALCITE_BRICK_STAIRS = registerBlockItem(ADBlocks.MOSSY_CALCITE_BRICK_STAIRS);
+        MOSSY_CALCITE_BRICK_SLAB = registerBlockItem(ADBlocks.MOSSY_CALCITE_BRICK_SLAB);
+        MOSSY_CALCITE_BRICK_WALL = registerBlockItem(ADBlocks.MOSSY_CALCITE_BRICK_WALL);
+        CRACKED_CALCITE_BRICKS = registerBlockItem(ADBlocks.CRACKED_CALCITE_BRICKS);
+        CRACKED_CALCITE_BRICK_STAIRS = registerBlockItem(ADBlocks.CRACKED_CALCITE_BRICK_STAIRS);
+        CRACKED_CALCITE_BRICK_SLAB = registerBlockItem(ADBlocks.CRACKED_CALCITE_BRICK_SLAB);
+        CRACKED_CALCITE_BRICK_WALL = registerBlockItem(ADBlocks.CRACKED_CALCITE_BRICK_WALL);
+        CHISELED_CALCITE_BRICKS = registerBlockItem(ADBlocks.CHISELED_CALCITE_BRICKS);
+        TUFF_BRICKS = registerBlockItem(ADBlocks.TUFF_BRICKS);
+        TUFF_BRICK_STAIRS = registerBlockItem(ADBlocks.TUFF_BRICK_STAIRS);
+        TUFF_BRICK_SLAB = registerBlockItem(ADBlocks.TUFF_BRICK_SLAB);
+        TUFF_BRICK_WALL = registerBlockItem(ADBlocks.TUFF_BRICK_WALL);
+        MOSSY_TUFF_BRICKS = registerBlockItem(ADBlocks.MOSSY_TUFF_BRICKS);
+        MOSSY_TUFF_BRICK_STAIRS = registerBlockItem(ADBlocks.MOSSY_TUFF_BRICK_STAIRS);
+        MOSSY_TUFF_BRICK_SLAB = registerBlockItem(ADBlocks.MOSSY_TUFF_BRICK_SLAB);
+        MOSSY_TUFF_BRICK_WALL = registerBlockItem(ADBlocks.MOSSY_TUFF_BRICK_WALL);
+        CRACKED_TUFF_BRICKS = registerBlockItem(ADBlocks.CRACKED_TUFF_BRICKS);
+        CRACKED_TUFF_BRICK_STAIRS = registerBlockItem(ADBlocks.CRACKED_TUFF_BRICK_STAIRS);
+        CRACKED_TUFF_BRICK_SLAB = registerBlockItem(ADBlocks.CRACKED_TUFF_BRICK_SLAB);
+        CRACKED_TUFF_BRICK_WALL = registerBlockItem(ADBlocks.CRACKED_TUFF_BRICK_WALL);
+        CHISELED_TUFF_BRICKS = registerBlockItem(ADBlocks.CHISELED_TUFF_BRICKS);
+        DRIPSTONE_BRICKS = registerBlockItem(ADBlocks.DRIPSTONE_BRICKS);
+        DRIPSTONE_BRICK_STAIRS = registerBlockItem(ADBlocks.DRIPSTONE_BRICK_STAIRS);
+        DRIPSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.DRIPSTONE_BRICK_SLAB);
+        DRIPSTONE_BRICK_WALL = registerBlockItem(ADBlocks.DRIPSTONE_BRICK_WALL);
+        MOSSY_DRIPSTONE_BRICKS = registerBlockItem(ADBlocks.MOSSY_DRIPSTONE_BRICKS);
+        MOSSY_DRIPSTONE_BRICK_STAIRS = registerBlockItem(ADBlocks.MOSSY_DRIPSTONE_BRICK_STAIRS);
+        MOSSY_DRIPSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.MOSSY_DRIPSTONE_BRICK_SLAB);
+        MOSSY_DRIPSTONE_BRICK_WALL = registerBlockItem(ADBlocks.MOSSY_DRIPSTONE_BRICK_WALL);
+        CRACKED_DRIPSTONE_BRICKS = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICKS);
+        CRACKED_DRIPSTONE_BRICK_STAIRS = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICK_STAIRS);
+        CRACKED_DRIPSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICK_SLAB);
+        CRACKED_DRIPSTONE_BRICK_WALL = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICK_WALL);
+        CHISELED_DRIPSTONE_BRICKS = registerBlockItem(ADBlocks.CHISELED_DRIPSTONE_BRICKS);
+        SPECTRAL_ONYX = registerBlockItem(ADBlocks.SPECTRAL_ONYX);
+        SPECTRAL_ONYX_STAIRS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_STAIRS);
+        SPECTRAL_ONYX_SLAB = registerBlockItem(ADBlocks.SPECTRAL_ONYX_SLAB);
+        SPECTRAL_ONYX_WALL = registerBlockItem(ADBlocks.SPECTRAL_ONYX_WALL);
+        COBBLED_SPECTRAL_ONYX = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX);
+        COBBLED_SPECTRAL_ONYX_STAIRS = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_STAIRS);
+        COBBLED_SPECTRAL_ONYX_SLAB = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_SLAB);
+        COBBLED_SPECTRAL_ONYX_WALL = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_WALL);
+        SPECTRAL_ONYX_BRICKS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICKS);
+        SPECTRAL_ONYX_BRICK_STAIRS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_STAIRS);
+        SPECTRAL_ONYX_BRICK_SLAB = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_SLAB);
+        SPECTRAL_ONYX_BRICK_WALL = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_WALL);
+        CRIMSON_BOOKSHELF = registerBlockItem(ADBlocks.CRIMSON_BOOKSHELF);
+        WARPED_BOOKSHELF = registerBlockItem(ADBlocks.WARPED_BOOKSHELF);
+        BOK_CHOY = registerItem("bok_choy",
+                new Item(makeSettings(ADFoodComponents.BOK_CHOY)));
+        BOK_CHOY_SEEDS = registerItem("bok_choy_seeds",
+                new AliasedBlockItem(ADBlocks.BOK_CHOY, makeSettings()));
+        GARLIC = registerItem("garlic",
+                new AliasedBlockItem(ADBlocks.GARLIC, makeSettings(ADFoodComponents.GARLIC)));
+        GREEN_ONION = registerItem("green_onion",
+                new AliasedBlockItem(ADBlocks.GREEN_ONIONS, makeSettings(ADFoodComponents.GREEN_ONION)));
+        BLUEBERRIES = registerItem("blueberries",
+                new AliasedBlockItem(ADBlocks.BLUEBERRY_BUSH, makeSettings(ADFoodComponents.BLUEBERRIES)));
+        SWEET_BERRY_JUICE = registerItem("sweet_berry_juice",
+                new ADDrinkItem(makeSettings(ADFoodComponents.SWEET_BERRY_JUICE, 16)));
+        BLUEBERRY_JUICE = registerItem("blueberry_juice",
+                new ADDrinkItem(makeSettings(ADFoodComponents.BLUEBERRY_JUICE, 16)));
+        NOODLES = registerItem("noodles", item());
+        NOODLE_SOUP = registerItem("noodle_soup",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.NOODLE_SOUP, 1)));
+        PUDDING = registerItem("pudding",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.PUDDING, 1)));
+        BERRY_PUDDING = registerItem("berry_pudding",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.BERRY_PUDDING, 1)));
+        SMOKY_QUARTZ = registerItem("smoky_quartz", item());
+        CARAMEL_APPLE = registerItem("caramel_apple",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.CARAMEL_APPLE, 1), Items.STICK));
+        CARAMEL = registerItem("caramel", item());
+        SPRUCE_CONE = registerItem("spruce_cone",
+                new Item(makeSettings(ADFoodComponents.SPRUCE_CONE)));
+        FORESTS_BOUNTY = registerItem("forests_bounty",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.FORESTS_BOUNTY, 1)));
+        WITCHS_CRADLE_BRANCH = registerItem("witchs_cradle_branch",
+                new AliasedBlockItem(ADBlocks.WITCHS_CRADLE, makeSettings(ADFoodComponents.WITCHS_CRADLE_BRANCH)));
+        WITCHS_CRADLE_SOUP = registerItem("witchs_cradle_soup",
+                new ADFoodContainerItem(makeSettings(ADFoodComponents.WITCHS_CRADLE_SOUP, 1)));
+        GLASS_VIAL = registerItem("glass_vial",
+                new ADGlassVialItem(makeSettings()));
+        BLOOD_VIAL = registerItem("blood_vial",
+                new ADDrinkItem(makeSettings(ADFoodComponents.BLOOD_VILE, 1), ADItems.GLASS_VIAL));
+        MIXED_SEED_PACKET = registerItem("mixed_seed_packet",
+                new ADMixedSeedPacketItem(makeSettings()));
+        CATTAIL = registerItem("cattail",
+                new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings()));
+        DRIED_BAMBOO = registerItem("dried_bamboo", item());
+        FRIED_EGG = registerItem("fried_egg",
+                new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16)));
+        BLOOD_KELP_SEED_CLUSTER = registerItem("blood_kelp_seed_cluster",
+                new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings()));
     }
 }

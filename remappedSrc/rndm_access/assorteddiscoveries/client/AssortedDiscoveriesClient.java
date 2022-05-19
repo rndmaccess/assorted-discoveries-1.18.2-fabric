@@ -5,37 +5,49 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaEmberParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.util.Identifier;
 import rndm_access.assorteddiscoveries.ADReference;
-import rndm_access.assorteddiscoveries.client.entity.ADCharredRemnantRenderer;
-import rndm_access.assorteddiscoveries.client.particle.ADBloodKelpSporeParticle;
+import rndm_access.assorteddiscoveries.client.block_entity.ADDyedCampfireBlockEntityRenderer;
+import rndm_access.assorteddiscoveries.client.particle.ADSporeParticle;
 import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
-import rndm_access.assorteddiscoveries.common.core.ADBlocks;
-import rndm_access.assorteddiscoveries.common.core.ADEntityTypes;
-import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
-import rndm_access.assorteddiscoveries.common.core.ADScreenHandlerTypes;
+import rndm_access.assorteddiscoveries.common.core.*;
 
 @Environment(EnvType.CLIENT)
 public class AssortedDiscoveriesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        registerEntityRenderers();
+        registerBlockColorProviders();
+        registerItemColorProviders();
         registerParticleSprites();
         registerParticleFactories();
         registerRenderLayers();
         registerScreens();
+        registerBlockEntityRenderers();
     }
 
-    private void registerEntityRenderers() {
-        EntityRendererRegistry.register(ADEntityTypes.CHARRED_REMNANT, ADCharredRemnantRenderer::new);
+    private void registerBlockEntityRenderers() {
+        BlockEntityRendererRegistry.register(ADBlockEntityTypes.DYED_CAMPFIRE, ADDyedCampfireBlockEntityRenderer::new);
+    }
+
+    private void registerBlockColorProviders() {
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> ((tintIndex == 1) && (view != null))
+                ? BiomeColors.getGrassColor(view, pos)
+                : -1, ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
+    }
+
+    private void registerItemColorProviders() {
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> GrassColors.getColor(0.5D, 1.0D),
+                ADItems.ENDERMAN_PLUSH, ADItems.GRASS_SLAB);
     }
 
     private void registerScreens() {
@@ -76,12 +88,12 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         registerParticleSprite("red_flame");
         registerParticleSprite("black_flame");
         registerParticleSprite("blood_kelp_spore");
+        registerParticleSprite("witchs_cradle_spore");
     }
 
-    private void registerParticleSprite(String id) {
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new Identifier(ADReference.MOD_ID, "particle/" + id));
-        }));
+    private static void registerParticleSprite(String id) {
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((
+                (atlasTexture, registry) -> registry.register(ADReference.makeId("particle/" + id))));
     }
 
     private void registerParticleFactories() {
@@ -119,7 +131,8 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         factoryRegistry.register(ADParticleTypes.GREEN_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.RED_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLACK_FLAME, FlameParticle.Factory::new);
-        factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADBloodKelpSporeParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADSporeParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.WITCHS_CRADLE_SPORE, ADSporeParticle.Factory::new);
     }
 
     private void registerRenderLayers() {

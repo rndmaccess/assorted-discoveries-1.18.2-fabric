@@ -119,7 +119,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     }
 
     public boolean canUse(PlayerEntity player) {
-        return canUse(this.context, player, Blocks.STONECUTTER);
+        return canUse(this.context, player, ADBlocks.WOODCUTTER);
     }
 
     public boolean onButtonClick(PlayerEntity player, int id) {
@@ -166,7 +166,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     }
 
     public ScreenHandlerType<?> getType() {
-        return ScreenHandlerType.STONECUTTER;
+        return ADScreenHandlerTypes.WOODCUTTER;
     }
 
     public void setContentsChangedListener(Runnable contentsChangedListener) {
@@ -195,7 +195,8 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
                 if (!this.insertItem(itemStack2, 2, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.world.getRecipeManager().getFirstMatch(ADRecipeTypes.WOODCUTTING, new SimpleInventory(new ItemStack[]{itemStack2}), this.world).isPresent()) {
+            } else if (this.world.getRecipeManager().getFirstMatch(ADRecipeTypes.WOODCUTTING,
+                    new SimpleInventory(new ItemStack[]{itemStack2}), this.world).isPresent()) {
                 if (!this.insertItem(itemStack2, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }
@@ -219,7 +220,6 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
             slot.onTakeItem(player, itemStack2);
             this.sendContentUpdates();
         }
-
         return itemStack;
     }
 

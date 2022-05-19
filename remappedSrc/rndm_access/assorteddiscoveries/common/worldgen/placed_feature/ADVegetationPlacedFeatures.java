@@ -1,41 +1,67 @@
 package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
+import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADVegetationConfiguredFeatures;
 
 import java.util.List;
 
 public class ADVegetationPlacedFeatures {
-    /*
-    public static final PlacedFeature PATCH_BLUEBERRY_COMMON = ADFeatureUtils.register("patch_blueberry_common",
-            ADVegetationFeatures.PATCH_BLUEBERRY_BUSH.placed(getCommonBushPlacement()));
-    public static final PlacedFeature PATCH_BLUEBERRY_RARE = ADFeatureUtils.register("patch_blueberry_rare",
-            ADVegetationFeatures.PATCH_BLUEBERRY_BUSH.placed(getRareBushPlacement()));
-    public static final PlacedFeature PATCH_WITCHS_CRADLE_COMMON = ADFeatureUtils.register("patch_witchs_cradle_common",
-            ADVegetationFeatures.PATCH_WITCHS_CRADLE.placed(getCommonBushPlacement()));
-    public static final PlacedFeature PATCH_WITCHS_CRADLE_RARE = ADFeatureUtils.register("patch_witchs_cradle_rare",
-            ADVegetationFeatures.PATCH_WITCHS_CRADLE.placed(getRareBushPlacement()));
-    public static final PlacedFeature SNAPDRAGON_AND_GRASS_DEFAULT = PlacementUtils.register(
-            "snapdragon_and_grass_default",
-            ADVegetationFeatures.SNAPDRAGON_AND_GRASS_DEFAULT.placed(RarityFilter.onAverageOnceEvery(32),
-                    InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+    public static final RegistryEntry<PlacedFeature> PATCH_BLUEBERRY_COMMON;
+    public static final RegistryEntry<PlacedFeature> PATCH_BLUEBERRY_RARE;
+    public static final RegistryEntry<PlacedFeature> PATCH_WITCHS_CRADLE_COMMON;
+    public static final RegistryEntry<PlacedFeature> PATCH_WITCHS_CRADLE_RARE;
+    public static final RegistryEntry<PlacedFeature> SNAPDRAGON_AND_ENDER_GRASS;
 
-    private static List<PlacementModifier> getCommonBushPlacement() {
-        return getBushPlacement(32);
+    public static void registerVegetationPlacedFeatures() {
+        AssortedDiscoveries.LOGGER.info("Registered vegetation placed features");
     }
 
-    private static List<PlacementModifier> getRareBushPlacement() {
-        return getBushPlacement(384);
+    private static List<PlacementModifier> makeCommonBushPlacement() {
+        return makeBushPlacement(32);
     }
 
-    private static List<PlacementModifier> getBushPlacement(int chance) {
-        Builder<PlacementModifier> builder = ImmutableList.builder();
+    private static List<PlacementModifier> makeRareBushPlacement() {
+        return makeBushPlacement(384);
+    }
 
-        builder.add(InSquarePlacement.spread());
-        builder.add(PlacementUtils.HEIGHTMAP_WORLD_SURFACE);
-        builder.add(RarityFilter.onAverageOnceEvery(chance));
-        builder.add(BiomeFilter.biome());
+    private static List<PlacementModifier> makeBushPlacement(int chance) {
+        ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
+
+        builder.add(SquarePlacementModifier.of());
+        builder.add(PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP);
+        builder.add(RarityFilterPlacementModifier.of(chance));
+        builder.add(BiomePlacementModifier.of());
         return builder.build();
     }
-     */
+
+    private static List<PlacementModifier> makeSnapdragonAndEnderGrassPlacement() {
+        ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
+
+        builder.add(RarityFilterPlacementModifier.of(32));
+        builder.add(SquarePlacementModifier.of());
+        builder.add(PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
+        builder.add(BiomePlacementModifier.of());
+        return builder.build();
+    }
+
+    static {
+        PATCH_BLUEBERRY_COMMON = ADPlacedFeatures.register("patch_blueberry_common",
+                ADVegetationConfiguredFeatures.PATCH_BLUEBERRY_BUSH, makeCommonBushPlacement());
+        PATCH_BLUEBERRY_RARE = ADPlacedFeatures.register("patch_blueberry_rare",
+                ADVegetationConfiguredFeatures.PATCH_BLUEBERRY_BUSH, makeRareBushPlacement());
+        PATCH_WITCHS_CRADLE_COMMON = ADPlacedFeatures.register("patch_witchs_cradle_common",
+                ADVegetationConfiguredFeatures.PATCH_WITCHS_CRADLE, makeCommonBushPlacement());
+        PATCH_WITCHS_CRADLE_RARE = ADPlacedFeatures.register("patch_witchs_cradle_rare",
+                ADVegetationConfiguredFeatures.PATCH_WITCHS_CRADLE, makeRareBushPlacement());
+        SNAPDRAGON_AND_ENDER_GRASS = ADPlacedFeatures.register("snapdragon_and_ender_grass",
+                ADVegetationConfiguredFeatures.SNAPDRAGON_AND_GRASS_DEFAULT, makeSnapdragonAndEnderGrassPlacement());
+    }
 }

@@ -1,16 +1,22 @@
 package rndm_access.assorteddiscoveries.common.worldgen.placed_feature;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.PlacedFeature;
 import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.world.gen.placementmodifier.*;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
 
 import java.util.List;
 
 public class ADTreePlacedFeatures {
-    public static final RegistryKey<PlacedFeature> HUGE_PURPLE_MUSHROOM_VEGETATION;
+    public static final RegistryEntry<PlacedFeature> HUGE_PURPLE_MUSHROOM_VEGETATION;
+
+    public static void registerTreePlacedFeatures() {
+        AssortedDiscoveries.LOGGER.info("Registered tree placed features");
+    }
 
     private static List<PlacementModifier> getPurpleMushroomPlacement(int chance, PlacementModifier modifier) {
         ImmutableList.Builder<PlacementModifier> builder = ImmutableList.builder();
@@ -29,7 +35,9 @@ public class ADTreePlacedFeatures {
     }
 
     static {
-        HUGE_PURPLE_MUSHROOM_VEGETATION = ADPlacedFeatures.register("huge_purple_mushroom_vegetation",
-                ADTreeConfiguredFeatures.HUGE_PURPLE_MUSHROOM.withPlacement(getPurpleMushroomPlacement(20, CountPlacementModifier.of(3))));
+        HUGE_PURPLE_MUSHROOM_VEGETATION = ADPlacedFeatures.register(
+                "huge_purple_mushroom_vegetation",
+                ADTreeConfiguredFeatures.HUGE_PURPLE_MUSHROOM,
+                getPurpleMushroomPlacement(20, CountPlacementModifier.of(3)));
     }
 }

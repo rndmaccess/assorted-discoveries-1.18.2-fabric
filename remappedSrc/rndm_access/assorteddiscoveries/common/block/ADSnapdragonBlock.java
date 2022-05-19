@@ -30,7 +30,7 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return ADBlockTags.SNAPDRAGON_PLANTABLE_ON.contains(floor.getBlock());
+        return floor.isIn(ADBlockTags.SNAPDRAGON_PLANTABLE_ON);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
         EntityType<?> type = entity.getType();
 
-        if (entity instanceof LivingEntity && !(ADEntityTypeTags.SNAPDRAGON_TELEPORT_EXCEPTIONS.contains(type))) {
+        if (entity instanceof LivingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES))) {
             LivingEntity livingEntity = (LivingEntity) entity;
 
             if (!world.isClient() && !livingEntity.isSneaking() && ((LivingEntity) entity).getVelocity().y == 0.0D) {

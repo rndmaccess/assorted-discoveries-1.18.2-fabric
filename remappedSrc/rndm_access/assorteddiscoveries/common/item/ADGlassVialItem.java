@@ -24,8 +24,7 @@ public class ADGlassVialItem extends Item {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (stack.getItem().equals(ADItems.GLASS_VIAL)) {
 
-
-            if (entity instanceof AnimalEntity && entity.getHealth() > 0.0 && ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD.isOf(entity.getType())) {
+            if (entity instanceof AnimalEntity && entity.getHealth() > 0.0 && entity.getType().isIn(ADEntityTypeTags.ANIMALS_THAT_GIVE_BLOOD)) {
                 AnimalEntity animalTarget = (AnimalEntity)(entity);
 
                 if (animalTarget.damage(DamageSource.GENERIC, 1)) {

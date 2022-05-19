@@ -57,7 +57,7 @@ public class ADBambooFenceBlock extends FenceBlock {
         BlockPos abovePos = pos.up();
         BlockState state = world.getBlockState(abovePos);
 
-        return ADBlockTags.BAMBOO_FENCES.contains(state.getBlock());
+        return state.isIn(ADBlockTags.BAMBOO_FENCES);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {

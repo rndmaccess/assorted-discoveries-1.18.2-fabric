@@ -14,7 +14,7 @@ public class ADRecipeTypes {
         AssortedDiscoveries.LOGGER.info("Registered recipe types.");
     }
 
-    private static <T extends Recipe<?>> RecipeType<T> registerRecipeType(String path) {
+    private static <T extends Recipe<?>> RecipeType<T> register(String path) {
         return Registry.register(Registry.RECIPE_TYPE, ADReference.makeId(path), new RecipeType<T>() {
             public String toString() {
                 return ADReference.makeId(path).toString();
@@ -23,6 +23,6 @@ public class ADRecipeTypes {
     }
 
     static {
-        WOODCUTTING = registerRecipeType("woodcutting");
+        WOODCUTTING = register("woodcutting");
     }
 }

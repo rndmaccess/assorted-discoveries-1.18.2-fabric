@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.common.mixin;
+package rndm_access.assorteddiscoveries.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
@@ -13,7 +13,8 @@ import rndm_access.assorteddiscoveries.common.core.ADBlockTags;
 @Mixin(CropBlock.class)
 public class ADCropBlockMixin {
     @Inject(method = "canPlantOnTop", at = @At("HEAD"), cancellable = true)
-    private void canPlantOnTop(BlockState floor, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
+    private void assorteddiscoveries_canPlantOnTop(BlockState floor, BlockView world, BlockPos pos,
+                                                   CallbackInfoReturnable<Boolean> info) {
 
         // Add the ability to plant crops in planter boxes.
         if(floor.isIn(ADBlockTags.PLANTER_BOXES)) {

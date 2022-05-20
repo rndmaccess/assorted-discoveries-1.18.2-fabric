@@ -11,10 +11,6 @@ public class ADEntityTypeTags {
     public static final TagKey<EntityType<?>> BLUEBERRY_BUSH_SLOWS;
     public static final TagKey<EntityType<?>> WITCHS_CRADLE_IMMUNE_ENTITY_TYPES;
 
-    /**
-     * @param path The name of the tag.
-     * @return The tag from the location or an empty tag if none exists.
-     */
     private static TagKey<EntityType<?>> of(String path) {
         return TagKey.of(Registry.ENTITY_TYPE_KEY, ADReference.makeId(path));
     }

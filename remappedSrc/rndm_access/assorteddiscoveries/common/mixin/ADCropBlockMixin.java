@@ -1,4 +1,4 @@
-package rndm_access.assorteddiscoveries.common.mixin;
+package rndm_access.assorteddiscoveries.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;

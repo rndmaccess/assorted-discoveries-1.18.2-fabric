@@ -25,15 +25,15 @@ public class ADGrassSlabBlock extends SlabBlock {
     }
 
     public static boolean canBeGrass(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos abovepos = pos.up();
-        BlockState aboveState = world.getBlockState(abovepos);
+        BlockPos abovePos = pos.up();
+        BlockState aboveState = world.getBlockState(abovePos);
 
         if (aboveState.isIn(BlockTags.SNOW)) {
             return true;
         } else if (aboveState.getFluidState().getLevel() == 8) {
             return false;
         } else {
-            return !aboveState.isSolidBlock(world, abovepos) || state.get(TYPE).equals(SlabType.BOTTOM);
+            return !aboveState.isSolidBlock(world, abovePos) || state.get(TYPE).equals(SlabType.BOTTOM);
         }
     }
 

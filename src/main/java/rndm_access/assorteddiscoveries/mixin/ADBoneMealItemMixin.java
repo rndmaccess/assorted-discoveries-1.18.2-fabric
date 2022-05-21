@@ -58,8 +58,8 @@ public abstract class ADBoneMealItemMixin {
 
                 if (soilState.isIn(ADBlockTags.END_BONE_MEALABLE_BLOCKS) && state.isAir()) {
 
-                    // There is a 40% chance to get a snapdragon and an 60% chance to get some ender grass.
-                    if(random.nextFloat() <= .4) {
+                    // There is a 40% chance to get a snapdragon and a 60% chance to get some ender grass.
+                    if(random.nextFloat() <= 0.4) {
                         world.setBlockState(mutablePos, ADBlocks.SNAPDRAGON.getDefaultState());
                     }
                     else {

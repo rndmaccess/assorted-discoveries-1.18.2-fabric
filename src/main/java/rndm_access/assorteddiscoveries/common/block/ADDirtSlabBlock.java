@@ -2,40 +2,38 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 
-public class ADDirtSlabBlock extends ADSoilSlabBlock {
+public class ADDirtSlabBlock extends SlabBlock implements Fertilizable {
     public ADDirtSlabBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
-    private static boolean canSpread(BlockState state, WorldView world, BlockPos pos) {
-        BlockPos blockpos = pos.up();
-        return ADGrassSlabBlock.canBeGrass(state, world, pos)
-                && !world.getFluidState(blockpos).isIn(FluidTags.WATER);
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return true;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (world.getLightLevel(pos.up()) >= 9) {
-            BlockState blockstate = ADBlocks.GRASS_SLAB.getDefaultState();
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+        return true;
+    }
 
-            for (int i = 0; i < 4; ++i) {
-                BlockPos atPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                BlockPos abovePos = atPos.up();
-                BlockState stateAt = world.getBlockState(atPos);
-
-                if (stateAt.isOf(ADBlocks.GRASS_SLAB) || stateAt.isOf(Blocks.GRASS_BLOCK) && canSpread(blockstate, world, atPos)) {
-                    world.setBlockState(pos, blockstate.with(TYPE, state.get(TYPE)).with(ADSnowyDirtSlabBlock.SNOWY, Boolean.valueOf(world.getBlockState(abovePos).isOf(Blocks.SNOW))));
-                }
-            }
-        }
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        BlockState blockState = world.getBlockState(pos.up());
+        world.setBlockState(pos, ADBlocks.GRASS_SLAB.getDefaultState().with(TYPE, state.get(TYPE))
+                .with(ADGrassSlabBlock.SNOWY, ADGrassSlabBlock.isSnow(blockState)));
     }
 }

@@ -410,12 +410,12 @@ public class ADBlocks {
         return new Block(AbstractBlock.Settings.of(Material.NETHER_WOOD, color).strength(1.5F).sounds(BlockSoundGroup.WOOD));
     }
 
-    private static ADNetherPlanterBoxBlock netherPlanterBoxBlock(MapColor color) {
-        return new ADNetherPlanterBoxBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(2.5F).sounds(BlockSoundGroup.WOOD));
+    private static ADPlanterBoxBlock overworldPlanterBoxBlock(MapColor color) {
+        return new ADPlanterBoxBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(2.5F).sounds(BlockSoundGroup.WOOD));
     }
 
-    private static ADOverworldPlanterBoxBlock overworldPlanterBoxBlock(MapColor color) {
-        return new ADOverworldPlanterBoxBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(2.5F).sounds(BlockSoundGroup.WOOD));
+    private static ADPlanterBoxBlock netherPlanterBoxBlock(MapColor color) {
+        return new ADPlanterBoxBlock(AbstractBlock.Settings.of(Material.NETHER_WOOD, color).strength(2.5F).sounds(BlockSoundGroup.WOOD));
     }
 
     private static ADDyedCampfireBlock dyedCampfireBlock(ParticleEffect sparkParticle) {
@@ -729,7 +729,7 @@ public class ADBlocks {
         DIRT_PATH_SLAB = register("dirt_path_slab",
                 new ADDirtPathSlabBlock(AbstractBlock.Settings.copy(Blocks.DIRT_PATH)));
         COARSE_DIRT_SLAB = register("coarse_dirt_slab",
-                new ADDirtSlabBlock(AbstractBlock.Settings.copy(Blocks.COARSE_DIRT)));
+                new SlabBlock(AbstractBlock.Settings.copy(Blocks.COARSE_DIRT)));
         SNOW_BRICKS = register("snow_bricks",
                 new Block(AbstractBlock.Settings.of(Material.SNOW_BLOCK).strength(0.6F)
                         .requiresTool().sounds(BlockSoundGroup.SNOW)));

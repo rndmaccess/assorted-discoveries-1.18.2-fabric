@@ -11,11 +11,10 @@
     "ADLeavesBlockMixin",
     "ADBlockMixin",
     "ADEntityAccessor",
-    "ADLivingEntityMixin"
+    "ADLivingEntityMixin",
+    "ADBoneMealItemMixin"
   ],
-  "client": [
-
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

@@ -734,8 +734,8 @@ public class ADBlocks {
                 new Block(AbstractBlock.Settings.of(Material.SNOW_BLOCK).strength(0.6F)
                         .requiresTool().sounds(BlockSoundGroup.SNOW)));
         SNOW_BRICK_STAIRS = register("snow_brick_stairs",
-                new ADSnowyStairBlock(ADBlocks.SNOW_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(SNOW_BRICKS)));
-        SNOW_BRICK_SLAB = register("snow_brick_slab", new ADSnowySlabBlock(AbstractBlock.Settings.copy(SNOW_BRICKS)));
+                new ADStairsBlock(ADBlocks.SNOW_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(SNOW_BRICKS)));
+        SNOW_BRICK_SLAB = register("snow_brick_slab", new SlabBlock(AbstractBlock.Settings.copy(SNOW_BRICKS)));
         SNOW_BRICK_WALL = register("snow_brick_wall", new WallBlock(AbstractBlock.Settings.copy(SNOW_BRICKS)));
         PURPLE_MUSHROOM = register("purple_mushroom",
                 new MushroomPlantBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM),
@@ -883,10 +883,10 @@ public class ADBlocks {
         BAUXITE_BRICK_WALL = register("bauxite_brick_wall",
                 new WallBlock(AbstractBlock.Settings.copy(BAUXITE_BRICKS)));
         SNOW_SLAB = register("snow_slab",
-                new ADSnowySlabBlock(AbstractBlock.Settings.of(Material.SNOW_BLOCK).requiresTool()
+                new SlabBlock(AbstractBlock.Settings.of(Material.SNOW_BLOCK).requiresTool()
                         .strength(0.2F).sounds(BlockSoundGroup.SNOW)));
         SNOW_STAIRS = register("snow_stairs",
-                new ADSnowyStairBlock(Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(SNOW_SLAB)));
+                new ADStairsBlock(Blocks.SNOW_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(SNOW_SLAB)));
         SNOW_WALL = register("snow_wall",
                 new WallBlock(AbstractBlock.Settings.copy(SNOW_SLAB)));
         TWISTED_NETHER_BRICKS = register("twisted_nether_bricks",

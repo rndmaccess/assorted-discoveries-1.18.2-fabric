@@ -10,9 +10,12 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import rndm_access.assorteddiscoveries.common.core.ADBlockTags;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
+import rndm_access.assorteddiscoveries.common.util.ADBlockStateUtil;
 
 import java.util.Random;
 
@@ -28,7 +31,7 @@ public class ADGrassSlabBlock extends SlabBlock {
         BlockPos abovePos = pos.up();
         BlockState aboveState = world.getBlockState(abovePos);
 
-        if (aboveState.isIn(BlockTags.SNOW)) {
+        if (aboveState.isIn(BlockTags.SNOW) || aboveState.isIn(ADBlockTags.SNOW_STAIRS) || aboveState.isIn(ADBlockTags.SNOW_SLABS)) {
             return true;
         } else if (aboveState.getFluidState().getLevel() == 8) {
             return false;
@@ -38,19 +41,25 @@ public class ADGrassSlabBlock extends SlabBlock {
     }
 
     public BlockState getPlacementState(ItemPlacementContext context) {
-        BlockState blockState = context.getWorld().getBlockState(context.getBlockPos().up());
-        return super.getPlacementState(context).with(SNOWY, isSnow(blockState));
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos().up();
+        BlockState blockState = context.getWorld().getBlockState(blockPos);
+        return super.getPlacementState(context).with(SNOWY, isSnow(world, blockPos, blockState));
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
                                                 WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return direction == Direction.UP
-                ? super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(SNOWY, isSnow(neighborState))
+                ? super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(SNOWY, isSnow(world, neighborPos, neighborState))
                 : state;
     }
 
-    public static boolean isSnow(BlockState state) {
+    public static boolean isSnow(WorldAccess world, BlockPos pos, BlockState state) {
+
+        if(ADBlockStateUtil.isSnowSlabOrStairs(world, pos, state)) {
+            return true;
+        }
         return state.isIn(BlockTags.SNOW);
     }
 

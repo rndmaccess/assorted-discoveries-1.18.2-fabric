@@ -14,6 +14,8 @@ public class ADBlockTags {
     public static final TagKey<Block> PLANTER_BOXES;
     public static final TagKey<Block> NETHER_PLANTER_BOXES;
     public static final TagKey<Block> DIRT_SLABS;
+    public static final TagKey<Block> SNOW_SLABS;
+    public static final TagKey<Block> SNOW_STAIRS;
 
     /**
      * @param path The name of the tag.
@@ -32,5 +34,7 @@ public class ADBlockTags {
         PLANTER_BOXES = of("planter_boxes");
         NETHER_PLANTER_BOXES = of("nether_planter_boxes");
         DIRT_SLABS = of("dirt_slabs");
+        SNOW_SLABS = of("snow_slabs");
+        SNOW_STAIRS = of("snow_stairs");
     }
 }

@@ -12,7 +12,9 @@
     "ADBlockMixin",
     "ADEntityAccessor",
     "ADLivingEntityMixin",
-    "ADBoneMealItemMixin"
+    "ADBoneMealItemMixin",
+    "ADSnowyBlockMixin",
+    "ADSpreadableBlockMixin"
   ],
   "client": [],
   "injectors": {

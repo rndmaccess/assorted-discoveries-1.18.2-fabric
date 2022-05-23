@@ -32,8 +32,9 @@ public class ADDirtSlabBlock extends SlabBlock implements Fertilizable {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        BlockState blockState = world.getBlockState(pos.up());
+        BlockPos blockPos = pos.up();
+        BlockState blockState = world.getBlockState(blockPos);
         world.setBlockState(pos, ADBlocks.GRASS_SLAB.getDefaultState().with(TYPE, state.get(TYPE))
-                .with(ADGrassSlabBlock.SNOWY, ADGrassSlabBlock.isSnow(blockState)));
+                .with(ADGrassSlabBlock.SNOWY, ADGrassSlabBlock.isSnow(world, blockPos, blockState)));
     }
 }

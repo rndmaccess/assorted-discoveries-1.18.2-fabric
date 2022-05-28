@@ -6,19 +6,19 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import rndm_access.assorteddiscoveries.common.util.ADPlushOutlineShapeBuilder;
 
-public class ADCowPlushBlock extends ADDirectionalPlushBlock {
+public class ADVillagerPlushBlock extends ADDirectionalPlushBlock {
     protected static final VoxelShape NORTH_SHAPE;
 
-    public ADCowPlushBlock(AbstractBlock.Settings settings) {
+    public ADVillagerPlushBlock(AbstractBlock.Settings settings) {
         super(settings, NORTH_SHAPE);
     }
 
-    public ADCowPlushBlock(AbstractBlock.Settings settings, VoxelShape northShape) {
+    public ADVillagerPlushBlock(AbstractBlock.Settings settings, VoxelShape northShape) {
         super(settings, northShape);
     }
 
     static {
-        NORTH_SHAPE = new ADPlushOutlineShapeBuilder().addCowTorsoShape().addCowLegShapes().addCowHeadShape()
-                .addCowSnoutShape().addCowEyeShapes().addCowHornShapes().addCowUtterShape().build();
+        NORTH_SHAPE = new ADPlushOutlineShapeBuilder().addVillagerArmShape().addVillagerFootShapes()
+                .addVillagerHeadShape().addVillagerNoseShape().addVillagerTorsoShape().addVillagerEyeShapes().build();
     }
 }

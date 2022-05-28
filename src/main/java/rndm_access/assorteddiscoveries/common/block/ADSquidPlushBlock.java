@@ -4,63 +4,39 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
-public class ADSquidPlushBlock extends ADAbstractPlushBlock {
-    protected static final VoxelShape BODY_SHAPE;
-    protected static final VoxelShape MOUTH_SHAPE;
-    protected static final VoxelShape LEG1_SHAPE;
-    protected static final VoxelShape LEG2_SHAPE;
-    protected static final VoxelShape LEG3_SHAPE;
-    protected static final VoxelShape LEG4_SHAPE;
-    protected static final VoxelShape LEG5_SHAPE;
-    protected static final VoxelShape LEG6_SHAPE;
-    protected static final VoxelShape LEG7_SHAPE;
-    protected static final VoxelShape LEG8_SHAPE;
-    protected static final VoxelShape LEG9_SHAPE;
-    protected static final VoxelShape LEG10_SHAPE;
-    protected static final VoxelShape LEG11_SHAPE;
-    protected static final VoxelShape LEG12_SHAPE;
-    protected static final VoxelShape TOOTH1_SHAPE;
-    protected static final VoxelShape TOOTH2_SHAPE;
-    protected static final VoxelShape TOOTH3_SHAPE;
-    protected static final VoxelShape TOOTH4_SHAPE;
-    protected static final VoxelShape TOOTH5_SHAPE;
-    protected static final VoxelShape TOOTH6_SHAPE;
-    protected static final VoxelShape TOOTH7_SHAPE;
-    protected static final VoxelShape TOOTH8_SHAPE;
-    protected static final VoxelShape NORTH_RIGHT_EYE_SHAPE;
-    protected static final VoxelShape NORTH_LEFT_EYE_SHAPE;
-    protected static final VoxelShape LEGS_SHAPE;
-    protected static final VoxelShape TEETH_SHAPE;
-    protected static final VoxelShape NORTH_EYES_SHAPE;
-    protected static final VoxelShape NORTH_SHAPE;
-    protected static final VoxelShape SOUTH_SHAPE;
-    protected static final VoxelShape WEST_SHAPE;
-    protected static final VoxelShape EAST_SHAPE;
+public class ADSquidPlushBlock extends ADDirectionalPlushBlock {
+    private static final VoxelShape BODY_SHAPE;
+    private static final VoxelShape MOUTH_SHAPE;
+    private static final VoxelShape LEG1_SHAPE;
+    private static final VoxelShape LEG2_SHAPE;
+    private static final VoxelShape LEG3_SHAPE;
+    private static final VoxelShape LEG4_SHAPE;
+    private static final VoxelShape LEG5_SHAPE;
+    private static final VoxelShape LEG6_SHAPE;
+    private static final VoxelShape LEG7_SHAPE;
+    private static final VoxelShape LEG8_SHAPE;
+    private static final VoxelShape LEG9_SHAPE;
+    private static final VoxelShape LEG10_SHAPE;
+    private static final VoxelShape LEG11_SHAPE;
+    private static final VoxelShape LEG12_SHAPE;
+    private static final VoxelShape TOOTH1_SHAPE;
+    private static final VoxelShape TOOTH2_SHAPE;
+    private static final VoxelShape TOOTH3_SHAPE;
+    private static final VoxelShape TOOTH4_SHAPE;
+    private static final VoxelShape TOOTH5_SHAPE;
+    private static final VoxelShape TOOTH6_SHAPE;
+    private static final VoxelShape TOOTH7_SHAPE;
+    private static final VoxelShape TOOTH8_SHAPE;
+    private static final VoxelShape NORTH_RIGHT_EYE_SHAPE;
+    private static final VoxelShape NORTH_LEFT_EYE_SHAPE;
+    private static final VoxelShape LEGS_SHAPE;
+    private static final VoxelShape TEETH_SHAPE;
+    private static final VoxelShape NORTH_EYES_SHAPE;
+    private static final VoxelShape NORTH_SHAPE;
 
     public ADSquidPlushBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
-
-    @Override
-    protected VoxelShape getNorthOutlineShape() {
-        return NORTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getSouthOutlineShape() {
-        return SOUTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getWestOutlineShape() {
-        return WEST_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getEastOutlineShape() {
-        return EAST_SHAPE;
+        super(settings, NORTH_SHAPE);
     }
 
     static {
@@ -95,8 +71,5 @@ public class ADSquidPlushBlock extends ADAbstractPlushBlock {
         NORTH_EYES_SHAPE = VoxelShapes.union(NORTH_RIGHT_EYE_SHAPE, NORTH_LEFT_EYE_SHAPE);
         NORTH_SHAPE = VoxelShapes.union(BODY_SHAPE, MOUTH_SHAPE, LEGS_SHAPE, TEETH_SHAPE,
                 NORTH_EYES_SHAPE);
-        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

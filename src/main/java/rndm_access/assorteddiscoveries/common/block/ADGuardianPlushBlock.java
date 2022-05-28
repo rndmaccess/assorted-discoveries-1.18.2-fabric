@@ -4,50 +4,26 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
-public class ADGuardianPlushBlock extends ADAbstractPlushBlock {
-    protected static final VoxelShape NORTH_BODY;
-    protected static final VoxelShape NORTH_TAIL1;
-    protected static final VoxelShape NORTH_TAIL2;
-    protected static final VoxelShape NORTH_FIN1;
-    protected static final VoxelShape NORTH_FIN2;
-    protected static final VoxelShape NORTH_EYE_BALL;
-    protected static final VoxelShape NORTH_EYE_BROW;
-    protected static final VoxelShape NORTH_LEFT_TOP_HORN;
-    protected static final VoxelShape NORTH_LEFT_BOTTOM_HORN;
-    protected static final VoxelShape NORTH_RIGHT_TOP_HORN;
-    protected static final VoxelShape NORTH_RIGHT_BOTTOM_HORN;
-    protected static final VoxelShape NORTH_TAIL;
-    protected static final VoxelShape NORTH_EYE;
-    protected static final VoxelShape NORTH_HORNS;
-    protected static final VoxelShape NORTH_SHAPE;
-    protected static final VoxelShape SOUTH_SHAPE;
-    protected static final VoxelShape WEST_SHAPE;
-    protected static final VoxelShape EAST_SHAPE;
+public class ADGuardianPlushBlock extends ADDirectionalPlushBlock {
+    private static final VoxelShape NORTH_BODY;
+    private static final VoxelShape NORTH_TAIL1;
+    private static final VoxelShape NORTH_TAIL2;
+    private static final VoxelShape NORTH_FIN1;
+    private static final VoxelShape NORTH_FIN2;
+    private static final VoxelShape NORTH_EYE_BALL;
+    private static final VoxelShape NORTH_EYE_BROW;
+    private static final VoxelShape NORTH_LEFT_TOP_HORN;
+    private static final VoxelShape NORTH_LEFT_BOTTOM_HORN;
+    private static final VoxelShape NORTH_RIGHT_TOP_HORN;
+    private static final VoxelShape NORTH_RIGHT_BOTTOM_HORN;
+    private static final VoxelShape NORTH_TAIL;
+    private static final VoxelShape NORTH_EYE;
+    private static final VoxelShape NORTH_HORNS;
+    private static final VoxelShape NORTH_SHAPE;
 
     public ADGuardianPlushBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
-
-    @Override
-    protected VoxelShape getNorthOutlineShape() {
-        return NORTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getSouthOutlineShape() {
-        return SOUTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getWestOutlineShape() {
-        return WEST_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getEastOutlineShape() {
-        return EAST_SHAPE;
+        super(settings, NORTH_SHAPE);
     }
 
     static {
@@ -67,8 +43,5 @@ public class ADGuardianPlushBlock extends ADAbstractPlushBlock {
         NORTH_HORNS = VoxelShapes.union(NORTH_LEFT_TOP_HORN, NORTH_LEFT_BOTTOM_HORN, NORTH_RIGHT_TOP_HORN,
                 NORTH_RIGHT_BOTTOM_HORN);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY, NORTH_TAIL, NORTH_EYE, NORTH_HORNS);
-        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

@@ -546,11 +546,11 @@ public class ADBlocks {
         BEE_PLUSH = register("bee_plush",
                 new ADBeePlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         PLAINS_VILLAGER_PLUSH = register("plains_villager_plush",
-                new ADBaseVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
+                new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         DESERT_VILLAGER_PLUSH = register("desert_villager_plush",
                 new ADDesertVillagerPlushBlock(AbstractBlock.Settings.copy(RED_CAT_PLUSH)));
         JUNGLE_VILLAGER_PLUSH = register("jungle_villager_plush",
-                new ADBaseVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
+                new ADVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         SAVANNA_VILLAGER_PLUSH = register("savanna_villager_plush",
                 new ADSavannaVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         SNOW_VILLAGER_PLUSH = register("snow_villager_plush",
@@ -558,19 +558,19 @@ public class ADBlocks {
         SWAMP_VILLAGER_PLUSH = register("swamp_villager_plush",
                 new ADSwampVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH)));
         TAIGA_VILLAGER_PLUSH = register("taiga_villager_plush",
-                new ADBaseVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
+                new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         CRIMSON_VILLAGER_PLUSH = register("crimson_villager_plush",
-                new ADBaseVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
+                new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         WARPED_VILLAGER_PLUSH = register("warped_villager_plush",
-                new ADBaseVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
+                new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         WANDERING_TRADER_PLUSH = register("wandering_trader_plush",
                 new ADWanderingTraderPlushBlock(AbstractBlock.Settings.copy(BLUE_SHEEP_PLUSH)));
         PLAINS_ZOMBIE_VILLAGER_PLUSH = register("plains_zombie_villager_plush",
-                new ADBaseZombieVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH)));
+                new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH)));
         DESERT_ZOMBIE_VILLAGER_PLUSH = register("desert_zombie_villager_plush",
                 new ADDesertZombieVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH)));
         JUNGLE_ZOMBIE_VILLAGER_PLUSH = register("jungle_zombie_villager_plush",
-                new ADBaseZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
+                new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         SAVANNA_ZOMBIE_VILLAGER_PLUSH = register("savanna_zombie_villager_plush",
                 new ADSavannaZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         SNOW_ZOMBIE_VILLAGER_PLUSH = register("snow_zombie_villager_plush",
@@ -578,11 +578,11 @@ public class ADBlocks {
         SWAMP_ZOMBIE_VILLAGER_PLUSH = register("swamp_zombie_villager_plush",
                 new ADSwampZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
         TAIGA_ZOMBIE_VILLAGER_PLUSH = register("taiga_zombie_villager_plush",
-                new ADBaseZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
+                new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         CRIMSON_ZOMBIE_VILLAGER_PLUSH = register("crimson_zombie_villager_plush",
-                new ADBaseZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
+                new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         WARPED_ZOMBIE_VILLAGER_PLUSH = register("warped_zombie_villager_plush",
-                new ADBaseZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
+                new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         WITCH_PLUSH = register("witch_plush",
                 new ADWitchPlushBlock(AbstractBlock.Settings.copy(ENDERMAN_PLUSH)));
         WOLF_PLUSH = register("wolf_plush",

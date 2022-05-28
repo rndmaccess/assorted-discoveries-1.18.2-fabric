@@ -16,6 +16,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
+import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
 /**
  * A base class designed to help create tall plush blocks.
@@ -23,14 +24,39 @@ import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
  * @author Ryan
  *
  */
-public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
+public class ADDirectionalTallPlushBlock extends ADPlushBlock {
     public static final IntProperty STACK_SIZE;
     public static final EnumProperty<DoubleBlockHalf> HALF;
+    private final VoxelShape bottomNorthShape;
+    private final VoxelShape bottomSouthShape;
+    private final VoxelShape bottomWestShape;
+    private final VoxelShape bottomEastShape;
+    private final VoxelShape middleNorthShape;
+    private final VoxelShape middleSouthShape;
+    private final VoxelShape middleWestShape;
+    private final VoxelShape middleEastShape;
+    private final VoxelShape topNorthShape;
+    private final VoxelShape topSouthShape;
+    private final VoxelShape topWestShape;
+    private final VoxelShape topEastShape;
 
-    public ADAbstractTallPlushBlock(AbstractBlock.Settings settings) {
+    public ADDirectionalTallPlushBlock(AbstractBlock.Settings settings, VoxelShape bottomNorthShape,
+                                       VoxelShape middleNorthShape, VoxelShape topNorthShape) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER)
                 .with(STACK_SIZE, 1).with(WATERLOGGED, false));
+        this.bottomNorthShape = bottomNorthShape;
+        this.bottomSouthShape = ADVoxelShapeHelper.rotate180Y(bottomNorthShape);
+        this.bottomWestShape = ADVoxelShapeHelper.rotate270Y(bottomNorthShape);
+        this.bottomEastShape = ADVoxelShapeHelper.rotate90Y(bottomNorthShape);
+        this.middleNorthShape = middleNorthShape;
+        this.middleSouthShape = ADVoxelShapeHelper.rotate180Y(middleNorthShape);
+        this.middleWestShape = ADVoxelShapeHelper.rotate270Y(middleNorthShape);
+        this.middleEastShape = ADVoxelShapeHelper.rotate90Y(middleNorthShape);
+        this.topNorthShape = topNorthShape;
+        this.topSouthShape = ADVoxelShapeHelper.rotate180Y(topNorthShape);
+        this.topWestShape = ADVoxelShapeHelper.rotate270Y(topNorthShape);
+        this.topEastShape = ADVoxelShapeHelper.rotate90Y(topNorthShape);
     }
 
     private void placeTop(World world, BlockPos pos, BlockState state) {
@@ -78,51 +104,29 @@ public abstract class ADAbstractTallPlushBlock extends ADPlushBlock {
         return state;
     }
 
-    // Get the bottom outline shapes.
-    public abstract VoxelShape getBottomNorthOutlineShape();
-    public abstract VoxelShape getBottomSouthOutlineShape();
-    public abstract VoxelShape getBottomWestOutlineShape();
-    public abstract VoxelShape getBottomEastOutlineShape();
-
-    // Get the middle outline shapes.
-    public abstract VoxelShape getMiddleNorthOutlineShape();
-    public abstract VoxelShape getMiddleSouthOutlineShape();
-    public abstract VoxelShape getMiddleWestOutlineShape();
-    public abstract VoxelShape getMiddleEastOutlineShape();
-
-    // Get the top outline shapes.
-    public abstract VoxelShape getTopNorthOutlineShape();
-    public abstract VoxelShape getTopSouthOutlineShape();
-    public abstract VoxelShape getTopWestOutlineShape();
-    public abstract VoxelShape getTopEastOutlineShape();
-
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(FACING)) {
-            case NORTH -> getStackShape(state, getBottomNorthOutlineShape(),
-                    getMiddleNorthOutlineShape(), getTopNorthOutlineShape());
-            case SOUTH -> getStackShape(state, getBottomSouthOutlineShape(),
-                    getMiddleSouthOutlineShape(), getTopSouthOutlineShape());
-            case WEST -> getStackShape(state, getBottomWestOutlineShape(),
-                    getMiddleWestOutlineShape(), getTopWestOutlineShape());
-            default -> getStackShape(state, getBottomEastOutlineShape(),
-                    getMiddleEastOutlineShape(), getTopEastOutlineShape());
+            case NORTH -> getStackShape(state, this.bottomNorthShape, this.middleNorthShape, this.topNorthShape);
+            case SOUTH -> getStackShape(state, this.bottomSouthShape, this.middleSouthShape, this.topSouthShape);
+            case WEST -> getStackShape(state, this.bottomWestShape, this.middleWestShape, this.topWestShape);
+            default -> getStackShape(state, this.bottomEastShape, this.middleEastShape, this.topEastShape);
         };
     }
 
     /**
-     * @param state                The current state this block is in.
-     * @param stackSizeShapeBottom The shape for stack size 1.
-     * @param stackSizeShapeMiddle The shape for stack size 2.
-     * @param stackSizeShapeTop    The shape for the top of stack size 3.
+     * @param state       The current state this block is in.
+     * @param bottomShape The shape for stack size 1.
+     * @param middleShape The shape for stack size 2.
+     * @param topShape    The shape for the top of stack size 3.
      * @return The appropriate bounding box for the given state.
      */
-    protected static VoxelShape getStackShape(BlockState state, VoxelShape stackSizeShapeBottom,
-                                              VoxelShape stackSizeShapeMiddle, VoxelShape stackSizeShapeTop) {
+    protected static VoxelShape getStackShape(BlockState state, VoxelShape bottomShape,
+                                              VoxelShape middleShape, VoxelShape topShape) {
         return switch (state.get(STACK_SIZE)) {
-            case 1 -> stackSizeShapeBottom;
-            case 2 -> stackSizeShapeMiddle;
-            default -> (state.get(HALF) == DoubleBlockHalf.UPPER ? stackSizeShapeTop : stackSizeShapeMiddle);
+            case 1 -> bottomShape;
+            case 2 -> middleShape;
+            default -> ((state.get(HALF) == DoubleBlockHalf.UPPER) ? topShape : middleShape);
         };
     }
 

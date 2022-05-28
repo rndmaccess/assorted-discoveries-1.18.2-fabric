@@ -4,44 +4,17 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
+import rndm_access.assorteddiscoveries.common.util.ADPlushOutlineShapeBuilder;
 
-public class ADSavannaVillagerPlushBlock extends ADBaseVillagerPlushBlock {
-    protected static final VoxelShape NORTH_HEADBAND;
-    protected static final VoxelShape NORTH_SHAPE;
-    protected static final VoxelShape SOUTH_SHAPE;
-    protected static final VoxelShape WEST_SHAPE;
-    protected static final VoxelShape EAST_SHAPE;
+public class ADSavannaVillagerPlushBlock extends ADVillagerPlushBlock {
+    public static final VoxelShape NORTH_SHAPE;
 
     public ADSavannaVillagerPlushBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
-
-    @Override
-    public VoxelShape getNorthOutlineShape() {
-        return NORTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getSouthOutlineShape() {
-        return SOUTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getWestOutlineShape() {
-        return WEST_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getEastOutlineShape() {
-        return EAST_SHAPE;
+        super(settings, NORTH_SHAPE);
     }
 
     static {
-        NORTH_HEADBAND = Block.createCuboidShape(3.0D, 12.0D, 4.5D, 13.0D, 13.0D, 13.0D);
-        NORTH_SHAPE = VoxelShapes.union(ADBaseVillagerPlushBlock.NORTH_SHAPE, NORTH_HEADBAND);
-        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
+        NORTH_SHAPE = new ADPlushOutlineShapeBuilder(ADVillagerPlushBlock.NORTH_SHAPE)
+                .addSavannaVillagerHeadbandShape().build();
     }
 }

@@ -3,51 +3,27 @@ package rndm_access.assorteddiscoveries.common.block;
 import net.minecraft.block.*;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
-public class ADBatPlushBlock extends ADAbstractPlushBlock {
-    protected static final VoxelShape NORTH_BODY;
-    protected static final VoxelShape NORTH_HEAD;
-    protected static final VoxelShape NORTH_LEFT_EAR;
-    protected static final VoxelShape NORTH_RIGHT_EAR;
-    protected static final VoxelShape NORTH_LEFT_LEG;
-    protected static final VoxelShape NORTH_RIGHT_LEG;
-    protected static final VoxelShape NORTH_LEFT_WING;
-    protected static final VoxelShape NORTH_RIGHT_WING;
-    protected static final VoxelShape NORTH_MOUTH;
-    protected static final VoxelShape NORTH_RIGHT_EYE;
-    protected static final VoxelShape NORTH_LEFT_EYE;
-    protected static final VoxelShape NORTH_EARS;
-    protected static final VoxelShape NORTH_LEGS;
-    protected static final VoxelShape NORTH_WINGS;
-    protected static final VoxelShape NORTH_EYES;
-    protected static final VoxelShape NORTH_SHAPE;
-    protected static final VoxelShape SOUTH_SHAPE;
-    protected static final VoxelShape WEST_SHAPE;
-    protected static final VoxelShape EAST_SHAPE;
+public class ADBatPlushBlock extends ADDirectionalPlushBlock {
+    private static final VoxelShape NORTH_BODY;
+    private static final VoxelShape NORTH_HEAD;
+    private static final VoxelShape NORTH_LEFT_EAR;
+    private static final VoxelShape NORTH_RIGHT_EAR;
+    private static final VoxelShape NORTH_LEFT_LEG;
+    private static final VoxelShape NORTH_RIGHT_LEG;
+    private static final VoxelShape NORTH_LEFT_WING;
+    private static final VoxelShape NORTH_RIGHT_WING;
+    private static final VoxelShape NORTH_MOUTH;
+    private static final VoxelShape NORTH_RIGHT_EYE;
+    private static final VoxelShape NORTH_LEFT_EYE;
+    private static final VoxelShape NORTH_EARS;
+    private static final VoxelShape NORTH_LEGS;
+    private static final VoxelShape NORTH_WINGS;
+    private static final VoxelShape NORTH_EYES;
+    private static final VoxelShape NORTH_SHAPE;
 
     public ADBatPlushBlock(AbstractBlock.Settings settings) {
-        super(settings);
-    }
-
-    @Override
-    protected VoxelShape getNorthOutlineShape() {
-        return NORTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getSouthOutlineShape() {
-        return SOUTH_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getWestOutlineShape() {
-        return WEST_SHAPE;
-    }
-
-    @Override
-    protected VoxelShape getEastOutlineShape() {
-        return EAST_SHAPE;
+        super(settings, NORTH_SHAPE);
     }
 
     static {
@@ -68,8 +44,5 @@ public class ADBatPlushBlock extends ADAbstractPlushBlock {
         NORTH_EYES = VoxelShapes.union(NORTH_RIGHT_EYE, NORTH_LEFT_EYE);
         NORTH_SHAPE = VoxelShapes.union(NORTH_BODY, NORTH_HEAD, NORTH_MOUTH, NORTH_EARS,
                 NORTH_LEGS, NORTH_WINGS, NORTH_EYES);
-        SOUTH_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_SHAPE);
-        WEST_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_SHAPE);
-        EAST_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SHAPE);
     }
 }

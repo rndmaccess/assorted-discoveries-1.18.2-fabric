@@ -6,10 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.PlacedFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rndm_access.assorteddiscoveries.ADReference;
@@ -22,6 +19,10 @@ import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADOceanPla
 import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADOrePlacedFeatures;
 import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADTreePlacedFeatures;
 import rndm_access.assorteddiscoveries.common.worldgen.placed_feature.ADVegetationPlacedFeatures;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature_key.ADOceanPlacedFeatureKeys;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature_key.ADOrePlacedFeatureKeys;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature_key.ADTreePlacedFeatureKeys;
+import rndm_access.assorteddiscoveries.common.worldgen.placed_feature_key.ADVegetationPlacedFeatureKeys;
 
 public class AssortedDiscoveries implements ModInitializer {
 	public static final ItemGroup MOD_GROUP = FabricItemGroupBuilder.build(ADReference.makeId("mod_group"), () -> new ItemStack(ADItems.CATTAIL));
@@ -61,34 +62,21 @@ public class AssortedDiscoveries implements ModInitializer {
 	}
 
 	private static void addFeaturesToBiomes() {
-		RegistryKey<PlacedFeature> cattailPatch = of("cattail_patch");
-		RegistryKey<PlacedFeature> oreSmokyQuartz = of("ore_smoky_quartz");
-		RegistryKey<PlacedFeature> hugePurpleMushroom = of("huge_purple_mushroom_vegetation");
-		RegistryKey<PlacedFeature> patchBlueberryCommon = of("patch_blueberry_common");
-		RegistryKey<PlacedFeature> patchBlueberryRare = of("patch_blueberry_rare");
-		RegistryKey<PlacedFeature> patchWitchsCradleCommon = of("patch_witchs_cradle_common");
-		RegistryKey<PlacedFeature> patchWitchsCradleRare = of("patch_witchs_cradle_rare");
-		RegistryKey<PlacedFeature> snapdragonAndEnderGrass = of("snapdragon_and_ender_grass");
-
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.CATTAIL_PATCH),
-				GenerationStep.Feature.VEGETAL_DECORATION, cattailPatch);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADOceanPlacedFeatureKeys.CATTAIL_PATCH);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.ORE_SMOKY_QUARTZ),
-				GenerationStep.Feature.UNDERGROUND_ORES, oreSmokyQuartz);
+				GenerationStep.Feature.UNDERGROUND_ORES, ADOrePlacedFeatureKeys.ORE_SMOKY_QUARTZ);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.HUGE_PURPLE_MUSHROOM),
-				GenerationStep.Feature.VEGETAL_DECORATION, hugePurpleMushroom);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADTreePlacedFeatureKeys.HUGE_PURPLE_MUSHROOM_VEGETATION);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLUEBERRY_BUSH_PATCH),
-				GenerationStep.Feature.VEGETAL_DECORATION, patchBlueberryCommon);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADVegetationPlacedFeatureKeys.PATCH_BLUEBERRY_COMMON);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLUEBERRY_BUSH_PATCH),
-				GenerationStep.Feature.VEGETAL_DECORATION, patchBlueberryRare);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADVegetationPlacedFeatureKeys.PATCH_BLUEBERRY_RARE);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.WITCHS_CRADLE_PATCH),
-				GenerationStep.Feature.VEGETAL_DECORATION, patchWitchsCradleCommon);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADVegetationPlacedFeatureKeys.PATCH_WITCHS_CRADLE_COMMON);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.WITCHS_CRADLE_PATCH),
-				GenerationStep.Feature.VEGETAL_DECORATION, patchWitchsCradleRare);
+				GenerationStep.Feature.VEGETAL_DECORATION, ADVegetationPlacedFeatureKeys.PATCH_WITCHS_CRADLE_RARE);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.SNAPDRAGON_AND_ENDER_GRASS),
-				GenerationStep.Feature.VEGETAL_DECORATION, snapdragonAndEnderGrass);
-	}
-
-	private static RegistryKey<PlacedFeature> of(String path) {
-		return RegistryKey.of(Registry.PLACED_FEATURE_KEY, ADReference.makeId(path));
+				GenerationStep.Feature.VEGETAL_DECORATION, ADVegetationPlacedFeatureKeys.SNAPDRAGON_AND_ENDER_GRASS);
 	}
 }

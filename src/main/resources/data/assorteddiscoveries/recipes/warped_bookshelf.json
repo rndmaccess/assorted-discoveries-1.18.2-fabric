@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
     "XXX",
@@ -10,7 +10,7 @@
       "item": "minecraft:book"
     },
     "#": {
-      "item": "minecraft:warped_planks"
+      "item": "minecraft:warped_slab"
     }
   },
   "result": {

@@ -4,6 +4,6 @@
     "body": "block/white_wool",
     "eyes": "block/black_wool",
     "hooves": "block/light_gray_wool",
-    "hair": "block/light_gray_wool"
+    "tail": "block/light_gray_wool"
   }
 }

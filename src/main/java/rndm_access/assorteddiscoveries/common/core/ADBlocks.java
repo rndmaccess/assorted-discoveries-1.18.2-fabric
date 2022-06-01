@@ -426,7 +426,7 @@ public class ADBlocks {
         return Registry.register(Registry.BLOCK, ADReference.makeId(path), block);
     }
 
-    private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
+    private static ToIntFunction<BlockState> createLightLevelFromLitState(int litLevel) {
         return (state) -> state.get(Properties.LIT) ? litLevel : 0;
     }
 
@@ -485,7 +485,7 @@ public class ADBlocks {
                 new ADCatPlushBlock(AbstractBlock.Settings.copy(CHICKEN_PLUSH)));
         BLACK_CAT_PLUSH = register("black_cat_plush",
                 new ADCatPlushBlock(AbstractBlock.Settings.copy(ENDERMAN_PLUSH)));
-        PIG_PLUSH = register("pig_plush", new ADPigPlushBlock(
+        PIG_PLUSH = register("pig_plush", new ADAnimalPlushBlock(
                 AbstractBlock.Settings.of(Material.WOOL, MapColor.PINK).strength(0.2F).sounds(BlockSoundGroup.WOOL)));
         BROWN_RABBIT_PLUSH = register("brown_rabbit_plush",
                 new ADRabbitPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH)));
@@ -608,7 +608,7 @@ public class ADBlocks {
         ZOGLIN_PLUSH = register("zoglin_plush",
                 new ADHoglinPlushBlock(AbstractBlock.Settings.copy(PIG_PLUSH)));
         POLAR_BEAR_PLUSH = register("polar_bear_plush",
-                new ADHoglinPlushBlock(AbstractBlock.Settings.copy(CHICKEN_PLUSH)));
+                new ADPolarBearPlushBlock(AbstractBlock.Settings.copy(CHICKEN_PLUSH)));
         NETHER_SMOKY_QUARTZ_ORE = register("nether_smoky_quartz_ore",
                 new OreBlock(AbstractBlock.Settings.copy(Blocks.NETHER_QUARTZ_ORE)));
         SMOKY_QUARTZ_BLOCK = register("smoky_quartz_block",
@@ -1141,7 +1141,7 @@ public class ADBlocks {
                 new ADBloodKelpBlock(AbstractBlock.Settings.copy(Blocks.KELP)));
         BLOOD_KELP_PLANT = register("blood_kelp_plant",
                 new ADBloodKelpPlantBlock(AbstractBlock.Settings.copy(Blocks.KELP_PLANT)
-                        .luminance(createLightLevelFromLitBlockState(10))));
+                        .luminance(createLightLevelFromLitState(10))));
         CRIMSON_BOOKSHELF = register("crimson_bookshelf", netherBookshelfBlock(MapColor.DULL_PINK));
         WARPED_BOOKSHELF = register("warped_bookshelf", netherBookshelfBlock(MapColor.DARK_AQUA));
     }

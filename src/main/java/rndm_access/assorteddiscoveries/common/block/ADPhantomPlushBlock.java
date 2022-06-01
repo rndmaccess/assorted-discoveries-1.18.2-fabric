@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-public class ADPhantomPlushBlock extends ADDirectionalPlushBlock {
+public class ADPhantomPlushBlock extends ADAbstractDirectionalPlushBlock {
     private static final VoxelShape NORTH_WING_SHAPE;
     private static final VoxelShape NORTH_BODY_SHAPE;
     private static final VoxelShape NORTH_TAIL_SHAPE;
@@ -13,7 +13,12 @@ public class ADPhantomPlushBlock extends ADDirectionalPlushBlock {
     private static final VoxelShape NORTH_SHAPE;
 
     public ADPhantomPlushBlock(AbstractBlock.Settings settings) {
-        super(settings, NORTH_SHAPE);
+        super(settings);
+    }
+
+    @Override
+    public VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
     }
 
     static {

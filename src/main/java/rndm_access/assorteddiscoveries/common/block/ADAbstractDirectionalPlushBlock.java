@@ -13,19 +13,21 @@ import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
  * @author Ryan
  *
  */
-public class ADDirectionalPlushBlock extends ADPlushBlock {
+public abstract class ADAbstractDirectionalPlushBlock extends ADPlushBlock {
     private final VoxelShape northShape;
     private final VoxelShape southShape;
     private final VoxelShape westShape;
     private final VoxelShape eastShape;
 
-    public ADDirectionalPlushBlock(Settings settings, VoxelShape northShape) {
+    protected ADAbstractDirectionalPlushBlock(Settings settings) {
         super(settings);
-        this.northShape = northShape;
+        this.northShape = getNorthOutlineShape();
         this.southShape = ADVoxelShapeHelper.rotate180Y(northShape);
         this.westShape = ADVoxelShapeHelper.rotate270Y(northShape);
         this.eastShape = ADVoxelShapeHelper.rotate90Y(northShape);
     }
+
+    protected abstract VoxelShape getNorthOutlineShape();
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {

@@ -72,32 +72,28 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        int puffed_level = state.get(PUFFED);
+        int puffedLevel = state.get(PUFFED);
 
-        if (puffed_level < 2) {
+        if (puffedLevel < 2) {
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
                     0.8F + world.random.nextFloat() * 0.4F);
-            world.setBlockState(pos, state.with(PUFFED, puffed_level + 1), 3);
+            world.setBlockState(pos, state.with(PUFFED, puffedLevel + 1));
         } else {
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
                     0.8F + world.random.nextFloat() * 0.4F);
-            world.setBlockState(pos, state.with(PUFFED, 0), 3);
+            world.setBlockState(pos, state.with(PUFFED, 0));
         }
         return ActionResult.SUCCESS;
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        switch (state.get(FACING)) {
-            case NORTH:
-                return getPuffedShapes(state, SMALL_NORTH_SHAPE, MEDIUM_NORTH_SHAPE, LARGE_NORTH_SHAPE);
-            case SOUTH:
-                return getPuffedShapes(state, SMALL_SOUTH_SHAPE, MEDIUM_SOUTH_SHAPE, LARGE_SOUTH_SHAPE);
-            case WEST:
-                return getPuffedShapes(state, SMALL_WEST_SHAPE, MEDIUM_WEST_SHAPE, LARGE_WEST_SHAPE);
-            default:
-                return getPuffedShapes(state, SMALL_EAST_SHAPE, MEDIUM_EAST_SHAPE, LARGE_EAST_SHAPE);
-        }
+        return switch (state.get(FACING)) {
+            case NORTH -> getPuffedShapes(state, SMALL_NORTH_SHAPE, MEDIUM_NORTH_SHAPE, LARGE_NORTH_SHAPE);
+            case SOUTH -> getPuffedShapes(state, SMALL_SOUTH_SHAPE, MEDIUM_SOUTH_SHAPE, LARGE_SOUTH_SHAPE);
+            case WEST -> getPuffedShapes(state, SMALL_WEST_SHAPE, MEDIUM_WEST_SHAPE, LARGE_WEST_SHAPE);
+            default -> getPuffedShapes(state, SMALL_EAST_SHAPE, MEDIUM_EAST_SHAPE, LARGE_EAST_SHAPE);
+        };
     }
 
     /**
@@ -108,14 +104,11 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
      * @return The appropriate shape for the current state.
      */
     private static VoxelShape getPuffedShapes(BlockState state, VoxelShape smallShape, VoxelShape mediumShape, VoxelShape largeShape) {
-        switch (state.get(PUFFED)) {
-        case 0:
-            return smallShape;
-        case 1:
-            return mediumShape;
-        default:
-            return largeShape;
-        }
+        return switch (state.get(PUFFED)) {
+            case 0 -> smallShape;
+            case 1 -> mediumShape;
+            default -> largeShape;
+        };
     }
 
     @Override

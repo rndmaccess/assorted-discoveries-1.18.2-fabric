@@ -19,7 +19,7 @@ import net.minecraft.world.WorldAccess;
 public class ADPlushBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final BooleanProperty WATERLOGGED;
 
-    public ADPlushBlock(AbstractBlock.Settings settings) {
+    protected ADPlushBlock(AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(
                 this.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
@@ -30,11 +30,11 @@ public class ADPlushBlock extends HorizontalFacingBlock implements Waterloggable
         BlockPos pos = context.getBlockPos();
         World world = context.getWorld();
         FluidState fluidstate = world.getFluidState(pos);
-        boolean flag = fluidstate.isIn(FluidTags.WATER) && fluidstate.getLevel() == 8;
+        boolean isWaterSource = fluidstate.isIn(FluidTags.WATER) && fluidstate.isStill();
 
         for (Direction direction : context.getPlacementDirections()) {
             if (direction.getAxis().isHorizontal()) {
-                return this.getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, flag);
+                return this.getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, isWaterSource);
             }
         }
         return null;

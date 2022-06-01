@@ -4,11 +4,16 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 
-public class ADHorsePlushBlock extends ADDirectionalPlushBlock {
+public class ADHorsePlushBlock extends ADAbstractDirectionalPlushBlock {
     private static final VoxelShape NORTH_SHAPE;
 
     public ADHorsePlushBlock(AbstractBlock.Settings settings) {
-        super(settings, NORTH_SHAPE);
+        super(settings);
+    }
+
+    @Override
+    public VoxelShape getNorthOutlineShape() {
+        return NORTH_SHAPE;
     }
 
     static {

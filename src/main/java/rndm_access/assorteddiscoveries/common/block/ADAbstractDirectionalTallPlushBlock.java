@@ -24,7 +24,7 @@ import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
  * @author Ryan
  *
  */
-public class ADDirectionalTallPlushBlock extends ADPlushBlock {
+public abstract class ADAbstractDirectionalTallPlushBlock extends ADPlushBlock {
     public static final IntProperty STACK_SIZE;
     public static final EnumProperty<DoubleBlockHalf> HALF;
     private final VoxelShape bottomNorthShape;
@@ -40,32 +40,36 @@ public class ADDirectionalTallPlushBlock extends ADPlushBlock {
     private final VoxelShape topWestShape;
     private final VoxelShape topEastShape;
 
-    public ADDirectionalTallPlushBlock(AbstractBlock.Settings settings, VoxelShape bottomNorthShape,
-                                       VoxelShape middleNorthShape, VoxelShape topNorthShape) {
+    protected ADAbstractDirectionalTallPlushBlock(AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER)
                 .with(STACK_SIZE, 1).with(WATERLOGGED, false));
-        this.bottomNorthShape = bottomNorthShape;
+        this.bottomNorthShape = getNorthBottomOutlineShape();
         this.bottomSouthShape = ADVoxelShapeHelper.rotate180Y(bottomNorthShape);
         this.bottomWestShape = ADVoxelShapeHelper.rotate270Y(bottomNorthShape);
         this.bottomEastShape = ADVoxelShapeHelper.rotate90Y(bottomNorthShape);
-        this.middleNorthShape = middleNorthShape;
+        this.middleNorthShape = getNorthMiddleOutlineShape();
         this.middleSouthShape = ADVoxelShapeHelper.rotate180Y(middleNorthShape);
         this.middleWestShape = ADVoxelShapeHelper.rotate270Y(middleNorthShape);
         this.middleEastShape = ADVoxelShapeHelper.rotate90Y(middleNorthShape);
-        this.topNorthShape = topNorthShape;
+        this.topNorthShape = getNorthTopOutlineShape();
         this.topSouthShape = ADVoxelShapeHelper.rotate180Y(topNorthShape);
         this.topWestShape = ADVoxelShapeHelper.rotate270Y(topNorthShape);
         this.topEastShape = ADVoxelShapeHelper.rotate90Y(topNorthShape);
     }
 
-    private void placeTop(World world, BlockPos pos, BlockState state) {
-        FluidState fluidstate = world.getFluidState(pos);
-        boolean flag = fluidstate.isIn(FluidTags.WATER) && fluidstate.isStill();
+    protected abstract VoxelShape getNorthBottomOutlineShape();
+    protected abstract VoxelShape getNorthMiddleOutlineShape();
+    protected abstract VoxelShape getNorthTopOutlineShape();
 
-        if (state.get(STACK_SIZE).equals(2)) {
+    private static void placeTop(World world, BlockPos pos, BlockState state) {
+        FluidState fluidState = world.getFluidState(pos);
+        boolean isWaterSource = fluidState.isIn(FluidTags.WATER) && fluidState.isStill();
+        boolean isDoubleStacked = state.get(STACK_SIZE) == 2;
+
+        if (isDoubleStacked) {
             world.setBlockState(pos, state.with(HALF, DoubleBlockHalf.UPPER).with(STACK_SIZE, 3)
-                    .with(WATERLOGGED, flag), 3);
+                    .with(WATERLOGGED, isWaterSource), 3);
         }
     }
 
@@ -73,11 +77,11 @@ public class ADDirectionalTallPlushBlock extends ADPlushBlock {
     public BlockState getPlacementState(ItemPlacementContext context) {
         BlockPos pos = context.getBlockPos();
         World world = context.getWorld();
-        BlockState blockstate = world.getBlockState(pos);
+        BlockState state = world.getBlockState(pos);
 
-        if (blockstate.isOf(this)) {
-            placeTop(world, pos.up(), blockstate);
-            return blockstate.with(STACK_SIZE, Math.min(3, blockstate.get(STACK_SIZE) + 1));
+        if (state.isOf(this)) {
+            placeTop(world, pos.up(), state);
+            return state.with(STACK_SIZE, Math.min(3, state.get(STACK_SIZE) + 1));
         }
         return super.getPlacementState(context);
     }
@@ -86,10 +90,10 @@ public class ADDirectionalTallPlushBlock extends ADPlushBlock {
     public boolean canReplace(BlockState state, ItemPlacementContext context) {
         BlockPos topPos = context.getBlockPos().up();
         BlockState topState = context.getWorld().getBlockState(topPos);
-        int size = state.get(STACK_SIZE);
+        boolean isStackSame = context.getStack().isOf(this.asItem());
+        boolean isTopStateReplaceable = topState.getMaterial().isReplaceable();
 
-        // Let the player continue to stack plushes as long as the conditions are met.
-        return context.getStack().isOf(this.asItem()) && size < 3 && topState.getMaterial().isReplaceable();
+        return isStackSame && state.get(STACK_SIZE) < 3 && isTopStateReplaceable;
     }
 
     @Override

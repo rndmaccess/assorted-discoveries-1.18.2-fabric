@@ -71,6 +71,7 @@ public class ADBlocks {
     public static final Block SLIME_PLUSH;
     public static final Block SPIDER_PLUSH;
     public static final Block SQUID_PLUSH;
+    public static final Block GLOW_SQUID_PLUSH;
     public static final Block BEE_PLUSH;
     public static final Block PLAINS_VILLAGER_PLUSH;
     public static final Block DESERT_VILLAGER_PLUSH;
@@ -543,6 +544,8 @@ public class ADBlocks {
                 new ADSpiderPlushBlock(AbstractBlock.Settings.copy(ENDERMAN_PLUSH)));
         SQUID_PLUSH = register("squid_plush",
                 new ADSquidPlushBlock(AbstractBlock.Settings.copy(BLUE_SHEEP_PLUSH)));
+        GLOW_SQUID_PLUSH = register("glow_squid_plush",
+                new ADSquidPlushBlock(AbstractBlock.Settings.copy(LIGHT_BLUE_SHEEP_PLUSH).luminance((state) -> 10)));
         BEE_PLUSH = register("bee_plush",
                 new ADBeePlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH)));
         PLAINS_VILLAGER_PLUSH = register("plains_villager_plush",

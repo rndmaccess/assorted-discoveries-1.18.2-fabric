@@ -8,6 +8,10 @@ public abstract class ADAbstractHumanoidPlushBlock extends ADAbstractDirectional
         super(settings);
     }
 
+    /**
+     * Use the methods provided by this class to get specific parts of the plush outline shape.
+     */
+    @Deprecated
     @Override
     public VoxelShape getNorthOutlineShape() {
         return VoxelShapes.union(

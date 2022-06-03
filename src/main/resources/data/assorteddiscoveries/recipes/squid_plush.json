@@ -1,9 +1,9 @@
 {
   "type": "crafting_shaped",
   "pattern": [
-    "WBW",
-    "BIB",
-    "QbQ"
+    "BBB",
+    "bIb",
+    "B B"
   ],
   "key": {
     "B": {
@@ -11,12 +11,6 @@
     },
     "b": {
       "item": "minecraft:black_wool"
-    },
-    "W": {
-      "item": "minecraft:white_wool"
-    },
-    "Q": {
-      "item": "minecraft:quartz_slab"
     },
     "I": {
       "item": "minecraft:ink_sac"

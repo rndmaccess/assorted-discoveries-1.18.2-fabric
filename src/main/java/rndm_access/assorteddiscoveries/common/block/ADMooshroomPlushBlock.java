@@ -16,8 +16,8 @@ public class ADMooshroomPlushBlock extends ADCowPlushBlock {
     }
 
     @Override
-    public VoxelShape getNorthOutlineShape() {
-        return VoxelShapes.union(super.getNorthOutlineShape(), NORTH_HEAD_MUSHROOM_SHAPE);
+    protected VoxelShape getNorthOutlineHeadShape() {
+        return VoxelShapes.union(super.getNorthOutlineHeadShape(), NORTH_HEAD_MUSHROOM_SHAPE);
     }
 
     static {

@@ -4,6 +4,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.item.FoodComponents;
 import net.minecraft.util.registry.Registry;
 
 public class ADFoodComponents {
@@ -31,7 +32,7 @@ public class ADFoodComponents {
 
     private static FoodComponent magicStew(int hunger, StatusEffect effect) {
         return new FoodComponent.Builder().hunger(hunger).saturationModifier(0.6F)
-                .statusEffect(new StatusEffectInstance(effect, 1000, 0, true, true), 1.0F).build();
+                .statusEffect(new StatusEffectInstance(effect, 1000, 0), 1.0F).build();
     }
 
     static {

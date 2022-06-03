@@ -18,15 +18,9 @@ public class ADCreeperPlushBlock extends ADAnimalPlushBlock {
     private static final VoxelShape NORTH_FOOT_SHAPES;
     private static final VoxelShape NORTH_EYE_SHAPES;
     private static final VoxelShape NORTH_MOUTH_SHAPES;
-    private static final VoxelShape NORTH_SHAPES;
 
     public ADCreeperPlushBlock(AbstractBlock.Settings settings) {
         super(settings);
-    }
-
-    @Override
-    public VoxelShape getNorthOutlineShape() {
-        return NORTH_SHAPES;
     }
 
     @Override
@@ -67,7 +61,5 @@ public class ADCreeperPlushBlock extends ADAnimalPlushBlock {
         NORTH_FOOT_SHAPES = VoxelShapes.union(NORTH_BACK_FOOT_SHAPE, NORTH_FRONT_FOOT_SHAPE);
         NORTH_EYE_SHAPES = VoxelShapes.union(NORTH_LEFT_EYE_SHAPE, NORTH_RIGHT_EYE_SHAPE);
         NORTH_MOUTH_SHAPES = VoxelShapes.union(NORTH_MIDDLE_MOUTH_SHAPE, NORTH_RIGHT_MOUTH_SHAPE, NORTH_LEFT_MOUTH_SHAPE);
-        NORTH_SHAPES = VoxelShapes.union(NORTH_HEAD_SHAPE, NORTH_TORSO_SHAPE, NORTH_FOOT_SHAPES,
-                NORTH_EYE_SHAPES, NORTH_MOUTH_SHAPES);
     }
 }

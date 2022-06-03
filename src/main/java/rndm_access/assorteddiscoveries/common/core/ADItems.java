@@ -66,6 +66,7 @@ public class ADItems {
     public static final Item SLIME_PLUSH;
     public static final Item SPIDER_PLUSH;
     public static final Item SQUID_PLUSH;
+    public static final Item GLOW_SQUID_PLUSH;
     public static final Item BEE_PLUSH;
     public static final Item PLAINS_VILLAGER_PLUSH;
     public static final Item DESERT_VILLAGER_PLUSH;
@@ -476,6 +477,7 @@ public class ADItems {
         SLIME_PLUSH = registerBlockItem(ADBlocks.SLIME_PLUSH);
         SPIDER_PLUSH = registerBlockItem(ADBlocks.SPIDER_PLUSH);
         SQUID_PLUSH = registerBlockItem(ADBlocks.SQUID_PLUSH);
+        GLOW_SQUID_PLUSH = registerBlockItem(ADBlocks.GLOW_SQUID_PLUSH);
         BEE_PLUSH = registerBlockItem(ADBlocks.BEE_PLUSH);
         PLAINS_VILLAGER_PLUSH = registerBlockItem(ADBlocks.PLAINS_VILLAGER_PLUSH);
         DESERT_VILLAGER_PLUSH = registerBlockItem(ADBlocks.DESERT_VILLAGER_PLUSH);

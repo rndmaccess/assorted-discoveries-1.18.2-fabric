@@ -83,8 +83,6 @@ public class ADPlanterBoxBlock extends Block {
             } else if (west) {
                 if (south) {
                     return NORTH_SOUTH_WEST_BOX_SHAPE;
-                } else if (east) {
-                    return NORTH_WEST_EAST_BOX_SHAPE;
                 } else {
                     return NORTH_WEST_BOX_SHAPE;
                 }
@@ -223,26 +221,26 @@ public class ADPlanterBoxBlock extends Block {
 
         INSIDE_NORTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 13.0);
         NORTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SHAPE);
-        SOUTH_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_BOX_SHAPE);
-        WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_BOX_SHAPE);
-        EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_BOX_SHAPE);
+        SOUTH_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_BOX_SHAPE);
+        WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_BOX_SHAPE);
+        EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_BOX_SHAPE);
 
         INSIDE_NORTH_SOUTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 16.0);
         NORTH_SOUTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SOUTH_SHAPE);
-        EAST_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_SOUTH_BOX_SHAPE);
+        EAST_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_SOUTH_BOX_SHAPE);
 
         INSIDE_NORTH_EAST_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 16.0, 16.0, 13.0);
         NORTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_EAST_SHAPE);
 
-        SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_EAST_BOX_SHAPE);
-        NORTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_EAST_BOX_SHAPE);
-        SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_EAST_BOX_SHAPE);
+        SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_EAST_BOX_SHAPE);
+        NORTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_EAST_BOX_SHAPE);
+        SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_EAST_BOX_SHAPE);
 
         INSIDE_NORTH_WEST_EAST_SHAPE = Block.createCuboidShape(0.0, 15.0, 0.0, 16.0, 16.0, 13.0);
         NORTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_WEST_EAST_SHAPE);
 
-        SOUTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate180Y(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotate270Y(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotate90Y(NORTH_WEST_EAST_BOX_SHAPE);
+        SOUTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_WEST_EAST_BOX_SHAPE);
+        NORTH_SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_WEST_EAST_BOX_SHAPE);
+        NORTH_SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_WEST_EAST_BOX_SHAPE);
     }
 }

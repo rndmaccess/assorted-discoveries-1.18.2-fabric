@@ -45,17 +45,17 @@ public abstract class ADAbstractDirectionalTallPlushBlock extends ADPlushBlock {
         this.setDefaultState(this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER)
                 .with(STACK_SIZE, 1).with(WATERLOGGED, false));
         this.bottomNorthShape = getNorthBottomOutlineShape();
-        this.bottomSouthShape = ADVoxelShapeHelper.rotate180Y(bottomNorthShape);
-        this.bottomWestShape = ADVoxelShapeHelper.rotate270Y(bottomNorthShape);
-        this.bottomEastShape = ADVoxelShapeHelper.rotate90Y(bottomNorthShape);
+        this.bottomSouthShape = ADVoxelShapeHelper.rotateSouth(bottomNorthShape);
+        this.bottomWestShape = ADVoxelShapeHelper.rotateWest(bottomNorthShape);
+        this.bottomEastShape = ADVoxelShapeHelper.rotateEast(bottomNorthShape);
         this.middleNorthShape = getNorthMiddleOutlineShape();
-        this.middleSouthShape = ADVoxelShapeHelper.rotate180Y(middleNorthShape);
-        this.middleWestShape = ADVoxelShapeHelper.rotate270Y(middleNorthShape);
-        this.middleEastShape = ADVoxelShapeHelper.rotate90Y(middleNorthShape);
+        this.middleSouthShape = ADVoxelShapeHelper.rotateSouth(middleNorthShape);
+        this.middleWestShape = ADVoxelShapeHelper.rotateWest(middleNorthShape);
+        this.middleEastShape = ADVoxelShapeHelper.rotateEast(middleNorthShape);
         this.topNorthShape = getNorthTopOutlineShape();
-        this.topSouthShape = ADVoxelShapeHelper.rotate180Y(topNorthShape);
-        this.topWestShape = ADVoxelShapeHelper.rotate270Y(topNorthShape);
-        this.topEastShape = ADVoxelShapeHelper.rotate90Y(topNorthShape);
+        this.topSouthShape = ADVoxelShapeHelper.rotateSouth(topNorthShape);
+        this.topWestShape = ADVoxelShapeHelper.rotateWest(topNorthShape);
+        this.topEastShape = ADVoxelShapeHelper.rotateEast(topNorthShape);
     }
 
     protected abstract VoxelShape getNorthBottomOutlineShape();

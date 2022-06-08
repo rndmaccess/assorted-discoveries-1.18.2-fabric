@@ -1,19 +1,12 @@
 package rndm_access.assorteddiscoveries.common.util;
 
-import java.util.List;
-
-import com.mojang.datafixers.util.Pair;
-
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
 public final class ADVoxelShapeHelper {
-    private static final double CENTER = 0.5;
-    private static final double NINETY_DEGREES = Math.toRadians(90);
-    private static final double ONE_HUNDRED_EIGHTY_DEGREES = Math.toRadians(180);
-    private static final double TWO_HUNDRED_SEVENTY_DEGREES = Math.toRadians(270);
 
     private ADVoxelShapeHelper() {
     }
@@ -29,73 +22,57 @@ public final class ADVoxelShapeHelper {
         return shape;
     }
 
-    /**
-     * @param shape The shape to rotate.
-     * @return The shape passed rotated 90 radians on the Y axis.
-     */
-    public static VoxelShape rotate90Y(VoxelShape shape) {
-        return rotateY(NINETY_DEGREES, shape);
+    public static VoxelShape rotateSouth(VoxelShape source) {
+        return rotate(source, Direction.SOUTH);
     }
 
-    /**
-     * @param shape The shape to rotate.
-     * @return The shape passed rotated 180 radians on the Y axis.
-     */
-    public static VoxelShape rotate180Y(VoxelShape shape) {
-        return rotateY(ONE_HUNDRED_EIGHTY_DEGREES, shape);
+    public static VoxelShape rotateWest(VoxelShape source) {
+        return rotate(source, Direction.WEST);
     }
 
-    /**
-     * @param shape The shape to rotate.
-     * @return The shape passed rotated 270 radians on the Y axis.
-     */
-    public static VoxelShape rotate270Y(VoxelShape shape) {
-        return rotateY(TWO_HUNDRED_SEVENTY_DEGREES, shape);
+    public static VoxelShape rotateEast(VoxelShape source) {
+        return rotate(source, Direction.EAST);
     }
 
-    /**
-     * Rotates each box the number of radians on the Y axis.
-     *
-     * @param radians The degree to rotate.
-     * @param shape   The shape to rotate.
-     * @return A VoxelShape that contains all the boxes rotated.
-     */
-    private static VoxelShape rotateY(double radians, VoxelShape shape) {
-        VoxelShape rotatedShapes = VoxelShapes.empty();
-        List<Box> boxList = shape.getBoundingBoxes();
+    private static VoxelShape rotate(VoxelShape source, Direction direction) {
+        VoxelShape rotatedShape = VoxelShapes.empty();
 
-        for (Box box : boxList) {
-            Pair<Double, Double> min = rotatePoint(box.minX, box.minZ, radians);
-            Pair<Double, Double> max = rotatePoint(box.maxX, box.maxZ, radians);
-
-            // Store the x and z coordinates in two pairs
-            Pair<Double, Double> x = Pair.of(min.getFirst(), max.getFirst());
-            Pair<Double, Double> z = Pair.of(min.getSecond(), max.getSecond());
-
-            // Swap the minimum and maximum x or z coordinate if the minimum is greater than
-            // the maximum.
-            if (x.getFirst() > x.getSecond()) {
-                x = x.swap();
-            }
-            if (z.getFirst() > z.getSecond()) {
-                z = z.swap();
-            }
-
-            // Build the new box
-            VoxelShape rotated = VoxelShapes.cuboid(x.getFirst(), box.minY, z.getFirst(), x.getSecond(), box.maxY,
-                    z.getSecond());
-
-            rotatedShapes = VoxelShapes.union(rotatedShapes, rotated);
+        for(Box box : source.getBoundingBoxes()) {
+            VoxelShape tempShape = rotateValues(direction, box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
+            rotatedShape = VoxelShapes.union(tempShape, rotatedShape);
         }
-        return rotatedShapes;
+        return rotatedShape;
     }
 
-    private static Pair<Double, Double> rotatePoint(double p1, double p2, double rotation) {
-        return rotatePoint(p1, p2, rotation, CENTER);
-    }
+    private static VoxelShape rotateValues(Direction direction, double minX, double minY, double minZ, double maxX,
+                                           double maxY, double maxZ) {
+        double tempMinX = minX;
+        double tempMaxX = maxX;
+        double tempMinZ = minZ;
 
-    private static Pair<Double, Double> rotatePoint(double p1, double p2, double rotation, double center) {
-        return Pair.of(((p1 - center) * Math.cos(rotation) - ((p2 - center) * Math.sin(rotation))) + center,
-                ((p1 - center) * Math.sin(rotation)) + ((p2 - center) * Math.cos(rotation)) + center);
+        switch(direction)
+        {
+            case EAST:
+                minX = 1.0F - maxZ;
+                minZ = tempMinX;
+                maxX = 1.0F - tempMinZ;
+                maxZ = tempMaxX;
+                break;
+            case SOUTH:
+                minX = 1.0F - maxX;
+                minZ = 1.0F - maxZ;
+                maxX = 1.0F - tempMinX;
+                maxZ = 1.0F - tempMinZ;
+                break;
+            case WEST:
+                minX = minZ;
+                minZ = 1.0F - maxX;
+                maxX = maxZ;
+                maxZ = 1.0F - tempMinX;
+                break;
+            default:
+                break;
+        }
+        return VoxelShapes.cuboid(minX, minY, minZ, maxX, maxY, maxZ);
     }
 }

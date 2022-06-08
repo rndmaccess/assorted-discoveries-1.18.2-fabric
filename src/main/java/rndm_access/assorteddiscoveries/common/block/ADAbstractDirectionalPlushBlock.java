@@ -22,9 +22,9 @@ public abstract class ADAbstractDirectionalPlushBlock extends ADPlushBlock {
     protected ADAbstractDirectionalPlushBlock(Settings settings) {
         super(settings);
         this.northShape = getNorthOutlineShape();
-        this.southShape = ADVoxelShapeHelper.rotate180Y(northShape);
-        this.westShape = ADVoxelShapeHelper.rotate270Y(northShape);
-        this.eastShape = ADVoxelShapeHelper.rotate90Y(northShape);
+        this.southShape = ADVoxelShapeHelper.rotateSouth(northShape);
+        this.westShape = ADVoxelShapeHelper.rotateWest(northShape);
+        this.eastShape = ADVoxelShapeHelper.rotateEast(northShape);
     }
 
     protected abstract VoxelShape getNorthOutlineShape();

@@ -22,8 +22,8 @@ public class ADBlueberryBushBlock extends ADAbstractBerryBushBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity.getType().isIn(ADEntityTypeTags.BLUEBERRY_BUSH_SLOWS)) { // Wolf, Bee
-            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
+        if (entity.getType().isIn(ADEntityTypeTags.BLUEBERRY_BUSH_IMMUNE_ENTITY_TYPES)) { // Wolf, Bee
+            entity.slowMovement(state, new Vec3d(0.8D, 0.75D, 0.8D));
         }
     }
 }

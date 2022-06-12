@@ -3,11 +3,9 @@ package rndm_access.assorteddiscoveries.common.block;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -24,14 +22,15 @@ public class ADIcicleBlock extends FallingBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return ICICLE_SHAPE;
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
         if(!canStay(world, pos)) {
-            super.onPlaced(world, pos, state, placer, itemStack);
+            super.onBlockAdded(state, world, pos, oldState, notify);
         }
     }
 
@@ -58,12 +57,10 @@ public class ADIcicleBlock extends FallingBlock {
         if (canStay(world, pos)) {
             return state;
         } else {
-            // The icicle can't fall but isn't supported so harvest it.
-            if (world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState()) {
-                return Blocks.AIR.getDefaultState();
-            } else {
-                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
-            }
+            boolean isBlockBelow = world.getBlockState(pos.down()) != Blocks.AIR.getDefaultState();
+
+            return isBlockBelow ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState,
+                    world, pos, neighborPos);
         }
     }
 
@@ -85,6 +82,7 @@ public class ADIcicleBlock extends FallingBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.damage(DamageSource.GENERIC, 0.5F);
     }

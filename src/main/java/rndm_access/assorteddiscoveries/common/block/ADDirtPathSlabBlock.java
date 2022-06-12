@@ -38,7 +38,8 @@ public class ADDirtPathSlabBlock extends SlabBlock {
     }
 
     private static void setToDirtSlab(BlockState state, World world, BlockPos pos) {
-        BlockState dirtSlab = ADBlocks.DIRT_SLAB.getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED));
+        BlockState dirtSlab = ADBlocks.DIRT_SLAB.getDefaultState().with(TYPE, state.get(TYPE))
+                .with(WATERLOGGED, state.get(WATERLOGGED));
 
         world.setBlockState(pos, pushEntitiesUpBeforeBlockChange(state, dirtSlab, world, pos));
     }
@@ -46,22 +47,20 @@ public class ADDirtPathSlabBlock extends SlabBlock {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockState blockstate = world.getBlockState(pos.up());
+        boolean isCovered = blockstate.getMaterial().isSolid();
+        boolean isCoveredWithGate = blockstate.getBlock() instanceof FenceGateBlock;
+        boolean isBottomSlab = state.get(TYPE).equals(SlabType.BOTTOM);
 
-        return !blockstate.getMaterial().isSolid() || blockstate.getBlock() instanceof FenceGateBlock
-                || state.get(TYPE).equals(SlabType.BOTTOM);
+        return !isCovered || isCoveredWithGate || isBottomSlab;
     }
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabtype = state.get(TYPE);
-        switch (slabtype) {
-        case DOUBLE:
-            return DOUBLE_SHAPE;
-        case TOP:
-            return TOP_SHAPE;
-        default:
-            return BOTTOM_SHAPE;
-        }
+        return switch (state.get(TYPE)) {
+            case DOUBLE -> DOUBLE_SHAPE;
+            case TOP -> TOP_SHAPE;
+            default -> BOTTOM_SHAPE;
+        };
     }
 
     @Override

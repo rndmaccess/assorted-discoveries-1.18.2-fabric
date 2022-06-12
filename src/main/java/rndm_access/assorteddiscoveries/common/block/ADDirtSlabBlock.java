@@ -1,19 +1,16 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import java.util.Random;
-
-import net.minecraft.block.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Fertilizable;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
+
+import java.util.Random;
 
 public class ADDirtSlabBlock extends SlabBlock implements Fertilizable {
     public ADDirtSlabBlock(AbstractBlock.Settings settings) {

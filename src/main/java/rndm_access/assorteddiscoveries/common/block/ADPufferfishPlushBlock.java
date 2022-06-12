@@ -71,22 +71,24 @@ public class ADPufferfishPlushBlock extends ADPlushBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int puffedLevel = state.get(PUFFED);
 
         if (puffedLevel < 2) {
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_UP, SoundCategory.BLOCKS, 1.0F,
-                    0.8F + world.random.nextFloat() * 0.4F);
+                    0.8F + world.getRandom().nextFloat() * 0.4F);
             world.setBlockState(pos, state.with(PUFFED, puffedLevel + 1));
         } else {
             world.playSound(null, pos, SoundEvents.ENTITY_PUFFER_FISH_BLOW_OUT, SoundCategory.BLOCKS, 1.0F,
-                    0.8F + world.random.nextFloat() * 0.4F);
+                    0.8F + world.getRandom().nextFloat() * 0.4F);
             world.setBlockState(pos, state.with(PUFFED, 0));
         }
-        return ActionResult.SUCCESS;
+        return ActionResult.success(world.isClient());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return switch (state.get(FACING)) {
             case NORTH -> getPuffedShapes(state, SMALL_NORTH_SHAPE, MEDIUM_NORTH_SHAPE, LARGE_NORTH_SHAPE);

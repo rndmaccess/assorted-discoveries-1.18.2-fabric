@@ -1,6 +1,7 @@
 package rndm_access.assorteddiscoveries.common.block;
 
 import net.minecraft.block.*;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -16,53 +17,68 @@ public class ADBambooFenceBlock extends FenceBlock {
 
     public ADBambooFenceBlock(AbstractBlock.Settings settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState().with(UP, false));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(NORTH, false).with(SOUTH, false)
+                .with(WEST, false).with(EAST, false).with(WATERLOGGED, false).with(UP, false));
     }
 
     @Override
     public boolean canConnect(BlockState state, boolean neighborIsFullSquare, Direction dir) {
         Block block = state.getBlock();
-        boolean flag1 = block instanceof FenceGateBlock && FenceGateBlock.canWallConnect(state, dir);
+        boolean isGate = block instanceof FenceGateBlock && FenceGateBlock.canWallConnect(state, dir);
 
-        return !cannotConnect(state) && neighborIsFullSquare || flag1 || state.isIn(ADBlockTags.BAMBOO_FENCES);
+        return !cannotConnect(state) && neighborIsFullSquare || isGate || state.isIn(ADBlockTags.BAMBOO_FENCES);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (direction.getAxis().isVertical()) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        boolean isWaterlogged = state.get(WATERLOGGED);
+        Direction.Axis axis = direction.getAxis();
 
-            if (isBambooFenceAbove(world, pos)) {
-                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(UP, true);
-            } else {
-                return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos).with(UP, false);
-            }
-        } else {
-            return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        if (isWaterlogged) {
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
+
+        if(axis.isHorizontal()) {
+            state = state.with(FACING_PROPERTIES.get(direction), this.hasNeighborConnection(world, neighborPos, direction));
+        }
+
+        if(axis.isVertical()) {
+            state = state.with(UP, this.hasBambooFenceAbove(world, pos));
+        }
+        return state;
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
+        boolean isWater = world.getFluidState(pos).isOf(Fluids.WATER);
 
-        if (isBambooFenceAbove(world, pos)) {
-            return super.getPlacementState(context).with(UP, true);
-        } else {
-            return super.getPlacementState(context).with(UP, false);
-        }
+        return this.getDefaultState()
+                .with(NORTH, this.hasNeighborConnection(world, pos.north(), Direction.NORTH))
+                .with(SOUTH, this.hasNeighborConnection(world, pos.south(), Direction.SOUTH))
+                .with(WEST, this.hasNeighborConnection(world, pos.west(), Direction.WEST))
+                .with(EAST, this.hasNeighborConnection(world, pos.east(), Direction.EAST))
+                .with(WATERLOGGED, isWater)
+                .with(UP, this.hasBambooFenceAbove(world, pos));
     }
 
-    private static boolean isBambooFenceAbove(WorldAccess world, BlockPos pos) {
-        BlockPos abovePos = pos.up();
-        BlockState state = world.getBlockState(abovePos);
+    private boolean hasNeighborConnection(WorldAccess world, BlockPos neighborPos, Direction direction) {
+        BlockState neighborState = world.getBlockState(neighborPos);
+        Direction oppDir = direction.getOpposite();
+
+        return this.canConnect(neighborState, neighborState.isSideSolidFullSquare(world, neighborPos, oppDir), oppDir);
+    }
+
+    private boolean hasBambooFenceAbove(WorldAccess world, BlockPos pos) {
+        BlockState state = world.getBlockState(pos.up());
 
         return state.isIn(ADBlockTags.BAMBOO_FENCES);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(UP);
-        super.appendProperties(builder);
+        builder.add(NORTH, SOUTH, WEST, EAST, WATERLOGGED, UP);
     }
 
     static {

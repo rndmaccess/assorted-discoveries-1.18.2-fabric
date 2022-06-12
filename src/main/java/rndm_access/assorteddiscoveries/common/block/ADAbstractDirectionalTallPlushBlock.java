@@ -92,18 +92,21 @@ public abstract class ADAbstractDirectionalTallPlushBlock extends ADPlushBlock {
         BlockState topState = context.getWorld().getBlockState(topPos);
         boolean isStackSame = context.getStack().isOf(this.asItem());
         boolean isTopStateReplaceable = topState.getMaterial().isReplaceable();
+        boolean isStackNotFull = state.get(STACK_SIZE) < 3;
 
-        return isStackSame && state.get(STACK_SIZE) < 3 && isTopStateReplaceable;
+        return isStackSame && isStackNotFull && isTopStateReplaceable;
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if(state.get(STACK_SIZE) == 3) {
-            // If the stack is not full break the other half.
-            if(world.getBlockState(pos.down()).isOf(this) || world.getBlockState(pos.up()).isOf(this)) {
-                return state;
-            }
-            return Blocks.AIR.getDefaultState();
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        boolean isTripleStacked = state.get(STACK_SIZE) == 3;
+
+        if(isTripleStacked) {
+            boolean hasPlushBelow = world.getBlockState(pos.down()).isOf(this);
+            boolean hasPlushAbove = world.getBlockState(pos.up()).isOf(this);
+
+            return hasPlushBelow || hasPlushAbove ? state : Blocks.AIR.getDefaultState();
         }
         return state;
     }

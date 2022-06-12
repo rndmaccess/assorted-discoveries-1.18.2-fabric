@@ -38,13 +38,13 @@ public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!entity.getType().isIn(ADEntityTypeTags.WITCHS_CRADLE_IMMUNE_ENTITY_TYPES)) {
-            entity.slowMovement(state, new Vec3d(0.800000011920929D, 0.75D, 0.800000011920929D));
+            entity.slowMovement(state, new Vec3d(0.8D, 0.75D, 0.8D));
 
             if (!world.isClient() && state.get(AGE) > 0 && (entity.lastRenderX != entity.getX() || entity.lastRenderZ != entity.getZ())) {
                 double d = Math.abs(entity.getX() - entity.lastRenderX);
                 double e = Math.abs(entity.getZ() - entity.lastRenderZ);
 
-                if (d >= 0.003000000026077032D || e >= 0.003000000026077032D) {
+                if (d >= 0.003D || e >= 0.003D) {
                     entity.damage(DamageSource.SWEET_BERRY_BUSH, 1.0F);
                 }
             }

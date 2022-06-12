@@ -16,8 +16,8 @@ public class ADOreConfiguredFeatures {
     }
 
     static {
-        ORE_SMOKY_QUARTZ = ADConfiguredFeatures.register("ore_smoky_quartz",
-                Feature.ORE,
-                new OreFeatureConfig(OreConfiguredFeatures.NETHERRACK, ADBlocks.NETHER_SMOKY_QUARTZ_ORE.getDefaultState(), 14));
+        ORE_SMOKY_QUARTZ = ADConfiguredFeatures.register("ore_smoky_quartz", Feature.ORE,
+                new OreFeatureConfig(OreConfiguredFeatures.NETHERRACK,
+                        ADBlocks.NETHER_SMOKY_QUARTZ_ORE.getDefaultState(), 14));
     }
 }

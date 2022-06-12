@@ -46,9 +46,7 @@ public class ADPieBlock extends Block {
     }
 
     private ActionResult tryEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!player.canConsume(false)) {
-            return ActionResult.PASS;
-        } else {
+        if (player.canConsume(false)) {
             int i = state.get(BITES);
 
             player.getHungerManager().add(this.nutrition, this.saturationMod);
@@ -62,6 +60,7 @@ public class ADPieBlock extends Block {
             }
             return ActionResult.SUCCESS;
         }
+        return ActionResult.PASS;
     }
 
     @Override

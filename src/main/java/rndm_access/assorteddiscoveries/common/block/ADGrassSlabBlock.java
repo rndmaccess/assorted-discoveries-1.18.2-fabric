@@ -43,7 +43,7 @@ public class ADGrassSlabBlock extends SlabBlock {
     public BlockState getPlacementState(ItemPlacementContext context) {
         World world = context.getWorld();
         BlockPos blockPos = context.getBlockPos().up();
-        BlockState blockState = context.getWorld().getBlockState(blockPos);
+        BlockState blockState = world.getBlockState(blockPos);
         return super.getPlacementState(context).with(SNOWY, isSnow(world, blockPos, blockState));
     }
 

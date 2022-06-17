@@ -5,13 +5,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.StewItem;
 import net.minecraft.world.World;
 
-import java.util.function.Supplier;
-
 public class ADFoodContainerItem extends Item {
-    private Item returnItem;
+    private final Item returnItem;
 
     public ADFoodContainerItem(Item.Settings settings) {
         super(settings);
@@ -27,6 +24,7 @@ public class ADFoodContainerItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         boolean flag = user instanceof PlayerEntity && ((PlayerEntity)user).isCreative();
 
+        user.eatFood(world, stack);
         return flag ? stack : new ItemStack(this.returnItem);
     }
 }

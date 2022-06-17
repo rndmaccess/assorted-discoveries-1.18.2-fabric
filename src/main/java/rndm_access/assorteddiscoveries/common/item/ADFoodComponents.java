@@ -29,11 +29,6 @@ public class ADFoodComponents {
         return new FoodComponent.Builder().hunger(hunger).saturationModifier(0.6F).build();
     }
 
-    private static FoodComponent magicStew(int hunger, StatusEffect effect) {
-        return new FoodComponent.Builder().hunger(hunger).saturationModifier(0.6F)
-                .statusEffect(new StatusEffectInstance(effect, 1000, 0), 1.0F).build();
-    }
-
     static {
         FRIED_EGG = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.3F).build();
         GARLIC = new FoodComponent.Builder().hunger(2).saturationModifier(0.3F).build();
@@ -44,7 +39,9 @@ public class ADFoodComponents {
         BERRY_PUDDING = stew(8);
         CARAMEL_APPLE = new FoodComponent.Builder().hunger(5).saturationModifier(0.5F).build();
         WITCHS_CRADLE_BRANCH = new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build();
-        WITCHS_CRADLE_SOUP = magicStew(7, StatusEffects.NIGHT_VISION);
+        WITCHS_CRADLE_SOUP = new FoodComponent.Builder().hunger(6).saturationModifier(1.0F)
+                .statusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1000, 0, true, true), 1.0F)
+                .alwaysEdible().build();
         BLOOD_VILE = new FoodComponent.Builder().hunger(3).saturationModifier(0.6F).build();
         BLUEBERRIES = new FoodComponent.Builder().hunger(3).saturationModifier(0.2F).build();
         SWEET_BERRY_JUICE = new FoodComponent.Builder().hunger(5).saturationModifier(0.6F).build();

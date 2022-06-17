@@ -9,7 +9,7 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public class ADDrinkItem extends Item {
-    private Item returnItem;
+    private final Item returnItem;
 
     public ADDrinkItem(Item.Settings settings) {
         super(settings);
@@ -23,16 +23,13 @@ public class ADDrinkItem extends Item {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (user instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) user;
-            boolean flag = playerEntity.isCreative();
-
-            if (!flag) {
+        if (user instanceof PlayerEntity playerEntity) {
+            if (playerEntity.isCreative()) {
                 playerEntity.giveItemStack(new ItemStack(this.returnItem, 1));
                 return super.finishUsing(stack, world, user);
             }
         }
-        return stack;
+        return user.eatFood(world, stack);
     }
 
     @Override

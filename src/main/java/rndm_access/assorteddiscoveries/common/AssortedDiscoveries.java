@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.core.*;
-import rndm_access.assorteddiscoveries.common.core.ADConfiguredFeatures;
 
 public class AssortedDiscoveries implements ModInitializer {
 	public static final ItemGroup MOD_GROUP = FabricItemGroupBuilder.build(ADReference.makeId("mod_group"),

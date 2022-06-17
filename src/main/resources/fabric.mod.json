@@ -23,6 +23,12 @@
     ],
     "client": [
       "rndm_access.assorteddiscoveries.client.AssortedDiscoveriesClient"
+    ],
+    "rei_server": [
+      "rndm_access.assorteddiscoveries.rei_compat.server.ADServerPlugin"
+    ],
+    "rei_client": [
+      "rndm_access.assorteddiscoveries.rei_compat.client.ADClientPlugin"
     ]
   },
   "mixins": [

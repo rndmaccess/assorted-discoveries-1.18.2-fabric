@@ -396,5 +396,7 @@
   
   "itemGroup.assorteddiscoveries.mod_group": "Assorted Discoveries Mod",
   
-  "entity.minecraft.villager.lumberjack": "Lumberjack"
+  "entity.minecraft.villager.lumberjack": "Lumberjack",
+
+  "category.assorteddiscoveries.wood_cutting": "Wood Cutting"
 }

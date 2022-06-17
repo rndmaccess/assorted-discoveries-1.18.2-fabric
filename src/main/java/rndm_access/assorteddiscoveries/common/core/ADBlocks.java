@@ -364,18 +364,6 @@ public class ADBlocks {
     public static final Block CRACKED_DRIPSTONE_BRICK_SLAB;
     public static final Block CRACKED_DRIPSTONE_BRICK_WALL;
     public static final Block CHISELED_DRIPSTONE_BRICKS;
-    public static final Block SPECTRAL_ONYX;
-    public static final Block SPECTRAL_ONYX_STAIRS;
-    public static final Block SPECTRAL_ONYX_SLAB;
-    public static final Block SPECTRAL_ONYX_WALL;
-    public static final Block COBBLED_SPECTRAL_ONYX;
-    public static final Block COBBLED_SPECTRAL_ONYX_STAIRS;
-    public static final Block COBBLED_SPECTRAL_ONYX_SLAB;
-    public static final Block COBBLED_SPECTRAL_ONYX_WALL;
-    public static final Block SPECTRAL_ONYX_BRICKS;
-    public static final Block SPECTRAL_ONYX_BRICK_STAIRS;
-    public static final Block SPECTRAL_ONYX_BRICK_SLAB;
-    public static final Block SPECTRAL_ONYX_BRICK_WALL;
     public static final Block BLOOD_KELP;
     public static final Block BLOOD_KELP_PLANT;
     public static final Block CRIMSON_BOOKSHELF;
@@ -1115,30 +1103,6 @@ public class ADBlocks {
                 new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
         CHISELED_DRIPSTONE_BRICKS = register("chiseled_dripstone_bricks",
                 new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK)));
-        SPECTRAL_ONYX = register("spectral_onyx",
-                new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.BLUE).requiresTool().strength(0.4F)));
-        SPECTRAL_ONYX_STAIRS = register("spectral_onyx_stairs",
-                new ADStairsBlock(ADBlocks.SPECTRAL_ONYX.getDefaultState(), AbstractBlock.Settings.copy(SPECTRAL_ONYX)));
-        SPECTRAL_ONYX_SLAB = register("spectral_onyx_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(SPECTRAL_ONYX)));
-        SPECTRAL_ONYX_WALL = register("spectral_onyx_wall",
-                new WallBlock(AbstractBlock.Settings.copy(SPECTRAL_ONYX)));
-        COBBLED_SPECTRAL_ONYX = register("cobbled_spectral_onyx",
-                new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.BLUE).requiresTool().strength(0.4F)));
-        COBBLED_SPECTRAL_ONYX_STAIRS = register("cobbled_spectral_onyx_stairs",
-                new ADStairsBlock(COBBLED_SPECTRAL_ONYX.getDefaultState(), AbstractBlock.Settings.copy(COBBLED_SPECTRAL_ONYX)));
-        COBBLED_SPECTRAL_ONYX_SLAB = register("cobbled_spectral_onyx_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(COBBLED_SPECTRAL_ONYX)));
-        COBBLED_SPECTRAL_ONYX_WALL = register("cobbled_spectral_onyx_wall",
-                new WallBlock(AbstractBlock.Settings.copy(COBBLED_SPECTRAL_ONYX)));
-        SPECTRAL_ONYX_BRICKS = register("spectral_onyx_bricks",
-                new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.BLUE).requiresTool().strength(0.4F)));
-        SPECTRAL_ONYX_BRICK_STAIRS = register("spectral_onyx_brick_stairs",
-                new ADStairsBlock(SPECTRAL_ONYX_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(SPECTRAL_ONYX_BRICKS)));
-        SPECTRAL_ONYX_BRICK_SLAB = register("spectral_onyx_brick_slab",
-                new SlabBlock(AbstractBlock.Settings.copy(SPECTRAL_ONYX_BRICKS)));
-        SPECTRAL_ONYX_BRICK_WALL = register("spectral_onyx_brick_wall",
-                new WallBlock(AbstractBlock.Settings.copy(SPECTRAL_ONYX_BRICKS)));
         BLOOD_KELP = register("blood_kelp",
                 new ADBloodKelpBlock(AbstractBlock.Settings.copy(Blocks.KELP)));
         BLOOD_KELP_PLANT = register("blood_kelp_plant",

@@ -336,18 +336,6 @@ public class ADItems {
     public static final Item CRACKED_DRIPSTONE_BRICK_SLAB;
     public static final Item CRACKED_DRIPSTONE_BRICK_WALL;
     public static final Item CHISELED_DRIPSTONE_BRICKS;
-    public static final Item SPECTRAL_ONYX;
-    public static final Item SPECTRAL_ONYX_STAIRS;
-    public static final Item SPECTRAL_ONYX_SLAB;
-    public static final Item SPECTRAL_ONYX_WALL;
-    public static final Item COBBLED_SPECTRAL_ONYX;
-    public static final Item COBBLED_SPECTRAL_ONYX_STAIRS;
-    public static final Item COBBLED_SPECTRAL_ONYX_SLAB;
-    public static final Item COBBLED_SPECTRAL_ONYX_WALL;
-    public static final Item SPECTRAL_ONYX_BRICKS;
-    public static final Item SPECTRAL_ONYX_BRICK_STAIRS;
-    public static final Item SPECTRAL_ONYX_BRICK_SLAB;
-    public static final Item SPECTRAL_ONYX_BRICK_WALL;
     public static final Item CRIMSON_BOOKSHELF;
     public static final Item WARPED_BOOKSHELF;
     public static final Item BOK_CHOY;
@@ -763,18 +751,6 @@ public class ADItems {
         CRACKED_DRIPSTONE_BRICK_SLAB = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICK_SLAB);
         CRACKED_DRIPSTONE_BRICK_WALL = registerBlockItem(ADBlocks.CRACKED_DRIPSTONE_BRICK_WALL);
         CHISELED_DRIPSTONE_BRICKS = registerBlockItem(ADBlocks.CHISELED_DRIPSTONE_BRICKS);
-        SPECTRAL_ONYX = registerBlockItem(ADBlocks.SPECTRAL_ONYX);
-        SPECTRAL_ONYX_STAIRS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_STAIRS);
-        SPECTRAL_ONYX_SLAB = registerBlockItem(ADBlocks.SPECTRAL_ONYX_SLAB);
-        SPECTRAL_ONYX_WALL = registerBlockItem(ADBlocks.SPECTRAL_ONYX_WALL);
-        COBBLED_SPECTRAL_ONYX = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX);
-        COBBLED_SPECTRAL_ONYX_STAIRS = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_STAIRS);
-        COBBLED_SPECTRAL_ONYX_SLAB = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_SLAB);
-        COBBLED_SPECTRAL_ONYX_WALL = registerBlockItem(ADBlocks.COBBLED_SPECTRAL_ONYX_WALL);
-        SPECTRAL_ONYX_BRICKS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICKS);
-        SPECTRAL_ONYX_BRICK_STAIRS = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_STAIRS);
-        SPECTRAL_ONYX_BRICK_SLAB = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_SLAB);
-        SPECTRAL_ONYX_BRICK_WALL = registerBlockItem(ADBlocks.SPECTRAL_ONYX_BRICK_WALL);
         CRIMSON_BOOKSHELF = registerBlockItem(ADBlocks.CRIMSON_BOOKSHELF);
         WARPED_BOOKSHELF = registerBlockItem(ADBlocks.WARPED_BOOKSHELF);
         BOK_CHOY = registerItem("bok_choy",

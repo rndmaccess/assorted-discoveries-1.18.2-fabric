@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "assorteddiscoveries:block/cobbled_spectral_onyx",
-    "top": "assorteddiscoveries:block/cobbled_spectral_onyx",
-    "side": "assorteddiscoveries:block/cobbled_spectral_onyx"
-  }
-}

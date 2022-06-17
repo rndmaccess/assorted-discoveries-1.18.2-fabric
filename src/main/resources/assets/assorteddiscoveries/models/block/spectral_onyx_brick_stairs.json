@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "assorteddiscoveries:block/spectral_onyx_bricks",
-    "top": "assorteddiscoveries:block/spectral_onyx_bricks",
-    "side": "assorteddiscoveries:block/spectral_onyx_bricks"
-  }
-}

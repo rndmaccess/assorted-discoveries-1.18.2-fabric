@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "assorteddiscoveries:spectral_onyx"
-  },
-  "result": "assorteddiscoveries:spectral_onyx_wall",
-  "count": 1
-}

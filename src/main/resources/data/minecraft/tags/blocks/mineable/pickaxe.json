@@ -148,18 +148,6 @@
     "assorteddiscoveries:cracked_dripstone_brick_stairs",
     "assorteddiscoveries:cracked_dripstone_brick_slab",
     "assorteddiscoveries:cracked_dripstone_brick_wall",
-	"assorteddiscoveries:chiseled_dripstone_bricks",
-	"assorteddiscoveries:spectral_onyx",
-	"assorteddiscoveries:spectral_onyx_stairs",
-	"assorteddiscoveries:spectral_onyx_slab",
-	"assorteddiscoveries:spectral_onyx_wall",
-	"assorteddiscoveries:cobbled_spectral_onyx",
-	"assorteddiscoveries:cobbled_spectral_onyx_stairs",
-	"assorteddiscoveries:cobbled_spectral_onyx_slab",
-	"assorteddiscoveries:cobbled_spectral_onyx_wall",
-	"assorteddiscoveries:spectral_onyx_bricks",
-	"assorteddiscoveries:spectral_onyx_brick_stairs",
-	"assorteddiscoveries:spectral_onyx_brick_slab",
-	"assorteddiscoveries:spectral_onyx_brick_wall"
+	"assorteddiscoveries:chiseled_dripstone_bricks"
   ]
 }

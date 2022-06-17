@@ -1,20 +1,30 @@
-package rndm_access.assorteddiscoveries.common.worldgen.configured_feature;
+package rndm_access.assorteddiscoveries.common.core;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomBlock;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.HugeMushroomFeatureConfig;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
-import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 
-public class ADTreeConfiguredFeatures {
+/**
+ * These are used within the code itself. The other configured and placed features are done in json and
+ * are referenced through the {@link  ADPlacedFeatureKeys} class.
+ */
+public class ADConfiguredFeatures {
     public static final RegistryEntry<ConfiguredFeature<?, ?>> HUGE_PURPLE_MUSHROOM;
 
-    public static void registerTreeConfiguredFeatures() {
-        AssortedDiscoveries.LOGGER.info("Registered tree configured features");
+    public static void registerConfiguredFeatures() {
+        AssortedDiscoveries.LOGGER.info("Registered configured features");
+    }
+
+    public static <FC extends FeatureConfig, F extends Feature<FC>> RegistryEntry<ConfiguredFeature<?, ?>> register(String path, F feature, FC config) {
+        return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, ADReference.makeId(path), new ConfiguredFeature<>(feature, config));
     }
 
     static {

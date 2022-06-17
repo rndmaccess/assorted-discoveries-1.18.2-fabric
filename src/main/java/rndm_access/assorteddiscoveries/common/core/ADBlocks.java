@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block.*;
-import rndm_access.assorteddiscoveries.common.worldgen.configured_feature.ADTreeConfiguredFeatures;
 
 import java.util.function.ToIntFunction;
 
@@ -742,7 +741,7 @@ public class ADBlocks {
         SNOW_BRICK_WALL = register("snow_brick_wall", new WallBlock(AbstractBlock.Settings.copy(SNOW_BRICKS)));
         PURPLE_MUSHROOM = register("purple_mushroom",
                 new MushroomPlantBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM),
-                        () -> ADTreeConfiguredFeatures.HUGE_PURPLE_MUSHROOM));
+                        () -> ADConfiguredFeatures.HUGE_PURPLE_MUSHROOM));
         PURPLE_MUSHROOM_BLOCK = register("purple_mushroom_block",
                 new ADPurpleMushroomBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM_BLOCK)));
         WOODCUTTER = register("woodcutter",

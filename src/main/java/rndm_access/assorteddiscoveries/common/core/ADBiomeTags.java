@@ -6,23 +6,23 @@ import net.minecraft.world.biome.Biome;
 import rndm_access.assorteddiscoveries.ADReference;
 
 public class ADBiomeTags {
-    public static final TagKey<Biome> CATTAIL_PATCH;
-    public static final TagKey<Biome> HUGE_PURPLE_MUSHROOM;
     public static final TagKey<Biome> ORE_SMOKY_QUARTZ;
-    public static final TagKey<Biome> BLUEBERRY_BUSH_PATCH;
-    public static final TagKey<Biome> WITCHS_CRADLE_PATCH;
-    public static final TagKey<Biome> SNAPDRAGON_AND_ENDER_GRASS;
+    public static final TagKey<Biome> PATCH_BLUEBERRY_BUSH;
+    public static final TagKey<Biome> PATCH_CATTAIL;
+    public static final TagKey<Biome> PATCH_ENDER_PLANTS;
+    public static final TagKey<Biome> PATCH_HUGE_PURPLE_MUSHROOM;
+    public static final TagKey<Biome> PATCH_WITCHS_CRADLE;
 
     private static TagKey<Biome> of(String path) {
         return TagKey.of(Registry.BIOME_KEY, ADReference.makeId(path));
     }
 
     static {
-        CATTAIL_PATCH = of("has_feature/cattail_patch");
-        HUGE_PURPLE_MUSHROOM = of("has_feature/huge_purple_mushroom");
         ORE_SMOKY_QUARTZ = of("has_feature/ore_smoky_quartz");
-        BLUEBERRY_BUSH_PATCH = of("has_feature/blueberry_bush_patch");
-        WITCHS_CRADLE_PATCH = of("has_feature/witchs_cradle_patch");
-        SNAPDRAGON_AND_ENDER_GRASS = of("has_feature/snapdragon_and_ender_grass");
+        PATCH_BLUEBERRY_BUSH = of("has_feature/patch_blueberry_bush");
+        PATCH_CATTAIL = of("has_feature/patch_cattail");
+        PATCH_ENDER_PLANTS = of("has_feature/patch_ender_plants");
+        PATCH_HUGE_PURPLE_MUSHROOM = of("has_feature/patch_huge_purple_mushroom");
+        PATCH_WITCHS_CRADLE = of("has_feature/patch_witchs_cradle");
     }
 }

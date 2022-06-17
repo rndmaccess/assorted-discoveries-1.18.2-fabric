@@ -19,7 +19,6 @@ public class ADFoodComponents {
     public static final FoodComponent WITCHS_CRADLE_BRANCH;
     public static final FoodComponent WITCHS_CRADLE_SOUP;
     public static final FoodComponent BLOOD_VILE;
-    public static final FoodComponent CRANBERRIES;
     public static final FoodComponent BLUEBERRIES;
     public static final FoodComponent SWEET_BERRY_JUICE;
     public static final FoodComponent BLUEBERRY_JUICE;
@@ -47,7 +46,6 @@ public class ADFoodComponents {
         WITCHS_CRADLE_BRANCH = new FoodComponent.Builder().hunger(4).saturationModifier(0.6F).build();
         WITCHS_CRADLE_SOUP = magicStew(7, StatusEffects.NIGHT_VISION);
         BLOOD_VILE = new FoodComponent.Builder().hunger(3).saturationModifier(0.6F).build();
-        CRANBERRIES = new FoodComponent.Builder().hunger(2).saturationModifier(0.3F).build();
         BLUEBERRIES = new FoodComponent.Builder().hunger(3).saturationModifier(0.2F).build();
         SWEET_BERRY_JUICE = new FoodComponent.Builder().hunger(5).saturationModifier(0.6F).build();
         BLUEBERRY_JUICE = new FoodComponent.Builder().hunger(5).saturationModifier(0.6F).build();

@@ -17,6 +17,6 @@ public class ADRabbitPlushBlock extends ADAbstractDirectionalPlushBlock {
     }
 
     static {
-        NORTH_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+        NORTH_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 14.0D, 15.0D);
     }
 }

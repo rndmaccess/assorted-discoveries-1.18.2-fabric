@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandlerType;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
-import rndm_access.assorteddiscoveries.common.block.screen.ADWoodcutterScreenHandler;
+import rndm_access.assorteddiscoveries.common.block_screen.ADWoodcutterScreenHandler;
 
 public class ADScreenHandlerTypes {
     public static final ScreenHandlerType<ADWoodcutterScreenHandler> WOODCUTTER;

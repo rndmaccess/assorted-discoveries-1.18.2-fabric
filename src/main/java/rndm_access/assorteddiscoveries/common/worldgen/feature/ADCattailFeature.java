@@ -2,7 +2,6 @@ package rndm_access.assorteddiscoveries.common.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
@@ -22,27 +21,30 @@ public class ADCattailFeature extends Feature<ProbabilityConfig> {
 
     @Override
     public boolean generate(FeatureContext<ProbabilityConfig> context) {
-        boolean placeFlag = false;
-        Random random = context.getRandom();
-        StructureWorldAccess worldAccess = context.getWorld();
-        BlockPos originPos = context.getOrigin();
-        int i = random.nextInt(8) - random.nextInt(8);
-        int j = random.nextInt(8) - random.nextInt(8);
-        int k = worldAccess.getTopY(Heightmap.Type.OCEAN_FLOOR, originPos.getX() + i, originPos.getZ() + j);
-        BlockPos cattailBottomPos = new BlockPos(originPos.getX() + i, k, originPos.getZ() + j);
+        BlockPos origin = context.getOrigin();
+        int xOrigin = origin.getX();
+        int zOrigin = origin.getZ();
 
-        BlockState cattailBottom = ADBlocks.CATTAIL.getDefaultState();
+        return placeCattail(context.getWorld(), context.getRandom(), xOrigin, zOrigin);
+    }
 
-        if (cattailBottom.canPlaceAt(worldAccess, cattailBottomPos)) {
-            BlockState cattailTop = cattailBottom.with(ADCattailBlock.HALF, DoubleBlockHalf.UPPER);
-            BlockPos cattailTopPos = cattailBottomPos.up();
+    private static boolean placeCattail(StructureWorldAccess world, Random random, int xOrigin, int zOrigin) {
+        int xOffset = random.nextInt(8) - random.nextInt(8);
+        int zOffset = random.nextInt(8) - random.nextInt(8);
+        int x = xOrigin + xOffset;
+        int z = zOrigin + zOffset;
+        int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR, x, z);
+        BlockPos lowerPlacementPos = new BlockPos(x, y, z);
+        BlockPos upperPlacementPos = lowerPlacementPos.up();
+        BlockState lowerHalf = ADBlocks.CATTAIL.getDefaultState();
+        BlockState upperHalf = lowerHalf.with(ADCattailBlock.HALF, DoubleBlockHalf.UPPER);
+        boolean canPlace = lowerHalf.canPlaceAt(world, lowerPlacementPos) && world.getBlockState(upperPlacementPos).isAir();
 
-            if (worldAccess.getBlockState(cattailTopPos).isAir() && worldAccess.getBlockState(cattailBottomPos).isOf(Blocks.WATER)) {
-                worldAccess.setBlockState(cattailBottomPos, cattailBottom, 2);
-                worldAccess.setBlockState(cattailTopPos, cattailTop, 2);
-                placeFlag = true;
-            }
+        if (canPlace) {
+            world.setBlockState(lowerPlacementPos, lowerHalf, 2);
+            world.setBlockState(upperPlacementPos, upperHalf, 2);
+            return true;
         }
-        return placeFlag;
+        return false;
     }
 }

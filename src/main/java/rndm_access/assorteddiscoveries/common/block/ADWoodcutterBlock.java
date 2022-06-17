@@ -15,7 +15,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.ADReference;
-import rndm_access.assorteddiscoveries.common.block.screen.ADWoodcutterScreenHandler;
+import rndm_access.assorteddiscoveries.common.block_screen.ADWoodcutterScreenHandler;
 
 public class ADWoodcutterBlock extends StonecutterBlock {
     private static final Text TITLE = new TranslatableText(
@@ -26,9 +26,9 @@ public class ADWoodcutterBlock extends StonecutterBlock {
     }
 
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return new SimpleNamedScreenHandlerFactory((syncId, playerInventory, player) -> {
-            return new ADWoodcutterScreenHandler(syncId, playerInventory, ScreenHandlerContext.create(world, pos));
-        }, TITLE);
+        return new SimpleNamedScreenHandlerFactory(
+                (syncId, playerInventory, player) -> new ADWoodcutterScreenHandler(syncId, playerInventory,
+                        ScreenHandlerContext.create(world, pos)), TITLE);
     }
 
     @Override

@@ -11,10 +11,11 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import rndm_access.assorteddiscoveries.common.block.screen.ADWoodcutterScreenHandler;
+import rndm_access.assorteddiscoveries.common.block_screen.ADWoodcutterScreenHandler;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADWoodcuttingRecipe;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler> {
     private static final Identifier TEXTURE = new Identifier("textures/gui/container/stonecutter.png");
@@ -97,7 +98,8 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
             int k = x + j % 4 * 16;
             int l = j / 4;
             int i1 = y + l * 18 + 2;
-            this.client.getItemRenderer().renderInGuiWithOverrides(list.get(i).getOutput(), k, i1);
+
+            Objects.requireNonNull(this.client).getItemRenderer().renderInGuiWithOverrides(list.get(i).getOutput(), k, i1);
         }
     }
 
@@ -110,15 +112,16 @@ public class ADWoodcutterScreen extends HandledScreen<ADWoodcutterScreenHandler>
             int k = this.scrollOffset + 12;
 
             for (int l = this.scrollOffset; l < k; ++l) {
-                int i1 = l - this.scrollOffset;
+                double i1 = l - this.scrollOffset;
                 double d0 = mouseX - (i + i1 % 4 * 16);
                 double d1 = mouseY - (j + i1 / 4 * 18);
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D
-                        && this.handler.onButtonClick(this.client.player, l)) {
-                    MinecraftClient.getInstance().getSoundManager()
-                            .play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    this.client.interactionManager.clickButton((this.handler).syncId, l);
-                    return true;
+                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D) {
+                    if (this.handler.onButtonClick(Objects.requireNonNull(this.client).player, l)) {
+                        MinecraftClient.getInstance().getSoundManager()
+                                .play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
+                        Objects.requireNonNull(this.client.interactionManager).clickButton((this.handler).syncId, l);
+                        return true;
+                    }
                 }
             }
 

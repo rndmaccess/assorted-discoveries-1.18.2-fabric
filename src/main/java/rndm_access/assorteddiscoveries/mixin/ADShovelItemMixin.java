@@ -22,7 +22,7 @@ import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 @Mixin(ShovelItem.class)
 public class ADShovelItemMixin {
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-    private void assorteddiscoveries_useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
+    private void assorteddiscoveries_makePathSlabOnUse(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
         PlayerEntity player = context.getPlayer();
         BlockPos pos = context.getBlockPos();
         World world = context.getWorld();

@@ -7,7 +7,6 @@ import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADVillagerProfessions {
-
     public static final VillagerProfession LUMBERJACK;
 
     private static VillagerProfession register(String name, VillagerProfession profession) {

@@ -14,8 +14,7 @@ import net.minecraft.util.math.Vec3f;
 import rndm_access.assorteddiscoveries.common.block_entity.ADDyedCampfireBlockEntity;
 
 public class ADDyedCampfireBlockEntityRenderer implements BlockEntityRenderer<ADDyedCampfireBlockEntity> {
-    public ADDyedCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-    }
+    public ADDyedCampfireBlockEntityRenderer(BlockEntityRendererFactory.Context context) {}
 
     @Override
     public void render(ADDyedCampfireBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {

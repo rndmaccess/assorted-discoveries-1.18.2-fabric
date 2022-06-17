@@ -21,7 +21,7 @@ import java.util.Random;
 public class ADBlockMixin {
 
     @Inject(method = "afterBreak", at = @At("HEAD"))
-    private void assorteddiscoveries_afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state,
+    private void assorteddiscoveries_dropSpruceConeFromSpruceLeaves(World world, PlayerEntity player, BlockPos pos, BlockState state,
                             BlockEntity blockEntity, ItemStack stack, CallbackInfo info) {
         int fortuneLevel = EnchantmentHelper.getLevel(Enchantments.FORTUNE, player.getMainHandStack());
         Random random = new Random();

@@ -25,7 +25,7 @@ public abstract class ADBoneMealItemMixin {
     public static void createParticles(WorldAccess world, BlockPos pos, int count) {}
 
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
-    private void assorteddiscoveries_useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
+    private void assorteddiscoveries_boneMealEndBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
         ItemStack boneMealStack = context.getStack();
@@ -45,7 +45,6 @@ public abstract class ADBoneMealItemMixin {
     }
 
     private static void growEnderPlants(BlockPos blockPos, Random random, World world) {
-
         for (int i = 0; i < 128; ++i) {
             // Re-center the position on the block bone mealed.
             BlockPos.Mutable mutablePos = blockPos.mutableCopy();

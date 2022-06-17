@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
-import rndm_access.assorteddiscoveries.common.core.ADItems;
-import rndm_access.assorteddiscoveries.common.core.ADVillagerProfessions;
 
 import java.util.Random;
 
@@ -47,76 +45,32 @@ public class ADVillagerOffers {
         });
     }
 
-    private static class EmeraldForItemFactory implements TradeOffers.Factory {
-        private int emeralds;
-        private ItemStack sellItem;
-        private int maxTrades;
-        private int xp;
-        private float priceMultiplier;
-
-        public EmeraldForItemFactory(int emeralds, ItemStack sellItem, int maxTrades, int xp, float priceMultiplier) {
-            this.emeralds = emeralds;
-            this.sellItem = sellItem;
-            this.maxTrades = maxTrades;
-            this.xp = xp;
-            this.priceMultiplier = priceMultiplier;
-        }
-
+    private record EmeraldForItemFactory(int emeralds, ItemStack sellItem, int maxTrades, int xp,
+                                         float priceMultiplier) implements TradeOffers.Factory {
         @Override
         public TradeOffer create(Entity entity, Random random) {
             return new TradeOffer(new ItemStack(Items.EMERALD, emeralds), sellItem, maxTrades, xp, priceMultiplier);
         }
     }
 
-    private static class ItemForEmeraldFactory implements TradeOffers.Factory {
-        private ItemStack buyItem;
-        private int maxTrades;
-        private int xp;
-
-        public ItemForEmeraldFactory(ItemStack buyItem, int maxTrades, int xp) {
-            this.buyItem = buyItem;
-            this.maxTrades = maxTrades;
-            this.xp = xp;
-        }
-
+    private record ItemForEmeraldFactory(ItemStack buyItem, int maxTrades,
+                                         int xp) implements TradeOffers.Factory {
         @Override
         public TradeOffer create(Entity entity, Random random) {
             return new TradeOffer(buyItem, new ItemStack(Items.EMERALD), maxTrades, xp, 0.05F);
         }
     }
 
-    private static class SellItemFactory implements TradeOffers.Factory {
-        private ItemStack buyItem;
-        private ItemStack forSale;
-        private int maxTrades;
-        private int xp;
-
-        public SellItemFactory(ItemStack buyItem, ItemStack forSale, int maxTrades, int xp) {
-            this.buyItem = buyItem;
-            this.forSale = forSale;
-            this.maxTrades = maxTrades;
-            this.xp = xp;
-        }
-
+    private record SellItemFactory(ItemStack buyItem, ItemStack forSale,
+                                   int maxTrades, int xp) implements TradeOffers.Factory {
         @Override
         public TradeOffer create(Entity entity, Random random) {
             return new TradeOffer(buyItem, new ItemStack(Items.EMERALD), forSale, maxTrades, xp, 0.05F);
         }
     }
 
-    private static class MasterFactory implements TradeOffers.Factory {
-        private int emeralds;
-        private ItemStack forSale;
-        private int maxTrades;
-        private float priceMultiplier;
-
-        public MasterFactory(int emeralds, ItemStack forSale, int maxTrades, float priceMultiplier) {
-            this.emeralds = emeralds;
-            this.forSale = forSale;
-            this.maxTrades = maxTrades;
-            this.priceMultiplier = priceMultiplier;
-        }
-
+    private record MasterFactory(int emeralds, ItemStack forSale, int maxTrades,
+                                 float priceMultiplier) implements TradeOffers.Factory {
         @Override
         public TradeOffer create(Entity entity, Random random) {
             return new TradeOffer(new ItemStack(Items.EMERALD, emeralds), forSale, maxTrades, 0, priceMultiplier);

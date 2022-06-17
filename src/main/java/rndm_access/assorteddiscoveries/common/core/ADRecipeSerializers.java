@@ -1,5 +1,7 @@
 package rndm_access.assorteddiscoveries.common.core;
 
+import net.minecraft.inventory.Inventory;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -18,8 +20,8 @@ public class ADRecipeSerializers {
     /**
      * Called during mod initialization to register every recipe serializer.
      */
-    private static RecipeSerializer register(String id, RecipeSerializer serializer) {
-        return Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(ADReference.MOD_ID, id), serializer);
+    private static <T extends Recipe<Inventory>> RecipeSerializer<T> register(String id, RecipeSerializer<T> serializer) {
+        return Registry.register(Registry.RECIPE_SERIALIZER, ADReference.makeId(id), serializer);
     }
 
     static {

@@ -5,7 +5,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 
 public class ADSporeParticle extends SpriteBillboardParticle {
-
     protected ADSporeParticle(ClientWorld clientWorld, double x, double y, double z, double xd, double yd, double zd) {
         super(clientWorld, x, y, z);
         this.setBoundingBoxSpacing(0.01F, 0.01F);

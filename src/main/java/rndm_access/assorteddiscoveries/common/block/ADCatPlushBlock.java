@@ -19,6 +19,7 @@ public class ADCatPlushBlock extends ADAnimalPlushBlock {
     private static final VoxelShape NORTH_EYE_SHAPES;
     private static final VoxelShape NORTH_LEG_SHAPES;
     private static final VoxelShape NORTH_SNOUT_SHAPE;
+    private static final VoxelShape NORTH_TAIL_SHAPE;
 
     public ADCatPlushBlock(Settings settings) {
         super(settings);
@@ -46,7 +47,7 @@ public class ADCatPlushBlock extends ADAnimalPlushBlock {
 
     @Override
     protected VoxelShape getNorthOutlineTailShape() {
-        return VoxelShapes.empty();
+        return NORTH_TAIL_SHAPE;
     }
 
     @Override
@@ -71,6 +72,8 @@ public class ADCatPlushBlock extends ADAnimalPlushBlock {
         NORTH_BACK_RIGHT_LEG_SHAPE = Block.createCuboidShape(5.0D, 0.0D, 10.0D, 7.0D, 2.0D, 12.0D);
         NORTH_BACK_LEFT_LEG_SHAPE = Block.createCuboidShape(9.0D, 0.0D, 10.0D, 11.0D, 2.0D, 12.0D);
         NORTH_SNOUT_SHAPE = Block.createCuboidShape(6.5D, 3.5D, 0.0D, 9.5D, 5.5D, 1.0D);
+        NORTH_TAIL_SHAPE = Block.createCuboidShape(7.0D, 2.5D, 12.0D, 9.0D, 6.0D, 16.0D);
+
         NORTH_EAR_SHAPES = VoxelShapes.union(NORTH_RIGHT_EAR_SHAPE, NORTH_LEFT_EAR_SHAPE);
         NORTH_EYE_SHAPES = VoxelShapes.union(NORTH_RIGHT_EYE_SHAPE, NORTH_LEFT_EYE_SHAPE);
         NORTH_LEG_SHAPES = VoxelShapes.union(NORTH_FRONT_RIGHT_LEG_SHAPE, NORTH_FRONT_LEFT_LEG_SHAPE,

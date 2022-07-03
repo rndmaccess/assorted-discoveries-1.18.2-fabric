@@ -1,11 +1,6 @@
 package rndm_access.assorteddiscoveries.common.core;
 
-import com.sun.jdi.event.StepEvent;
-import com.sun.jdi.request.StepRequest;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.PathNodeNavigator;
-import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;

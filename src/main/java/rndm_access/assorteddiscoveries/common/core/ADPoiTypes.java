@@ -13,6 +13,7 @@ public class ADPoiTypes {
     }
 
     static {
-        LUMBERJACK = PointOfInterestHelper.register(ADReference.makeId("lumberjack"), 1, 1, ADBlocks.WOODCUTTER);
+        LUMBERJACK = PointOfInterestHelper.register(ADReference.makeId("lumberjack"), 1, 1,
+                ADBlocks.WOODCUTTER);
     }
 }

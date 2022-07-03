@@ -9,20 +9,18 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.worldgen.feature.ADCattailFeature;
 
 public class ADFeature {
-    public static final Feature<ProbabilityConfig> CATTAIL;
+    public static final Feature<ProbabilityConfig> CATTAIL = new ADCattailFeature(ProbabilityConfig.CODEC);
 
-    private static <C extends FeatureConfig, F extends Feature<C>> F register(String path, F feature) {
-        return Registry.register(Registry.FEATURE, ADReference.makeId(path), feature);
+    private static <C extends FeatureConfig, F extends Feature<C>> void register(String path, F feature) {
+        Registry.register(Registry.FEATURE, ADReference.makeId(path), feature);
     }
 
     /**
      * Called during initialization to register every feature.
      */
     public static void registerFeatures() {
-        AssortedDiscoveries.LOGGER.info("Registered features");
-    }
+        register("cattail", CATTAIL);
 
-    static {
-        CATTAIL = register("cattail", new ADCattailFeature(ProbabilityConfig.CODEC));
+        AssortedDiscoveries.LOGGER.info("Registered features");
     }
 }

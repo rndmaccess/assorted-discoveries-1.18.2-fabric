@@ -9,26 +9,24 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block_entity.ADDyedCampfireBlockEntity;
 
 public class ADBlockEntityTypes {
-    public static final BlockEntityType<ADDyedCampfireBlockEntity> DYED_CAMPFIRE;
+    public static final BlockEntityType<ADDyedCampfireBlockEntity> DYED_CAMPFIRE = FabricBlockEntityTypeBuilder.create(ADDyedCampfireBlockEntity::new,
+            ADBlocks.WHITE_CAMPFIRE, ADBlocks.ORANGE_CAMPFIRE, ADBlocks.MAGENTA_CAMPFIRE,
+            ADBlocks.LIGHT_BLUE_CAMPFIRE, ADBlocks.YELLOW_CAMPFIRE,
+            ADBlocks.LIME_CAMPFIRE, ADBlocks.PINK_CAMPFIRE, ADBlocks.GRAY_CAMPFIRE,
+            ADBlocks.LIGHT_GRAY_CAMPFIRE, ADBlocks.CYAN_CAMPFIRE,
+            ADBlocks.PURPLE_CAMPFIRE, ADBlocks.BLUE_CAMPFIRE, ADBlocks.BROWN_CAMPFIRE,
+            ADBlocks.GREEN_CAMPFIRE, ADBlocks.RED_CAMPFIRE, ADBlocks.BLACK_CAMPFIRE).build();
 
-    private static <T extends BlockEntity> BlockEntityType<T> register(String path, BlockEntityType<T> type) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, ADReference.makeId(path), type);
+    private static <T extends BlockEntity> void register(String path, BlockEntityType<T> type) {
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, ADReference.makeId(path), type);
     }
 
     /**
      * Called during mod initialization to register every block entity type.
      */
     public static void registerBlockEntityTypes() {
-        AssortedDiscoveries.LOGGER.info("Registered block entity types");
-    }
+        register("dyed_campfire", DYED_CAMPFIRE);
 
-    static {
-        DYED_CAMPFIRE = register("dyed_campfire", FabricBlockEntityTypeBuilder.create(ADDyedCampfireBlockEntity::new,
-                ADBlocks.WHITE_CAMPFIRE, ADBlocks.ORANGE_CAMPFIRE, ADBlocks.MAGENTA_CAMPFIRE,
-                ADBlocks.LIGHT_BLUE_CAMPFIRE, ADBlocks.YELLOW_CAMPFIRE,
-                ADBlocks.LIME_CAMPFIRE, ADBlocks.PINK_CAMPFIRE, ADBlocks.GRAY_CAMPFIRE,
-                ADBlocks.LIGHT_GRAY_CAMPFIRE, ADBlocks.CYAN_CAMPFIRE,
-                ADBlocks.PURPLE_CAMPFIRE, ADBlocks.BLUE_CAMPFIRE, ADBlocks.BROWN_CAMPFIRE,
-                ADBlocks.GREEN_CAMPFIRE, ADBlocks.RED_CAMPFIRE, ADBlocks.BLACK_CAMPFIRE).build());
+        AssortedDiscoveries.LOGGER.info("Registered block entity types");
     }
 }

@@ -6,17 +6,15 @@ import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADPaintingTypes {
-    public static final PaintingMotive STARRY_NIGHT;
+    public static final PaintingMotive STARRY_NIGHT = new PaintingMotive(32, 32);
 
-    private static PaintingMotive register(String path, PaintingMotive motive) {
-        return Registry.register(Registry.PAINTING_MOTIVE, ADReference.makeId(path), motive);
+    private static void register(String path, PaintingMotive motive) {
+        Registry.register(Registry.PAINTING_MOTIVE, ADReference.makeId(path), motive);
     }
 
     public static void registerPaintingMotives() {
-        AssortedDiscoveries.LOGGER.info("Registered painting motives");
-    }
+        register("starry_night", STARRY_NIGHT);
 
-    static {
-        STARRY_NIGHT = register("starry_night", new PaintingMotive(32, 32));
+        AssortedDiscoveries.LOGGER.info("Registered painting motives");
     }
 }

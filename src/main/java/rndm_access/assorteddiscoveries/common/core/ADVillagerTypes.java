@@ -30,7 +30,7 @@ public class ADVillagerTypes {
     static {
         CRIMSON = register("crimson", BiomeKeys.CRIMSON_FOREST);
         WARPED = register("warped", BiomeKeys.WARPED_FOREST);
-        FOREST = register("forest", BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST,
-                BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.DARK_FOREST);
+        FOREST = register("forest", BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.BIRCH_FOREST,
+                BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.DARK_FOREST);
     }
 }

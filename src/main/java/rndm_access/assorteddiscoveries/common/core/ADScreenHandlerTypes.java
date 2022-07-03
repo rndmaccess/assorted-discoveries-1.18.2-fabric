@@ -7,13 +7,10 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.block_screen.ADWoodcutterScreenHandler;
 
 public class ADScreenHandlerTypes {
-    public static final ScreenHandlerType<ADWoodcutterScreenHandler> WOODCUTTER;
+    public static final ScreenHandlerType<ADWoodcutterScreenHandler> WOODCUTTER =
+            ScreenHandlerRegistry.registerSimple(ADReference.makeId("woodcutter"), ADWoodcutterScreenHandler::new);
 
     public static void registerScreenHandlerTypes() {
         AssortedDiscoveries.LOGGER.info("Registered screen handler types.");
-    }
-
-    static {
-        WOODCUTTER = ScreenHandlerRegistry.registerSimple(ADReference.makeId("woodcutter"), ADWoodcutterScreenHandler::new);
     }
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.WorldView;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 
 public class ADCattailBlock extends TallFlowerBlock {
-
     public ADCattailBlock(AbstractBlock.Settings settings) {
         super(settings);
         this.setDefaultState(this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER));
@@ -43,6 +42,7 @@ public class ADCattailBlock extends TallFlowerBlock {
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public FluidState getFluidState(BlockState state) {
         return state.get(HALF) == DoubleBlockHalf.LOWER ? Fluids.WATER.getStill(false)
                 : Fluids.EMPTY.getDefaultState();

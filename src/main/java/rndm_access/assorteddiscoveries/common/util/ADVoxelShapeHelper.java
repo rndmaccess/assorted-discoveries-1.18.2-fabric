@@ -1,37 +1,54 @@
 package rndm_access.assorteddiscoveries.common.util;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-public final class ADVoxelShapeHelper {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-    private ADVoxelShapeHelper() {
-    }
+public final class ADVoxelShapeHelper {
+    private ADVoxelShapeHelper() {}
 
     /**
      * Use the second argument's shapes to cut smaller shapes into the first
      * argument's shape and return the new shape.
      */
     public static VoxelShape cutBox(VoxelShape shape, VoxelShape... cutShapes) {
-        for (int i = 0; i < cutShapes.length; i++) {
-            shape = VoxelShapes.combine(shape, cutShapes[i], BooleanBiFunction.ONLY_FIRST);
+        for (VoxelShape cutShape : cutShapes) {
+            shape = VoxelShapes.combine(shape, cutShape, BooleanBiFunction.ONLY_FIRST);
         }
         return shape;
     }
 
-    public static VoxelShape rotateSouth(VoxelShape source) {
-        return rotate(source, Direction.SOUTH);
+    /**
+     * @param source The north variant of the shape.
+     * @return A hashmap that has all rotated shapes.
+     */
+    public static HashMap<Direction, VoxelShape> getShapeRotationsAsMap(VoxelShape source) {
+        HashMap<Direction, VoxelShape> shapes = new HashMap<>();
+        Direction north = Direction.NORTH;
+        Direction south = Direction.SOUTH;
+        Direction east = Direction.EAST;
+        Direction west = Direction.WEST;
+
+        shapes.put(north, source);
+        shapes.put(south, rotate(source, south));
+        shapes.put(east, rotate(source, east));
+        shapes.put(west, rotate(source, west));
+        return shapes;
     }
 
-    public static VoxelShape rotateWest(VoxelShape source) {
-        return rotate(source, Direction.WEST);
-    }
-
-    public static VoxelShape rotateEast(VoxelShape source) {
-        return rotate(source, Direction.EAST);
+    /**
+     * @param source The north variant of the shape.
+     * @return A list that has all rotated shapes.
+     */
+    public static List<VoxelShape> getShapeRotationsAsList(VoxelShape source) {
+        return ImmutableList.of(source, rotate(source, Direction.SOUTH), rotate(source, Direction.WEST), rotate(source, Direction.EAST));
     }
 
     private static VoxelShape rotate(VoxelShape source, Direction direction) {
@@ -50,28 +67,26 @@ public final class ADVoxelShapeHelper {
         double tempMaxX = maxX;
         double tempMinZ = minZ;
 
-        switch(direction)
-        {
-            case EAST:
+        switch (direction) {
+            case EAST -> {
                 minX = 1.0F - maxZ;
                 minZ = tempMinX;
                 maxX = 1.0F - tempMinZ;
                 maxZ = tempMaxX;
-                break;
-            case SOUTH:
+            }
+            case SOUTH -> {
                 minX = 1.0F - maxX;
                 minZ = 1.0F - maxZ;
                 maxX = 1.0F - tempMinX;
                 maxZ = 1.0F - tempMinZ;
-                break;
-            case WEST:
+            }
+            case WEST -> {
                 minX = minZ;
                 minZ = 1.0F - maxX;
                 maxX = maxZ;
                 maxZ = 1.0F - tempMinX;
-                break;
-            default:
-                break;
+            }
+            default -> {}
         }
         return VoxelShapes.cuboid(minX, minY, minZ, maxX, maxY, maxZ);
     }

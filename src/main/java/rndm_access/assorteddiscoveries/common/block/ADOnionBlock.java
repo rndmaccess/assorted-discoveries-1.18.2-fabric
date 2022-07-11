@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class ADOnionBlock extends BeetrootsBlock {
     private static final VoxelShape[] ONION_SHAPE_BY_AGE;
-    private Supplier<Item> seedItem;
+    private final Supplier<Item> seedItem;
 
     public ADOnionBlock(AbstractBlock.Settings settings, Supplier<Item> seedItem) {
         super(settings);

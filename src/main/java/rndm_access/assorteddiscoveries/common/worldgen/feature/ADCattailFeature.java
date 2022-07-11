@@ -22,17 +22,13 @@ public class ADCattailFeature extends Feature<ProbabilityConfig> {
     @Override
     public boolean generate(FeatureContext<ProbabilityConfig> context) {
         BlockPos origin = context.getOrigin();
-        int xOrigin = origin.getX();
-        int zOrigin = origin.getZ();
 
-        return placeCattail(context.getWorld(), context.getRandom(), xOrigin, zOrigin);
+        return placeCattail(context.getWorld(), context.getRandom(), origin.getX(), origin.getZ());
     }
 
     private static boolean placeCattail(StructureWorldAccess world, Random random, int xOrigin, int zOrigin) {
-        int xOffset = random.nextInt(8) - random.nextInt(8);
-        int zOffset = random.nextInt(8) - random.nextInt(8);
-        int x = xOrigin + xOffset;
-        int z = zOrigin + zOffset;
+        int x = offsetOrigin(xOrigin, random);
+        int z = offsetOrigin(zOrigin, random);
         int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR, x, z);
         BlockPos lowerPlacementPos = new BlockPos(x, y, z);
         BlockPos upperPlacementPos = lowerPlacementPos.up();
@@ -46,5 +42,9 @@ public class ADCattailFeature extends Feature<ProbabilityConfig> {
             return true;
         }
         return false;
+    }
+
+    private static int offsetOrigin(int origin, Random random) {
+        return origin + random.nextInt(8) - random.nextInt(8);
     }
 }

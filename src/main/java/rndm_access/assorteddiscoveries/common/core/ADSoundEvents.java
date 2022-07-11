@@ -6,8 +6,8 @@ import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADSoundEvents {
-    public static final SoundEvent BLOCK_MUSHROOM_BOUNCE;
-    public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT;
+    public static final SoundEvent BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
+    public static final SoundEvent UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
 
     public static void registerSoundEvents() {
         AssortedDiscoveries.LOGGER.info("Registered sound events.");
@@ -19,10 +19,5 @@ public class ADSoundEvents {
      */
     private static SoundEvent register(String name) {
         return Registry.register(Registry.SOUND_EVENT, ADReference.makeId(name), new SoundEvent(ADReference.makeId(name)));
-    }
-
-    static {
-        BLOCK_MUSHROOM_BOUNCE = register("block.mushroom_bounce");
-        UI_WOODCUTTER_TAKE_RESULT = register("ui.woodcutter.take_result");
     }
 }

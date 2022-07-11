@@ -1,7 +1,7 @@
 {
   "type": "assorteddiscoveries:cabin",
   "config": {
-    "start_pool": "assorteddiscoveries:cabin/forests/birch_forest/start",
+    "start_pool": "assorteddiscoveries:cabin/birch_forest/start",
     "size": 7
   },
   "biomes": "#assorteddiscoveries:has_structure/cabin_birch_forest",

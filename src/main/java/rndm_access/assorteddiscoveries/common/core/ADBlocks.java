@@ -91,19 +91,19 @@ public class ADBlocks {
     public static final Block PLAINS_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
     public static final Block DESERT_VILLAGER_PLUSH = new ADDesertVillagerPlushBlock(AbstractBlock.Settings.copy(RED_CAT_PLUSH));
     public static final Block JUNGLE_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH));
-    public static final Block SAVANNA_VILLAGER_PLUSH = new ADSavannaVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
-    public static final Block SNOW_VILLAGER_PLUSH = new ADDesertVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
-    public static final Block SWAMP_VILLAGER_PLUSH = new ADDesertVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH));
+    public static final Block SAVANNA_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
+    public static final Block SNOW_VILLAGER_PLUSH = new ADShortHatVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
+    public static final Block SWAMP_VILLAGER_PLUSH = new ADShortHatVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH));
     public static final Block TAIGA_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
     public static final Block CRIMSON_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
     public static final Block WARPED_VILLAGER_PLUSH = new ADVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
-    public static final Block WANDERING_TRADER_PLUSH = new ADDesertVillagerPlushBlock(AbstractBlock.Settings.copy(BLUE_SHEEP_PLUSH));
+    public static final Block WANDERING_TRADER_PLUSH = new ADShortHatVillagerPlushBlock(AbstractBlock.Settings.copy(BLUE_SHEEP_PLUSH));
     public static final Block PLAINS_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH));
     public static final Block DESERT_ZOMBIE_VILLAGER_PLUSH = new ADDesertZombieVillagerPlushBlock(AbstractBlock.Settings.copy(GREEN_SHEEP_PLUSH));
     public static final Block JUNGLE_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH));
-    public static final Block SAVANNA_ZOMBIE_VILLAGER_PLUSH = new ADSavannaZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
-    public static final Block SNOW_ZOMBIE_VILLAGER_PLUSH = new ADDesertZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
-    public static final Block SWAMP_ZOMBIE_VILLAGER_PLUSH = new ADDesertZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
+    public static final Block SAVANNA_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
+    public static final Block SNOW_ZOMBIE_VILLAGER_PLUSH = new ADShortHatZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
+    public static final Block SWAMP_ZOMBIE_VILLAGER_PLUSH = new ADShortHatZombieVillagerPlushBlock(AbstractBlock.Settings.copy(COW_PLUSH));
     public static final Block TAIGA_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH));
     public static final Block CRIMSON_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH));
     public static final Block WARPED_ZOMBIE_VILLAGER_PLUSH = new ADZombieVillagerPlushBlock(AbstractBlock.Settings.copy(BLAZE_PLUSH));
@@ -152,12 +152,12 @@ public class ADBlocks {
     public static final Block BOK_CHOY = new ADBokChoyCropBlock(AbstractBlock.Settings.copy(Blocks.WHEAT));
     public static final Block GARLIC = new ADOnionBlock(AbstractBlock.Settings.copy(Blocks.WHEAT), () -> ADItems.GARLIC);
     public static final Block GREEN_ONIONS = new ADOnionBlock(AbstractBlock.Settings.copy(Blocks.WHEAT), () -> ADItems.GREEN_ONION);
-    public static final Block OAK_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.OAK_TAN);
-    public static final Block SPRUCE_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.SPRUCE_BROWN);
-    public static final Block BIRCH_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.PALE_YELLOW);
-    public static final Block JUNGLE_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.DIRT_BROWN);
-    public static final Block ACACIA_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.ORANGE);
-    public static final Block DARK_OAK_PLANTER_BOX = overworldPlanterBoxBlock(MapColor.BROWN);
+    public static final Block OAK_PLANTER_BOX = planterBoxBlock(MapColor.OAK_TAN);
+    public static final Block SPRUCE_PLANTER_BOX = planterBoxBlock(MapColor.SPRUCE_BROWN);
+    public static final Block BIRCH_PLANTER_BOX = planterBoxBlock(MapColor.PALE_YELLOW);
+    public static final Block JUNGLE_PLANTER_BOX = planterBoxBlock(MapColor.DIRT_BROWN);
+    public static final Block ACACIA_PLANTER_BOX = planterBoxBlock(MapColor.ORANGE);
+    public static final Block DARK_OAK_PLANTER_BOX = planterBoxBlock(MapColor.BROWN);
     public static final Block CRIMSON_PLANTER_BOX = netherPlanterBoxBlock(MapColor.DULL_PINK);
     public static final Block WARPED_PLANTER_BOX = netherPlanterBoxBlock(MapColor.DARK_AQUA);
     public static final Block OAK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS));
@@ -453,7 +453,7 @@ public class ADBlocks {
 
     private static ADRopeLadderBlock ropeLadderBlock() { return new ADRopeLadderBlock(AbstractBlock.Settings.copy(Blocks.LADDER)); }
 
-    private static ADPlanterBoxBlock overworldPlanterBoxBlock(MapColor color) {
+    private static ADPlanterBoxBlock planterBoxBlock(MapColor color) {
         return new ADPlanterBoxBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(2.5F).sounds(BlockSoundGroup.WOOD));
     }
 
@@ -465,12 +465,12 @@ public class ADBlocks {
         return new ADDyedCampfireBlock(AbstractBlock.Settings.copy(Blocks.CAMPFIRE), sparkParticle);
     }
 
-    private static void register(String path, Block block) {
-        Registry.register(Registry.BLOCK, ADReference.makeId(path), block);
-    }
-
     private static ToIntFunction<BlockState> getLuminanceFromState(int luminance) {
         return (state) -> state.get(Properties.LIT) ? luminance : 0;
+    }
+
+    private static void register(String path, Block block) {
+        Registry.register(Registry.BLOCK, ADReference.makeId(path), block);
     }
 
     /**

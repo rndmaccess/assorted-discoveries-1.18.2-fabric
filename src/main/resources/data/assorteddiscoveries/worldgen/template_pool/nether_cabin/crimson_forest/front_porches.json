@@ -8,8 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "assorteddiscoveries:nether_cabin/crimson_forest/front_porches/crimson_forest_front_porch",
         "processors": "minecraft:empty",
-		"_comment1": "The projection has to be rigid or the porch won't spawn with the cabin.",
-        "projection": "rigid" 
+        "projection": "rigid"
       }
     }
   ]

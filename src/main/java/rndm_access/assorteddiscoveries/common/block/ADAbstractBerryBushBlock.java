@@ -1,7 +1,8 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,16 +17,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public abstract class ADAbstractBerryBushBlock extends SweetBerryBushBlock {
-
     public ADAbstractBerryBushBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
     protected abstract Item berryItem();
 
-    /**
-     * Called when the player right-clicks a block.
-     */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int age = state.get(AGE);
@@ -47,12 +44,5 @@ public abstract class ADAbstractBerryBushBlock extends SweetBerryBushBlock {
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
         return new ItemStack(this.berryItem());
-    }
-
-    /**
-     * @return The max age of this plant.
-     */
-    private int getMaxAge() {
-        return 3;
     }
 }

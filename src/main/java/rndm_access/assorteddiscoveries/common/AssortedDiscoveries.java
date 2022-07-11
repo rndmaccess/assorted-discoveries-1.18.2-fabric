@@ -32,7 +32,7 @@ public class AssortedDiscoveries implements ModInitializer {
 
 		// Entity Registries
 		ADVillagerTypes.registerVillagerTypes();
-		ADPoiTypes.registerPointOfInterestTypes();
+		ADPointOfInterestTypes.registerPointOfInterestTypes();
 		ADVillagerProfessions.registerVillagerProfessions();
 		ADVillagerOffers.registerVillagerTradeOffers();
 
@@ -60,5 +60,7 @@ public class AssortedDiscoveries implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.PATCH_WITCHS_CRADLE_RARE);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.PATCH_ENDER_PLANTS),
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.PATCH_ENDER_PLANTS);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLOOD_KELP),
+				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.BLOOD_KELP);
 	}
 }

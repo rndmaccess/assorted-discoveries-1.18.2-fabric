@@ -12,7 +12,7 @@ import net.minecraft.world.gen.random.ChunkRandom;
 
 public class ADNetherCabinFeature extends JigsawFeature {
     public ADNetherCabinFeature(Codec<StructurePoolFeatureConfig> config) {
-        super(config, 33, false, false, ADNetherCabinFeature::checkLocation);
+        super(config, 33, true, false, ADNetherCabinFeature::checkLocation);
     }
 
     @Override

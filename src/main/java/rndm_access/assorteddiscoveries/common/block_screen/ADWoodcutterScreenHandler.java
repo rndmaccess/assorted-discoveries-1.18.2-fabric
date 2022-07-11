@@ -3,6 +3,7 @@ package rndm_access.assorteddiscoveries.common.block_screen;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingResultInventory;
@@ -29,7 +30,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     private long lastTakeTime;
     private final Slot inputSlot;
     private final Slot outputSlot;
-    Runnable contentsChangedListener;
+    private Runnable contentsChangedListener;
     public final Inventory input;
     private final CraftingResultInventory output;
 
@@ -42,8 +43,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
         this.selectedRecipe = Property.create();
         this.availableRecipes = Lists.newArrayList();
         this.inputStack = ItemStack.EMPTY;
-        this.contentsChangedListener = () -> {
-        };
+        this.contentsChangedListener = () -> {};
         this.input = new SimpleInventory(1) {
             public void markDirty() {
                 super.markDirty();
@@ -53,7 +53,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
         };
         this.output = new CraftingResultInventory();
         this.context = context;
-        this.world = playerInventory.player.world;
+        this.world = playerInventory.player.getWorld();
         this.inputSlot = this.addSlot(new Slot(this.input, 0, 20, 33));
         this.outputSlot = this.addSlot(new Slot(this.output, 1, 143, 33) {
             public boolean canInsert(ItemStack stack) {
@@ -80,20 +80,23 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
             }
         });
 
-        // Player Inventory
-        int i;
-        for(i = 0; i < 3; ++i) {
+        this.addPlayerInventorySlots(playerInventory);
+        this.addPlayerHotbarSlots(playerInventory);
+        this.addProperty(this.selectedRecipe);
+    }
+
+    private void addPlayerInventorySlots(PlayerInventory playerInventory) {
+        for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
+    }
 
-        // Player Hotbar
-        for(i = 0; i < 9; ++i) {
+    private void addPlayerHotbarSlots(PlayerInventory playerInventory) {
+        for(int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
-
-        this.addProperty(this.selectedRecipe);
     }
 
     public int getSelectedRecipe() {
@@ -134,7 +137,6 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
             this.inputStack = itemStack.copy();
             this.updateInput(inventory, itemStack);
         }
-
     }
 
     private void updateInput(Inventory input, ItemStack stack) {
@@ -147,7 +149,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
 
     }
 
-    void populateResult() {
+    public void populateResult() {
         if (!this.availableRecipes.isEmpty() && this.isInBounds(this.selectedRecipe.get())) {
             ADWoodcuttingRecipe woodcuttingRecipe = this.availableRecipes.get(this.selectedRecipe.get());
             this.output.setLastRecipe(woodcuttingRecipe);
@@ -174,7 +176,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             Item item = itemStack2.getItem();
             itemStack = itemStack2.copy();
@@ -190,7 +192,7 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
                     return ItemStack.EMPTY;
                 }
             } else if (this.world.getRecipeManager().getFirstMatch(ADRecipeTypes.WOODCUTTING,
-                    new SimpleInventory(new ItemStack[]{itemStack2}), this.world).isPresent()) {
+                    new SimpleInventory(itemStack2), this.world).isPresent()) {
                 if (!this.insertItem(itemStack2, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }
@@ -220,8 +222,6 @@ public class ADWoodcutterScreenHandler extends ScreenHandler {
     public void close(PlayerEntity player) {
         super.close(player);
         this.output.removeStack(1);
-        this.context.run((world, pos) -> {
-            this.dropInventory(player, this.input);
-        });
+        this.context.run((world, pos) -> this.dropInventory(player, this.input));
     }
 }

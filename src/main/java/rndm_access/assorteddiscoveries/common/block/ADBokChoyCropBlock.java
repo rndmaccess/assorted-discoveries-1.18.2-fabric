@@ -6,7 +6,6 @@ import net.minecraft.item.ItemConvertible;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 
 public class ADBokChoyCropBlock extends CropBlock {
-
     public ADBokChoyCropBlock(AbstractBlock.Settings settings) {
         super(settings);
     }

@@ -5,18 +5,15 @@ import net.minecraft.block.Block;
 import net.minecraft.util.shape.VoxelShape;
 
 public class ADGhastPlushBlock extends ADAbstractDirectionalPlushBlock {
-    private static final VoxelShape NORTH_SHAPE;
+    private static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 3.5D, 12.5D,
+            10.0D, 12.5D);
 
     public ADGhastPlushBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 
     @Override
-    public VoxelShape getNorthOutlineShape() {
+    public VoxelShape northOutlineShape() {
         return NORTH_SHAPE;
-    }
-
-    static {
-        NORTH_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 14.0D, 14.0D);
     }
 }

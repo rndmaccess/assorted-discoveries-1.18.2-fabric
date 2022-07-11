@@ -13,11 +13,11 @@ public class ADSquidPlushBlock extends ADAbstractDirectionalPlushBlock {
     }
 
     @Override
-    public VoxelShape getNorthOutlineShape() {
+    public VoxelShape northOutlineShape() {
         return NORTH_SHAPE;
     }
 
     static {
-        NORTH_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
+        NORTH_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
     }
 }

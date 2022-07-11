@@ -8,12 +8,15 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.feature.JigsawFeature;
+import net.minecraft.world.gen.feature.ShipwreckFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
+import net.minecraft.world.gen.feature.VillageFeature;
+import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADCabinFeature extends JigsawFeature {
 
     public ADCabinFeature(Codec<StructurePoolFeatureConfig> config) {
-        super(config, 0, false, true, ADCabinFeature::checkLocation);
+        super(config, 0, true, true, ADCabinFeature::checkLocation);
     }
 
     @Override
@@ -21,16 +24,12 @@ public class ADCabinFeature extends JigsawFeature {
         return GenerationStep.Feature.SURFACE_STRUCTURES;
     }
 
-    /**
-     * This method prevents cabins from spawning in water.
-     */
     private static boolean checkLocation(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
         BlockPos blockPos = context.chunkPos().getStartPos();
-        int landHeight = context.chunkGenerator()
-                .getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world());
-        VerticalBlockSample columnOfBlocks = context.chunkGenerator()
-                .getColumnSample(blockPos.getX(), blockPos.getZ(), context.world());
+        int landHeight = context.chunkGenerator().getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world());
+        VerticalBlockSample columnOfBlocks = context.chunkGenerator().getColumnSample(blockPos.getX(), blockPos.getZ(), context.world());
         BlockState topBlock = columnOfBlocks.getState(landHeight);
+
         return topBlock.getFluidState().isEmpty();
     }
 }

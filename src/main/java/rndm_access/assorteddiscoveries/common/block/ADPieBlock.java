@@ -19,10 +19,17 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 
 public class ADPieBlock extends Block {
-    public static final IntProperty BITES;
-    protected static final VoxelShape[] SHAPE_BY_BITE;
-    private int nutrition;
-    private float saturationMod;
+    public static final IntProperty BITES = Properties.BITES;
+    private static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[] {
+            Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(3.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(5.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(7.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(9.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(11.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
+            Block.createCuboidShape(13.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D) };
+    private final int nutrition;
+    private final float saturationMod;
 
     public ADPieBlock(AbstractBlock.Settings settings, int nutrition, float saturationMod) {
         super(settings);
@@ -31,11 +38,13 @@ public class ADPieBlock extends Block {
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE_BY_BITE[state.get(BITES)];
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             if (tryEat(world, pos, state, player).isAccepted()) {
@@ -53,7 +62,7 @@ public class ADPieBlock extends Block {
             world.emitGameEvent(player, GameEvent.EAT, pos);
 
             if (i < 6) {
-                world.setBlockState(pos, state.with(BITES, Integer.valueOf(i + 1)), 3);
+                world.setBlockState(pos, state.with(BITES, i + 1), 3);
             } else {
                 world.removeBlock(pos, false);
                 world.emitGameEvent(player, GameEvent.BLOCK_DESTROY, pos);
@@ -66,17 +75,5 @@ public class ADPieBlock extends Block {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(BITES);
-    }
-
-    static {
-        BITES = Properties.BITES;
-        SHAPE_BY_BITE = new VoxelShape[] {
-                Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(3.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(5.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(7.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(9.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(11.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D),
-                Block.createCuboidShape(13.0D, 0.0D, 1.0D, 15.0D, 6.0D, 15.0D) };
     }
 }

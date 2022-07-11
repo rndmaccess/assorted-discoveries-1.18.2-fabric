@@ -8,7 +8,7 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADWoodcuttingRecipe;
 
 public class ADRecipeTypes {
-    public static final RecipeType<ADWoodcuttingRecipe> WOODCUTTING;
+    public static final RecipeType<ADWoodcuttingRecipe> WOODCUTTING = register("woodcutting");
 
     public static void registerRecipeTypes() {
         AssortedDiscoveries.LOGGER.info("Registered recipe types.");
@@ -20,9 +20,5 @@ public class ADRecipeTypes {
                 return ADReference.makeId(path).toString();
             }
         });
-    }
-
-    static {
-        WOODCUTTING = register("woodcutting");
     }
 }

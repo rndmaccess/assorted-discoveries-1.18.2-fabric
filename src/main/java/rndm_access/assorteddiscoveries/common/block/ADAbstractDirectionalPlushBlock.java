@@ -3,39 +3,26 @@ package rndm_access.assorteddiscoveries.common.block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
-/**
- * A base class designed to help create basic plush blocks.
- *
- * @author Ryan
- *
- */
+import java.util.HashMap;
+
 public abstract class ADAbstractDirectionalPlushBlock extends ADPlushBlock {
-    private final VoxelShape northShape;
-    private final VoxelShape southShape;
-    private final VoxelShape westShape;
-    private final VoxelShape eastShape;
+    private final HashMap<Direction, VoxelShape> shapes;
 
     protected ADAbstractDirectionalPlushBlock(Settings settings) {
         super(settings);
-        this.northShape = getNorthOutlineShape();
-        this.southShape = ADVoxelShapeHelper.rotateSouth(northShape);
-        this.westShape = ADVoxelShapeHelper.rotateWest(northShape);
-        this.eastShape = ADVoxelShapeHelper.rotateEast(northShape);
+        this.shapes = ADVoxelShapeHelper.getShapeRotationsAsMap(northOutlineShape());
     }
 
-    protected abstract VoxelShape getNorthOutlineShape();
+    protected abstract VoxelShape northOutlineShape();
 
     @Override
+    @SuppressWarnings("depreciated")
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(FACING)) {
-            case NORTH -> this.northShape;
-            case SOUTH -> this.southShape;
-            case WEST -> this.westShape;
-            default -> this.eastShape;
-        };
+        return shapes.get(state.get(FACING));
     }
 }

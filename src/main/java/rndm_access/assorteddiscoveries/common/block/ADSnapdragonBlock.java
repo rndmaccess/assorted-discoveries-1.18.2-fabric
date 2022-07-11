@@ -43,14 +43,13 @@ public class ADSnapdragonBlock extends FlowerBlock {
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-
         EntityType<?> type = entity.getType();
 
-        if (entity instanceof LivingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES))) {
-            LivingEntity livingEntity = (LivingEntity) entity;
+        if (entity instanceof LivingEntity livingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES))) {
 
-            if (!world.isClient() && !livingEntity.isSneaking() && ((LivingEntity) entity).getVelocity().y == 0.0D) {
+            if (!world.isClient() && !livingEntity.isSneaking() && entity.getVelocity().y == 0.0D) {
                 livingEntity.setVelocity(0.0, 0.0, 0.0);
 
                 double d = livingEntity.getX();
@@ -59,7 +58,10 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
                 for(int i = 0; i < 16; ++i) {
                     double g = livingEntity.getX() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
-                    double h = MathHelper.clamp(livingEntity.getY() + (double)(livingEntity.getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
+                    double h = MathHelper.clamp(
+                            livingEntity.getY() + (livingEntity.getRandom().nextInt(16) - 8),
+                            world.getBottomY(),
+                            (world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
                     double j = livingEntity.getZ() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
                     if (livingEntity.hasVehicle()) {
                         livingEntity.stopRiding();
@@ -67,7 +69,7 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
                     if (livingEntity.teleport(g, h, j, true)) {
                         SoundEvent soundEvent = livingEntity instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                        world.playSound((PlayerEntity)null, d, e, f, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        world.playSound(null, d, e, f, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
                         livingEntity.playSound(soundEvent, 1.0F, 1.0F);
                         break;
                     }

@@ -1,5 +1,5 @@
 {
-	"__comment": "Designed by Rcarmstrong20 with Cubik Studio - https://cubik.studio",
+	"__comment": "Designed by rndm_access with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
 		"particle": "block/green_wool",

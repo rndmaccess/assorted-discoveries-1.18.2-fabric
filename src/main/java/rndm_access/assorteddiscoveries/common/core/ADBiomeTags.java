@@ -12,6 +12,7 @@ public class ADBiomeTags {
     public static final TagKey<Biome> PATCH_ENDER_PLANTS;
     public static final TagKey<Biome> PATCH_HUGE_PURPLE_MUSHROOM;
     public static final TagKey<Biome> PATCH_WITCHS_CRADLE;
+    public static final TagKey<Biome> BLOOD_KELP;
 
     private static TagKey<Biome> of(String path) {
         return TagKey.of(Registry.BIOME_KEY, ADReference.makeId(path));
@@ -24,5 +25,6 @@ public class ADBiomeTags {
         PATCH_ENDER_PLANTS = of("has_feature/patch_ender_plants");
         PATCH_HUGE_PURPLE_MUSHROOM = of("has_feature/patch_huge_purple_mushroom");
         PATCH_WITCHS_CRADLE = of("has_feature/patch_witchs_cradle");
+        BLOOD_KELP = of("has_feature/blood_kelp");
     }
 }

@@ -18,7 +18,7 @@ import rndm_access.assorteddiscoveries.common.core.ADItems;
 import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
 
 public class ADBloodKelpPlantBlock extends KelpPlantBlock {
-    public static final BooleanProperty LIT;
+    public static final BooleanProperty LIT = Properties.LIT;
 
     public ADBloodKelpPlantBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -42,39 +42,30 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        Random random = new Random();
+
         if (state.get(LIT)) {
-            player.giveItemStack(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER));
+            player.giveItemStack(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER, random.nextInt(3) + 1));
             world.setBlockState(pos, state.with(LIT, false));
             return ActionResult.success(world.isClient);
         }
         return ActionResult.PASS;
     }
 
-    /**
-     * This method decides whether the blood kelp should have spores.
-     *
-     * @param world
-     * @param pos    The position of the new block.
-     * @param random
-     */
-    public boolean growSpores(World world, BlockPos pos, Random random) {
-        float sporeChance = 0.5F;
+    public BlockState setGrowthState(Random random) {
+        float sporeChance = 0.3F;
         float sporeChancePicked = random.nextFloat();
 
         if (sporeChancePicked <= sporeChance) {
-            world.setBlockState(pos, this.getDefaultState().with(LIT, true));
-            return true;
+            return this.getDefaultState().with(LIT, true);
         }
-        return false;
+        return this.getDefaultState();
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LIT);
-    }
-
-    static {
-        LIT = Properties.LIT;
     }
 }

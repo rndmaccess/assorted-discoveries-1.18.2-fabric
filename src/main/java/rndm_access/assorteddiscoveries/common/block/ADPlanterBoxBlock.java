@@ -1,5 +1,6 @@
 package rndm_access.assorteddiscoveries.common.block;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -16,103 +17,63 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import rndm_access.assorteddiscoveries.common.util.ADVoxelShapeHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class ADPlanterBoxBlock extends Block {
-    public static final BooleanProperty NORTH;
-    public static final BooleanProperty SOUTH;
-    public static final BooleanProperty WEST;
-    public static final BooleanProperty EAST;
+    public static final BooleanProperty NORTH = Properties.NORTH;
+    public static final BooleanProperty SOUTH = Properties.SOUTH;
+    public static final BooleanProperty WEST = Properties.WEST;
+    public static final BooleanProperty EAST = Properties.EAST;
 
-    private static final VoxelShape INSIDE_SINGLE_SHAPE;
-    private static final VoxelShape SINGLE_BOX_SHAPE;
-
-    private static final VoxelShape INSIDE_MIDDLE_SHAPE;
-    private static final VoxelShape MIDDLE_BOX_SHAPE;
-
-    private static final VoxelShape INSIDE_NORTH_SHAPE;
-    private static final VoxelShape NORTH_BOX_SHAPE;
-    private static final VoxelShape SOUTH_BOX_SHAPE;
-    private static final VoxelShape WEST_BOX_SHAPE;
-    private static final VoxelShape EAST_BOX_SHAPE;
-
-    private static final VoxelShape INSIDE_NORTH_SOUTH_SHAPE;
-    private static final VoxelShape NORTH_SOUTH_BOX_SHAPE;
-    private static final VoxelShape EAST_WEST_BOX_SHAPE;
-
-    private static final VoxelShape INSIDE_NORTH_EAST_SHAPE;
-    private static final VoxelShape NORTH_EAST_BOX_SHAPE;
-
-    private static final VoxelShape SOUTH_WEST_BOX_SHAPE;
-    private static final VoxelShape NORTH_WEST_BOX_SHAPE;
-    private static final VoxelShape SOUTH_EAST_BOX_SHAPE;
-
-    private static final VoxelShape INSIDE_NORTH_WEST_EAST_SHAPE;
-    private static final VoxelShape NORTH_WEST_EAST_BOX_SHAPE;
-
-    private static final VoxelShape SOUTH_WEST_EAST_BOX_SHAPE;
-    private static final VoxelShape NORTH_SOUTH_WEST_BOX_SHAPE;
-    private static final VoxelShape NORTH_SOUTH_EAST_BOX_SHAPE;
+    private static final VoxelShape NORTH_EDGE_SHAPE = Block.createCuboidShape(0.0, 15.0, 13.0,
+            16.0, 16.0, 16.0);
+    private static final List<VoxelShape> EDGE_SHAPES = ADVoxelShapeHelper.getShapeRotationsAsList(NORTH_EDGE_SHAPE);
+    private static final HashMap<List<Boolean>, VoxelShape> SHAPES = composeShapes(EDGE_SHAPES, 4);
 
     public ADPlanterBoxBlock(AbstractBlock.Settings settings) {
         super(settings);
-
         this.setDefaultState(this.getDefaultState().with(NORTH, false).with(SOUTH, false)
                 .with(WEST, false).with(EAST, false));
     }
 
     /**
-     * Creates the bounding box for this block.
+     * A helper method that creates a hashmap that maps a list of booleans that represent each property,
+     * (south, north, east, west), to the appropriate shape.
      */
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        boolean north = state.get(NORTH);
-        boolean south = state.get(SOUTH);
-        boolean west = state.get(WEST);
-        boolean east = state.get(EAST);
+    private static HashMap<List<Boolean>, VoxelShape> composeShapes(List<VoxelShape> borderShapes, int set_size) {
+        VoxelShape bottomShape = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 15.0, 16.0);
+        HashMap<List<Boolean>, VoxelShape> map = new HashMap<>();
+        double power_set_size = Math.pow(2, set_size);
 
-        if (north && south && west && east) {
-            return MIDDLE_BOX_SHAPE;
-        } else if (north) {
-            if (east) {
-                if (south) {
-                    return NORTH_SOUTH_EAST_BOX_SHAPE;
-                } else if (west) {
-                    return NORTH_WEST_EAST_BOX_SHAPE;
-                } else {
-                    return NORTH_EAST_BOX_SHAPE;
+        // Add every subset to the map which covers every possible shape for every state these blocks.
+        for (int i = 0; i < power_set_size; i++) {
+            List<Boolean> isBorderOpen = new ArrayList<>(4);
+            VoxelShape tempBorderShape = VoxelShapes.empty();
+
+            for (int j = 0; j < set_size; j++) {
+
+                // If true there is a border here on the planter box.
+                if ((i & (1 << j)) > 0) {
+                    isBorderOpen.add(false);
+                    tempBorderShape = VoxelShapes.union(tempBorderShape, borderShapes.get(j));
                 }
-            } else if (west) {
-                if (south) {
-                    return NORTH_SOUTH_WEST_BOX_SHAPE;
-                } else {
-                    return NORTH_WEST_BOX_SHAPE;
+                else {
+                    isBorderOpen.add(true);
                 }
-            } else if (south) {
-                return NORTH_SOUTH_BOX_SHAPE;
-            } else {
-                return NORTH_BOX_SHAPE;
             }
-        } else if (south) {
-            if (east) {
-                if (west) {
-                    return SOUTH_WEST_EAST_BOX_SHAPE;
-                } else {
-                    return SOUTH_EAST_BOX_SHAPE;
-                }
-            } else if (west) {
-                return SOUTH_WEST_BOX_SHAPE;
-            } else {
-                return SOUTH_BOX_SHAPE;
-            }
-        } else if (west) {
-            if (east) {
-                return EAST_WEST_BOX_SHAPE;
-            } else {
-                return WEST_BOX_SHAPE;
-            }
-        } else if (east) {
-            return EAST_BOX_SHAPE;
+            map.put(isBorderOpen, VoxelShapes.union(tempBorderShape, bottomShape));
         }
-        return SINGLE_BOX_SHAPE;
+        return map;
+    }
+
+    @Override
+    @SuppressWarnings("depreciated")
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        List<Boolean> stateProperties = ImmutableList.of(state.get(SOUTH), state.get(NORTH), state.get(EAST), state.get(WEST));
+
+        return SHAPES.get(stateProperties);
     }
 
     @Nullable
@@ -124,6 +85,7 @@ public class ADPlanterBoxBlock extends Block {
     }
 
     @Override
+    @SuppressWarnings("depreciated")
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return getPlanterBoxState(state, world, pos);
     }
@@ -140,6 +102,7 @@ public class ADPlanterBoxBlock extends Block {
      * state each block should be in.
      */
     @Override
+    @SuppressWarnings("depreciated")
     public BlockState rotate(BlockState state, BlockRotation rotation) {
         BlockState rotatedState = this.getDefaultState();
         boolean north = state.get(NORTH);
@@ -149,7 +112,7 @@ public class ADPlanterBoxBlock extends Block {
         boolean hasNone = north && south && west && east;
         boolean hasAll = !north && !south && !west && !east;
 
-        // If the block is surrounded by edges or has no edges. Then we don't have
+        // If the block is surrounded by borders or has no borders. Then we don't have
         // to rotate it.
         if (!(hasAll || hasNone)) {
             switch (rotation) {
@@ -205,42 +168,5 @@ public class ADPlanterBoxBlock extends Block {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(NORTH, SOUTH, WEST, EAST);
-    }
-
-    static {
-        NORTH = Properties.NORTH;
-        SOUTH = Properties.SOUTH;
-        WEST = Properties.WEST;
-        EAST = Properties.EAST;
-
-        INSIDE_SINGLE_SHAPE = Block.createCuboidShape(3.0, 15.0, 3.0, 13.0, 16.0, 13.0);
-        SINGLE_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_SINGLE_SHAPE);
-
-        INSIDE_MIDDLE_SHAPE = Block.createCuboidShape(0.0, 15.0, 0.0, 16.0, 16.0, 16.0);
-        MIDDLE_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_MIDDLE_SHAPE);
-
-        INSIDE_NORTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 13.0);
-        NORTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SHAPE);
-        SOUTH_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_BOX_SHAPE);
-        WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_BOX_SHAPE);
-        EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_BOX_SHAPE);
-
-        INSIDE_NORTH_SOUTH_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 13.0, 16.0, 16.0);
-        NORTH_SOUTH_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_SOUTH_SHAPE);
-        EAST_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_SOUTH_BOX_SHAPE);
-
-        INSIDE_NORTH_EAST_SHAPE = Block.createCuboidShape(3.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-        NORTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_EAST_SHAPE);
-
-        SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_EAST_BOX_SHAPE);
-        NORTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_EAST_BOX_SHAPE);
-        SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_EAST_BOX_SHAPE);
-
-        INSIDE_NORTH_WEST_EAST_SHAPE = Block.createCuboidShape(0.0, 15.0, 0.0, 16.0, 16.0, 13.0);
-        NORTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.cutBox(VoxelShapes.fullCube(), INSIDE_NORTH_WEST_EAST_SHAPE);
-
-        SOUTH_WEST_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateSouth(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_WEST_BOX_SHAPE = ADVoxelShapeHelper.rotateWest(NORTH_WEST_EAST_BOX_SHAPE);
-        NORTH_SOUTH_EAST_BOX_SHAPE = ADVoxelShapeHelper.rotateEast(NORTH_WEST_EAST_BOX_SHAPE);
     }
 }

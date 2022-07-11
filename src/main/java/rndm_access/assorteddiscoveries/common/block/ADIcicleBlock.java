@@ -15,7 +15,8 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 public class ADIcicleBlock extends FallingBlock {
-    private static final VoxelShape ICICLE_SHAPE;
+    private static final VoxelShape ICICLE_SHAPE = Block.createCuboidShape(4.0, 1.0, 4.0, 12.0,
+            16.0, 12.0);
 
     public ADIcicleBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -85,9 +86,5 @@ public class ADIcicleBlock extends FallingBlock {
     @SuppressWarnings("deprecation")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         entity.damage(DamageSource.GENERIC, 0.5F);
-    }
-
-    static {
-        ICICLE_SHAPE = Block.createCuboidShape(4.0, 1.0, 4.0, 12.0, 16.0, 12.0);
     }
 }

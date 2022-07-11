@@ -8,7 +8,7 @@ import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADVillagerProfessions {
     public static final VillagerProfession LUMBERJACK = VillagerProfessionBuilder.create()
-            .workstation(ADPoiTypes.LUMBERJACK).id(ADReference.makeId("lumberjack"))
+            .workstation(ADPointOfInterestTypes.LUMBERJACK).id(ADReference.makeId("lumberjack"))
             .workSound(ADSoundEvents.UI_WOODCUTTER_TAKE_RESULT).build();
 
     private static void register(String name, VillagerProfession profession) {
@@ -21,6 +21,6 @@ public class ADVillagerProfessions {
     public static void registerVillagerProfessions() {
         register("lumberjack", LUMBERJACK);
 
-        AssortedDiscoveries.LOGGER.info("Registered Villager Professions");
+        AssortedDiscoveries.LOGGER.info("Registered villager professions");
     }
 }

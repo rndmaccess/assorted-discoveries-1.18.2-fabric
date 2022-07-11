@@ -360,6 +360,7 @@ public class ADItems {
     public static final Item DRIED_BAMBOO = item();
     public static final Item FRIED_EGG = new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16));
     public static final Item BLOOD_KELP_SEED_CLUSTER = new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings());
+    public static final Item BLOOD_KELP = item();
 
     private static Item item() {
         return new Item(makeSettings());
@@ -749,6 +750,7 @@ public class ADItems {
         register("dried_bamboo", DRIED_BAMBOO);
         register("fried_egg", FRIED_EGG);
         register("blood_kelp_seed_cluster", BLOOD_KELP_SEED_CLUSTER);
+        register("blood_kelp", BLOOD_KELP);
 
         AssortedDiscoveries.LOGGER.info("Registered Items");
     }

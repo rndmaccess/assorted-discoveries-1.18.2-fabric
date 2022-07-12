@@ -21,10 +21,14 @@ import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
 import java.util.Random;
 
 public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
-    private static final VoxelShape SMALL_SHAPE;
-    private static final VoxelShape MEDIUM_SHAPE;
-    private static final VoxelShape LARGE_SHAPE;
-    private static final VoxelShape GIANT_SHAPE;
+    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D,
+            9.0D, 13.0D);
+    private static final VoxelShape MEDIUM_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D,
+            11.0D, 14.0D);
+    private static final VoxelShape LARGE_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D,
+            11.0D, 15.0D);
+    private static final VoxelShape GIANT_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D,
+            12.0D, 16.0D);
 
     public ADWitchsCradleBlock(Settings settings) {
         super(settings);
@@ -68,12 +72,5 @@ public class ADWitchsCradleBlock extends ADAbstractBerryBushBlock {
             case 2 -> LARGE_SHAPE;
             default -> GIANT_SHAPE;
         };
-    }
-
-    static {
-        SMALL_SHAPE = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 9.0D, 13.0D);
-        MEDIUM_SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 11.0D, 14.0D);
-        LARGE_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 11.0D, 15.0D);
-        GIANT_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.WorldAccess;
 import rndm_access.assorteddiscoveries.common.core.ADBlockTags;
 
 public class ADBambooFenceBlock extends FenceBlock {
-    public static final BooleanProperty UP;
+    public static final BooleanProperty UP = Properties.UP;
 
     public ADBambooFenceBlock(AbstractBlock.Settings settings) {
         super(settings);
@@ -79,9 +79,5 @@ public class ADBambooFenceBlock extends FenceBlock {
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(NORTH, SOUTH, WEST, EAST, WATERLOGGED, UP);
-    }
-
-    static {
-        UP = Properties.UP;
     }
 }

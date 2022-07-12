@@ -1,8 +1,7 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.Entity;
@@ -11,21 +10,48 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
 import rndm_access.assorteddiscoveries.common.core.ADBlockTags;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypeTags;
 
+import java.util.Random;
+
 public class ADSnapdragonBlock extends FlowerBlock {
+    public static final BooleanProperty CAN_TELEPORT = ADProperties.CAN_TELEPORT;
+
     public ADSnapdragonBlock(StatusEffect suspiciousStewEffect, int effectDuration, AbstractBlock.Settings settings) {
         super(suspiciousStewEffect, effectDuration, settings);
+        this.setDefaultState(this.getDefaultState().with(CAN_TELEPORT, true));
+    }
+
+    @Override
+    @SuppressWarnings("depreciated")
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack itemInHand = player.getStackInHand(hand);
+
+        if(itemInHand.isOf(Items.SHEARS) && state.get(CAN_TELEPORT)) {
+            world.setBlockState(pos, state.with(CAN_TELEPORT, false), 2);
+            world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            itemInHand.damage(1, player, (player2) -> player2.sendToolBreakStatus(player2.getActiveHand()));
+            return ActionResult.success(world.isClient());
+        }
+        return ActionResult.PASS;
     }
 
     @Override
@@ -46,35 +72,48 @@ public class ADSnapdragonBlock extends FlowerBlock {
     @SuppressWarnings("depreciated")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         EntityType<?> type = entity.getType();
+        boolean isTeleportImmune = type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES);
+        boolean isNotFalling = entity.getVelocity().y == 0.0D;
 
-        if (entity instanceof LivingEntity livingEntity && !(type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES))) {
+        if (entity instanceof LivingEntity livingEntity
+                && !isTeleportImmune
+                && !world.isClient()
+                && !livingEntity.isSneaking()
+                && isNotFalling
+                && state.get(CAN_TELEPORT)) {
+            double x = livingEntity.getX();
+            double y = livingEntity.getY();
+            double z = livingEntity.getZ();
+            int bottomY = world.getBottomY();
+            Random random = livingEntity.getRandom();
 
-            if (!world.isClient() && !livingEntity.isSneaking() && entity.getVelocity().y == 0.0D) {
-                livingEntity.setVelocity(0.0, 0.0, 0.0);
+            livingEntity.setVelocity(0.0, 0.0, 0.0);
 
-                double d = livingEntity.getX();
-                double e = livingEntity.getY();
-                double f = livingEntity.getZ();
+            for(int i = 0; i < 16; ++i) {
+                double newX = x + (random.nextDouble() - 0.5D) * 16.0D;
+                double newY = MathHelper.clamp(y + (random.nextInt(16) - 8), bottomY,
+                        bottomY + ((ServerWorld)world).getLogicalHeight() - 1);
+                double newZ = z + (random.nextDouble() - 0.5D) * 16.0D;
 
-                for(int i = 0; i < 16; ++i) {
-                    double g = livingEntity.getX() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
-                    double h = MathHelper.clamp(
-                            livingEntity.getY() + (livingEntity.getRandom().nextInt(16) - 8),
-                            world.getBottomY(),
-                            (world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
-                    double j = livingEntity.getZ() + (livingEntity.getRandom().nextDouble() - 0.5D) * 16.0D;
-                    if (livingEntity.hasVehicle()) {
-                        livingEntity.stopRiding();
-                    }
+                if (livingEntity.hasVehicle()) {
+                    livingEntity.stopRiding();
+                }
 
-                    if (livingEntity.teleport(g, h, j, true)) {
-                        SoundEvent soundEvent = livingEntity instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                        world.playSound(null, d, e, f, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                        livingEntity.playSound(soundEvent, 1.0F, 1.0F);
-                        break;
-                    }
+                if (livingEntity.teleport(newX, newY, newZ, true)) {
+                    SoundEvent teleportSound = livingEntity instanceof FoxEntity
+                            ? SoundEvents.ENTITY_FOX_TELEPORT
+                            : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+
+                    world.playSound(null, x, y, z, teleportSound, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    livingEntity.playSound(teleportSound, 1.0F, 1.0F);
+                    break;
                 }
             }
         }
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(CAN_TELEPORT);
     }
 }

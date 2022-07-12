@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -44,9 +45,10 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
     @Override
     @SuppressWarnings("depreciated")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        boolean holdingBoneMeal = player.getStackInHand(hand).isOf(Items.BONE_MEAL);
         Random random = new Random();
 
-        if (state.get(LIT)) {
+        if (!holdingBoneMeal && state.get(LIT)) {
             player.giveItemStack(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER, random.nextInt(3) + 1));
             world.setBlockState(pos, state.with(LIT, false));
             return ActionResult.success(world.isClient);

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -30,9 +31,10 @@ public class ADBloodKelpBlock extends KelpBlock {
     @Override
     @SuppressWarnings("depreciated")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        boolean holdingBoneMeal = player.getStackInHand(hand).isOf(Items.BONE_MEAL);
         Random random = new Random();
 
-        if (state.get(LIT)) {
+        if (!holdingBoneMeal && state.get(LIT)) {
             player.giveItemStack(new ItemStack(ADItems.BLOOD_KELP_SEED_CLUSTER, random.nextInt(3) + 1));
             world.setBlockState(pos, state.with(LIT, false));
             return ActionResult.success(world.isClient);
@@ -71,21 +73,11 @@ public class ADBloodKelpBlock extends KelpBlock {
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos newStemPos = pos.mutableCopy().offset(this.growthDirection);
-        BlockPos oldStemPos = pos.mutableCopy();
-        BlockState oldStem = world.getBlockState(oldStemPos);
         int age = Math.min(state.get(AGE) + 1, 25);
-        int growthLength = this.getGrowthLength(random);
 
-        // Grow the blood kelp, this supports multiple.
-        for(int i = 0; i < growthLength && this.chooseStemState(world.getBlockState(newStemPos)); ++i) {
-            world.setBlockState(oldStemPos, this.getPlant().getDefaultState()
-                    .with(ADBloodKelpPlantBlock.LIT, oldStem.get(LIT)), 2);
+        if(this.chooseStemState(world.getBlockState(newStemPos))) {
+            world.setBlockState(pos, this.getPlant().getDefaultState().with(ADBloodKelpPlantBlock.LIT, state.get(LIT)), 2);
             world.setBlockState(newStemPos, this.getBloodKelpState(random).with(AGE, age));
-
-            age = Math.min(age + 1, 25);
-            oldStemPos.offset(this.growthDirection);
-            newStemPos.offset(this.growthDirection);
-            oldStem = world.getBlockState(oldStemPos);
         }
     }
 

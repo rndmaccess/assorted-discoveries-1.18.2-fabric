@@ -11,8 +11,10 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.KelpFeature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
+import rndm_access.assorteddiscoveries.common.block.ADBloodKelpBlock;
 import rndm_access.assorteddiscoveries.common.block.ADBloodKelpPlantBlock;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
+import rndm_access.assorteddiscoveries.common.util.ADBlockStateUtil;
 
 import java.util.Random;
 
@@ -39,15 +41,17 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> {
                         && structureWorldAccess.getBlockState(blockPos2.up()).isOf(Blocks.WATER)
                         && bloodKelpPlantState.getDefaultState().canPlaceAt(structureWorldAccess, blockPos2)) {
                     if (l == maxHeight) {
-                        structureWorldAccess.setBlockState(blockPos2, bloodKelpState.with(KelpBlock.AGE, random.nextInt(4) + 20), 2);
+                        structureWorldAccess.setBlockState(blockPos2, getBloodKelpState(random)
+                                .with(KelpBlock.AGE, random.nextInt(4) + 20), 2);
                         ++i;
                     } else {
-                        structureWorldAccess.setBlockState(blockPos2, bloodKelpPlantState.setGrowthState(random), 2);
+                        structureWorldAccess.setBlockState(blockPos2, getBloodKelpPlantState(random), 2);
                     }
                 } else if (l > 0) {
                     BlockPos blockPos3 = blockPos2.down();
                     if (bloodKelpState.canPlaceAt(structureWorldAccess, blockPos3) && !structureWorldAccess.getBlockState(blockPos3.down()).isOf(Blocks.KELP)) {
-                        structureWorldAccess.setBlockState(blockPos3, bloodKelpState.with(KelpBlock.AGE, random.nextInt(4) + 20), 2);
+                        structureWorldAccess.setBlockState(blockPos3, getBloodKelpState(random)
+                                .with(KelpBlock.AGE, random.nextInt(4) + 20), 2);
                         ++i;
                     }
                     break;
@@ -56,5 +60,17 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> {
             }
         }
         return i > 0;
+    }
+
+    private static BlockState getBloodKelpPlantState(Random random) {
+        BlockState bloodKelpPlant = ADBlocks.BLOOD_KELP_PLANT.getDefaultState();
+
+        return bloodKelpPlant.with(ADBloodKelpPlantBlock.LIT, ADBlockStateUtil.isBloodKelpLit(random));
+    }
+
+    private static BlockState getBloodKelpState(Random random) {
+        BlockState bloodKelp = ADBlocks.BLOOD_KELP.getDefaultState();
+
+        return bloodKelp.with(ADBloodKelpPlantBlock.LIT, ADBlockStateUtil.isBloodKelpLit(random));
     }
 }

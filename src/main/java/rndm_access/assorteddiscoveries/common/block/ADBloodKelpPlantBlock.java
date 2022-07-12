@@ -54,16 +54,6 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
         return ActionResult.PASS;
     }
 
-    public BlockState setGrowthState(Random random) {
-        float sporeChance = 0.3F;
-        float sporeChancePicked = random.nextFloat();
-
-        if (sporeChancePicked <= sporeChance) {
-            return this.getDefaultState().with(LIT, true);
-        }
-        return this.getDefaultState();
-    }
-
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(LIT);

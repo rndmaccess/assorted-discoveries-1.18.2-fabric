@@ -361,6 +361,8 @@ public class ADItems {
     public static final Item FRIED_EGG = new Item(makeSettings(ADFoodComponents.FRIED_EGG, 16));
     public static final Item BLOOD_KELP_SEED_CLUSTER = new AliasedBlockItem(ADBlocks.BLOOD_KELP, makeSettings());
     public static final Item BLOOD_KELP = item();
+    public static final Item DRIED_BLOOD_KELP_BLOCK = blockItem(ADBlocks.DRIED_BLOOD_KELP_BLOCK);
+    public static final Item DRIED_BLOOD_KELP = new Item(makeSettings(FoodComponents.DRIED_KELP));
 
     private static Item item() {
         return new Item(makeSettings());
@@ -751,6 +753,8 @@ public class ADItems {
         register("fried_egg", FRIED_EGG);
         register("blood_kelp_seed_cluster", BLOOD_KELP_SEED_CLUSTER);
         register("blood_kelp", BLOOD_KELP);
+        register("dried_blood_kelp_block", DRIED_BLOOD_KELP_BLOCK);
+        register("dried_blood_kelp", DRIED_BLOOD_KELP);
 
         AssortedDiscoveries.LOGGER.info("Registered Items");
     }

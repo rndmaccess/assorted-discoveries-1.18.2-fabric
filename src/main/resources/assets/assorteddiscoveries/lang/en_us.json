@@ -342,6 +342,7 @@
   "block.assorteddiscoveries.cracked_dripstone_brick_slab": "Cracked Dripstone Brick Slab",
   "block.assorteddiscoveries.cracked_dripstone_brick_wall": "Cracked Dripstone Brick Wall",
   "block.assorteddiscoveries.chiseled_dripstone_bricks": "Chiseled Dripstone Bricks",
+  "block.assorteddiscoveries.dried_blood_kelp_block": "Dried Blood Kelp Block",
   
   "container.assorteddiscoveries.woodcutter": "Woodcutter",
   
@@ -372,6 +373,8 @@
   "item.assorteddiscoveries.dried_bamboo": "Dried Bamboo",
   "item.assorteddiscoveries.fried_egg": "Fried Egg",
   "item.assorteddiscoveries.blood_kelp_seed_cluster": "Blood Kelp Seed Cluster",
+  "item.assorteddiscoveries.blood_kelp": "Blood Kelp",
+  "item.assorteddiscoveries.dried_blood_kelp": "Dried Blood Kelp",
   
   "advancements.assorteddiscoveries.story.root.title": "Assorted Journeys",
   "advancements.assorteddiscoveries.story.root.description": "A mod designed to enhance vanilla gameplay",

@@ -1,5 +1,6 @@
 package rndm_access.assorteddiscoveries.common;
 
+import dev.architectury.registry.fuel.FuelRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -29,6 +30,7 @@ public class AssortedDiscoveries implements ModInitializer {
 		ADRecipeSerializers.registerSerializers();
 		ADPaintingTypes.registerPaintingMotives();
 		ADSoundEvents.registerSoundEvents();
+		AssortedDiscoveries.registerFuel();
 
 		// Entity Registries
 		ADVillagerTypes.registerVillagerTypes();
@@ -62,5 +64,9 @@ public class AssortedDiscoveries implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.PATCH_ENDER_PLANTS);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLOOD_KELP),
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.BLOOD_KELP);
+	}
+
+	private static void registerFuel() {
+		FuelRegistry.register(4000, ADItems.DRIED_BLOOD_KELP_BLOCK);
 	}
 }

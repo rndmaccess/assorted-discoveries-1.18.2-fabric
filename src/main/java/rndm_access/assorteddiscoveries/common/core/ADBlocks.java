@@ -434,6 +434,7 @@ public class ADBlocks {
             .luminance(getLuminanceFromState(10)));
     public static final Block BLOOD_KELP_PLANT = new ADBloodKelpPlantBlock(AbstractBlock.Settings.copy(Blocks.KELP_PLANT)
             .luminance(getLuminanceFromState(10)));
+    public static final Block DRIED_BLOOD_KELP_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.DRIED_KELP_BLOCK));
 
     private static ADBambooFenceBlock bambooFenceBlock(MapColor color) {
         return new ADBambooFenceBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(1.0F)
@@ -831,6 +832,7 @@ public class ADBlocks {
         register("cattail", CATTAIL);
         register("blood_kelp", BLOOD_KELP);
         register("blood_kelp_plant", BLOOD_KELP_PLANT);
+        register("dried_blood_kelp_block", DRIED_BLOOD_KELP_BLOCK);
 
         AssortedDiscoveries.LOGGER.info("Registered blocks");
     }

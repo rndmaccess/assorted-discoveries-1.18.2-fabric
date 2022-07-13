@@ -3,7 +3,6 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "#body",
-		"body": "#body",
 		"gray_wool": "block/gray_wool",
 		"black_wool": "block/black_wool",
 		"utter": "block/pink_wool",

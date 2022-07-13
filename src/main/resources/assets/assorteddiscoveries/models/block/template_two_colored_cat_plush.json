@@ -3,7 +3,6 @@
 	"parent": "minecraft:block/block",
 	"textures": {
 		"particle": "#primary_body",
-		"primary_body": "#primary_body",
 		"eyes": "#eyes",
 		"nose": "block/pink_wool",
 		"secondary_body": "#secondary_body"

@@ -3,7 +3,6 @@
   "parent": "block/block",
   "textures": {
     "particle": "#material",
-    "material": "#material",
     "soil": "#soil"
   },
   "elements": [

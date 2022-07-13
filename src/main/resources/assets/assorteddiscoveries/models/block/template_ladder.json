@@ -1,8 +1,7 @@
 {
   "ambientocclusion": false, 
   "textures": { 
-    "particle": "#ladder", 
-    "texture": "#ladder"
+    "particle": "#ladder"
   }, 
   "elements": [
     {
@@ -10,8 +9,8 @@
       "to": [ 16, 16, 15 ],
       "shade": false,
       "faces": {
-        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
-        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" }
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#ladder" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#ladder" }
       }
     }
   ]

@@ -2,7 +2,6 @@
   "__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio",
   "textures": {
     "particle": "#bamboo",
-    "bamboo": "#bamboo",
     "cut_bamboo": "#cut_bamboo"
   },
   "elements": [

@@ -3,7 +3,6 @@
   "parent": "block/block",
   "textures": {
     "particle": "#bamboo",
-    "bamboo": "#bamboo",
     "cut_bamboo": "#cut_bamboo"
   },
   "elements": [

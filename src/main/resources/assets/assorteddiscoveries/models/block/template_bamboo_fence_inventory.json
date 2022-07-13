@@ -2,8 +2,7 @@
   "__comment": "Designed by rndmaccess with Cubik Studio - https://cubik.studio",
   "parent": "block/block",
   "textures": {
-    "particle": "#bamboo",
-    "bamboo": "#bamboo"
+    "particle": "#bamboo"
   },
   "elements": [
     {

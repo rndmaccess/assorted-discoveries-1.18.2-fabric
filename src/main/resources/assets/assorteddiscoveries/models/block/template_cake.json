@@ -2,8 +2,7 @@
   "textures": {
     "particle": "#side",
     "bottom": "#bottom",
-    "top": "#top",
-    "side": "#side"
+    "top": "#top"
   },
   "elements": [
     {

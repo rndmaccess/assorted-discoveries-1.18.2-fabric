@@ -3,7 +3,6 @@
     "particle": "#side",
     "bottom": "#bottom",
     "top": "#top",
-    "side": "#side",
     "inside": "#inside"
   },
   "elements": [

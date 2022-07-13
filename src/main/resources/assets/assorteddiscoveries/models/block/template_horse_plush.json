@@ -4,7 +4,6 @@
 	"textures": {
 		"particle": "#body",
 		"eyes": "#eyes",
-		"body": "#body",
 		"hooves": "#hooves",
 		"tail": "#tail"
 	},

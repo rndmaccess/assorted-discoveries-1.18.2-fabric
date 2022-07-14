@@ -1,6 +1,6 @@
 {
   "__comment": "Designed by rndmaccess with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
-  "parent": "block/block",
+  "parent": "assorteddiscoveries:block/plush_block",
   "textures": {
     "particle": "block/lime_wool",
     "limeWool": "block/lime_wool",

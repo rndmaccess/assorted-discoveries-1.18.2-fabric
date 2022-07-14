@@ -1,6 +1,6 @@
 {
 	"__comment": "Designed by rndm_access with Cubik Studio - https://cubik.studio",
-	"parent": "block/block",
+	"parent": "assorteddiscoveries:block/plush_block",
 	"textures": {
 		"particle": "block/brown_wool",
 		"eyes": "block/black_wool",

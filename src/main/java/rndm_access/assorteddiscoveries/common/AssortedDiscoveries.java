@@ -15,7 +15,7 @@ import rndm_access.assorteddiscoveries.common.core.*;
 
 public class AssortedDiscoveries implements ModInitializer {
 	public static final ItemGroup MOD_GROUP = FabricItemGroupBuilder.build(ADReference.makeId("mod_group"),
-			() -> new ItemStack(ADItems.CATTAIL));
+			() -> new ItemStack(ADItems.CALCITE_BRICKS));
 	public static final Logger LOGGER = LoggerFactory.getLogger(ADReference.MOD_ID);
 
 	@Override

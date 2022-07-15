@@ -29,6 +29,11 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> {
         int z = originPos.getZ();
         int y = world.getTopY(Heightmap.Type.OCEAN_FLOOR, x, z);
         BlockPos placementPos = new BlockPos(x, y, z);
+
+        return generateBloodKelp(world, random, placementPos);
+    }
+
+    private static boolean generateBloodKelp(StructureWorldAccess world, Random random, BlockPos placementPos) {
         boolean isWater = world.getFluidState(placementPos).isOf(Fluids.WATER);
 
         if (isWater) {
@@ -36,12 +41,11 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> {
             BlockState bloodKelpPlantState = ADBlocks.BLOOD_KELP_PLANT.getDefaultState();
             int maxLength = 1 + random.nextInt(10);
 
-            for(int length = 0; length <= maxLength; ++length) {
+            for (int length = 0; length <= maxLength; ++length) {
                 boolean canSustainBloodKelpPlant = bloodKelpPlantState.canPlaceAt(world, placementPos);
                 boolean isAboveEmpty = world.getFluidState(placementPos.up()).isEmpty();
 
                 if (canSustainBloodKelpPlant && isWater) {
-                    // Place blood kelp plant body blocks then place the stem block on top.
                     if (isAboveEmpty || length == maxLength) {
                         world.setBlockState(placementPos, bloodKelpState
                                 .with(ADBloodKelpBlock.LIT, ADBlockStateUtil.isBloodKelpLit(random))

@@ -1,7 +1,5 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,10 +11,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class ADBloodKelpPlantBlock extends KelpPlantBlock {
     public static final BooleanProperty LIT = Properties.LIT;
@@ -29,6 +32,13 @@ public class ADBloodKelpPlantBlock extends KelpPlantBlock {
     @Override
     protected AbstractPlantStemBlock getStem() {
         return (AbstractPlantStemBlock) ADBlocks.BLOOD_KELP;
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return Objects.requireNonNull(super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos))
+                .with(LIT, state.get(LIT));
     }
 
     @Override

@@ -1,8 +1,9 @@
 package rndm_access.assorteddiscoveries.common.block;
 
-import java.util.Random;
-
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.KelpBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -14,11 +15,16 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
 import rndm_access.assorteddiscoveries.common.util.ADBlockStateUtil;
+
+import java.util.Objects;
+import java.util.Random;
 
 public class ADBloodKelpBlock extends KelpBlock {
     public static final BooleanProperty LIT = Properties.LIT;
@@ -48,10 +54,17 @@ public class ADBloodKelpBlock extends KelpBlock {
     }
 
     @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+                                                WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        return Objects.requireNonNull(super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos))
+                .with(LIT, state.get(LIT));
+    }
+
+    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        double x = pos.getX() + random.nextDouble();
-        double y = pos.getY() + random.nextDouble();
-        double z = pos.getZ() + random.nextDouble();
+        double x = pos.getX() + (random.nextDouble() / 2.0);
+        double y = pos.getY() + (random.nextDouble() / 2.0);
+        double z = pos.getZ() + (random.nextDouble() / 2.0);
 
         if (state.get(LIT)) {
             world.addParticle(ADParticleTypes.BLOOD_KELP_SPORE, x, y, z, 0.0D, 0.0D, 0.0D);

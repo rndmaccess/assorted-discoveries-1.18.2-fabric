@@ -64,6 +64,10 @@ public class AssortedDiscoveries implements ModInitializer {
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.PATCH_ENDER_PLANTS);
 		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.BLOOD_KELP),
 				GenerationStep.Feature.VEGETAL_DECORATION, ADPlacedFeatureKeys.BLOOD_KELP);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.ORE_BAUXITE),
+				GenerationStep.Feature.UNDERGROUND_ORES, ADPlacedFeatureKeys.ORE_BAUXITE_LOWER);
+		BiomeModifications.addFeature(BiomeSelectors.tag(ADBiomeTags.ORE_BAUXITE),
+				GenerationStep.Feature.UNDERGROUND_ORES, ADPlacedFeatureKeys.ORE_BAUXITE_UPPER);
 	}
 
 	private static void registerFuel() {

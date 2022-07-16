@@ -15,6 +15,8 @@ public class ADPlacedFeatureKeys {
     public static final RegistryKey<PlacedFeature> PATCH_WITCHS_CRADLE_RARE = of("patch_witchs_cradle_rare");
     public static final RegistryKey<PlacedFeature> PATCH_ENDER_PLANTS = of("patch_ender_plants");
     public static final RegistryKey<PlacedFeature> BLOOD_KELP = of("blood_kelp");
+    public static final RegistryKey<PlacedFeature> ORE_BAUXITE_LOWER = of("ore_bauxite_lower");
+    public static final RegistryKey<PlacedFeature> ORE_BAUXITE_UPPER = of("ore_bauxite_upper");
 
     public static RegistryKey<PlacedFeature> of(String path) {
         return RegistryKey.of(Registry.PLACED_FEATURE_KEY, ADReference.makeId(path));

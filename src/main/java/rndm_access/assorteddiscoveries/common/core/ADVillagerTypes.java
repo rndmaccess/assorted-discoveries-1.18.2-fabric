@@ -9,22 +9,21 @@ import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADVillagerTypes {
-    public static final VillagerType CRIMSON = register("crimson", BiomeKeys.CRIMSON_FOREST);
-    public static final VillagerType WARPED = register("warped", BiomeKeys.WARPED_FOREST);
-    public static final VillagerType FOREST = register("forest", BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST,
-            BiomeKeys.BIRCH_FOREST, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.DARK_FOREST);
-
     @SafeVarargs
-    private static VillagerType register(String path, RegistryKey<Biome>... biomes) {
+    private static void register(String path, RegistryKey<Biome>... biomes) {
         VillagerType type = VillagerTypeHelper.register(ADReference.makeId(path));
 
         for(RegistryKey<Biome> biome : biomes) {
             VillagerTypeHelper.addVillagerTypeToBiome(biome, type);
         }
-        return type;
     }
 
     public static void registerVillagerTypes() {
+        register("crimson", BiomeKeys.CRIMSON_FOREST);
+        register("warped", BiomeKeys.WARPED_FOREST);
+        register("forest", BiomeKeys.FOREST, BiomeKeys.FLOWER_FOREST, BiomeKeys.BIRCH_FOREST,
+                BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.DARK_FOREST);
+
         AssortedDiscoveries.LOGGER.info("Registered villager types.");
     }
 }

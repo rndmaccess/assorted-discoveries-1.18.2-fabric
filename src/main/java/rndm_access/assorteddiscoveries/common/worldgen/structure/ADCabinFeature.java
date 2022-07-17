@@ -14,7 +14,6 @@ import net.minecraft.world.gen.feature.VillageFeature;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
 
 public class ADCabinFeature extends JigsawFeature {
-
     public ADCabinFeature(Codec<StructurePoolFeatureConfig> config) {
         super(config, 0, true, true, ADCabinFeature::checkLocation);
     }

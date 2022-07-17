@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
 public abstract class ADLivingEntityMixin {
-
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
     public void assorteddiscoveries_handleFallDamage(float fallDistance, float damageMultiplier,
                                                      DamageSource damageSource, CallbackInfoReturnable<Boolean> info) {

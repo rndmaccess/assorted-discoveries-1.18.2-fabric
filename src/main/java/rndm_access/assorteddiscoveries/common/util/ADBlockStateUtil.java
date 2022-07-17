@@ -16,7 +16,6 @@ import rndm_access.assorteddiscoveries.common.core.ADItems;
 import java.util.Random;
 
 public final class ADBlockStateUtil {
-
     public static void dropSpruceCone(BlockState state, World world, BlockPos pos, Random random, float chance) {
         if(state.isOf(Blocks.SPRUCE_LEAVES) && random.nextFloat() <= chance) {
             Block.dropStack(world, pos, new ItemStack(ADItems.SPRUCE_CONE, 1));

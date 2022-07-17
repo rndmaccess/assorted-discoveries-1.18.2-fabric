@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class ADRopeLadderBlockItem extends BlockItem {
-
     public ADRopeLadderBlockItem(Block block, Item.Settings settings) {
         super(block, settings);
     }

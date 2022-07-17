@@ -19,7 +19,6 @@ import java.util.Random;
 
 @Mixin(Block.class)
 public class ADBlockMixin {
-
     @Inject(method = "afterBreak", at = @At("HEAD"))
     private void assorteddiscoveries_dropSpruceConeFromSpruceLeaves(World world, PlayerEntity player, BlockPos pos, BlockState state,
                             BlockEntity blockEntity, ItemStack stack, CallbackInfo info) {

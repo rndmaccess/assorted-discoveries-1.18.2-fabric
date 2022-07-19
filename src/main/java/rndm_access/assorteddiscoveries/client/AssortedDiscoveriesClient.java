@@ -7,10 +7,10 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.GrassColors;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.LavaEmberParticle;
 import net.minecraft.client.render.RenderLayer;
@@ -23,7 +23,6 @@ import rndm_access.assorteddiscoveries.common.core.*;
 
 @Environment(EnvType.CLIENT)
 public class AssortedDiscoveriesClient implements ClientModInitializer {
-
     @Override
     public void onInitializeClient() {
         registerBlockColorProviders();
@@ -51,7 +50,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
     }
 
     private void registerScreens() {
-        ScreenRegistry.register(ADScreenHandlerTypes.WOODCUTTER, ADWoodcutterScreen::new);
+        HandledScreens.register(ADScreenHandlerTypes.WOODCUTTER, ADWoodcutterScreen::new);
     }
 
     private void registerParticleSprites() {

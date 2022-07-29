@@ -28,7 +28,6 @@ public class AssortedDiscoveries implements ModInitializer {
 	public static final ItemGroup MOD_GROUP = FabricItemGroupBuilder.build(ADReference.makeId("mod_group"),
 			() -> new ItemStack(ADItems.CALCITE_BRICKS));
 	public static final Logger LOGGER = LoggerFactory.getLogger(ADReference.MOD_ID);
-	private static final Identifier SPRUCE_LEAVES_LOOT_TABLE = Blocks.SPRUCE_LEAVES.getLootTableId();
 
 	@Override
 	public void onInitialize() {
@@ -88,8 +87,10 @@ public class AssortedDiscoveries implements ModInitializer {
 	}
 
 	private static void modifyLootTables() {
+		Identifier spruceLeavesLootTableId = Blocks.SPRUCE_LEAVES.getLootTableId();
+
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-			if(source.isBuiltin() && SPRUCE_LEAVES_LOOT_TABLE.equals(id)) {
+			if(source.isBuiltin() && spruceLeavesLootTableId.equals(id)) {
 				LootPool.Builder poolBuilder = LootPool.builder()
 						.rolls(ConstantLootNumberProvider.create(1))
 						.conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, 0.02F, 0.023F, 0.025F, 0.035F, 0.1F))

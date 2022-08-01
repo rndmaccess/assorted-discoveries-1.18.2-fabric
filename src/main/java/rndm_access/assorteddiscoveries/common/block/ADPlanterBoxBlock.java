@@ -43,11 +43,11 @@ public class ADPlanterBoxBlock extends Block {
         VoxelShape northBorderShape = Block.createCuboidShape(0.0, 15.0, 13.0, 16.0, 16.0, 16.0);
         List<VoxelShape> borderShapes = ADVoxelShapeHelper.getShapeRotationsAsList(northBorderShape);
         double setSize = 4;
-        double power_set_size = Math.pow(2, setSize);
+        double powerSetSize = Math.pow(2, setSize);
         HashMap<List<Boolean>, VoxelShape> map = new HashMap<>();
 
         // Add every subset to the map which covers every possible shape for every state these blocks.
-        for (int i = 0; i < power_set_size; i++) {
+        for (int i = 0; i < powerSetSize; i++) {
             List<Boolean> isBorderOpen = new ArrayList<>(4);
             VoxelShape tempBorderShape = VoxelShapes.empty();
 

@@ -1,13 +1,12 @@
 package rndm_access.assorteddiscoveries.common.util;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.util.function.BooleanBiFunction;
+import com.google.common.collect.Maps;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,22 +14,11 @@ public final class ADVoxelShapeHelper {
     private ADVoxelShapeHelper() {}
 
     /**
-     * Use the second argument's shapes to cut smaller shapes into the first
-     * argument's shape and return the new shape.
-     */
-    public static VoxelShape cutBox(VoxelShape shape, VoxelShape... cutShapes) {
-        for (VoxelShape cutShape : cutShapes) {
-            shape = VoxelShapes.combine(shape, cutShape, BooleanBiFunction.ONLY_FIRST);
-        }
-        return shape;
-    }
-
-    /**
      * @param source The north variant of the shape.
      * @return A hashmap that has all rotated shapes.
      */
     public static HashMap<Direction, VoxelShape> getShapeRotationsAsMap(VoxelShape source) {
-        HashMap<Direction, VoxelShape> shapes = new HashMap<>();
+        HashMap<Direction, VoxelShape> shapes = Maps.newHashMap();
         Direction north = Direction.NORTH;
         Direction south = Direction.SOUTH;
         Direction east = Direction.EAST;

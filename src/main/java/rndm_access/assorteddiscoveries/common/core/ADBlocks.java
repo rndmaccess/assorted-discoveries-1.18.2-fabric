@@ -125,21 +125,21 @@ public class ADBlocks {
             .requiresTool().strength(0.8F));
     public static final Block CHISELED_SMOKY_QUARTZ_BLOCK = new Block(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_BRICKS = new Block(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
-    public static final Block SMOKY_QUARTZ_BRICK_STAIRS = new ADStairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
+    public static final Block SMOKY_QUARTZ_BRICK_STAIRS = new StairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
-    public static final Block SMOKY_QUARTZ_STAIRS = new ADStairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
+    public static final Block SMOKY_QUARTZ_STAIRS = new StairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_SLAB = new SlabBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOKY_QUARTZ_WALL = new WallBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOOTH_SMOKY_QUARTZ = new Block(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
-    public static final Block SMOOTH_SMOKY_QUARTZ_STAIRS = new ADStairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
+    public static final Block SMOOTH_SMOKY_QUARTZ_STAIRS = new StairsBlock(SMOKY_QUARTZ_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOOTH_SMOKY_QUARTZ_SLAB = new SlabBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
     public static final Block SMOOTH_SMOKY_QUARTZ_WALL = new WallBlock(AbstractBlock.Settings.copy(SMOKY_QUARTZ_BLOCK));
-    public static final Block CRACKED_STONE_BRICK_STAIRS = new ADStairsBlock(Blocks.CRACKED_STONE_BRICKS.getDefaultState(),
+    public static final Block CRACKED_STONE_BRICK_STAIRS = new StairsBlock(Blocks.CRACKED_STONE_BRICKS.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS));
     public static final Block CRACKED_STONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS));
     public static final Block CRACKED_STONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS));
@@ -184,7 +184,7 @@ public class ADBlocks {
     public static final Block DARK_OAK_ROPE_LADDER = ropeLadderBlock();
     public static final Block CRIMSON_ROPE_LADDER = ropeLadderBlock();
     public static final Block WARPED_ROPE_LADDER = ropeLadderBlock();
-    public static final Block IRON_LADDER = new ADLadderBlock(AbstractBlock.Settings.of(Material.METAL)
+    public static final Block IRON_LADDER = new LadderBlock(AbstractBlock.Settings.of(Material.METAL)
             .strength(0.4F, 5.0F).sounds(BlockSoundGroup.METAL).nonOpaque());
     public static final Block DIRT_SLAB = new ADDirtSlabBlock(AbstractBlock.Settings.copy(Blocks.DIRT).ticksRandomly());
     public static final Block GRASS_SLAB = new ADGrassSlabBlock(AbstractBlock.Settings.copy(Blocks.GRASS_BLOCK));
@@ -192,7 +192,7 @@ public class ADBlocks {
     public static final Block COARSE_DIRT_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.COARSE_DIRT));
     public static final Block SNOW_BRICKS = new Block(AbstractBlock.Settings.of(Material.SNOW_BLOCK).strength(0.6F)
             .requiresTool().sounds(BlockSoundGroup.SNOW));
-    public static final Block SNOW_BRICK_STAIRS = new ADStairsBlock(ADBlocks.SNOW_BRICKS.getDefaultState(),
+    public static final Block SNOW_BRICK_STAIRS = new StairsBlock(ADBlocks.SNOW_BRICKS.getDefaultState(),
             AbstractBlock.Settings.copy(SNOW_BRICKS));
     public static final Block SNOW_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(SNOW_BRICKS));
     public static final Block SNOW_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(SNOW_BRICKS));
@@ -273,12 +273,12 @@ public class ADBlocks {
     public static final Block BAUXITE = new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.SPRUCE_BROWN)
             .strength(0.3F));
     public static final Block BAUXITE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(BAUXITE));
-    public static final Block BAUXITE_STAIRS = new ADStairsBlock(BAUXITE.getDefaultState(),
+    public static final Block BAUXITE_STAIRS = new StairsBlock(BAUXITE.getDefaultState(),
             AbstractBlock.Settings.copy(BAUXITE));
     public static final Block BAUXITE_WALL = new WallBlock(AbstractBlock.Settings.copy(BAUXITE));
     public static final Block BAUXITE_BRICKS = new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.SPRUCE_BROWN)
             .strength(0.4F));
-    public static final Block BAUXITE_BRICK_STAIRS = new ADStairsBlock(BAUXITE_BRICKS.getDefaultState(),
+    public static final Block BAUXITE_BRICK_STAIRS = new StairsBlock(BAUXITE_BRICKS.getDefaultState(),
             AbstractBlock.Settings.copy(BAUXITE_BRICKS));
     public static final Block BAUXITE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(BAUXITE_BRICKS));
     public static final Block BAUXITE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(BAUXITE_BRICKS));
@@ -294,26 +294,26 @@ public class ADBlocks {
     public static final Block CRACKED_BAUXITE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(BAUXITE_BRICKS));
     public static final Block SNOW_SLAB = new SlabBlock(AbstractBlock.Settings.of(Material.SNOW_BLOCK).requiresTool()
             .strength(0.2F).sounds(BlockSoundGroup.SNOW));
-    public static final Block SNOW_STAIRS = new ADStairsBlock(Blocks.SNOW_BLOCK.getDefaultState(),
+    public static final Block SNOW_STAIRS = new StairsBlock(Blocks.SNOW_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(SNOW_SLAB));
     public static final Block SNOW_WALL = new WallBlock(AbstractBlock.Settings.copy(SNOW_SLAB));
     public static final Block TWISTED_NETHER_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.NETHER_BRICKS));
-    public static final Block TWISTED_NETHER_BRICK_STAIRS = new ADStairsBlock(TWISTED_NETHER_BRICKS.getDefaultState(),
+    public static final Block TWISTED_NETHER_BRICK_STAIRS = new StairsBlock(TWISTED_NETHER_BRICKS.getDefaultState(),
             AbstractBlock.Settings.copy(TWISTED_NETHER_BRICKS));
     public static final Block TWISTED_NETHER_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(TWISTED_NETHER_BRICKS));
     public static final Block TWISTED_NETHER_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(TWISTED_NETHER_BRICKS));
     public static final Block TWISTED_NETHERRACK = new Block(AbstractBlock.Settings.copy(Blocks.NETHERRACK));
-    public static final Block TWISTED_NETHERRACK_STAIRS = new ADStairsBlock(TWISTED_NETHERRACK.getDefaultState(),
+    public static final Block TWISTED_NETHERRACK_STAIRS = new StairsBlock(TWISTED_NETHERRACK.getDefaultState(),
             AbstractBlock.Settings.copy(TWISTED_NETHERRACK));
     public static final Block TWISTED_NETHERRACK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(TWISTED_NETHERRACK));
     public static final Block TWISTED_NETHERRACK_WALL = new WallBlock(AbstractBlock.Settings.copy(TWISTED_NETHERRACK));
     public static final Block WEEPING_NETHER_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.NETHER_BRICKS));
-    public static final Block WEEPING_NETHER_BRICK_STAIRS = new ADStairsBlock(WEEPING_NETHER_BRICKS.getDefaultState(),
+    public static final Block WEEPING_NETHER_BRICK_STAIRS = new StairsBlock(WEEPING_NETHER_BRICKS.getDefaultState(),
             AbstractBlock.Settings.copy(WEEPING_NETHER_BRICKS));
     public static final Block WEEPING_NETHER_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(WEEPING_NETHER_BRICKS));
     public static final Block WEEPING_NETHER_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(WEEPING_NETHER_BRICKS));
     public static final Block WEEPING_NETHERRACK = new Block(AbstractBlock.Settings.copy(Blocks.NETHERRACK));
-    public static final Block WEEPING_NETHERRACK_STAIRS = new ADStairsBlock(WEEPING_NETHERRACK.getDefaultState(),
+    public static final Block WEEPING_NETHERRACK_STAIRS = new StairsBlock(WEEPING_NETHERRACK.getDefaultState(),
             AbstractBlock.Settings.copy(WEEPING_NETHERRACK));
     public static final Block WEEPING_NETHERRACK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(WEEPING_NETHERRACK));
     public static final Block WEEPING_NETHERRACK_WALL = new WallBlock(AbstractBlock.Settings.copy(WEEPING_NETHERRACK));
@@ -329,22 +329,22 @@ public class ADBlocks {
             .strength(0.2F).noCollision().sounds(BlockSoundGroup.GLASS));
     public static final Block CATTAIL = new ADCattailBlock(AbstractBlock.Settings.of(Material.PLANT).noCollision()
             .nonOpaque().sounds(BlockSoundGroup.WET_GRASS));
-    public static final Block CHOCOLATE_CAKE = new ADCakeBlock(AbstractBlock.Settings.copy(Blocks.CAKE));
-    public static final Block RED_VELVET_CAKE = new ADCakeBlock(AbstractBlock.Settings.copy(Blocks.CAKE));
+    public static final Block CHOCOLATE_CAKE = new CakeBlock(AbstractBlock.Settings.copy(Blocks.CAKE));
+    public static final Block RED_VELVET_CAKE = new CakeBlock(AbstractBlock.Settings.copy(Blocks.CAKE));
     public static final Block STONE_TILES = new Block(AbstractBlock.Settings.copy(Blocks.STONE)
             .sounds(BlockSoundGroup.DEEPSLATE_TILES));
     public static final Block STONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(STONE_TILES));
-    public static final Block STONE_TILE_STAIRS = new ADStairsBlock(STONE_TILES.getDefaultState(),
+    public static final Block STONE_TILE_STAIRS = new StairsBlock(STONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block STONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block MOSSY_STONE_TILES = new Block(AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block MOSSY_STONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(STONE_TILES));
-    public static final Block MOSSY_STONE_TILE_STAIRS = new ADStairsBlock(MOSSY_STONE_TILES.getDefaultState(),
+    public static final Block MOSSY_STONE_TILE_STAIRS = new StairsBlock(MOSSY_STONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block MOSSY_STONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block CRACKED_STONE_TILES = new Block(AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block CRACKED_STONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(STONE_TILES));
-    public static final Block CRACKED_STONE_TILE_STAIRS = new ADStairsBlock(CRACKED_STONE_TILES.getDefaultState(),
+    public static final Block CRACKED_STONE_TILE_STAIRS = new StairsBlock(CRACKED_STONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block CRACKED_STONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(STONE_TILES));
     public static final Block SWEET_BERRY_PIE = new ADPieBlock(AbstractBlock.Settings.copy(Blocks.CAKE), 3,
@@ -353,89 +353,89 @@ public class ADBlocks {
             0.6F);
     public static final Block BLACKSTONE_TILES = new Block(AbstractBlock.Settings.copy(Blocks.BLACKSTONE)
             .sounds(BlockSoundGroup.DEEPSLATE_TILES));
-    public static final Block BLACKSTONE_TILE_STAIRS = new ADStairsBlock(BLACKSTONE_TILES.getDefaultState(),
+    public static final Block BLACKSTONE_TILE_STAIRS = new StairsBlock(BLACKSTONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block BLACKSTONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block BLACKSTONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block TWISTED_BLACKSTONE_TILES = new Block(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
-    public static final Block TWISTED_BLACKSTONE_TILE_STAIRS = new ADStairsBlock(BLACKSTONE_TILES.getDefaultState(),
+    public static final Block TWISTED_BLACKSTONE_TILE_STAIRS = new StairsBlock(BLACKSTONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block TWISTED_BLACKSTONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block TWISTED_BLACKSTONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block WEEPING_BLACKSTONE_TILES = new Block(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
-    public static final Block WEEPING_BLACKSTONE_TILE_STAIRS = new ADStairsBlock(BLACKSTONE_TILES.getDefaultState(),
+    public static final Block WEEPING_BLACKSTONE_TILE_STAIRS = new StairsBlock(BLACKSTONE_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block WEEPING_BLACKSTONE_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block WEEPING_BLACKSTONE_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(BLACKSTONE_TILES));
     public static final Block TWISTED_POLISHED_BLACKSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
-    public static final Block TWISTED_POLISHED_BLACKSTONE_BRICK_STAIRS = new ADStairsBlock(
+    public static final Block TWISTED_POLISHED_BLACKSTONE_BRICK_STAIRS = new StairsBlock(
             Blocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block TWISTED_POLISHED_BLACKSTONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block TWISTED_POLISHED_BLACKSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block WEEPING_POLISHED_BLACKSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
-    public static final Block WEEPING_POLISHED_BLACKSTONE_BRICK_STAIRS = new ADStairsBlock(
+    public static final Block WEEPING_POLISHED_BLACKSTONE_BRICK_STAIRS = new StairsBlock(
             Blocks.POLISHED_BLACKSTONE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block WEEPING_POLISHED_BLACKSTONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block WEEPING_POLISHED_BLACKSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_BLACKSTONE_BRICKS));
     public static final Block TWISTED_BLACKSTONE = new Block(AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
-    public static final Block TWISTED_BLACKSTONE_STAIRS = new ADStairsBlock(Blocks.BLACKSTONE.getDefaultState(),
+    public static final Block TWISTED_BLACKSTONE_STAIRS = new StairsBlock(Blocks.BLACKSTONE.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
     public static final Block TWISTED_BLACKSTONE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
     public static final Block TWISTED_BLACKSTONE_WALL = new WallBlock(AbstractBlock.Settings.copy(TWISTED_BLACKSTONE));
     public static final Block WEEPING_BLACKSTONE = new Block(AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
-    public static final Block WEEPING_BLACKSTONE_STAIRS = new ADStairsBlock(
+    public static final Block WEEPING_BLACKSTONE_STAIRS = new StairsBlock(
             Blocks.BLACKSTONE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
     public static final Block WEEPING_BLACKSTONE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
     public static final Block WEEPING_BLACKSTONE_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.BLACKSTONE));
     public static final Block QUARTZ_TILES = new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)
             .sounds(BlockSoundGroup.DEEPSLATE_TILES));
-    public static final Block QUARTZ_TILE_STAIRS = new ADStairsBlock(QUARTZ_TILES.getDefaultState(),
+    public static final Block QUARTZ_TILE_STAIRS = new StairsBlock(QUARTZ_TILES.getDefaultState(),
             AbstractBlock.Settings.copy(QUARTZ_TILES));
     public static final Block QUARTZ_TILE_SLAB = new SlabBlock(AbstractBlock.Settings.copy(QUARTZ_TILES));
     public static final Block QUARTZ_TILE_WALL = new WallBlock(AbstractBlock.Settings.copy(QUARTZ_TILES));
     public static final Block CALCITE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.CALCITE));
-    public static final Block CALCITE_BRICK_STAIRS = new ADStairsBlock(Blocks.CALCITE.getDefaultState(),
+    public static final Block CALCITE_BRICK_STAIRS = new StairsBlock(Blocks.CALCITE.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block CALCITE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block CALCITE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block MOSSY_CALCITE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.CALCITE));
-    public static final Block MOSSY_CALCITE_BRICK_STAIRS = new ADStairsBlock(Blocks.CALCITE.getDefaultState(),
+    public static final Block MOSSY_CALCITE_BRICK_STAIRS = new StairsBlock(Blocks.CALCITE.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block MOSSY_CALCITE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block MOSSY_CALCITE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block CRACKED_CALCITE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.CALCITE));
-    public static final Block CRACKED_CALCITE_BRICK_STAIRS = new ADStairsBlock(
+    public static final Block CRACKED_CALCITE_BRICK_STAIRS = new StairsBlock(
             CRACKED_CALCITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(CRACKED_CALCITE_BRICKS));
     public static final Block CRACKED_CALCITE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(CRACKED_CALCITE_BRICKS));
     public static final Block CRACKED_CALCITE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(CRACKED_CALCITE_BRICKS));
     public static final Block CHISELED_CALCITE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.CALCITE));
     public static final Block TUFF_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.TUFF));
-    public static final Block TUFF_BRICK_STAIRS = new ADStairsBlock(Blocks.TUFF.getDefaultState(), AbstractBlock.Settings.copy(Blocks.TUFF));
+    public static final Block TUFF_BRICK_STAIRS = new StairsBlock(Blocks.TUFF.getDefaultState(), AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block TUFF_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block TUFF_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block MOSSY_TUFF_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.TUFF));
-    public static final Block MOSSY_TUFF_BRICK_STAIRS = new ADStairsBlock(Blocks.TUFF.getDefaultState(),
+    public static final Block MOSSY_TUFF_BRICK_STAIRS = new StairsBlock(Blocks.TUFF.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block MOSSY_TUFF_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block MOSSY_TUFF_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block CRACKED_TUFF_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.TUFF));
-    public static final Block CRACKED_TUFF_BRICK_STAIRS = new ADStairsBlock(Blocks.TUFF.getDefaultState(),
+    public static final Block CRACKED_TUFF_BRICK_STAIRS = new StairsBlock(Blocks.TUFF.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block CRACKED_TUFF_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block CRACKED_TUFF_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block CHISELED_TUFF_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.TUFF));
     public static final Block DRIPSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
-    public static final Block DRIPSTONE_BRICK_STAIRS = new ADStairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
+    public static final Block DRIPSTONE_BRICK_STAIRS = new StairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block DRIPSTONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block DRIPSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block MOSSY_DRIPSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
-    public static final Block MOSSY_DRIPSTONE_BRICK_STAIRS = new ADStairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
+    public static final Block MOSSY_DRIPSTONE_BRICK_STAIRS = new StairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block MOSSY_DRIPSTONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block MOSSY_DRIPSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block CRACKED_DRIPSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
-    public static final Block CRACKED_DRIPSTONE_BRICK_STAIRS = new ADStairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
+    public static final Block CRACKED_DRIPSTONE_BRICK_STAIRS = new StairsBlock(Blocks.DRIPSTONE_BLOCK.getDefaultState(),
             AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block CRACKED_DRIPSTONE_BRICK_SLAB = new SlabBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block CRACKED_DRIPSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
@@ -452,11 +452,11 @@ public class ADBlocks {
     }
 
     private static WallTorchBlock wallTorchBlock(ParticleEffect flameParticle) {
-        return new ADWallTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH), flameParticle);
+        return new WallTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH), flameParticle);
     }
 
     private static TorchBlock torchBlock(ParticleEffect flameParticle) {
-        return new ADTorchBlock(AbstractBlock.Settings.copy(Blocks.TORCH), flameParticle);
+        return new TorchBlock(AbstractBlock.Settings.copy(Blocks.TORCH), flameParticle);
     }
 
     private static LanternBlock lanternBlock() {

@@ -11,7 +11,6 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.SetCountLootFunction;

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class ADMixedSeedPacketItem extends Item {
-    protected static final ImmutableList<Item> SEEDS;
+    protected static final ImmutableList<Item> SEEDS = ImmutableList.of(ADItems.GARLIC, ADItems.GREEN_ONION, ADItems.BOK_CHOY_SEEDS);
 
     public ADMixedSeedPacketItem(Item.Settings settings) {
         super(settings);
@@ -40,9 +40,5 @@ public class ADMixedSeedPacketItem extends Item {
         } else {
             return TypedActionResult.consume(new ItemStack(heldStack.getItem(), heldStack.getCount() - 1));
         }
-    }
-
-    static {
-        SEEDS = ImmutableList.of(ADItems.GARLIC, ADItems.GREEN_ONION, ADItems.BOK_CHOY_SEEDS);
     }
 }

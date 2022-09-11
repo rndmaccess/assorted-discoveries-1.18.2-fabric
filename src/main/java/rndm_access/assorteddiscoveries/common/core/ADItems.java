@@ -1,10 +1,12 @@
 package rndm_access.assorteddiscoveries.common.core;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.util.registry.Registry;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.common.AssortedDiscoveries;
+import rndm_access.assorteddiscoveries.common.block.ADVillagerPlushBlock;
 import rndm_access.assorteddiscoveries.common.item.*;
 
 public class ADItems {
@@ -100,7 +102,13 @@ public class ADItems {
     public static final Item ZOGLIN_PLUSH = blockItem(ADBlocks.ZOGLIN_PLUSH);
     public static final Item POLAR_BEAR_PLUSH = blockItem(ADBlocks.POLAR_BEAR_PLUSH);
     public static final Item ALLAY_PLUSH = blockItem(ADBlocks.ALLAY_PLUSH);
+
+    public static final Item PILLAGER_PLUSH = blockItem(ADBlocks.PILLAGER_PLUSH);
+    public static final Item VINDICATOR_PLUSH = blockItem(ADBlocks.VINDICATOR_PLUSH);
+    public static final Item EVOKER_PLUSH = blockItem(ADBlocks.EVOKER_PLUSH);
+
     public static final Item RAVAGER_PLUSH = blockItem(ADBlocks.RAVAGER_PLUSH);
+    public static final Item SHULKER_PLUSH = blockItem(ADBlocks.SHULKER_PLUSH);
     public static final Item NETHER_SMOKY_QUARTZ_ORE = blockItem(ADBlocks.NETHER_SMOKY_QUARTZ_ORE);
     public static final Item SMOKY_QUARTZ_BLOCK = blockItem(ADBlocks.SMOKY_QUARTZ_BLOCK);
     public static final Item CHISELED_SMOKY_QUARTZ_BLOCK = blockItem(ADBlocks.CHISELED_SMOKY_QUARTZ_BLOCK);
@@ -364,7 +372,7 @@ public class ADItems {
     public static final Item WITCHS_CRADLE_BRANCH = new AliasedBlockItem(ADBlocks.WITCHS_CRADLE, makeSettings(ADFoodComponents.WITCHS_CRADLE_BRANCH));
     public static final Item WITCHS_CRADLE_SOUP = new ADFoodContainerItem(makeSettings(ADFoodComponents.WITCHS_CRADLE_SOUP, 1));
     public static final Item GLASS_VIAL = new ADGlassVialItem(makeSettings());
-    public static final Item BLOOD_VIAL = new ADDrinkItem(makeSettings(ADFoodComponents.BLOOD_VILE, 1), ADItems.GLASS_VIAL);
+    public static final Item BLOOD_VIAL = new ADDrinkItem(makeSettings(ADFoodComponents.BLOOD_VILE, 16), ADItems.GLASS_VIAL);
     public static final Item MIXED_SEED_PACKET = new ADMixedSeedPacketItem(makeSettings());
     public static final Item CATTAIL = new AliasedBlockItem(ADBlocks.CATTAIL, makeSettings());
     public static final Item DRIED_BAMBOO = item();
@@ -374,6 +382,7 @@ public class ADItems {
     public static final Item DRIED_BLOOD_KELP_BLOCK = blockItem(ADBlocks.DRIED_BLOOD_KELP_BLOCK);
     public static final Item DRIED_BLOOD_KELP = new Item(makeSettings(FoodComponents.DRIED_KELP));
     public static final Item BLOOD_KELP_LANTERN = blockItem(ADBlocks.BLOOD_KELP_LANTERN);
+    public static final Item MAROON_WOOL = blockItem(ADBlocks.MAROON_WOOL);
 
     private static Item item() {
         return new Item(makeSettings());
@@ -503,7 +512,13 @@ public class ADItems {
         register("zoglin_plush", ZOGLIN_PLUSH);
         register("polar_bear_plush", POLAR_BEAR_PLUSH);
         register("allay_plush", ALLAY_PLUSH);
+
+        register("pillager_plush", PILLAGER_PLUSH);
+        register("vindicator_plush", VINDICATOR_PLUSH);
+        register("evoker_plush", EVOKER_PLUSH);
+
         register("ravager_plush", RAVAGER_PLUSH);
+        register("shulker_plush", SHULKER_PLUSH);
         register("nether_smoky_quartz_ore", NETHER_SMOKY_QUARTZ_ORE);
         register("smoky_quartz_block", SMOKY_QUARTZ_BLOCK);
         register("chiseled_smoky_quartz_block", CHISELED_SMOKY_QUARTZ_BLOCK);
@@ -777,6 +792,7 @@ public class ADItems {
         register("dried_blood_kelp_block", DRIED_BLOOD_KELP_BLOCK);
         register("dried_blood_kelp", DRIED_BLOOD_KELP);
         register("blood_kelp_lantern", BLOOD_KELP_LANTERN);
+        register("maroon_wool", MAROON_WOOL);
 
         AssortedDiscoveries.LOGGER.info("Registered Items");
     }

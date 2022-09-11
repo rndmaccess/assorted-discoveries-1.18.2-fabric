@@ -512,11 +512,9 @@ public class ADItems {
         register("zoglin_plush", ZOGLIN_PLUSH);
         register("polar_bear_plush", POLAR_BEAR_PLUSH);
         register("allay_plush", ALLAY_PLUSH);
-
         register("pillager_plush", PILLAGER_PLUSH);
         register("vindicator_plush", VINDICATOR_PLUSH);
         register("evoker_plush", EVOKER_PLUSH);
-
         register("ravager_plush", RAVAGER_PLUSH);
         register("shulker_plush", SHULKER_PLUSH);
         register("nether_smoky_quartz_ore", NETHER_SMOKY_QUARTZ_ORE);

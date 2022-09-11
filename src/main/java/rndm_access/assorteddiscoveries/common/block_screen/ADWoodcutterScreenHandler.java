@@ -1,9 +1,6 @@
 package rndm_access.assorteddiscoveries.common.block_screen;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingResultInventory;
@@ -11,15 +8,20 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.*;
+import net.minecraft.screen.Property;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.common.core.ADBlocks;
-import rndm_access.assorteddiscoveries.common.core.ADScreenHandlerTypes;
 import rndm_access.assorteddiscoveries.common.core.ADRecipeTypes;
+import rndm_access.assorteddiscoveries.common.core.ADScreenHandlerTypes;
 import rndm_access.assorteddiscoveries.common.item.crafting.ADWoodcuttingRecipe;
+
+import java.util.List;
 
 public class ADWoodcutterScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;

@@ -102,11 +102,9 @@ public class ADItems {
     public static final Item ZOGLIN_PLUSH = blockItem(ADBlocks.ZOGLIN_PLUSH);
     public static final Item POLAR_BEAR_PLUSH = blockItem(ADBlocks.POLAR_BEAR_PLUSH);
     public static final Item ALLAY_PLUSH = blockItem(ADBlocks.ALLAY_PLUSH);
-
     public static final Item PILLAGER_PLUSH = blockItem(ADBlocks.PILLAGER_PLUSH);
     public static final Item VINDICATOR_PLUSH = blockItem(ADBlocks.VINDICATOR_PLUSH);
     public static final Item EVOKER_PLUSH = blockItem(ADBlocks.EVOKER_PLUSH);
-
     public static final Item RAVAGER_PLUSH = blockItem(ADBlocks.RAVAGER_PLUSH);
     public static final Item SHULKER_PLUSH = blockItem(ADBlocks.SHULKER_PLUSH);
     public static final Item NETHER_SMOKY_QUARTZ_ORE = blockItem(ADBlocks.NETHER_SMOKY_QUARTZ_ORE);
@@ -383,6 +381,10 @@ public class ADItems {
     public static final Item DRIED_BLOOD_KELP = new Item(makeSettings(FoodComponents.DRIED_KELP));
     public static final Item BLOOD_KELP_LANTERN = blockItem(ADBlocks.BLOOD_KELP_LANTERN);
     public static final Item MAROON_WOOL = blockItem(ADBlocks.MAROON_WOOL);
+    public static final Item MAROON_STAINED_GLASS = blockItem(ADBlocks.MAROON_STAINED_GLASS);
+    public static final Item MAROON_STAINED_GLASS_PANE = blockItem(ADBlocks.MAROON_STAINED_GLASS_PANE);
+    public static final Item MAROON_CANDLE = blockItem(ADBlocks.MAROON_CANDLE);
+    public static final Item MAROON_DYE = item();
 
     private static Item item() {
         return new Item(makeSettings());
@@ -791,6 +793,10 @@ public class ADItems {
         register("dried_blood_kelp", DRIED_BLOOD_KELP);
         register("blood_kelp_lantern", BLOOD_KELP_LANTERN);
         register("maroon_wool", MAROON_WOOL);
+        register("maroon_stained_glass", MAROON_STAINED_GLASS);
+        register("maroon_stained_glass_pane", MAROON_STAINED_GLASS_PANE);
+        register("maroon_candle", MAROON_CANDLE);
+        register("maroon_dye", MAROON_DYE);
 
         AssortedDiscoveries.LOGGER.info("Registered Items");
     }

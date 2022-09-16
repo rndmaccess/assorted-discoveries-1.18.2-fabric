@@ -164,5 +164,8 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
                 ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);
+
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),
+                ADBlocks.MAROON_STAINED_GLASS, ADBlocks.MAROON_STAINED_GLASS_PANE);
     }
 }

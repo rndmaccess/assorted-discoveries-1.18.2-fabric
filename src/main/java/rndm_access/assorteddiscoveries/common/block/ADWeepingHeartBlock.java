@@ -2,6 +2,7 @@ package rndm_access.assorteddiscoveries.common.block;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
@@ -22,7 +23,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.event.GameEvent;
 import rndm_access.assorteddiscoveries.common.core.ADItems;
 import rndm_access.assorteddiscoveries.common.core.ADParticleTypes;
 
@@ -87,25 +87,23 @@ public class ADWeepingHeartBlock extends Block implements Fertilizable {
     }
 
     private void givePlayerNectar(PlayerEntity player, Hand hand) {
-        boolean hasWeepingHeartNectarBucket = player.getInventory().contains(new ItemStack(ADItems.WEEPING_HEART_NECTAR_BUCKET));
+        ItemStack nectarBucketStack = new ItemStack(ADItems.WEEPING_HEART_NECTAR_BUCKET);
+
+        player.playSound(SoundEvents.BLOCK_BEEHIVE_DRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         if(player.isCreative()) {
-            if(!hasWeepingHeartNectarBucket) {
-                // TODO: This sound is too much like water replace it!
-                player.playSound(SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                player.giveItemStack(new ItemStack(ADItems.WEEPING_HEART_NECTAR_BUCKET, 1));
+            PlayerInventory playerInventory = player.getInventory();
+
+            if(!playerInventory.contains(nectarBucketStack)) {
+                player.giveItemStack(nectarBucketStack);
             }
-        }
-        else {
+        } else {
             player.getStackInHand(hand).decrement(1);
-            // TODO: This sound is too much like water replace it!
-            player.playSound(SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
             if(player.getStackInHand(hand).isEmpty()) {
-
-                player.setStackInHand(hand, new ItemStack(ADItems.WEEPING_HEART_NECTAR_BUCKET));
+                player.setStackInHand(hand, nectarBucketStack);
             } else {
-                player.giveItemStack(new ItemStack(ADItems.WEEPING_HEART_NECTAR_BUCKET, 1));
+                player.giveItemStack(nectarBucketStack);
             }
         }
     }

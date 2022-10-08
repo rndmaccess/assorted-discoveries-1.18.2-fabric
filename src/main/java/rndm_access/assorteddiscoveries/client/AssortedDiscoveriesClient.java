@@ -17,7 +17,9 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
 import rndm_access.assorteddiscoveries.ADReference;
 import rndm_access.assorteddiscoveries.client.block_entity.ADDyedCampfireBlockEntityRenderer;
+import rndm_access.assorteddiscoveries.client.particle.ADFallingWeepingHeartNectarParticle;
 import rndm_access.assorteddiscoveries.client.particle.ADSporeParticle;
+import rndm_access.assorteddiscoveries.client.particle.ADWeepingHeartAirNectarParticle;
 import rndm_access.assorteddiscoveries.client.screen.ADWoodcutterScreen;
 import rndm_access.assorteddiscoveries.common.core.*;
 
@@ -132,6 +134,8 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         factoryRegistry.register(ADParticleTypes.BLACK_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLOOD_KELP_SPORE, ADSporeParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.WITCHS_CRADLE_SPORE, ADSporeParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.FALLING_WEEPING_HEART_NECTAR, ADFallingWeepingHeartNectarParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.WEEPING_HEART_AIR_NECTAR, ADWeepingHeartAirNectarParticle.Factory::new);
     }
 
     private void registerRenderLayers() {
@@ -160,7 +164,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
                 ADBlocks.BLACK_WALL_TORCH, ADBlocks.BOK_CHOY, ADBlocks.GARLIC, ADBlocks.GREEN_ONIONS,
                 ADBlocks.BLUEBERRY_BUSH, ADBlocks.WITCHS_CRADLE, ADBlocks.SNAPDRAGON, ADBlocks.POTTED_SNAPDRAGON,
                 ADBlocks.ENDER_GRASS, ADBlocks.ICICLE, ADBlocks.CATTAIL, ADBlocks.POTTED_PURPLE_MUSHROOM,
-                ADBlocks.BLOOD_KELP, ADBlocks.BLOOD_KELP_PLANT);
+                ADBlocks.BLOOD_KELP, ADBlocks.BLOOD_KELP_PLANT, ADBlocks.WEEPING_HEART);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
                 ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);

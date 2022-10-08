@@ -437,9 +437,9 @@ public class ADBlocks {
     public static final Block CRACKED_DRIPSTONE_BRICK_WALL = new WallBlock(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block CHISELED_DRIPSTONE_BRICKS = new Block(AbstractBlock.Settings.copy(Blocks.DRIPSTONE_BLOCK));
     public static final Block BLOOD_KELP = new ADBloodKelpBlock(AbstractBlock.Settings.copy(Blocks.KELP)
-            .luminance(getLuminanceFromState(10)));
+            .luminance(getLuminanceFromState()));
     public static final Block BLOOD_KELP_PLANT = new ADBloodKelpPlantBlock(AbstractBlock.Settings.copy(Blocks.KELP_PLANT)
-            .luminance(getLuminanceFromState(10)));
+            .luminance(getLuminanceFromState()));
     public static final Block DRIED_BLOOD_KELP_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.DRIED_KELP_BLOCK));
     public static final Block BLOOD_KELP_LANTERN = new PillarBlock(AbstractBlock.Settings.of(Material.GLASS, MapColor.PALE_YELLOW)
             .strength(0.3F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 15));
@@ -453,6 +453,8 @@ public class ADBlocks {
     public static final Block MAROON_CANDLE = new CandleBlock(AbstractBlock.Settings.of(Material.DECORATION, MapColor.RED)
             .nonOpaque().strength(0.1F).sounds(BlockSoundGroup.CANDLE).luminance(CandleBlock.STATE_TO_LUMINANCE));
     public static final Block MAROON_CANDLE_CAKE = new CandleCakeBlock(MAROON_CANDLE, AbstractBlock.Settings.copy(Blocks.CANDLE_CAKE));
+    public static final Block WEEPING_HEART = new ADWeepingHeartBlock(AbstractBlock.Settings.of(Material.PLANT).ticksRandomly()
+            .breakInstantly().noCollision().sounds(BlockSoundGroup.SPORE_BLOSSOM).luminance(getCropLuminanceFromState()));
 
     private static ADBambooFenceBlock bambooFenceBlock(MapColor color) {
         return new ADBambooFenceBlock(AbstractBlock.Settings.of(Material.WOOD, color).strength(1.0F)
@@ -493,8 +495,12 @@ public class ADBlocks {
         return new ADDyedCampfireBlock(AbstractBlock.Settings.copy(Blocks.CAMPFIRE), sparkParticle);
     }
 
-    private static ToIntFunction<BlockState> getLuminanceFromState(int luminance) {
-        return (state) -> state.get(Properties.LIT) ? luminance : 0;
+    private static ToIntFunction<BlockState> getLuminanceFromState() {
+        return (state) -> state.get(Properties.LIT) ? 10 : 0;
+    }
+
+    private static ToIntFunction<BlockState> getCropLuminanceFromState() {
+        return (state) -> state.get(Properties.AGE_3) >= 2 ? 10 : 0;
     }
 
     private static void register(String path, Block block) {
@@ -879,6 +885,7 @@ public class ADBlocks {
         register("maroon_stained_glass_pane", MAROON_STAINED_GLASS_PANE);
         register("maroon_candle", MAROON_CANDLE);
         register("maroon_candle_cake", MAROON_CANDLE_CAKE);
+        register("weeping_heart", WEEPING_HEART);
 
         AssortedDiscoveries.LOGGER.info("Registered blocks");
     }

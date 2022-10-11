@@ -1,7 +1,10 @@
 package rndm_access.assorteddiscoveries.common.block;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -43,25 +46,24 @@ public class ADPlanterBoxBlock extends Block {
         VoxelShape northBorderShape = Block.createCuboidShape(0.0, 15.0, 13.0, 16.0, 16.0, 16.0);
         List<VoxelShape> borderShapes = ADVoxelShapeHelper.getShapeRotationsAsList(northBorderShape);
         double setSize = 4;
-        double powerSetSize = Math.pow(2, setSize);
+        double power_set_size = Math.pow(2, setSize);
         HashMap<List<Boolean>, VoxelShape> map = new HashMap<>();
 
         // Add every subset to the map which covers every possible shape for every state these blocks.
-        for (int i = 0; i < powerSetSize; i++) {
-            List<Boolean> isBorderOpen = new ArrayList<>(4);
+        for (int i = 0; i < power_set_size; i++) {
+            ArrayList<Boolean> edges = new ArrayList<>(4);
             VoxelShape tempBorderShape = VoxelShapes.empty();
 
             for (int j = 0; j < setSize; j++) {
-                // If true there is a border here on the planter box.
-                if ((i >> j) % 2 == 1) {
-                    isBorderOpen.add(false);
+                // If this bit is on we know there has to be an edge on the planter box.
+                if (((i >> j) & 0x01) == 1) {
+                    edges.add(false);
                     tempBorderShape = VoxelShapes.union(tempBorderShape, borderShapes.get(j));
-                }
-                else {
-                    isBorderOpen.add(true);
+                } else {
+                    edges.add(true);
                 }
             }
-            map.put(isBorderOpen, VoxelShapes.union(tempBorderShape, bottomShape));
+            map.put(edges, VoxelShapes.union(tempBorderShape, bottomShape));
         }
         return map;
     }

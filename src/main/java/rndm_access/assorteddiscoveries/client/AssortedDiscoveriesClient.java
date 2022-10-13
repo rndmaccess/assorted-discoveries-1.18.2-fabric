@@ -72,6 +72,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         registerParticleSprite("green_spark");
         registerParticleSprite("red_spark");
         registerParticleSprite("black_spark");
+        registerParticleSprite("maroon_spark");
         registerParticleSprite("white_flame");
         registerParticleSprite("orange_flame");
         registerParticleSprite("magenta_flame");
@@ -116,6 +117,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
         factoryRegistry.register(ADParticleTypes.GREEN_SPARK, LavaEmberParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.RED_SPARK, LavaEmberParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.BLACK_SPARK, LavaEmberParticle.Factory::new);
+        factoryRegistry.register(ADParticleTypes.MAROON_SPARK, LavaEmberParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.WHITE_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.ORANGE_FLAME, FlameParticle.Factory::new);
         factoryRegistry.register(ADParticleTypes.MAGENTA_FLAME, FlameParticle.Factory::new);
@@ -164,7 +166,7 @@ public class AssortedDiscoveriesClient implements ClientModInitializer {
                 ADBlocks.BLACK_WALL_TORCH, ADBlocks.BOK_CHOY, ADBlocks.GARLIC, ADBlocks.GREEN_ONIONS,
                 ADBlocks.BLUEBERRY_BUSH, ADBlocks.WITCHS_CRADLE, ADBlocks.SNAPDRAGON, ADBlocks.POTTED_SNAPDRAGON,
                 ADBlocks.ENDER_GRASS, ADBlocks.ICICLE, ADBlocks.CATTAIL, ADBlocks.POTTED_PURPLE_MUSHROOM,
-                ADBlocks.BLOOD_KELP, ADBlocks.BLOOD_KELP_PLANT, ADBlocks.WEEPING_HEART);
+                ADBlocks.BLOOD_KELP, ADBlocks.BLOOD_KELP_PLANT, ADBlocks.WEEPING_HEART, ADBlocks.MAROON_CAMPFIRE);
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(),
                 ADBlocks.ENDERMAN_PLUSH, ADBlocks.GRASS_SLAB);

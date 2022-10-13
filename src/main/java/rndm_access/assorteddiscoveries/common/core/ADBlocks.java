@@ -213,6 +213,7 @@ public class ADBlocks {
     public static final Block GREEN_CAMPFIRE = dyedCampfireBlock(ADParticleTypes.GREEN_SPARK);
     public static final Block RED_CAMPFIRE = dyedCampfireBlock(ADParticleTypes.RED_SPARK);
     public static final Block BLACK_CAMPFIRE = dyedCampfireBlock(ADParticleTypes.BLACK_SPARK);
+    public static final Block MAROON_CAMPFIRE = dyedCampfireBlock(ADParticleTypes.MAROON_SPARK);
     public static final Block WHITE_LANTERN = lanternBlock();
     public static final Block ORANGE_LANTERN = lanternBlock();
     public static final Block MAGENTA_LANTERN = lanternBlock();
@@ -446,7 +447,7 @@ public class ADBlocks {
             .strength(0.3F).sounds(BlockSoundGroup.GLASS).luminance((state) -> 15));
     public static final Block MAROON_WOOL = new Block(AbstractBlock.Settings.copy(Blocks.RED_WOOL));
     public static final Block MAROON_STAINED_GLASS = new StainedGlassBlock(DyeColor.RED,
-            AbstractBlock.Settings.of(Material.GLASS, DyeColor.RED)
+            AbstractBlock.Settings.of(Material.GLASS, MapColor.DARK_RED)
                     .strength(0.3F).sounds(BlockSoundGroup.GLASS).nonOpaque().allowsSpawning(ADBlocks::never)
                     .solidBlock(ADBlocks::never).suffocates(ADBlocks::never).blockVision(ADBlocks::never));
     public static final Block MAROON_STAINED_GLASS_PANE = new StainedGlassPaneBlock(DyeColor.RED,
@@ -769,6 +770,7 @@ public class ADBlocks {
         register("green_campfire", GREEN_CAMPFIRE);
         register("red_campfire", RED_CAMPFIRE);
         register("black_campfire", BLACK_CAMPFIRE);
+        register("maroon_campfire", MAROON_CAMPFIRE);
         register("white_lantern", WHITE_LANTERN);
         register("orange_lantern", ORANGE_LANTERN);
         register("magenta_lantern", MAGENTA_LANTERN);

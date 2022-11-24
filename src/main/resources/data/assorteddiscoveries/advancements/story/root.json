@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "assorteddiscoveries:bok_choy"
+      "item": "assorteddiscoveries:calcite_bricks"
     },
     "title": {
       "translate": "advancements.assorteddiscoveries.story.root.title"
@@ -16,20 +16,13 @@
     "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
   },
   "criteria": {
-    "crafting_table": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:crafting_table"
-          }
-        ]
-      }
+    "tick": {
+      "trigger": "minecraft:tick"
     }
   },
   "requirements": [
     [
-      "crafting_table"
+      "tick"
     ]
   ]
 }

@@ -4,7 +4,7 @@
     "start_pool": "assorteddiscoveries:cabin/dark_forest/start",
     "size": 7
   },
-  "biomes": "#assorteddiscoveries:has_structure/cabin_dark_forest",
+  "biomes": "#c:has_structure/cabin_dark_forest",
   "adapt_noise": true,
   "spawn_overrides": {}
 }

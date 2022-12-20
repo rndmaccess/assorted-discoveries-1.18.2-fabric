@@ -27,8 +27,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import rndm_access.assorteddiscoveries.common.block.state.ADProperties;
-import rndm_access.assorteddiscoveries.common.core.ADBlockTags;
 import rndm_access.assorteddiscoveries.common.core.ADEntityTypeTags;
+import rndm_access.assorteddiscoveries.common.core.CBlockTags;
 
 import java.util.Random;
 
@@ -40,8 +40,8 @@ public class ADSnapdragonBlock extends FlowerBlock {
         this.setDefaultState(this.getDefaultState().with(CAN_TELEPORT, true));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    @SuppressWarnings("depreciated")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack itemInHand = player.getStackInHand(hand);
 
@@ -56,7 +56,7 @@ public class ADSnapdragonBlock extends FlowerBlock {
 
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.isIn(ADBlockTags.SNAPDRAGON_PLANTABLE_ON);
+        return floor.isIn(CBlockTags.SNAPDRAGON_PLANTABLE_ON);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class ADSnapdragonBlock extends FlowerBlock {
         world.addParticle(ParticleTypes.PORTAL, x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    @SuppressWarnings("depreciated")
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         EntityType<?> type = entity.getType();
         boolean isTeleportImmune = type.isIn(ADEntityTypeTags.SNAPDRAGON_TELEPORT_IMMUNE_ENTITY_TYPES);

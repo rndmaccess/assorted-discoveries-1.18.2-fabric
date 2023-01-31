@@ -1,7 +1,6 @@
 package rndm_access.assorteddiscoveries.common.worldgen.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,10 +33,10 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> implements
     }
 
     private boolean placeBloodKelpStalk(StructureWorldAccess world, Random random, BlockPos.Mutable placePos) {
+        ADBloodKelpBlock stemBlock = (ADBloodKelpBlock) ADBlocks.BLOOD_KELP;
+        ADBloodKelpPlantBlock plantBlock = (ADBloodKelpPlantBlock) ADBlocks.BLOOD_KELP_PLANT;
         int maxLength = 1 + random.nextInt(10);
-        BlockState state = ADBlocks.BLOOD_KELP.getDefaultState();
-        BlockState plantState = ADBlocks.BLOOD_KELP_PLANT.getDefaultState();
-        boolean canSustainPlant = state.canPlaceAt(world, placePos);
+        boolean canSustainPlant = stemBlock.getDefaultState().canPlaceAt(world, placePos);
         boolean isInWater = world.getFluidState(placePos).isOf(Fluids.WATER);
 
         if(!canSustainPlant || !isInWater) {
@@ -50,15 +49,12 @@ public class ADBloodKelpFeature extends Feature<DefaultFeatureConfig> implements
 
             // Top off the blood kelp stalk with a head block.
             if (isAboveEmpty || length == maxLength) {
-                world.setBlockState(placePos, state
-                        .with(ADBloodKelpBlock.LIT, ADBloodKelp.isLit(random))
-                        .with(ADBloodKelpBlock.AGE, random.nextInt(4) + 20), 2);
+                world.setBlockState(placePos, stemBlock.getStemState(random, random.nextInt(4) + 20), 2);
                 return true;
             }
 
             // Place the next blood kelp body block.
-            world.setBlockState(placePos, plantState
-                    .with(ADBloodKelpPlantBlock.LIT, ADBloodKelp.isLit(random)), 2);
+            world.setBlockState(placePos, plantBlock.getPlantState(random), 2);
 
             placePos.move(Direction.UP);
         }
